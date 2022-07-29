@@ -106,7 +106,7 @@ import (
 )
 
 const (
-	AccountAddressPrefix = "cosmos"
+	AccountAddressPrefix = "price"
 	Name                 = "rd_net"
 )
 
@@ -187,6 +187,7 @@ func init() {
 	}
 
 	DefaultNodeHome = filepath.Join(userHomeDir, "."+Name)
+	RegisterCoinDenominations()
 }
 
 // App extends an ABCI application, but with most of its parameters exported.
@@ -745,4 +746,9 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 // SimulationManager implements the SimulationApp interface
 func (app *App) SimulationManager() *module.SimulationManager {
 	return app.sm
+}
+
+func RegisterCoinDenominations() {
+	_ = sdk.RegisterDenom("prc", sdk.OneDec())
+	_ = sdk.RegisterDenom("uprc", sdk.NewDecWithPrec(1, 6))
 }
