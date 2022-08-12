@@ -11,6 +11,9 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
 )
 
+const (
+	RD_NET_COIN = "uprc"
+)
 // HandlerOptions extends the SDK's AnteHandler options by requiring the IBC
 // channel keeper.
 type HandlerOptions struct {
@@ -21,11 +24,12 @@ type HandlerOptions struct {
 }
 
 type MinCommissionDecorator struct {
+	options ante.HandlerOptions
 	cdc codec.BinaryCodec
 }
 
-func NewMinCommissionDecorator(cdc codec.BinaryCodec) MinCommissionDecorator {
-	return MinCommissionDecorator{cdc}
+func NewMinCommissionDecorator(options ante.HandlerOptions) MinCommissionDecorator {
+	return MinCommissionDecorator{options, options.cdc}
 }
 
 func (min MinCommissionDecorator) AnteHandle(
@@ -34,8 +38,13 @@ func (min MinCommissionDecorator) AnteHandle(
 ) (newCtx sdk.Context, err error) {
 	msgs := tx.GetMsgs()
 	minCommissionRate := sdk.NewDecWithPrec(5, 2)
+	maxCommissionRate := sdk.NewDecWithPrec(20, 2)
 
-	validMsg := func(m sdk.Msg) error {
+	// Calc total supply
+	totalSupply := min.options.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount
+	fmt.Println("total supply:", totalSupply)
+
+	validMsg := func(m sdk.Msg, totalSupply int) error {
 		switch msg := m.(type) {
 		case *stakingtypes.MsgCreateValidator:
 			// prevent new validators joining the set with
@@ -43,6 +52,10 @@ func (min MinCommissionDecorator) AnteHandle(
 			c := msg.Commission
 			if c.Rate.LT(minCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be lower than 5%")
+			}
+			
+			if c.Rate.GT(maxCommissionRate){
+				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be greater than 20%")
 			}
 		case *stakingtypes.MsgEditValidator:
 			// if commission rate is nil, it means only
@@ -53,12 +66,16 @@ func (min MinCommissionDecorator) AnteHandle(
 			if msg.CommissionRate.LT(minCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be lower than 5%")
 			}
+			
+			if c.Rate.GT(maxCommissionRate){
+				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be greater than 20%")
+			}
 		}
 
 		return nil
 	}
 
-	validAuthz := func(execMsg *authz.MsgExec) error {
+	validAuthz := func(execMsg *authz.MsgExec, totalSupply int) error {
 		for _, v := range execMsg.Msgs {
 			var innerMsg sdk.Msg
 			err := min.cdc.UnpackAny(v, &innerMsg)
@@ -66,7 +83,7 @@ func (min MinCommissionDecorator) AnteHandle(
 				return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized, "cannot unmarshal authz exec msgs")
 			}
 
-			err = validMsg(innerMsg)
+			err = validMsg(innerMsg, totalSupply)
 			if err != nil {
 				return err
 			}
@@ -77,14 +94,14 @@ func (min MinCommissionDecorator) AnteHandle(
 
 	for _, m := range msgs {
 		if msg, ok := m.(*authz.MsgExec); ok {
-			if err := validAuthz(msg); err != nil {
+			if err := validAuthz(msg, totalSupply); err != nil {
 				return ctx, err
 			}
 			continue
 		}
 
 		// validate normal msgs
-		err = validMsg(m)
+		err = validMsg(m, totalSupply)
 		if err != nil {
 			return ctx, err
 		}
@@ -116,7 +133,7 @@ func NewAnteHandler(options HandlerOptions) (sdk.AnteHandler, error) {
 
 	anteDecorators := []sdk.AnteDecorator{
 		ante.NewSetUpContextDecorator(), // outermost AnteDecorator. SetUpContext must be called first
-		NewMinCommissionDecorator(options.Cdc),
+		NewMinCommissionDecorator(options),
 		ante.NewRejectExtensionOptionsDecorator(),
 		ante.NewMempoolFeeDecorator(),
 		ante.NewValidateBasicDecorator(),
