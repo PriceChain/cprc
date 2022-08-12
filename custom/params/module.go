@@ -5,7 +5,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/params"
 
-	customtypes "bluechip/custom/params/types"
+	customtypes "github.com/PriceChain/rd_net/custom/params/types"
 )
 
 var (

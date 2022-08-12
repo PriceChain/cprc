@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmcli "github.com/tendermint/tendermint/libs/cli"
 
-	"bluechip/testutil/network"
+	"github.com/PriceChain/rd_net/testutil/network"
 	"github.com/PriceChain/rd_net/x/mint/client/cli"
 	minttypes "github.com/PriceChain/rd_net/x/mint/types"
 

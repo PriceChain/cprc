@@ -4,7 +4,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/x/upgrade/types"
 
-	govtypes "bluechip/custom/gov/types"
+	govtypes "github.com/PriceChain/rd_net/custom/gov/types"
 )
 
 // RegisterLegacyAminoCodec registers concrete types on the LegacyAmino codec

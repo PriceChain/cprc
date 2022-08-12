@@ -56,9 +56,6 @@ import (
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 	govkeeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/cosmos/cosmos-sdk/x/mint"
-	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
-	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/x/params"
 	paramsclient "github.com/cosmos/cosmos-sdk/x/params/client"
 	paramskeeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
@@ -102,11 +99,10 @@ import (
 	rdnetmodule "github.com/PriceChain/rd_net/x/rdnet"
 	rdnetmodulekeeper "github.com/PriceChain/rd_net/x/rdnet/keeper"
 	rdnetmoduletypes "github.com/PriceChain/rd_net/x/rdnet/types"
-	
+
 	"github.com/PriceChain/rd_net/x/mint"
 	mintkeeper "github.com/PriceChain/rd_net/x/mint/keeper"
 	minttypes "github.com/PriceChain/rd_net/x/mint/types"
-
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 

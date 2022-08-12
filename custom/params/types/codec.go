@@ -4,7 +4,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 
-	govtypes "bluechip/custom/gov/types"
+	govtypes "github.com/PriceChain/rd_net/custom/gov/types"
 )
 
 // RegisterLegacyAminoCodec registers all necessary param module types with a given LegacyAmino codec.
