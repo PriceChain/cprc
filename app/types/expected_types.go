@@ -2,6 +2,7 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
 // StakingKeeper defines the expected staking keeper
@@ -12,12 +13,12 @@ type StakingKeeper interface {
 
 // AccountKeeper defines the contract required for account APIs.
 type AccountKeeper interface {
-	GetAccount(ctx sdk.Context, addr sdk.AccAddress) AccountI
+	GetAccount(ctx sdk.Context, addr sdk.AccAddress) types.AccountI
 	GetModuleAddress(name string) sdk.AccAddress
 
 	// TODO remove with genesis 2-phases refactor https://github.com/cosmos/cosmos-sdk/issues/2862
-	SetModuleAccount(sdk.Context, ModuleAccountI)
-	GetModuleAccount(ctx sdk.Context, moduleName string) ModuleAccountI
+	SetModuleAccount(sdk.Context, types.ModuleAccountI)
+	GetModuleAccount(ctx sdk.Context, moduleName string) types.ModuleAccountI
 }
 
 // BankKeeper defines the contract needed to be fulfilled for banking and supply
