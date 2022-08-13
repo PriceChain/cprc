@@ -3,11 +3,12 @@ package app
 import (
 	"fmt"
 
-	"github.com/PriceChain/rd_net/x/auth/ante"
-	"github.com/PriceChain/rd_net/x/authz"
+	authtypes "github.com/PriceChain/rd_net/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"github.com/cosmos/cosmos-sdk/x/auth/ante"
+	"github.com/cosmos/cosmos-sdk/x/authz"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
@@ -22,8 +23,9 @@ const (
 type HandlerOptions struct {
 	ante.HandlerOptions
 
-	IBCKeeper *ibckeeper.Keeper
-	Cdc       codec.BinaryCodec
+	BankKeeper authtypes.BankKeeper
+	IBCKeeper  *ibckeeper.Keeper
+	Cdc        codec.BinaryCodec
 }
 
 type MinCommissionDecorator struct {
@@ -44,14 +46,10 @@ func (min MinCommissionDecorator) AnteHandle(
 	maxCommissionRate := sdk.NewDecWithPrec(20, 2)
 
 	// Calc total supply
-
-	min.options.BankKeeper.SendCoinsFromAccountToModule()
-
-	min.options.BankKeeper.SendCoinsFromAccountToModule()
-	totalSupply := min.options.HandlerOptions.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount
+	totalSupply := min.options.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount.Int64()
 	fmt.Println("total supply:", totalSupply)
 
-	validMsg := func(m sdk.Msg, totalSupply int) error {
+	validMsg := func(m sdk.Msg, totalSupply int64) error {
 		switch msg := m.(type) {
 		case *stakingtypes.MsgCreateValidator:
 			// prevent new validators joining the set with
@@ -82,7 +80,7 @@ func (min MinCommissionDecorator) AnteHandle(
 		return nil
 	}
 
-	validAuthz := func(execMsg *authz.MsgExec, totalSupply int) error {
+	validAuthz := func(execMsg *authz.MsgExec, totalSupply int64) error {
 		for _, v := range execMsg.Msgs {
 			var innerMsg sdk.Msg
 			err := min.cdc.UnpackAny(v, &innerMsg)
@@ -147,7 +145,7 @@ func NewAnteHandler(options HandlerOptions) (sdk.AnteHandler, error) {
 		ante.NewTxTimeoutHeightDecorator(),
 		ante.NewValidateMemoDecorator(options.AccountKeeper),
 		ante.NewConsumeGasForTxSizeDecorator(options.AccountKeeper),
-		ante.NewDeductFeeDecorator(options.AccountKeeper, options.BankKeeper, options.FeegrantKeeper),
+		ante.NewDeductFeeDecorator(options.AccountKeeper, options.HandlerOptions.BankKeeper, options.FeegrantKeeper),
 		// SetPubKeyDecorator must be called before all signature verification decorators
 		ante.NewSetPubKeyDecorator(options.AccountKeeper),
 		ante.NewValidateSigCountDecorator(options.AccountKeeper),

@@ -6,18 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/PriceChain/rd_net/x/auth"
-	"github.com/PriceChain/rd_net/x/auth/ante"
-	authrest "github.com/PriceChain/rd_net/x/auth/client/rest"
-	authkeeper "github.com/PriceChain/rd_net/x/auth/keeper"
-	authsims "github.com/PriceChain/rd_net/x/auth/simulation"
-	authtx "github.com/PriceChain/rd_net/x/auth/tx"
 	authtypes "github.com/PriceChain/rd_net/x/auth/types"
-	"github.com/PriceChain/rd_net/x/auth/vesting"
-	vestingtypes "github.com/PriceChain/rd_net/x/auth/vesting/types"
-	"github.com/PriceChain/rd_net/x/authz"
-	authzkeeper "github.com/PriceChain/rd_net/x/authz/keeper"
-	authzmodule "github.com/PriceChain/rd_net/x/authz/module"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/grpc/tmservice"
@@ -31,6 +20,18 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/version"
+	"github.com/cosmos/cosmos-sdk/x/auth"
+	"github.com/cosmos/cosmos-sdk/x/auth/ante"
+	authrest "github.com/cosmos/cosmos-sdk/x/auth/client/rest"
+	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
+	authsims "github.com/cosmos/cosmos-sdk/x/auth/simulation"
+	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
+	cauthtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
+	"github.com/cosmos/cosmos-sdk/x/auth/vesting"
+	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
+	"github.com/cosmos/cosmos-sdk/x/authz"
+	authzkeeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
+	authzmodule "github.com/cosmos/cosmos-sdk/x/authz/module"
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -301,7 +302,7 @@ func New(
 
 	// add keepers
 	app.AccountKeeper = authkeeper.NewAccountKeeper(
-		appCodec, keys[authtypes.StoreKey], app.GetSubspace(authtypes.ModuleName), authtypes.ProtoBaseAccount, maccPerms,
+		appCodec, keys[authtypes.StoreKey], app.GetSubspace(authtypes.ModuleName), cauthtypes.ProtoBaseAccount, maccPerms,
 	)
 
 	app.AuthzKeeper = authzkeeper.NewKeeper(
@@ -571,8 +572,9 @@ func New(
 				SignModeHandler: encodingConfig.TxConfig.SignModeHandler(),
 				SigGasConsumer:  ante.DefaultSigVerificationGasConsumer,
 			},
-			IBCKeeper: app.IBCKeeper,
-			Cdc:       appCodec,
+			BankKeeper: app.BankKeeper,
+			IBCKeeper:  app.IBCKeeper,
+			Cdc:        appCodec,
 		},
 	)
 
