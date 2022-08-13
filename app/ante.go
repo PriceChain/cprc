@@ -1,11 +1,13 @@
 package app
 
 import (
+	"fmt"
+
+	"github.com/PriceChain/rd_net/x/auth/ante"
+	"github.com/PriceChain/rd_net/x/authz"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/cosmos/cosmos-sdk/x/auth/ante"
-	"github.com/cosmos/cosmos-sdk/x/authz"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
@@ -14,22 +16,23 @@ import (
 const (
 	RD_NET_COIN = "uprc"
 )
+
 // HandlerOptions extends the SDK's AnteHandler options by requiring the IBC
 // channel keeper.
 type HandlerOptions struct {
 	ante.HandlerOptions
 
-	IBCKeeper         *ibckeeper.Keeper
-	Cdc               codec.BinaryCodec
+	IBCKeeper *ibckeeper.Keeper
+	Cdc       codec.BinaryCodec
 }
 
 type MinCommissionDecorator struct {
-	options ante.HandlerOptions
-	cdc codec.BinaryCodec
+	options HandlerOptions
+	cdc     codec.BinaryCodec
 }
 
-func NewMinCommissionDecorator(options ante.HandlerOptions) MinCommissionDecorator {
-	return MinCommissionDecorator{options, options.cdc}
+func NewMinCommissionDecorator(options HandlerOptions) MinCommissionDecorator {
+	return MinCommissionDecorator{options, options.Cdc}
 }
 
 func (min MinCommissionDecorator) AnteHandle(
@@ -41,7 +44,11 @@ func (min MinCommissionDecorator) AnteHandle(
 	maxCommissionRate := sdk.NewDecWithPrec(20, 2)
 
 	// Calc total supply
-	totalSupply := min.options.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount
+
+	min.options.BankKeeper.SendCoinsFromAccountToModule()
+
+	min.options.BankKeeper.SendCoinsFromAccountToModule()
+	totalSupply := min.options.HandlerOptions.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount
 	fmt.Println("total supply:", totalSupply)
 
 	validMsg := func(m sdk.Msg, totalSupply int) error {
@@ -53,8 +60,8 @@ func (min MinCommissionDecorator) AnteHandle(
 			if c.Rate.LT(minCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be lower than 5%")
 			}
-			
-			if c.Rate.GT(maxCommissionRate){
+
+			if c.Rate.GT(maxCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be greater than 20%")
 			}
 		case *stakingtypes.MsgEditValidator:
@@ -66,8 +73,8 @@ func (min MinCommissionDecorator) AnteHandle(
 			if msg.CommissionRate.LT(minCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be lower than 5%")
 			}
-			
-			if c.Rate.GT(maxCommissionRate){
+
+			if msg.CommissionRate.GT(maxCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be greater than 20%")
 			}
 		}
