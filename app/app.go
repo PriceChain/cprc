@@ -571,9 +571,10 @@ func New(
 				SignModeHandler: encodingConfig.TxConfig.SignModeHandler(),
 				SigGasConsumer:  ante.DefaultSigVerificationGasConsumer,
 			},
-			BankKeeper: app.BankKeeper,
-			IBCKeeper:  app.IBCKeeper,
-			Cdc:        appCodec,
+			BankKeeper:    app.BankKeeper,
+			StakingKeeper: app.StakingKeeper,
+			IBCKeeper:     app.IBCKeeper,
+			Cdc:           appCodec,
 		},
 	)
 

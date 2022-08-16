@@ -1,8 +1,7 @@
 package app
 
 import (
-	"fmt"
-
+	"github.com/PriceChain/rd_net/app/types"
 	authtypes "github.com/PriceChain/rd_net/app/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -23,9 +22,10 @@ const (
 type HandlerOptions struct {
 	ante.HandlerOptions
 
-	BankKeeper authtypes.BankKeeper
-	IBCKeeper  *ibckeeper.Keeper
-	Cdc        codec.BinaryCodec
+	StakingKeeper authtypes.StakingKeeper
+	BankKeeper    authtypes.BankKeeper
+	IBCKeeper     *ibckeeper.Keeper
+	Cdc           codec.BinaryCodec
 }
 
 type MinCommissionDecorator struct {
@@ -35,6 +35,49 @@ type MinCommissionDecorator struct {
 
 func NewMinCommissionDecorator(options HandlerOptions) MinCommissionDecorator {
 	return MinCommissionDecorator{options, options.Cdc}
+}
+
+func (min MinCommissionDecorator) CheckEmissionRule(totalSupply int64, amount int64, suggestEmission int64) bool {
+	emission := types.STAKE_AMT_EMISSION_5
+	if amount > types.STAKE_AMT_EMISSION_20 {
+		emission = types.EMISSION_20
+	} else if amount > types.STAKE_AMT_EMISSION_19 {
+		emission = types.EMISSION_19
+	} else if amount > types.STAKE_AMT_EMISSION_18 {
+		emission = types.EMISSION_18
+	} else if amount > types.STAKE_AMT_EMISSION_17 {
+		emission = types.EMISSION_17
+	} else if amount > types.STAKE_AMT_EMISSION_16 {
+		emission = types.EMISSION_16
+	} else if amount > types.STAKE_AMT_EMISSION_15 {
+		emission = types.EMISSION_15
+	} else if amount > types.STAKE_AMT_EMISSION_14 {
+		emission = types.EMISSION_14
+	} else if amount > types.STAKE_AMT_EMISSION_13 {
+		emission = types.EMISSION_13
+	} else if amount > types.STAKE_AMT_EMISSION_12 {
+		emission = types.EMISSION_12
+	} else if amount > types.STAKE_AMT_EMISSION_11 {
+		emission = types.EMISSION_11
+	} else if amount > types.STAKE_AMT_EMISSION_10 {
+		emission = types.EMISSION_10
+	} else if amount > types.STAKE_AMT_EMISSION_9 {
+		emission = types.EMISSION_9
+	} else if amount > types.STAKE_AMT_EMISSION_8 {
+		emission = types.EMISSION_8
+	} else if amount > types.STAKE_AMT_EMISSION_7 {
+		emission = types.EMISSION_7
+	} else if amount > types.STAKE_AMT_EMISSION_6 {
+		emission = types.EMISSION_6
+	} else {
+		emission = types.EMISSION_5
+	}
+
+	if suggestEmission > int64(emission) {
+		return false
+	}
+
+	return true
 }
 
 func (min MinCommissionDecorator) AnteHandle(
@@ -47,7 +90,6 @@ func (min MinCommissionDecorator) AnteHandle(
 
 	// Calc total supply
 	totalSupply := min.options.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount.Int64()
-	fmt.Println("total supply:", totalSupply)
 
 	validMsg := func(m sdk.Msg, totalSupply int64) error {
 		switch msg := m.(type) {
@@ -56,11 +98,15 @@ func (min MinCommissionDecorator) AnteHandle(
 			// commission set below 5%
 			c := msg.Commission
 			if c.Rate.LT(minCommissionRate) {
-				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be lower than 5%")
+				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Commission can't be lower than 5%")
 			}
 
 			if c.Rate.GT(maxCommissionRate) {
-				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be greater than 20%")
+				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Commission can't be greater than 20%")
+			}
+
+			if !min.CheckEmissionRule(totalSupply, msg.Value.Amount.Int64(), msg.Commission.Rate.RoundInt64()) {
+				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "Invalid commission rate.")
 			}
 		case *stakingtypes.MsgEditValidator:
 			// if commission rate is nil, it means only
@@ -68,6 +114,7 @@ func (min MinCommissionDecorator) AnteHandle(
 			if msg.CommissionRate == nil {
 				break
 			}
+
 			if msg.CommissionRate.LT(minCommissionRate) {
 				return sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "commission can't be lower than 5%")
 			}
