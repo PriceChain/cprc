@@ -27,6 +27,7 @@ git clone https://github.com/PriceChain/RD_Net_Cosmos.git
 
 ```
 sudo rm -rf ~/.rd_net
+cd RD_Net_Cosmos
 make install
 
 clear
