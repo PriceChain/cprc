@@ -20,6 +20,9 @@ go version
 ```
 // Should return go version go1.18 linux/amd64
 
+## Clone Master Repository
+git clone https://github.com/PriceChain/RD_Net_Cosmos.git
+
 ## Install the executables
 
 ```
