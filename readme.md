@@ -187,11 +187,12 @@ curl http://18.144.22.147:26657/genesis? | jq ".result.genesis" > ~/.rd_net/conf
 
 ## Change seeds item in ~/.rd_net/config/config.toml file.(Format: node_id@peer_node_ip:26656")
 
-sudo nano ~/.rd_net/config/cofig.toml
+sudo nano ~/.rd_net/config/config.toml
 
 Modify 'seeds = ""' to:
 
-seeds = "6b050ca5852f3f8d624dcdff06387f1ec93e83ac@18.144.22.147:26656"
+seeds = "id@xx.xx.xx.xx:26656"
+where id = validator id,  xx = validator address.
 
 ## Replace stake to PRC
 ```
