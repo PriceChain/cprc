@@ -8,7 +8,7 @@ accounts:
   - name: lucas
     coins: ["8800000000prc", "8800000000stake"]
 validator:
-  name: alice
+  name: lucas
   staked: "1000stake"
 client:
   openapi:
@@ -16,5 +16,5 @@ client:
   vuex:
     path: "vue/src/store"
 faucet:
-  name: bob
+  name: lucas
   coins: ["50000prc", "100stake"]
