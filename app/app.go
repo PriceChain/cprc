@@ -56,9 +56,6 @@ import (
 	govclient "github.com/cosmos/cosmos-sdk/x/gov/client"
 	govkeeper "github.com/cosmos/cosmos-sdk/x/gov/keeper"
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
-	"github.com/cosmos/cosmos-sdk/x/mint"
-	mintkeeper "github.com/cosmos/cosmos-sdk/x/mint/keeper"
-	minttypes "github.com/cosmos/cosmos-sdk/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/x/params"
 	paramsclient "github.com/cosmos/cosmos-sdk/x/params/client"
 	paramskeeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
@@ -102,6 +99,10 @@ import (
 	rdnetmodule "github.com/PriceChain/rd_net/x/rdnet"
 	rdnetmodulekeeper "github.com/PriceChain/rd_net/x/rdnet/keeper"
 	rdnetmoduletypes "github.com/PriceChain/rd_net/x/rdnet/types"
+
+	"github.com/PriceChain/rd_net/x/mint"
+	mintkeeper "github.com/PriceChain/rd_net/x/mint/keeper"
+	minttypes "github.com/PriceChain/rd_net/x/mint/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -561,15 +562,22 @@ func New(
 	app.SetInitChainer(app.InitChainer)
 	app.SetBeginBlocker(app.BeginBlocker)
 
-	anteHandler, err := ante.NewAnteHandler(
-		ante.HandlerOptions{
-			AccountKeeper:   app.AccountKeeper,
-			BankKeeper:      app.BankKeeper,
-			SignModeHandler: encodingConfig.TxConfig.SignModeHandler(),
-			FeegrantKeeper:  app.FeeGrantKeeper,
-			SigGasConsumer:  ante.DefaultSigVerificationGasConsumer,
+	anteHandler, err := NewAnteHandler(
+		HandlerOptions{
+			HandlerOptions: ante.HandlerOptions{
+				AccountKeeper:   app.AccountKeeper,
+				BankKeeper:      app.BankKeeper,
+				FeegrantKeeper:  app.FeeGrantKeeper,
+				SignModeHandler: encodingConfig.TxConfig.SignModeHandler(),
+				SigGasConsumer:  ante.DefaultSigVerificationGasConsumer,
+			},
+			BankKeeper:    app.BankKeeper,
+			StakingKeeper: app.StakingKeeper,
+			IBCKeeper:     app.IBCKeeper,
+			Cdc:           appCodec,
 		},
 	)
+
 	if err != nil {
 		panic(err)
 	}
