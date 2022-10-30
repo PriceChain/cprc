@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/PriceChain/rd_net/app/types"
+	
 	authtypes "github.com/PriceChain/rd_net/app/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -11,6 +11,7 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
+
 )
 
 const (
@@ -38,39 +39,16 @@ func NewMinCommissionDecorator(options HandlerOptions) MinCommissionDecorator {
 }
 
 func (min MinCommissionDecorator) CheckEmissionRule(totalSupply int64, amount int64, suggestEmission int64) bool {
-	emission := types.STAKE_AMT_EMISSION_5
-	if amount > types.STAKE_AMT_EMISSION_20 {
-		emission = types.EMISSION_20
-	} else if amount > types.STAKE_AMT_EMISSION_19 {
-		emission = types.EMISSION_19
-	} else if amount > types.STAKE_AMT_EMISSION_18 {
-		emission = types.EMISSION_18
-	} else if amount > types.STAKE_AMT_EMISSION_17 {
-		emission = types.EMISSION_17
-	} else if amount > types.STAKE_AMT_EMISSION_16 {
-		emission = types.EMISSION_16
-	} else if amount > types.STAKE_AMT_EMISSION_15 {
-		emission = types.EMISSION_15
-	} else if amount > types.STAKE_AMT_EMISSION_14 {
-		emission = types.EMISSION_14
-	} else if amount > types.STAKE_AMT_EMISSION_13 {
-		emission = types.EMISSION_13
-	} else if amount > types.STAKE_AMT_EMISSION_12 {
-		emission = types.EMISSION_12
-	} else if amount > types.STAKE_AMT_EMISSION_11 {
-		emission = types.EMISSION_11
-	} else if amount > types.STAKE_AMT_EMISSION_10 {
-		emission = types.EMISSION_10
-	} else if amount > types.STAKE_AMT_EMISSION_9 {
-		emission = types.EMISSION_9
-	} else if amount > types.STAKE_AMT_EMISSION_8 {
-		emission = types.EMISSION_8
-	} else if amount > types.STAKE_AMT_EMISSION_7 {
-		emission = types.EMISSION_7
-	} else if amount > types.STAKE_AMT_EMISSION_6 {
-		emission = types.EMISSION_6
-	} else {
-		emission = types.EMISSION_5
+	
+	emission := 5
+	reward_percent := 0.04125
+	tranche_value := float64(totalSupply) * reward_percent
+
+	for i :=0; i < 16; i++ {
+		if float64(16 - i) * tranche_value <= float64(amount){
+			emission = 20 - i
+			break
+		}
 	}
 
 	if suggestEmission > int64(emission) {

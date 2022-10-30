@@ -1,14 +1,20 @@
 accounts:
-  - name: validator
-    coins: ["8800000000000000uprc"]
+  - name: alice
+    mnemonic: "guard cream sadness conduct invite crumble clock pudding hole grit liar hotel maid produce squeeze return argue turtle know drive eight casino maze host"
+    coins: ["3000000prc", "3000000stake"]
+  - name: bob
+    mnemonic: "friend excite rough reopen cover wheel spoon convince island path clean monkey play snow number walnut pull lock shoot hurry dream divide concert discover"
+    coins: ["2000000prc", "2000000stake"]
+  - name: lucas
+    coins: ["8800000000prc", "8800000000stake"]
 validator:
-  name: validator
-  staked: "1000000000000000uprc"
+  name: lucas
+  staked: "1000stake"
 client:
   openapi:
     path: "docs/static/openapi.yml"
   vuex:
     path: "vue/src/store"
 faucet:
-  name: test
-  coins: ["50000000uprc"]
+  name: lucas
+  coins: ["50000prc", "100stake"]
