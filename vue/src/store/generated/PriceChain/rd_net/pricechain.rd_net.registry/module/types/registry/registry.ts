@@ -16,6 +16,7 @@ export interface Registry {
   prodInfo: string;
   memo: string;
   reserved: string;
+  creator: string;
 }
 
 const baseRegistry: object = {
@@ -30,6 +31,7 @@ const baseRegistry: object = {
   prodInfo: "",
   memo: "",
   reserved: "",
+  creator: "",
 };
 
 export const Registry = {
@@ -66,6 +68,9 @@ export const Registry = {
     }
     if (message.reserved !== "") {
       writer.uint32(90).string(message.reserved);
+    }
+    if (message.creator !== "") {
+      writer.uint32(98).string(message.creator);
     }
     return writer;
   },
@@ -109,6 +114,9 @@ export const Registry = {
           break;
         case 11:
           message.reserved = reader.string();
+          break;
+        case 12:
+          message.creator = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -178,6 +186,11 @@ export const Registry = {
     } else {
       message.reserved = "";
     }
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
     return message;
   },
 
@@ -197,6 +210,7 @@ export const Registry = {
     message.prodInfo !== undefined && (obj.prodInfo = message.prodInfo);
     message.memo !== undefined && (obj.memo = message.memo);
     message.reserved !== undefined && (obj.reserved = message.reserved);
+    message.creator !== undefined && (obj.creator = message.creator);
     return obj;
   },
 
@@ -259,6 +273,11 @@ export const Registry = {
       message.reserved = object.reserved;
     } else {
       message.reserved = "";
+    }
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
     }
     return message;
   },

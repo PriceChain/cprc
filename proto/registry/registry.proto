@@ -15,5 +15,5 @@ message Registry {
   string prodInfo = 9; 
   string memo = 10; 
   string reserved = 11; 
-  
+  string creator = 12;
 }
