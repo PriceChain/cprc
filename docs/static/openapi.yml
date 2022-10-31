@@ -52223,6 +52223,8 @@ definitions:
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   pricechain.rd_net.registry.MsgCreateRegistryResponse:
     type: object
+  pricechain.rd_net.registry.MsgJoinRegistryCoOperatorResponse:
+    type: object
   pricechain.rd_net.registry.Params:
     type: object
     description: Params defines the parameters for the module.

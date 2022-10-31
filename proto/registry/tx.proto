@@ -8,6 +8,7 @@ option go_package = "github.com/PriceChain/rd_net/x/registry/types";
 // Msg defines the Msg service.
 service Msg {
       rpc CreateRegistry(MsgCreateRegistry) returns (MsgCreateRegistryResponse);
+  rpc JoinRegistryCoOperator(MsgJoinRegistryCoOperator) returns (MsgJoinRegistryCoOperatorResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -20,6 +21,15 @@ message MsgCreateRegistry {
 }
 
 message MsgCreateRegistryResponse {
+}
+
+message MsgJoinRegistryCoOperator {
+  string creator = 1;
+  string registryId = 2;
+  string stakeAmount = 3;
+}
+
+message MsgJoinRegistryCoOperatorResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

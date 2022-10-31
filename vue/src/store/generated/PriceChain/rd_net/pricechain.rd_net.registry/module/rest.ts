@@ -15,6 +15,8 @@ export interface ProtobufAny {
 
 export type RegistryMsgCreateRegistryResponse = object;
 
+export type RegistryMsgJoinRegistryCoOperatorResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
