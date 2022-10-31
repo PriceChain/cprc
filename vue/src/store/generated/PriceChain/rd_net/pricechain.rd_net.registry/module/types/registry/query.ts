@@ -8,6 +8,7 @@ import {
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
 import { RegistryOwner } from "../registry/registry_owner";
+import { RegistryMember } from "../registry/registry_member";
 
 export const protobufPackage = "pricechain.rd_net.registry";
 
@@ -51,6 +52,23 @@ export interface QueryAllRegistryOwnerRequest {
 
 export interface QueryAllRegistryOwnerResponse {
   RegistryOwner: RegistryOwner[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetRegistryMemberRequest {
+  id: number;
+}
+
+export interface QueryGetRegistryMemberResponse {
+  RegistryMember: RegistryMember | undefined;
+}
+
+export interface QueryAllRegistryMemberRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllRegistryMemberResponse {
+  RegistryMember: RegistryMember[];
   pagination: PageResponse | undefined;
 }
 
@@ -778,6 +796,330 @@ export const QueryAllRegistryOwnerResponse = {
   },
 };
 
+const baseQueryGetRegistryMemberRequest: object = { id: 0 };
+
+export const QueryGetRegistryMemberRequest = {
+  encode(
+    message: QueryGetRegistryMemberRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetRegistryMemberRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetRegistryMemberRequest,
+    } as QueryGetRegistryMemberRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetRegistryMemberRequest {
+    const message = {
+      ...baseQueryGetRegistryMemberRequest,
+    } as QueryGetRegistryMemberRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id);
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetRegistryMemberRequest): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetRegistryMemberRequest>
+  ): QueryGetRegistryMemberRequest {
+    const message = {
+      ...baseQueryGetRegistryMemberRequest,
+    } as QueryGetRegistryMemberRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetRegistryMemberResponse: object = {};
+
+export const QueryGetRegistryMemberResponse = {
+  encode(
+    message: QueryGetRegistryMemberResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.RegistryMember !== undefined) {
+      RegistryMember.encode(
+        message.RegistryMember,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetRegistryMemberResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetRegistryMemberResponse,
+    } as QueryGetRegistryMemberResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.RegistryMember = RegistryMember.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetRegistryMemberResponse {
+    const message = {
+      ...baseQueryGetRegistryMemberResponse,
+    } as QueryGetRegistryMemberResponse;
+    if (object.RegistryMember !== undefined && object.RegistryMember !== null) {
+      message.RegistryMember = RegistryMember.fromJSON(object.RegistryMember);
+    } else {
+      message.RegistryMember = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetRegistryMemberResponse): unknown {
+    const obj: any = {};
+    message.RegistryMember !== undefined &&
+      (obj.RegistryMember = message.RegistryMember
+        ? RegistryMember.toJSON(message.RegistryMember)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetRegistryMemberResponse>
+  ): QueryGetRegistryMemberResponse {
+    const message = {
+      ...baseQueryGetRegistryMemberResponse,
+    } as QueryGetRegistryMemberResponse;
+    if (object.RegistryMember !== undefined && object.RegistryMember !== null) {
+      message.RegistryMember = RegistryMember.fromPartial(
+        object.RegistryMember
+      );
+    } else {
+      message.RegistryMember = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllRegistryMemberRequest: object = {};
+
+export const QueryAllRegistryMemberRequest = {
+  encode(
+    message: QueryAllRegistryMemberRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllRegistryMemberRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllRegistryMemberRequest,
+    } as QueryAllRegistryMemberRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllRegistryMemberRequest {
+    const message = {
+      ...baseQueryAllRegistryMemberRequest,
+    } as QueryAllRegistryMemberRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllRegistryMemberRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllRegistryMemberRequest>
+  ): QueryAllRegistryMemberRequest {
+    const message = {
+      ...baseQueryAllRegistryMemberRequest,
+    } as QueryAllRegistryMemberRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllRegistryMemberResponse: object = {};
+
+export const QueryAllRegistryMemberResponse = {
+  encode(
+    message: QueryAllRegistryMemberResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.RegistryMember) {
+      RegistryMember.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllRegistryMemberResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllRegistryMemberResponse,
+    } as QueryAllRegistryMemberResponse;
+    message.RegistryMember = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.RegistryMember.push(
+            RegistryMember.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllRegistryMemberResponse {
+    const message = {
+      ...baseQueryAllRegistryMemberResponse,
+    } as QueryAllRegistryMemberResponse;
+    message.RegistryMember = [];
+    if (object.RegistryMember !== undefined && object.RegistryMember !== null) {
+      for (const e of object.RegistryMember) {
+        message.RegistryMember.push(RegistryMember.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllRegistryMemberResponse): unknown {
+    const obj: any = {};
+    if (message.RegistryMember) {
+      obj.RegistryMember = message.RegistryMember.map((e) =>
+        e ? RegistryMember.toJSON(e) : undefined
+      );
+    } else {
+      obj.RegistryMember = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllRegistryMemberResponse>
+  ): QueryAllRegistryMemberResponse {
+    const message = {
+      ...baseQueryAllRegistryMemberResponse,
+    } as QueryAllRegistryMemberResponse;
+    message.RegistryMember = [];
+    if (object.RegistryMember !== undefined && object.RegistryMember !== null) {
+      for (const e of object.RegistryMember) {
+        message.RegistryMember.push(RegistryMember.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -796,6 +1138,14 @@ export interface Query {
   RegistryOwnerAll(
     request: QueryAllRegistryOwnerRequest
   ): Promise<QueryAllRegistryOwnerResponse>;
+  /** Queries a RegistryMember by id. */
+  RegistryMember(
+    request: QueryGetRegistryMemberRequest
+  ): Promise<QueryGetRegistryMemberResponse>;
+  /** Queries a list of RegistryMember items. */
+  RegistryMemberAll(
+    request: QueryAllRegistryMemberRequest
+  ): Promise<QueryAllRegistryMemberResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -866,6 +1216,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllRegistryOwnerResponse.decode(new Reader(data))
+    );
+  }
+
+  RegistryMember(
+    request: QueryGetRegistryMemberRequest
+  ): Promise<QueryGetRegistryMemberResponse> {
+    const data = QueryGetRegistryMemberRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Query",
+      "RegistryMember",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetRegistryMemberResponse.decode(new Reader(data))
+    );
+  }
+
+  RegistryMemberAll(
+    request: QueryAllRegistryMemberRequest
+  ): Promise<QueryAllRegistryMemberResponse> {
+    const data = QueryAllRegistryMemberRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Query",
+      "RegistryMemberAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllRegistryMemberResponse.decode(new Reader(data))
     );
   }
 }

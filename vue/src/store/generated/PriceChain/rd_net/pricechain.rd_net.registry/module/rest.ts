@@ -25,10 +25,27 @@ export type RegistryMsgProposePriceResponse = object;
 
 export type RegistryMsgUnbondRegistryResponse = object;
 
+export type RegistryMsgVotePriceResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */
 export type RegistryParams = object;
+
+export interface RegistryQueryAllRegistryMemberResponse {
+  RegistryMember?: RegistryRegistryMember[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
 
 export interface RegistryQueryAllRegistryOwnerResponse {
   RegistryOwner?: RegistryRegistryOwner[];
@@ -58,6 +75,10 @@ export interface RegistryQueryAllRegistryResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface RegistryQueryGetRegistryMemberResponse {
+  RegistryMember?: RegistryRegistryMember;
 }
 
 export interface RegistryQueryGetRegistryOwnerResponse {
@@ -90,6 +111,18 @@ export interface RegistryRegistry {
   memo?: string;
   reserved?: string;
   creator?: string;
+}
+
+export interface RegistryRegistryMember {
+  /** @format uint64 */
+  id?: string;
+  registryId?: string;
+  stakedAmount?: string;
+  address?: string;
+  status?: string;
+  memberSince?: string;
+  memo?: string;
+  reserved?: string;
 }
 
 export interface RegistryRegistryOwner {
@@ -421,6 +454,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryRegistry = (id: string, params: RequestParams = {}) =>
     this.request<RegistryQueryGetRegistryResponse, RpcStatus>({
       path: `/PriceChain/rd_net/registry/registry/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryRegistryMemberAll
+   * @summary Queries a list of RegistryMember items.
+   * @request GET:/PriceChain/rd_net/registry/registry_member
+   */
+  queryRegistryMemberAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<RegistryQueryAllRegistryMemberResponse, RpcStatus>({
+      path: `/PriceChain/rd_net/registry/registry_member`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryRegistryMember
+   * @summary Queries a RegistryMember by id.
+   * @request GET:/PriceChain/rd_net/registry/registry_member/{id}
+   */
+  queryRegistryMember = (id: string, params: RequestParams = {}) =>
+    this.request<RegistryQueryGetRegistryMemberResponse, RpcStatus>({
+      path: `/PriceChain/rd_net/registry/registry_member/${id}`,
       method: "GET",
       format: "json",
       ...params,

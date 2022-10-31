@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "registry/params.proto";
 import "registry/registry.proto";
 import "registry/registry_owner.proto";
+import "registry/registry_member.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/PriceChain/rd_net/x/registry/types";
@@ -16,5 +17,7 @@ message GenesisState {
   uint64 registryCount = 3;
   repeated RegistryOwner registryOwnerList = 4 [(gogoproto.nullable) = false];
   uint64 registryOwnerCount = 5;
+  repeated RegistryMember registryMemberList = 6 [(gogoproto.nullable) = false];
+  uint64 registryMemberCount = 7;
   // this line is used by starport scaffolding # genesis/proto/state
 }

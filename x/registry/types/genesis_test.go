@@ -40,6 +40,15 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryOwnerCount: 2,
+				RegistryMemberList: []types.RegistryMember{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				RegistryMemberCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -93,6 +102,32 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryOwnerCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated registryMember",
+			genState: &types.GenesisState{
+				RegistryMemberList: []types.RegistryMember{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid registryMember count",
+			genState: &types.GenesisState{
+				RegistryMemberList: []types.RegistryMember{
+					{
+						Id: 1,
+					},
+				},
+				RegistryMemberCount: 0,
 			},
 			valid: false,
 		},
