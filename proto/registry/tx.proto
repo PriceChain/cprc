@@ -10,6 +10,7 @@ service Msg {
       rpc CreateRegistry(MsgCreateRegistry) returns (MsgCreateRegistryResponse);
   rpc JoinRegistryCoOperator(MsgJoinRegistryCoOperator) returns (MsgJoinRegistryCoOperatorResponse);
   rpc JoinRegistryMember(MsgJoinRegistryMember) returns (MsgJoinRegistryMemberResponse);
+  rpc UnbondRegistry(MsgUnbondRegistry) returns (MsgUnbondRegistryResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -40,6 +41,16 @@ message MsgJoinRegistryMember {
 }
 
 message MsgJoinRegistryMemberResponse {
+}
+
+message MsgUnbondRegistry {
+  string creator = 1;
+  string registryId = 2;
+  string unbondAmount = 3;
+  string reason = 4;
+}
+
+message MsgUnbondRegistryResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

@@ -29,6 +29,15 @@ export interface MsgJoinRegistryMember {
 
 export interface MsgJoinRegistryMemberResponse {}
 
+export interface MsgUnbondRegistry {
+  creator: string;
+  registryId: string;
+  unbondAmount: string;
+  reason: string;
+}
+
+export interface MsgUnbondRegistryResponse {}
+
 const baseMsgCreateRegistry: object = {
   creator: "",
   name: "",
@@ -529,6 +538,170 @@ export const MsgJoinRegistryMemberResponse = {
   },
 };
 
+const baseMsgUnbondRegistry: object = {
+  creator: "",
+  registryId: "",
+  unbondAmount: "",
+  reason: "",
+};
+
+export const MsgUnbondRegistry = {
+  encode(message: MsgUnbondRegistry, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.registryId !== "") {
+      writer.uint32(18).string(message.registryId);
+    }
+    if (message.unbondAmount !== "") {
+      writer.uint32(26).string(message.unbondAmount);
+    }
+    if (message.reason !== "") {
+      writer.uint32(34).string(message.reason);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgUnbondRegistry {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgUnbondRegistry } as MsgUnbondRegistry;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.registryId = reader.string();
+          break;
+        case 3:
+          message.unbondAmount = reader.string();
+          break;
+        case 4:
+          message.reason = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUnbondRegistry {
+    const message = { ...baseMsgUnbondRegistry } as MsgUnbondRegistry;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.registryId !== undefined && object.registryId !== null) {
+      message.registryId = String(object.registryId);
+    } else {
+      message.registryId = "";
+    }
+    if (object.unbondAmount !== undefined && object.unbondAmount !== null) {
+      message.unbondAmount = String(object.unbondAmount);
+    } else {
+      message.unbondAmount = "";
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = String(object.reason);
+    } else {
+      message.reason = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgUnbondRegistry): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.registryId !== undefined && (obj.registryId = message.registryId);
+    message.unbondAmount !== undefined &&
+      (obj.unbondAmount = message.unbondAmount);
+    message.reason !== undefined && (obj.reason = message.reason);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgUnbondRegistry>): MsgUnbondRegistry {
+    const message = { ...baseMsgUnbondRegistry } as MsgUnbondRegistry;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.registryId !== undefined && object.registryId !== null) {
+      message.registryId = object.registryId;
+    } else {
+      message.registryId = "";
+    }
+    if (object.unbondAmount !== undefined && object.unbondAmount !== null) {
+      message.unbondAmount = object.unbondAmount;
+    } else {
+      message.unbondAmount = "";
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    } else {
+      message.reason = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgUnbondRegistryResponse: object = {};
+
+export const MsgUnbondRegistryResponse = {
+  encode(
+    _: MsgUnbondRegistryResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgUnbondRegistryResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgUnbondRegistryResponse,
+    } as MsgUnbondRegistryResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUnbondRegistryResponse {
+    const message = {
+      ...baseMsgUnbondRegistryResponse,
+    } as MsgUnbondRegistryResponse;
+    return message;
+  },
+
+  toJSON(_: MsgUnbondRegistryResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgUnbondRegistryResponse>
+  ): MsgUnbondRegistryResponse {
+    const message = {
+      ...baseMsgUnbondRegistryResponse,
+    } as MsgUnbondRegistryResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateRegistry(
@@ -537,10 +710,13 @@ export interface Msg {
   JoinRegistryCoOperator(
     request: MsgJoinRegistryCoOperator
   ): Promise<MsgJoinRegistryCoOperatorResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   JoinRegistryMember(
     request: MsgJoinRegistryMember
   ): Promise<MsgJoinRegistryMemberResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  UnbondRegistry(
+    request: MsgUnbondRegistry
+  ): Promise<MsgUnbondRegistryResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -587,6 +763,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgJoinRegistryMemberResponse.decode(new Reader(data))
+    );
+  }
+
+  UnbondRegistry(
+    request: MsgUnbondRegistry
+  ): Promise<MsgUnbondRegistryResponse> {
+    const data = MsgUnbondRegistry.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Msg",
+      "UnbondRegistry",
+      data
+    );
+    return promise.then((data) =>
+      MsgUnbondRegistryResponse.decode(new Reader(data))
     );
   }
 }

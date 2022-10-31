@@ -11,6 +11,7 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateRegistry{}, "registry/CreateRegistry", nil)
 	cdc.RegisterConcrete(&MsgJoinRegistryCoOperator{}, "registry/JoinRegistryCoOperator", nil)
 	cdc.RegisterConcrete(&MsgJoinRegistryMember{}, "registry/JoinRegistryMember", nil)
+	cdc.RegisterConcrete(&MsgUnbondRegistry{}, "registry/UnbondRegistry", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -23,6 +24,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgJoinRegistryMember{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgUnbondRegistry{},
 	)
 	// this line is used by starport scaffolding # 3
 
