@@ -30,6 +30,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 
 	// Set registryMember count
 	k.SetRegistryMemberCount(ctx, genState.RegistryMemberCount)
+	// Set all the priceConsensus
+	for _, elem := range genState.PriceConsensusList {
+		k.SetPriceConsensus(ctx, elem)
+	}
+
+	// Set priceConsensus count
+	k.SetPriceConsensusCount(ctx, genState.PriceConsensusCount)
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -45,6 +52,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.RegistryOwnerCount = k.GetRegistryOwnerCount(ctx)
 	genesis.RegistryMemberList = k.GetAllRegistryMember(ctx)
 	genesis.RegistryMemberCount = k.GetRegistryMemberCount(ctx)
+	genesis.PriceConsensusList = k.GetAllPriceConsensus(ctx)
+	genesis.PriceConsensusCount = k.GetPriceConsensusCount(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

@@ -35,3 +35,8 @@ const (
 	RegistryMemberKey      = "RegistryMember-value-"
 	RegistryMemberCountKey = "RegistryMember-count-"
 )
+
+const (
+	PriceConsensusKey      = "PriceConsensus-value-"
+	PriceConsensusCountKey = "PriceConsensus-count-"
+)

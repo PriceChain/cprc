@@ -5,6 +5,7 @@ import { Params } from "../registry/params";
 import { Registry } from "../registry/registry";
 import { RegistryOwner } from "../registry/registry_owner";
 import { RegistryMember } from "../registry/registry_member";
+import { PriceConsensus } from "../registry/price_consensus";
 
 export const protobufPackage = "pricechain.rd_net.registry";
 
@@ -16,14 +17,17 @@ export interface GenesisState {
   registryOwnerList: RegistryOwner[];
   registryOwnerCount: number;
   registryMemberList: RegistryMember[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   registryMemberCount: number;
+  priceConsensusList: PriceConsensus[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  priceConsensusCount: number;
 }
 
 const baseGenesisState: object = {
   registryCount: 0,
   registryOwnerCount: 0,
   registryMemberCount: 0,
+  priceConsensusCount: 0,
 };
 
 export const GenesisState = {
@@ -49,6 +53,12 @@ export const GenesisState = {
     if (message.registryMemberCount !== 0) {
       writer.uint32(56).uint64(message.registryMemberCount);
     }
+    for (const v of message.priceConsensusList) {
+      PriceConsensus.encode(v!, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.priceConsensusCount !== 0) {
+      writer.uint32(72).uint64(message.priceConsensusCount);
+    }
     return writer;
   },
 
@@ -59,6 +69,7 @@ export const GenesisState = {
     message.registryList = [];
     message.registryOwnerList = [];
     message.registryMemberList = [];
+    message.priceConsensusList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -87,6 +98,14 @@ export const GenesisState = {
         case 7:
           message.registryMemberCount = longToNumber(reader.uint64() as Long);
           break;
+        case 8:
+          message.priceConsensusList.push(
+            PriceConsensus.decode(reader, reader.uint32())
+          );
+          break;
+        case 9:
+          message.priceConsensusCount = longToNumber(reader.uint64() as Long);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -100,6 +119,7 @@ export const GenesisState = {
     message.registryList = [];
     message.registryOwnerList = [];
     message.registryMemberList = [];
+    message.priceConsensusList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -147,6 +167,22 @@ export const GenesisState = {
     } else {
       message.registryMemberCount = 0;
     }
+    if (
+      object.priceConsensusList !== undefined &&
+      object.priceConsensusList !== null
+    ) {
+      for (const e of object.priceConsensusList) {
+        message.priceConsensusList.push(PriceConsensus.fromJSON(e));
+      }
+    }
+    if (
+      object.priceConsensusCount !== undefined &&
+      object.priceConsensusCount !== null
+    ) {
+      message.priceConsensusCount = Number(object.priceConsensusCount);
+    } else {
+      message.priceConsensusCount = 0;
+    }
     return message;
   },
 
@@ -181,6 +217,15 @@ export const GenesisState = {
     }
     message.registryMemberCount !== undefined &&
       (obj.registryMemberCount = message.registryMemberCount);
+    if (message.priceConsensusList) {
+      obj.priceConsensusList = message.priceConsensusList.map((e) =>
+        e ? PriceConsensus.toJSON(e) : undefined
+      );
+    } else {
+      obj.priceConsensusList = [];
+    }
+    message.priceConsensusCount !== undefined &&
+      (obj.priceConsensusCount = message.priceConsensusCount);
     return obj;
   },
 
@@ -189,6 +234,7 @@ export const GenesisState = {
     message.registryList = [];
     message.registryOwnerList = [];
     message.registryMemberList = [];
+    message.priceConsensusList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -235,6 +281,22 @@ export const GenesisState = {
       message.registryMemberCount = object.registryMemberCount;
     } else {
       message.registryMemberCount = 0;
+    }
+    if (
+      object.priceConsensusList !== undefined &&
+      object.priceConsensusList !== null
+    ) {
+      for (const e of object.priceConsensusList) {
+        message.priceConsensusList.push(PriceConsensus.fromPartial(e));
+      }
+    }
+    if (
+      object.priceConsensusCount !== undefined &&
+      object.priceConsensusCount !== null
+    ) {
+      message.priceConsensusCount = object.priceConsensusCount;
+    } else {
+      message.priceConsensusCount = 0;
     }
     return message;
   },
