@@ -1,9 +1,9 @@
 package mint
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/PriceChain/rd_net/x/mint/keeper"
 	"github.com/PriceChain/rd_net/x/mint/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // InitGenesis new mint genesis

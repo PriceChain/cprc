@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pricechain.rd_net.registry;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/PriceChain/rd_net/x/registry/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

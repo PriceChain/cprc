@@ -1,7 +1,6 @@
 package app
 
 import (
-	
 	authtypes "github.com/PriceChain/rd_net/app/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -11,7 +10,6 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	ibcante "github.com/cosmos/ibc-go/v3/modules/core/ante"
 	ibckeeper "github.com/cosmos/ibc-go/v3/modules/core/keeper"
-
 )
 
 const (
@@ -39,13 +37,13 @@ func NewMinCommissionDecorator(options HandlerOptions) MinCommissionDecorator {
 }
 
 func (min MinCommissionDecorator) CheckEmissionRule(totalSupply int64, amount int64, suggestEmission int64) bool {
-	
+
 	emission := 5
 	reward_percent := 0.04125
 	tranche_value := float64(totalSupply) * reward_percent
 
-	for i :=0; i < 16; i++ {
-		if float64(16 - i) * tranche_value <= float64(amount){
+	for i := 0; i < 16; i++ {
+		if float64(16-i)*tranche_value <= float64(amount) {
 			emission = 20 - i
 			break
 		}

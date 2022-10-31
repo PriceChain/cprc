@@ -1,0 +1,14 @@
+syntax = "proto3";
+package pricechain.rd_net.registry;
+
+import "gogoproto/gogo.proto";
+import "registry/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/PriceChain/rd_net/x/registry/types";
+
+// GenesisState defines the registry module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

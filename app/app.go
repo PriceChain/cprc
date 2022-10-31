@@ -103,6 +103,9 @@ import (
 	"github.com/PriceChain/rd_net/x/mint"
 	mintkeeper "github.com/PriceChain/rd_net/x/mint/keeper"
 	minttypes "github.com/PriceChain/rd_net/x/mint/types"
+	registrymodule "github.com/PriceChain/rd_net/x/registry"
+	registrymodulekeeper "github.com/PriceChain/rd_net/x/registry/keeper"
+	registrymoduletypes "github.com/PriceChain/rd_net/x/registry/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -158,6 +161,7 @@ var (
 		vesting.AppModuleBasic{},
 		monitoringp.AppModuleBasic{},
 		rdnetmodule.AppModuleBasic{},
+		registrymodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -171,6 +175,7 @@ var (
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
 		rdnetmoduletypes.ModuleName:    {authtypes.Minter, authtypes.Burner, authtypes.Staking},
+		registrymoduletypes.ModuleName: {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -233,6 +238,8 @@ type App struct {
 	ScopedMonitoringKeeper capabilitykeeper.ScopedKeeper
 
 	RdnetKeeper rdnetmodulekeeper.Keeper
+
+	RegistryKeeper registrymodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -270,6 +277,7 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
 		rdnetmoduletypes.StoreKey,
+		registrymoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -401,6 +409,16 @@ func New(
 	)
 	rdnetModule := rdnetmodule.NewAppModule(appCodec, app.RdnetKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.RegistryKeeper = *registrymodulekeeper.NewKeeper(
+		appCodec,
+		keys[registrymoduletypes.StoreKey],
+		keys[registrymoduletypes.MemStoreKey],
+		app.GetSubspace(registrymoduletypes.ModuleName),
+
+		app.BankKeeper,
+	)
+	registryModule := registrymodule.NewAppModule(appCodec, app.RegistryKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -443,6 +461,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		rdnetModule,
+		registryModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -471,6 +490,7 @@ func New(
 		paramstypes.ModuleName,
 		monitoringptypes.ModuleName,
 		rdnetmoduletypes.ModuleName,
+		registrymoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -495,6 +515,7 @@ func New(
 		ibctransfertypes.ModuleName,
 		monitoringptypes.ModuleName,
 		rdnetmoduletypes.ModuleName,
+		registrymoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -524,6 +545,7 @@ func New(
 		feegrant.ModuleName,
 		monitoringptypes.ModuleName,
 		rdnetmoduletypes.ModuleName,
+		registrymoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -549,6 +571,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		rdnetModule,
+		registryModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -746,6 +769,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(monitoringptypes.ModuleName)
 	paramsKeeper.Subspace(rdnetmoduletypes.ModuleName)
+	paramsKeeper.Subspace(registrymoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

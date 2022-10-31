@@ -22,7 +22,7 @@ export type RdnetParams = object;
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
 export interface RdnetQueryParamsResponse {
-  /** params holds all the parameters of this module. */
+  /** Params defines the parameters for the module. */
   params?: RdnetParams;
 }
 

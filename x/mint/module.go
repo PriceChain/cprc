@@ -11,17 +11,17 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
+	"github.com/PriceChain/rd_net/x/mint/client/cli"
+	"github.com/PriceChain/rd_net/x/mint/client/rest"
+	"github.com/PriceChain/rd_net/x/mint/keeper"
+	"github.com/PriceChain/rd_net/x/mint/simulation"
+	"github.com/PriceChain/rd_net/x/mint/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
-	"github.com/PriceChain/rd_net/x/mint/client/cli"
-	"github.com/PriceChain/rd_net/x/mint/client/rest"
-	"github.com/PriceChain/rd_net/x/mint/keeper"
-	"github.com/PriceChain/rd_net/x/mint/simulation"
-	"github.com/PriceChain/rd_net/x/mint/types"
 )
 
 var (
