@@ -19,6 +19,8 @@ export type RegistryMsgJoinRegistryCoOperatorResponse = object;
 
 export type RegistryMsgJoinRegistryMemberResponse = object;
 
+export type RegistryMsgModifyRegistryResponse = object;
+
 export type RegistryMsgUnbondRegistryResponse = object;
 
 /**

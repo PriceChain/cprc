@@ -28,6 +28,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgUnbondRegistry int = 100
 
+	opWeightMsgModifyRegistry = "op_weight_msg_modify_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgModifyRegistry int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -71,6 +75,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUnbondRegistry,
 		registrysimulation.SimulateMsgUnbondRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgModifyRegistry int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgModifyRegistry, &weightMsgModifyRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgModifyRegistry = defaultWeightMsgModifyRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgModifyRegistry,
+		registrysimulation.SimulateMsgModifyRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

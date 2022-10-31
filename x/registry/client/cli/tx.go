@@ -34,6 +34,7 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdJoinRegistryCoOperator())
 	cmd.AddCommand(CmdJoinRegistryMember())
 	cmd.AddCommand(CmdUnbondRegistry())
+	cmd.AddCommand(CmdModifyRegistry())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

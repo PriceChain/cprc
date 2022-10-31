@@ -38,6 +38,18 @@ export interface MsgUnbondRegistry {
 
 export interface MsgUnbondRegistryResponse {}
 
+export interface MsgModifyRegistry {
+  creator: string;
+  registryId: string;
+  stakeAmount: string;
+  name: string;
+  quorum: string;
+  consensusExpringTime: string;
+  reason: string;
+}
+
+export interface MsgModifyRegistryResponse {}
+
 const baseMsgCreateRegistry: object = {
   creator: "",
   name: "",
@@ -702,6 +714,231 @@ export const MsgUnbondRegistryResponse = {
   },
 };
 
+const baseMsgModifyRegistry: object = {
+  creator: "",
+  registryId: "",
+  stakeAmount: "",
+  name: "",
+  quorum: "",
+  consensusExpringTime: "",
+  reason: "",
+};
+
+export const MsgModifyRegistry = {
+  encode(message: MsgModifyRegistry, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.registryId !== "") {
+      writer.uint32(18).string(message.registryId);
+    }
+    if (message.stakeAmount !== "") {
+      writer.uint32(26).string(message.stakeAmount);
+    }
+    if (message.name !== "") {
+      writer.uint32(34).string(message.name);
+    }
+    if (message.quorum !== "") {
+      writer.uint32(42).string(message.quorum);
+    }
+    if (message.consensusExpringTime !== "") {
+      writer.uint32(50).string(message.consensusExpringTime);
+    }
+    if (message.reason !== "") {
+      writer.uint32(58).string(message.reason);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgModifyRegistry {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgModifyRegistry } as MsgModifyRegistry;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.registryId = reader.string();
+          break;
+        case 3:
+          message.stakeAmount = reader.string();
+          break;
+        case 4:
+          message.name = reader.string();
+          break;
+        case 5:
+          message.quorum = reader.string();
+          break;
+        case 6:
+          message.consensusExpringTime = reader.string();
+          break;
+        case 7:
+          message.reason = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgModifyRegistry {
+    const message = { ...baseMsgModifyRegistry } as MsgModifyRegistry;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.registryId !== undefined && object.registryId !== null) {
+      message.registryId = String(object.registryId);
+    } else {
+      message.registryId = "";
+    }
+    if (object.stakeAmount !== undefined && object.stakeAmount !== null) {
+      message.stakeAmount = String(object.stakeAmount);
+    } else {
+      message.stakeAmount = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
+    if (object.quorum !== undefined && object.quorum !== null) {
+      message.quorum = String(object.quorum);
+    } else {
+      message.quorum = "";
+    }
+    if (
+      object.consensusExpringTime !== undefined &&
+      object.consensusExpringTime !== null
+    ) {
+      message.consensusExpringTime = String(object.consensusExpringTime);
+    } else {
+      message.consensusExpringTime = "";
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = String(object.reason);
+    } else {
+      message.reason = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgModifyRegistry): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.registryId !== undefined && (obj.registryId = message.registryId);
+    message.stakeAmount !== undefined &&
+      (obj.stakeAmount = message.stakeAmount);
+    message.name !== undefined && (obj.name = message.name);
+    message.quorum !== undefined && (obj.quorum = message.quorum);
+    message.consensusExpringTime !== undefined &&
+      (obj.consensusExpringTime = message.consensusExpringTime);
+    message.reason !== undefined && (obj.reason = message.reason);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgModifyRegistry>): MsgModifyRegistry {
+    const message = { ...baseMsgModifyRegistry } as MsgModifyRegistry;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.registryId !== undefined && object.registryId !== null) {
+      message.registryId = object.registryId;
+    } else {
+      message.registryId = "";
+    }
+    if (object.stakeAmount !== undefined && object.stakeAmount !== null) {
+      message.stakeAmount = object.stakeAmount;
+    } else {
+      message.stakeAmount = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
+    }
+    if (object.quorum !== undefined && object.quorum !== null) {
+      message.quorum = object.quorum;
+    } else {
+      message.quorum = "";
+    }
+    if (
+      object.consensusExpringTime !== undefined &&
+      object.consensusExpringTime !== null
+    ) {
+      message.consensusExpringTime = object.consensusExpringTime;
+    } else {
+      message.consensusExpringTime = "";
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    } else {
+      message.reason = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgModifyRegistryResponse: object = {};
+
+export const MsgModifyRegistryResponse = {
+  encode(
+    _: MsgModifyRegistryResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgModifyRegistryResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgModifyRegistryResponse,
+    } as MsgModifyRegistryResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgModifyRegistryResponse {
+    const message = {
+      ...baseMsgModifyRegistryResponse,
+    } as MsgModifyRegistryResponse;
+    return message;
+  },
+
+  toJSON(_: MsgModifyRegistryResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgModifyRegistryResponse>
+  ): MsgModifyRegistryResponse {
+    const message = {
+      ...baseMsgModifyRegistryResponse,
+    } as MsgModifyRegistryResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateRegistry(
@@ -713,10 +950,13 @@ export interface Msg {
   JoinRegistryMember(
     request: MsgJoinRegistryMember
   ): Promise<MsgJoinRegistryMemberResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   UnbondRegistry(
     request: MsgUnbondRegistry
   ): Promise<MsgUnbondRegistryResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  ModifyRegistry(
+    request: MsgModifyRegistry
+  ): Promise<MsgModifyRegistryResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -777,6 +1017,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgUnbondRegistryResponse.decode(new Reader(data))
+    );
+  }
+
+  ModifyRegistry(
+    request: MsgModifyRegistry
+  ): Promise<MsgModifyRegistryResponse> {
+    const data = MsgModifyRegistry.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Msg",
+      "ModifyRegistry",
+      data
+    );
+    return promise.then((data) =>
+      MsgModifyRegistryResponse.decode(new Reader(data))
     );
   }
 }

@@ -30272,6 +30272,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/rd_net/registry/registry/{id}':
@@ -30455,6 +30465,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -52598,6 +52618,8 @@ definitions:
   pricechain.rd_net.registry.MsgJoinRegistryCoOperatorResponse:
     type: object
   pricechain.rd_net.registry.MsgJoinRegistryMemberResponse:
+    type: object
+  pricechain.rd_net.registry.MsgModifyRegistryResponse:
     type: object
   pricechain.rd_net.registry.MsgUnbondRegistryResponse:
     type: object
