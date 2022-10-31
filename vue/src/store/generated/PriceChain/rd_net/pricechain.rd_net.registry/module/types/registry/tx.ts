@@ -50,6 +50,16 @@ export interface MsgModifyRegistry {
 
 export interface MsgModifyRegistryResponse {}
 
+export interface MsgProposePrice {
+  creator: string;
+  registryId: string;
+  price: string;
+  prodInfo: string;
+  reserved: string;
+}
+
+export interface MsgProposePriceResponse {}
+
 const baseMsgCreateRegistry: object = {
   creator: "",
   name: "",
@@ -939,6 +949,181 @@ export const MsgModifyRegistryResponse = {
   },
 };
 
+const baseMsgProposePrice: object = {
+  creator: "",
+  registryId: "",
+  price: "",
+  prodInfo: "",
+  reserved: "",
+};
+
+export const MsgProposePrice = {
+  encode(message: MsgProposePrice, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.registryId !== "") {
+      writer.uint32(18).string(message.registryId);
+    }
+    if (message.price !== "") {
+      writer.uint32(26).string(message.price);
+    }
+    if (message.prodInfo !== "") {
+      writer.uint32(34).string(message.prodInfo);
+    }
+    if (message.reserved !== "") {
+      writer.uint32(42).string(message.reserved);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgProposePrice {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgProposePrice } as MsgProposePrice;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.registryId = reader.string();
+          break;
+        case 3:
+          message.price = reader.string();
+          break;
+        case 4:
+          message.prodInfo = reader.string();
+          break;
+        case 5:
+          message.reserved = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgProposePrice {
+    const message = { ...baseMsgProposePrice } as MsgProposePrice;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.registryId !== undefined && object.registryId !== null) {
+      message.registryId = String(object.registryId);
+    } else {
+      message.registryId = "";
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = String(object.price);
+    } else {
+      message.price = "";
+    }
+    if (object.prodInfo !== undefined && object.prodInfo !== null) {
+      message.prodInfo = String(object.prodInfo);
+    } else {
+      message.prodInfo = "";
+    }
+    if (object.reserved !== undefined && object.reserved !== null) {
+      message.reserved = String(object.reserved);
+    } else {
+      message.reserved = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgProposePrice): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.registryId !== undefined && (obj.registryId = message.registryId);
+    message.price !== undefined && (obj.price = message.price);
+    message.prodInfo !== undefined && (obj.prodInfo = message.prodInfo);
+    message.reserved !== undefined && (obj.reserved = message.reserved);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgProposePrice>): MsgProposePrice {
+    const message = { ...baseMsgProposePrice } as MsgProposePrice;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.registryId !== undefined && object.registryId !== null) {
+      message.registryId = object.registryId;
+    } else {
+      message.registryId = "";
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = object.price;
+    } else {
+      message.price = "";
+    }
+    if (object.prodInfo !== undefined && object.prodInfo !== null) {
+      message.prodInfo = object.prodInfo;
+    } else {
+      message.prodInfo = "";
+    }
+    if (object.reserved !== undefined && object.reserved !== null) {
+      message.reserved = object.reserved;
+    } else {
+      message.reserved = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgProposePriceResponse: object = {};
+
+export const MsgProposePriceResponse = {
+  encode(_: MsgProposePriceResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgProposePriceResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgProposePriceResponse,
+    } as MsgProposePriceResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgProposePriceResponse {
+    const message = {
+      ...baseMsgProposePriceResponse,
+    } as MsgProposePriceResponse;
+    return message;
+  },
+
+  toJSON(_: MsgProposePriceResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgProposePriceResponse>
+  ): MsgProposePriceResponse {
+    const message = {
+      ...baseMsgProposePriceResponse,
+    } as MsgProposePriceResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateRegistry(
@@ -953,10 +1138,11 @@ export interface Msg {
   UnbondRegistry(
     request: MsgUnbondRegistry
   ): Promise<MsgUnbondRegistryResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   ModifyRegistry(
     request: MsgModifyRegistry
   ): Promise<MsgModifyRegistryResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  ProposePrice(request: MsgProposePrice): Promise<MsgProposePriceResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1031,6 +1217,18 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgModifyRegistryResponse.decode(new Reader(data))
+    );
+  }
+
+  ProposePrice(request: MsgProposePrice): Promise<MsgProposePriceResponse> {
+    const data = MsgProposePrice.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Msg",
+      "ProposePrice",
+      data
+    );
+    return promise.then((data) =>
+      MsgProposePriceResponse.decode(new Reader(data))
     );
   }
 }
