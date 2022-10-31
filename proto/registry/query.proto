@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "registry/params.proto";
 import "registry/registry.proto";
+import "registry/registry_owner.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/PriceChain/rd_net/x/registry/types";
@@ -24,6 +25,16 @@ service Query {
 	// Queries a list of Registry items.
 	rpc RegistryAll(QueryAllRegistryRequest) returns (QueryAllRegistryResponse) {
 		option (google.api.http).get = "/PriceChain/rd_net/registry/registry";
+	}
+
+// Queries a RegistryOwner by id.
+	rpc RegistryOwner(QueryGetRegistryOwnerRequest) returns (QueryGetRegistryOwnerResponse) {
+		option (google.api.http).get = "/PriceChain/rd_net/registry/registry_owner/{id}";
+	}
+
+	// Queries a list of RegistryOwner items.
+	rpc RegistryOwnerAll(QueryAllRegistryOwnerRequest) returns (QueryAllRegistryOwnerResponse) {
+		option (google.api.http).get = "/PriceChain/rd_net/registry/registry_owner";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -52,6 +63,23 @@ message QueryAllRegistryRequest {
 
 message QueryAllRegistryResponse {
 	repeated Registry Registry = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetRegistryOwnerRequest {
+	uint64 id = 1;
+}
+
+message QueryGetRegistryOwnerResponse {
+	RegistryOwner RegistryOwner = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllRegistryOwnerRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllRegistryOwnerResponse {
+	repeated RegistryOwner RegistryOwner = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

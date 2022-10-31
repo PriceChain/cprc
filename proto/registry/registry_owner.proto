@@ -1,0 +1,14 @@
+syntax = "proto3";
+package pricechain.rd_net.registry;
+
+option go_package = "github.com/PriceChain/rd_net/x/registry/types";
+
+message RegistryOwner {
+  uint64 id = 1;
+  string registryId = 2; 
+  string stakedAmount = 3; 
+  string address = 4; 
+  string status = 5; 
+  string reserved = 6; 
+  
+}

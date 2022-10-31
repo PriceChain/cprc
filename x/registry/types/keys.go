@@ -25,3 +25,8 @@ const (
 	RegistryKey      = "Registry-value-"
 	RegistryCountKey = "Registry-count-"
 )
+
+const (
+	RegistryOwnerKey      = "RegistryOwner-value-"
+	RegistryOwnerCountKey = "RegistryOwner-count-"
+)

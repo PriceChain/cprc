@@ -31,6 +31,15 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryCount: 2,
+				RegistryOwnerList: []types.RegistryOwner{
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				RegistryOwnerCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -58,6 +67,32 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated registryOwner",
+			genState: &types.GenesisState{
+				RegistryOwnerList: []types.RegistryOwner{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "invalid registryOwner count",
+			genState: &types.GenesisState{
+				RegistryOwnerList: []types.RegistryOwner{
+					{
+						Id: 1,
+					},
+				},
+				RegistryOwnerCount: 0,
 			},
 			valid: false,
 		},

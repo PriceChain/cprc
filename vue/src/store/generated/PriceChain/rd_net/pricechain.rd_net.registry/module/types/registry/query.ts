@@ -7,6 +7,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
+import { RegistryOwner } from "../registry/registry_owner";
 
 export const protobufPackage = "pricechain.rd_net.registry";
 
@@ -33,6 +34,23 @@ export interface QueryAllRegistryRequest {
 
 export interface QueryAllRegistryResponse {
   Registry: Registry[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetRegistryOwnerRequest {
+  id: number;
+}
+
+export interface QueryGetRegistryOwnerResponse {
+  RegistryOwner: RegistryOwner | undefined;
+}
+
+export interface QueryAllRegistryOwnerRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllRegistryOwnerResponse {
+  RegistryOwner: RegistryOwner[];
   pagination: PageResponse | undefined;
 }
 
@@ -441,6 +459,325 @@ export const QueryAllRegistryResponse = {
   },
 };
 
+const baseQueryGetRegistryOwnerRequest: object = { id: 0 };
+
+export const QueryGetRegistryOwnerRequest = {
+  encode(
+    message: QueryGetRegistryOwnerRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.id !== 0) {
+      writer.uint32(8).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetRegistryOwnerRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetRegistryOwnerRequest,
+    } as QueryGetRegistryOwnerRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetRegistryOwnerRequest {
+    const message = {
+      ...baseQueryGetRegistryOwnerRequest,
+    } as QueryGetRegistryOwnerRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id);
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetRegistryOwnerRequest): unknown {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetRegistryOwnerRequest>
+  ): QueryGetRegistryOwnerRequest {
+    const message = {
+      ...baseQueryGetRegistryOwnerRequest,
+    } as QueryGetRegistryOwnerRequest;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+};
+
+const baseQueryGetRegistryOwnerResponse: object = {};
+
+export const QueryGetRegistryOwnerResponse = {
+  encode(
+    message: QueryGetRegistryOwnerResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.RegistryOwner !== undefined) {
+      RegistryOwner.encode(
+        message.RegistryOwner,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetRegistryOwnerResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetRegistryOwnerResponse,
+    } as QueryGetRegistryOwnerResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.RegistryOwner = RegistryOwner.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetRegistryOwnerResponse {
+    const message = {
+      ...baseQueryGetRegistryOwnerResponse,
+    } as QueryGetRegistryOwnerResponse;
+    if (object.RegistryOwner !== undefined && object.RegistryOwner !== null) {
+      message.RegistryOwner = RegistryOwner.fromJSON(object.RegistryOwner);
+    } else {
+      message.RegistryOwner = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetRegistryOwnerResponse): unknown {
+    const obj: any = {};
+    message.RegistryOwner !== undefined &&
+      (obj.RegistryOwner = message.RegistryOwner
+        ? RegistryOwner.toJSON(message.RegistryOwner)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetRegistryOwnerResponse>
+  ): QueryGetRegistryOwnerResponse {
+    const message = {
+      ...baseQueryGetRegistryOwnerResponse,
+    } as QueryGetRegistryOwnerResponse;
+    if (object.RegistryOwner !== undefined && object.RegistryOwner !== null) {
+      message.RegistryOwner = RegistryOwner.fromPartial(object.RegistryOwner);
+    } else {
+      message.RegistryOwner = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllRegistryOwnerRequest: object = {};
+
+export const QueryAllRegistryOwnerRequest = {
+  encode(
+    message: QueryAllRegistryOwnerRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllRegistryOwnerRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllRegistryOwnerRequest,
+    } as QueryAllRegistryOwnerRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllRegistryOwnerRequest {
+    const message = {
+      ...baseQueryAllRegistryOwnerRequest,
+    } as QueryAllRegistryOwnerRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllRegistryOwnerRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllRegistryOwnerRequest>
+  ): QueryAllRegistryOwnerRequest {
+    const message = {
+      ...baseQueryAllRegistryOwnerRequest,
+    } as QueryAllRegistryOwnerRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllRegistryOwnerResponse: object = {};
+
+export const QueryAllRegistryOwnerResponse = {
+  encode(
+    message: QueryAllRegistryOwnerResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.RegistryOwner) {
+      RegistryOwner.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllRegistryOwnerResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllRegistryOwnerResponse,
+    } as QueryAllRegistryOwnerResponse;
+    message.RegistryOwner = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.RegistryOwner.push(
+            RegistryOwner.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllRegistryOwnerResponse {
+    const message = {
+      ...baseQueryAllRegistryOwnerResponse,
+    } as QueryAllRegistryOwnerResponse;
+    message.RegistryOwner = [];
+    if (object.RegistryOwner !== undefined && object.RegistryOwner !== null) {
+      for (const e of object.RegistryOwner) {
+        message.RegistryOwner.push(RegistryOwner.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllRegistryOwnerResponse): unknown {
+    const obj: any = {};
+    if (message.RegistryOwner) {
+      obj.RegistryOwner = message.RegistryOwner.map((e) =>
+        e ? RegistryOwner.toJSON(e) : undefined
+      );
+    } else {
+      obj.RegistryOwner = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllRegistryOwnerResponse>
+  ): QueryAllRegistryOwnerResponse {
+    const message = {
+      ...baseQueryAllRegistryOwnerResponse,
+    } as QueryAllRegistryOwnerResponse;
+    message.RegistryOwner = [];
+    if (object.RegistryOwner !== undefined && object.RegistryOwner !== null) {
+      for (const e of object.RegistryOwner) {
+        message.RegistryOwner.push(RegistryOwner.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -451,6 +788,14 @@ export interface Query {
   RegistryAll(
     request: QueryAllRegistryRequest
   ): Promise<QueryAllRegistryResponse>;
+  /** Queries a RegistryOwner by id. */
+  RegistryOwner(
+    request: QueryGetRegistryOwnerRequest
+  ): Promise<QueryGetRegistryOwnerResponse>;
+  /** Queries a list of RegistryOwner items. */
+  RegistryOwnerAll(
+    request: QueryAllRegistryOwnerRequest
+  ): Promise<QueryAllRegistryOwnerResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -493,6 +838,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllRegistryResponse.decode(new Reader(data))
+    );
+  }
+
+  RegistryOwner(
+    request: QueryGetRegistryOwnerRequest
+  ): Promise<QueryGetRegistryOwnerResponse> {
+    const data = QueryGetRegistryOwnerRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Query",
+      "RegistryOwner",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetRegistryOwnerResponse.decode(new Reader(data))
+    );
+  }
+
+  RegistryOwnerAll(
+    request: QueryAllRegistryOwnerRequest
+  ): Promise<QueryAllRegistryOwnerResponse> {
+    const data = QueryAllRegistryOwnerRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.rd_net.registry.Query",
+      "RegistryOwnerAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllRegistryOwnerResponse.decode(new Reader(data))
     );
   }
 }

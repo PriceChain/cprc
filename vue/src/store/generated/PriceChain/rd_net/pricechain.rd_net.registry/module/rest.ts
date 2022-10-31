@@ -24,6 +24,21 @@ export type RegistryMsgJoinRegistryMemberResponse = object;
  */
 export type RegistryParams = object;
 
+export interface RegistryQueryAllRegistryOwnerResponse {
+  RegistryOwner?: RegistryRegistryOwner[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface RegistryQueryAllRegistryResponse {
   Registry?: RegistryRegistry[];
 
@@ -37,6 +52,10 @@ export interface RegistryQueryAllRegistryResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface RegistryQueryGetRegistryOwnerResponse {
+  RegistryOwner?: RegistryRegistryOwner;
 }
 
 export interface RegistryQueryGetRegistryResponse {
@@ -63,6 +82,16 @@ export interface RegistryRegistry {
   activeMembers?: string;
   prodInfo?: string;
   memo?: string;
+  reserved?: string;
+}
+
+export interface RegistryRegistryOwner {
+  /** @format uint64 */
+  id?: string;
+  registryId?: string;
+  stakedAmount?: string;
+  address?: string;
+  status?: string;
   reserved?: string;
 }
 
@@ -110,13 +139,6 @@ export interface V1Beta1PageRequest {
    * is set.
    */
   count_total?: boolean;
-
-  /**
-   * reverse is set to true if results are to be returned in the descending order.
-   *
-   * Since: cosmos-sdk 0.43
-   */
-  reverse?: boolean;
 }
 
 /**
@@ -362,7 +384,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.offset"?: string;
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
-      "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>
@@ -385,6 +406,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryRegistry = (id: string, params: RequestParams = {}) =>
     this.request<RegistryQueryGetRegistryResponse, RpcStatus>({
       path: `/PriceChain/rd_net/registry/registry/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryRegistryOwnerAll
+   * @summary Queries a list of RegistryOwner items.
+   * @request GET:/PriceChain/rd_net/registry/registry_owner
+   */
+  queryRegistryOwnerAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<RegistryQueryAllRegistryOwnerResponse, RpcStatus>({
+      path: `/PriceChain/rd_net/registry/registry_owner`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryRegistryOwner
+   * @summary Queries a RegistryOwner by id.
+   * @request GET:/PriceChain/rd_net/registry/registry_owner/{id}
+   */
+  queryRegistryOwner = (id: string, params: RequestParams = {}) =>
+    this.request<RegistryQueryGetRegistryOwnerResponse, RpcStatus>({
+      path: `/PriceChain/rd_net/registry/registry_owner/${id}`,
       method: "GET",
       format: "json",
       ...params,

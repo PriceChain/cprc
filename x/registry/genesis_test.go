@@ -23,6 +23,15 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		RegistryCount: 2,
+		RegistryOwnerList: []types.RegistryOwner{
+			{
+				Id: 0,
+			},
+			{
+				Id: 1,
+			},
+		},
+		RegistryOwnerCount: 2,
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -36,5 +45,7 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.RegistryList, got.RegistryList)
 	require.Equal(t, genesisState.RegistryCount, got.RegistryCount)
+	require.ElementsMatch(t, genesisState.RegistryOwnerList, got.RegistryOwnerList)
+	require.Equal(t, genesisState.RegistryOwnerCount, got.RegistryOwnerCount)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

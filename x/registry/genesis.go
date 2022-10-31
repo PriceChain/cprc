@@ -16,6 +16,13 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 
 	// Set registry count
 	k.SetRegistryCount(ctx, genState.RegistryCount)
+	// Set all the registryOwner
+	for _, elem := range genState.RegistryOwnerList {
+		k.SetRegistryOwner(ctx, elem)
+	}
+
+	// Set registryOwner count
+	k.SetRegistryOwnerCount(ctx, genState.RegistryOwnerCount)
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -27,6 +34,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 
 	genesis.RegistryList = k.GetAllRegistry(ctx)
 	genesis.RegistryCount = k.GetRegistryCount(ctx)
+	genesis.RegistryOwnerList = k.GetAllRegistryOwner(ctx)
+	genesis.RegistryOwnerCount = k.GetRegistryOwnerCount(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

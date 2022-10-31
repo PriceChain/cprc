@@ -3,6 +3,7 @@ import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
 import { Params } from "../registry/params";
 import { Registry } from "../registry/registry";
+import { RegistryOwner } from "../registry/registry_owner";
 
 export const protobufPackage = "pricechain.rd_net.registry";
 
@@ -10,11 +11,13 @@ export const protobufPackage = "pricechain.rd_net.registry";
 export interface GenesisState {
   params: Params | undefined;
   registryList: Registry[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   registryCount: number;
+  registryOwnerList: RegistryOwner[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  registryOwnerCount: number;
 }
 
-const baseGenesisState: object = { registryCount: 0 };
+const baseGenesisState: object = { registryCount: 0, registryOwnerCount: 0 };
 
 export const GenesisState = {
   encode(message: GenesisState, writer: Writer = Writer.create()): Writer {
@@ -27,6 +30,12 @@ export const GenesisState = {
     if (message.registryCount !== 0) {
       writer.uint32(24).uint64(message.registryCount);
     }
+    for (const v of message.registryOwnerList) {
+      RegistryOwner.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.registryOwnerCount !== 0) {
+      writer.uint32(40).uint64(message.registryOwnerCount);
+    }
     return writer;
   },
 
@@ -35,6 +44,7 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.registryList = [];
+    message.registryOwnerList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -47,6 +57,14 @@ export const GenesisState = {
         case 3:
           message.registryCount = longToNumber(reader.uint64() as Long);
           break;
+        case 4:
+          message.registryOwnerList.push(
+            RegistryOwner.decode(reader, reader.uint32())
+          );
+          break;
+        case 5:
+          message.registryOwnerCount = longToNumber(reader.uint64() as Long);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -58,6 +76,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.registryList = [];
+    message.registryOwnerList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -72,6 +91,22 @@ export const GenesisState = {
       message.registryCount = Number(object.registryCount);
     } else {
       message.registryCount = 0;
+    }
+    if (
+      object.registryOwnerList !== undefined &&
+      object.registryOwnerList !== null
+    ) {
+      for (const e of object.registryOwnerList) {
+        message.registryOwnerList.push(RegistryOwner.fromJSON(e));
+      }
+    }
+    if (
+      object.registryOwnerCount !== undefined &&
+      object.registryOwnerCount !== null
+    ) {
+      message.registryOwnerCount = Number(object.registryOwnerCount);
+    } else {
+      message.registryOwnerCount = 0;
     }
     return message;
   },
@@ -89,12 +124,22 @@ export const GenesisState = {
     }
     message.registryCount !== undefined &&
       (obj.registryCount = message.registryCount);
+    if (message.registryOwnerList) {
+      obj.registryOwnerList = message.registryOwnerList.map((e) =>
+        e ? RegistryOwner.toJSON(e) : undefined
+      );
+    } else {
+      obj.registryOwnerList = [];
+    }
+    message.registryOwnerCount !== undefined &&
+      (obj.registryOwnerCount = message.registryOwnerCount);
     return obj;
   },
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.registryList = [];
+    message.registryOwnerList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -109,6 +154,22 @@ export const GenesisState = {
       message.registryCount = object.registryCount;
     } else {
       message.registryCount = 0;
+    }
+    if (
+      object.registryOwnerList !== undefined &&
+      object.registryOwnerList !== null
+    ) {
+      for (const e of object.registryOwnerList) {
+        message.registryOwnerList.push(RegistryOwner.fromPartial(e));
+      }
+    }
+    if (
+      object.registryOwnerCount !== undefined &&
+      object.registryOwnerCount !== null
+    ) {
+      message.registryOwnerCount = object.registryOwnerCount;
+    } else {
+      message.registryOwnerCount = 0;
     }
     return message;
   },
