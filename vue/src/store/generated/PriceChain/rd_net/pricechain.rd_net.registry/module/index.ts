@@ -5,11 +5,13 @@ import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
 import { MsgCreateRegistry } from "./types/registry/tx";
+import { MsgJoinRegistryMember } from "./types/registry/tx";
 import { MsgJoinRegistryCoOperator } from "./types/registry/tx";
 
 
 const types = [
   ["/pricechain.rd_net.registry.MsgCreateRegistry", MsgCreateRegistry],
+  ["/pricechain.rd_net.registry.MsgJoinRegistryMember", MsgJoinRegistryMember],
   ["/pricechain.rd_net.registry.MsgJoinRegistryCoOperator", MsgJoinRegistryCoOperator],
   
 ];
@@ -44,6 +46,7 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
     msgCreateRegistry: (data: MsgCreateRegistry): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgCreateRegistry", value: MsgCreateRegistry.fromPartial( data ) }),
+    msgJoinRegistryMember: (data: MsgJoinRegistryMember): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgJoinRegistryMember", value: MsgJoinRegistryMember.fromPartial( data ) }),
     msgJoinRegistryCoOperator: (data: MsgJoinRegistryCoOperator): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgJoinRegistryCoOperator", value: MsgJoinRegistryCoOperator.fromPartial( data ) }),
     
   };

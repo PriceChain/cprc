@@ -17,6 +17,8 @@ export type RegistryMsgCreateRegistryResponse = object;
 
 export type RegistryMsgJoinRegistryCoOperatorResponse = object;
 
+export type RegistryMsgJoinRegistryMemberResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */

@@ -52225,6 +52225,8 @@ definitions:
     type: object
   pricechain.rd_net.registry.MsgJoinRegistryCoOperatorResponse:
     type: object
+  pricechain.rd_net.registry.MsgJoinRegistryMemberResponse:
+    type: object
   pricechain.rd_net.registry.Params:
     type: object
     description: Params defines the parameters for the module.
