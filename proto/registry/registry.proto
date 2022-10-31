@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pricechain.rd_net.registry;
+
+option go_package = "github.com/PriceChain/rd_net/x/registry/types";
+
+message Registry {
+  uint64 id = 1;
+  string name = 2; 
+  string stakedAmount = 3; 
+  string status = 4; 
+  string price = 5; 
+  string quorum = 6; 
+  string consensusExpiringTime = 7; 
+  string activeMembers = 8; 
+  string prodInfo = 9; 
+  string memo = 10; 
+  string reserved = 11; 
+  
+}
