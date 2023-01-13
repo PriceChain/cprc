@@ -96,9 +96,6 @@ import (
 	monitoringptypes "github.com/tendermint/spn/x/monitoringp/types"
 
 	"github.com/PriceChain/rd_net/docs"
-	rdnetmodule "github.com/PriceChain/rd_net/x/rdnet"
-	rdnetmodulekeeper "github.com/PriceChain/rd_net/x/rdnet/keeper"
-	rdnetmoduletypes "github.com/PriceChain/rd_net/x/rdnet/types"
 
 	"github.com/PriceChain/rd_net/x/mint"
 	mintkeeper "github.com/PriceChain/rd_net/x/mint/keeper"
@@ -160,7 +157,6 @@ var (
 		transfer.AppModuleBasic{},
 		vesting.AppModuleBasic{},
 		monitoringp.AppModuleBasic{},
-		rdnetmodule.AppModuleBasic{},
 		registrymodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
@@ -174,7 +170,6 @@ var (
 		stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
-		rdnetmoduletypes.ModuleName:    {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		registrymoduletypes.ModuleName: {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
@@ -237,8 +232,6 @@ type App struct {
 	ScopedTransferKeeper   capabilitykeeper.ScopedKeeper
 	ScopedMonitoringKeeper capabilitykeeper.ScopedKeeper
 
-	RdnetKeeper rdnetmodulekeeper.Keeper
-
 	RegistryKeeper registrymodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
@@ -276,7 +269,6 @@ func New(
 		minttypes.StoreKey, distrtypes.StoreKey, slashingtypes.StoreKey,
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
-		rdnetmoduletypes.StoreKey,
 		registrymoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
@@ -399,16 +391,6 @@ func New(
 	)
 	monitoringModule := monitoringp.NewAppModule(appCodec, app.MonitoringKeeper)
 
-	app.RdnetKeeper = *rdnetmodulekeeper.NewKeeper(
-		appCodec,
-		keys[rdnetmoduletypes.StoreKey],
-		keys[rdnetmoduletypes.MemStoreKey],
-		app.GetSubspace(rdnetmoduletypes.ModuleName),
-
-		app.BankKeeper,
-	)
-	rdnetModule := rdnetmodule.NewAppModule(appCodec, app.RdnetKeeper, app.AccountKeeper, app.BankKeeper)
-
 	app.RegistryKeeper = *registrymodulekeeper.NewKeeper(
 		appCodec,
 		keys[registrymoduletypes.StoreKey],
@@ -460,7 +442,6 @@ func New(
 		params.NewAppModule(app.ParamsKeeper),
 		transferModule,
 		monitoringModule,
-		rdnetModule,
 		registryModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
@@ -489,7 +470,6 @@ func New(
 		feegrant.ModuleName,
 		paramstypes.ModuleName,
 		monitoringptypes.ModuleName,
-		rdnetmoduletypes.ModuleName,
 		registrymoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
@@ -514,7 +494,6 @@ func New(
 		ibchost.ModuleName,
 		ibctransfertypes.ModuleName,
 		monitoringptypes.ModuleName,
-		rdnetmoduletypes.ModuleName,
 		registrymoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
@@ -544,7 +523,6 @@ func New(
 		ibctransfertypes.ModuleName,
 		feegrant.ModuleName,
 		monitoringptypes.ModuleName,
-		rdnetmoduletypes.ModuleName,
 		registrymoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
@@ -570,7 +548,6 @@ func New(
 		ibc.NewAppModule(app.IBCKeeper),
 		transferModule,
 		monitoringModule,
-		rdnetModule,
 		registryModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
@@ -768,7 +745,6 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibctransfertypes.ModuleName)
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(monitoringptypes.ModuleName)
-	paramsKeeper.Subspace(rdnetmoduletypes.ModuleName)
 	paramsKeeper.Subspace(registrymoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
