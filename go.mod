@@ -1,4 +1,4 @@
-module github.com/PriceChain/rd_net
+module github.com/PriceChain/cprc
 
 go 1.18
 

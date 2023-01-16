@@ -1,8 +1,8 @@
 VERSION := 0.0.1
 COMMIT := $(shell git log -1 --format='%H')
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=rd_net \
-	-X github.com/cosmos/cosmos-sdk/version.ServerName=rd_netd \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=cprc \
+	-X github.com/cosmos/cosmos-sdk/version.ServerName=cprcd \
 	-X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
 	-X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT)
 
@@ -14,12 +14,12 @@ PROJECT_NAME = $(shell git remote get-url origin | xargs basename -s .git)
 all: install
 
 install: go.sum
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/rd_netd-manager
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/rd_netd
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/cprcd-manager
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/cprcd
 
 build: go.sum clean
-	go build -mod=mod $(BUILD_FLAGS) -o build/rd_netd-manager ./cmd/rd_netd-manager
-	go build -mod=mod $(BUILD_FLAGS) -o build/rd_netd ./cmd/rd_netd
+	go build -mod=mod $(BUILD_FLAGS) -o build/cprcd-manager ./cmd/cprcd-manager
+	go build -mod=mod $(BUILD_FLAGS) -o build/cprcd ./cmd/cprcd
 
 build-linux:
 	GOOS=linux GOARCH=amd64 $(MAKE) build
@@ -42,8 +42,8 @@ devnet-prepare:
 	./scripts/prepare-devnet.sh
 
 devnet-start:
-	DAEMON_NAME=diversifid DAEMON_HOME=~/.diversifid DAEMON_ALLOW_DOWNLOAD_BINARIES=true DAEMON_RESTART_AFTER_UPGRADE=true \
-    diversifid start --pruning="nothing" --inv-check-period 5
+	DAEMON_NAME=cprcd DAEMON_HOME=~/.cprcd DAEMON_ALLOW_DOWNLOAD_BINARIES=true DAEMON_RESTART_AFTER_UPGRADE=true \
+    cprcd start --pruning="nothing" --inv-check-period 5
 
 # Clean up the build directory
 clean:
@@ -58,7 +58,7 @@ build-docker:
 
 # Run a 4-node testnet locally
 localnet-start: build-linux localnet-stop
-	@if ! [ -f build/node0/.rd_net/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/rd_netd:Z lottery/core testnet --v 4 -o . --starting-ip-address 192.168.10.2 --keyring-backend=test --chain-id test ; fi
+	@if ! [ -f build/node0/.cprcd/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/cprcd:Z cprc/core testnet --v 4 -o . --starting-ip-address 192.168.10.2 --keyring-backend=test --chain-id test ; fi
 	./scripts/import-localnet-seeds.sh
 	docker-compose up
 
@@ -109,4 +109,4 @@ proto-check-breaking:
 
 # Create log files
 log-files:
-	sudo mkdir -p /var/log/rd_netd && sudo touch /var/log/rd_netd/rd_netd.log && sudo touch /var/log/rd_netd/rd_netd_error.log
+	sudo mkdir -p /var/log/cprcd && sudo touch /var/log/cprcd/cprcd.log && sudo touch /var/log/cprcd/cprcd_error.log

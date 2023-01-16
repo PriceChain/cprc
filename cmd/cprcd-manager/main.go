@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/PriceChain/rd_net/cmd/rd_netd-manager/lib"
+	"github.com/PriceChain/cprc/cmd/cprcd-manager/lib"
 )
 
 func main() {
