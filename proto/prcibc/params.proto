@@ -1,5 +1,5 @@
 syntax = "proto3";
-package pricechain.rd_net.prcibc;
+package pricechain.cprc.prcibc;
 
 import "gogoproto/gogo.proto";
 

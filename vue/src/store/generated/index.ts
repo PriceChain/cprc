@@ -1,5 +1,7 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
+import PriceChainCprcPricechainCprcPrcibc from './PriceChain/cprc/pricechain.cprc.prcibc'
+import PriceChainCprcPricechainCprcRegistry from './PriceChain/cprc/pricechain.cprc.registry'
 import PriceChainRdNetPricechainRdNetPrcibc from './PriceChain/rd_net/pricechain.rd_net.prcibc'
 import PriceChainRdNetPricechainRdNetRdnet from './PriceChain/rd_net/pricechain.rd_net.rdnet'
 import PriceChainRdNetPricechainRdNetRegistry from './PriceChain/rd_net/pricechain.rd_net.registry'
@@ -26,6 +28,8 @@ import CosmosIbcGoIbcCorePortV1 from './cosmos/ibc-go/ibc.core.port.v1'
 
 
 export default { 
+  PriceChainCprcPricechainCprcPrcibc: load(PriceChainCprcPricechainCprcPrcibc, 'pricechain.cprc.prcibc'),
+  PriceChainCprcPricechainCprcRegistry: load(PriceChainCprcPricechainCprcRegistry, 'pricechain.cprc.registry'),
   PriceChainRdNetPricechainRdNetPrcibc: load(PriceChainRdNetPricechainRdNetPrcibc, 'pricechain.rd_net.prcibc'),
   PriceChainRdNetPricechainRdNetRdnet: load(PriceChainRdNetPricechainRdNetRdnet, 'pricechain.rd_net.rdnet'),
   PriceChainRdNetPricechainRdNetRegistry: load(PriceChainRdNetPricechainRdNetRegistry, 'pricechain.rd_net.registry'),

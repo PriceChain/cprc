@@ -18,3 +18,5 @@ client:
 faucet:
   name: lucas
   coins: ["50000prc", "100stake"]
+build:
+  main: cmd/cprcd

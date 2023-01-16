@@ -2,7 +2,7 @@
 import { Params } from "../rdnet/params";
 import { Writer, Reader } from "protobufjs/minimal";
 
-export const protobufPackage = "pricechain.rd_net.rdnet";
+export const protobufPackage = "pricechain.cprc.rdnet";
 
 /** GenesisState defines the rdnet module's genesis state. */
 export interface GenesisState {

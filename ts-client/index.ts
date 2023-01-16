@@ -24,7 +24,7 @@ import { Module as IbcApplicationsTransferV1, msgTypes as IbcApplicationsTransfe
 import { Module as IbcCoreChannelV1, msgTypes as IbcCoreChannelV1MsgTypes } from './ibc.core.channel.v1'
 import { Module as IbcCoreClientV1, msgTypes as IbcCoreClientV1MsgTypes } from './ibc.core.client.v1'
 import { Module as IbcCoreConnectionV1, msgTypes as IbcCoreConnectionV1MsgTypes } from './ibc.core.connection.v1'
-import { Module as PricechainRdNetRdnet, msgTypes as PricechainRdNetRdnetMsgTypes } from './pricechain.rd_net.rdnet'
+import { Module as PricechainRdNetRdnet, msgTypes as PricechainRdNetRdnetMsgTypes } from './pricechain.cprc.rdnet'
 import { Module as TendermintSpnClaim, msgTypes as TendermintSpnClaimMsgTypes } from './tendermint.spn.claim'
 import { Module as TendermintSpnMonitoringp, msgTypes as TendermintSpnMonitoringpMsgTypes } from './tendermint.spn.monitoringp'
 

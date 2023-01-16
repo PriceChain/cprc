@@ -2,7 +2,7 @@
 import { Reader, Writer } from "protobufjs/minimal";
 import { Params } from "../prcibc/params";
 
-export const protobufPackage = "pricechain.rd_net.prcibc";
+export const protobufPackage = "pricechain.cprc.prcibc";
 
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -124,7 +124,7 @@ export class QueryClientImpl implements Query {
   Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request(
-      "pricechain.rd_net.prcibc.Query",
+      "pricechain.cprc.prcibc.Query",
       "Params",
       data
     );

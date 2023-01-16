@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pricechain.cprc.prcibc;
+
+option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
+
+message IbcMsg {
+  uint64 id = 1;
+  string msgType = 2; 
+  string content = 3; 
+  string creator = 4; 
+  
+}

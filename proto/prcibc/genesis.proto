@@ -1,8 +1,9 @@
 syntax = "proto3";
-package pricechain.rd_net.prcibc;
+package pricechain.cprc.prcibc;
 
 import "gogoproto/gogo.proto";
 import "prcibc/params.proto";
+import "prcibc/ibc_msg.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
@@ -11,5 +12,7 @@ option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   string port_id = 2;
+  repeated IbcMsg ibcMsgList = 3 [(gogoproto.nullable) = false];
+  uint64 ibcMsgCount = 4;
   // this line is used by starport scaffolding # genesis/proto/state
 }

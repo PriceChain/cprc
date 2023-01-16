@@ -14,13 +14,13 @@ import { MsgVotePrice } from "./types/registry/tx";
 
 
 const types = [
-  ["/pricechain.rd_net.registry.MsgJoinRegistryCoOperator", MsgJoinRegistryCoOperator],
-  ["/pricechain.rd_net.registry.MsgUnbondRegistry", MsgUnbondRegistry],
-  ["/pricechain.rd_net.registry.MsgJoinRegistryMember", MsgJoinRegistryMember],
-  ["/pricechain.rd_net.registry.MsgCreateRegistry", MsgCreateRegistry],
-  ["/pricechain.rd_net.registry.MsgModifyRegistry", MsgModifyRegistry],
-  ["/pricechain.rd_net.registry.MsgProposePrice", MsgProposePrice],
-  ["/pricechain.rd_net.registry.MsgVotePrice", MsgVotePrice],
+  ["/pricechain.cprc.registry.MsgJoinRegistryCoOperator", MsgJoinRegistryCoOperator],
+  ["/pricechain.cprc.registry.MsgUnbondRegistry", MsgUnbondRegistry],
+  ["/pricechain.cprc.registry.MsgJoinRegistryMember", MsgJoinRegistryMember],
+  ["/pricechain.cprc.registry.MsgCreateRegistry", MsgCreateRegistry],
+  ["/pricechain.cprc.registry.MsgModifyRegistry", MsgModifyRegistry],
+  ["/pricechain.cprc.registry.MsgProposePrice", MsgProposePrice],
+  ["/pricechain.cprc.registry.MsgVotePrice", MsgVotePrice],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -53,13 +53,13 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgJoinRegistryCoOperator: (data: MsgJoinRegistryCoOperator): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgJoinRegistryCoOperator", value: MsgJoinRegistryCoOperator.fromPartial( data ) }),
-    msgUnbondRegistry: (data: MsgUnbondRegistry): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgUnbondRegistry", value: MsgUnbondRegistry.fromPartial( data ) }),
-    msgJoinRegistryMember: (data: MsgJoinRegistryMember): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgJoinRegistryMember", value: MsgJoinRegistryMember.fromPartial( data ) }),
-    msgCreateRegistry: (data: MsgCreateRegistry): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgCreateRegistry", value: MsgCreateRegistry.fromPartial( data ) }),
-    msgModifyRegistry: (data: MsgModifyRegistry): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgModifyRegistry", value: MsgModifyRegistry.fromPartial( data ) }),
-    msgProposePrice: (data: MsgProposePrice): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgProposePrice", value: MsgProposePrice.fromPartial( data ) }),
-    msgVotePrice: (data: MsgVotePrice): EncodeObject => ({ typeUrl: "/pricechain.rd_net.registry.MsgVotePrice", value: MsgVotePrice.fromPartial( data ) }),
+    msgJoinRegistryCoOperator: (data: MsgJoinRegistryCoOperator): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgJoinRegistryCoOperator", value: MsgJoinRegistryCoOperator.fromPartial( data ) }),
+    msgUnbondRegistry: (data: MsgUnbondRegistry): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgUnbondRegistry", value: MsgUnbondRegistry.fromPartial( data ) }),
+    msgJoinRegistryMember: (data: MsgJoinRegistryMember): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgJoinRegistryMember", value: MsgJoinRegistryMember.fromPartial( data ) }),
+    msgCreateRegistry: (data: MsgCreateRegistry): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgCreateRegistry", value: MsgCreateRegistry.fromPartial( data ) }),
+    msgModifyRegistry: (data: MsgModifyRegistry): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgModifyRegistry", value: MsgModifyRegistry.fromPartial( data ) }),
+    msgProposePrice: (data: MsgProposePrice): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgProposePrice", value: MsgProposePrice.fromPartial( data ) }),
+    msgVotePrice: (data: MsgVotePrice): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgVotePrice", value: MsgVotePrice.fromPartial( data ) }),
     
   };
 };

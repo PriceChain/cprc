@@ -1,6 +1,6 @@
 import { Client, registry, MissingWalletError } from 'PriceChain-rd_net-client-ts'
 
-import { Params } from "PriceChain-rd_net-client-ts/pricechain.rd_net.rdnet/types"
+import { Params } from "PriceChain-rd_net-client-ts/pricechain.cprc.rdnet/types"
 
 
 export { Params };
@@ -82,7 +82,7 @@ export default {
 	},
 	actions: {
 		init({ dispatch, rootGetters }) {
-			console.log('Vuex module: pricechain.rd_net.rdnet initialized!')
+			console.log('Vuex module: pricechain.cprc.rdnet initialized!')
 			if (rootGetters['common/env/client']) {
 				rootGetters['common/env/client'].on('newblock', () => {
 					dispatch('StoreUpdate')

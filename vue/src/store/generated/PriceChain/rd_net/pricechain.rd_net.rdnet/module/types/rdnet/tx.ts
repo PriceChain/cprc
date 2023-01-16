@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const protobufPackage = "pricechain.rd_net.rdnet";
+export const protobufPackage = "pricechain.cprc.rdnet";
 
 /** Msg defines the Msg service. */
 export interface Msg {}

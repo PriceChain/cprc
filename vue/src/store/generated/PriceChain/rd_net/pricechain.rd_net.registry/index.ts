@@ -153,7 +153,7 @@ export default {
 	},
 	actions: {
 		init({ dispatch, rootGetters }) {
-			console.log('Vuex module: pricechain.rd_net.registry initialized!')
+			console.log('Vuex module: pricechain.cprc.registry initialized!')
 			if (rootGetters['common/env/client']) {
 				rootGetters['common/env/client'].on('newblock', () => {
 					dispatch('StoreUpdate')

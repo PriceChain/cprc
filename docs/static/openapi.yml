@@ -30068,10 +30068,176 @@ paths:
           format: uint64
       tags:
         - Query
+  /PriceChain/cprc/prcibc/ibc_msg:
+    get:
+      summary: Queries a list of IbcMsg items.
+      operationId: PricechainCprcPrcibcIbcMsgAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              IbcMsg:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uint64
+                    msgType:
+                      type: string
+                    content:
+                      type: string
+                    creator:
+                      type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    title: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  '/PriceChain/cprc/prcibc/ibc_msg/{id}':
+    get:
+      summary: Queries a IbcMsg by id.
+      operationId: PricechainCprcPrcibcIbcMsg
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              IbcMsg:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uint64
+                  msgType:
+                    type: string
+                  content:
+                    type: string
+                  creator:
+                    type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: string
+          format: uint64
+      tags:
+        - Query
   /PriceChain/rd_net/prcibc/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: PricechainRdNetPrcibcParams
+      operationId: PricechainCprcPrcibcParams
       responses:
         '200':
           description: A successful response.
@@ -30107,7 +30273,7 @@ paths:
   /PriceChain/rd_net/registry/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: PricechainRdNetRegistryParams
+      operationId: PricechainCprcRegistryParams
       responses:
         '200':
           description: A successful response.
@@ -30115,8 +30281,8 @@ paths:
             type: object
             properties:
               params:
+                description: params holds all the parameters of this module.
                 type: object
-                description: Params defines the parameters for the module.
             description: >-
               QueryParamsResponse is response type for the Query/Params RPC
               method.
@@ -30143,7 +30309,7 @@ paths:
   /PriceChain/rd_net/registry/price_consensus:
     get:
       summary: Queries a list of PriceConsensus items.
-      operationId: PricechainRdNetRegistryPriceConsensusAll
+      operationId: PricechainCprcRegistryPriceConsensusAll
       responses:
         '200':
           description: A successful response.
@@ -30287,7 +30453,7 @@ paths:
   '/PriceChain/rd_net/registry/price_consensus/{id}':
     get:
       summary: Queries a PriceConsensus by id.
-      operationId: PricechainRdNetRegistryPriceConsensus
+      operationId: PricechainCprcRegistryPriceConsensus
       responses:
         '200':
           description: A successful response.
@@ -30351,7 +30517,7 @@ paths:
   /PriceChain/rd_net/registry/registry:
     get:
       summary: Queries a list of Registry items.
-      operationId: PricechainRdNetRegistryRegistryAll
+      operationId: PricechainCprcRegistryRegistryAll
       responses:
         '200':
           description: A successful response.
@@ -30495,7 +30661,7 @@ paths:
   '/PriceChain/rd_net/registry/registry/{id}':
     get:
       summary: Queries a Registry by id.
-      operationId: PricechainRdNetRegistryRegistry
+      operationId: PricechainCprcRegistryRegistry
       responses:
         '200':
           description: A successful response.
@@ -30559,7 +30725,7 @@ paths:
   /PriceChain/rd_net/registry/registry_member:
     get:
       summary: Queries a list of RegistryMember items.
-      operationId: PricechainRdNetRegistryRegistryMemberAll
+      operationId: PricechainCprcRegistryRegistryMemberAll
       responses:
         '200':
           description: A successful response.
@@ -30695,7 +30861,7 @@ paths:
   '/PriceChain/rd_net/registry/registry_member/{id}':
     get:
       summary: Queries a RegistryMember by id.
-      operationId: PricechainRdNetRegistryRegistryMember
+      operationId: PricechainCprcRegistryRegistryMember
       responses:
         '200':
           description: A successful response.
@@ -30751,7 +30917,7 @@ paths:
   /PriceChain/rd_net/registry/registry_owner:
     get:
       summary: Queries a list of RegistryOwner items.
-      operationId: PricechainRdNetRegistryRegistryOwnerAll
+      operationId: PricechainCprcRegistryRegistryOwnerAll
       responses:
         '200':
           description: A successful response.
@@ -30883,7 +31049,7 @@ paths:
   '/PriceChain/rd_net/registry/registry_owner/{id}':
     get:
       summary: Queries a RegistryOwner by id.
-      operationId: PricechainRdNetRegistryRegistryOwner
+      operationId: PricechainCprcRegistryRegistryOwner
       responses:
         '200':
           description: A successful response.
@@ -53003,34 +53169,103 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
-  pricechain.rd_net.prcibc.Params:
+  pricechain.cprc.prcibc.IbcMsg:
+    type: object
+    properties:
+      id:
+        type: string
+        format: uint64
+      msgType:
+        type: string
+      content:
+        type: string
+      creator:
+        type: string
+  pricechain.cprc.prcibc.Params:
     type: object
     description: Params defines the parameters for the module.
-  pricechain.rd_net.prcibc.QueryParamsResponse:
+  pricechain.cprc.prcibc.QueryAllIbcMsgResponse:
+    type: object
+    properties:
+      IbcMsg:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uint64
+            msgType:
+              type: string
+            content:
+              type: string
+            creator:
+              type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            title: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  pricechain.cprc.prcibc.QueryGetIbcMsgResponse:
+    type: object
+    properties:
+      IbcMsg:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uint64
+          msgType:
+            type: string
+          content:
+            type: string
+          creator:
+            type: string
+  pricechain.cprc.prcibc.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  pricechain.rd_net.registry.MsgCreateRegistryResponse:
+  pricechain.cprc.registry.MsgCreateRegistryResponse:
     type: object
-  pricechain.rd_net.registry.MsgJoinRegistryCoOperatorResponse:
+  pricechain.cprc.registry.MsgJoinRegistryCoOperatorResponse:
     type: object
-  pricechain.rd_net.registry.MsgJoinRegistryMemberResponse:
+  pricechain.cprc.registry.MsgJoinRegistryMemberResponse:
     type: object
-  pricechain.rd_net.registry.MsgModifyRegistryResponse:
+  pricechain.cprc.registry.MsgModifyRegistryResponse:
     type: object
-  pricechain.rd_net.registry.MsgProposePriceResponse:
+  pricechain.cprc.registry.MsgProposePriceResponse:
     type: object
-  pricechain.rd_net.registry.MsgUnbondRegistryResponse:
+  pricechain.cprc.registry.MsgUnbondRegistryResponse:
     type: object
-  pricechain.rd_net.registry.MsgVotePriceResponse:
+  pricechain.cprc.registry.MsgVotePriceResponse:
     type: object
-  pricechain.rd_net.registry.Params:
+  pricechain.cprc.registry.Params:
     type: object
     description: Params defines the parameters for the module.
-  pricechain.rd_net.registry.PriceConsensus:
+  pricechain.cprc.registry.PriceConsensus:
     type: object
     properties:
       id:
@@ -53058,7 +53293,7 @@ definitions:
         type: string
       reserved:
         type: string
-  pricechain.rd_net.registry.QueryAllPriceConsensusResponse:
+  pricechain.cprc.registry.QueryAllPriceConsensusResponse:
     type: object
     properties:
       PriceConsensus:
@@ -53116,7 +53351,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  pricechain.rd_net.registry.QueryAllRegistryMemberResponse:
+  pricechain.cprc.registry.QueryAllRegistryMemberResponse:
     type: object
     properties:
       RegistryMember:
@@ -53166,7 +53401,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  pricechain.rd_net.registry.QueryAllRegistryOwnerResponse:
+  pricechain.cprc.registry.QueryAllRegistryOwnerResponse:
     type: object
     properties:
       RegistryOwner:
@@ -53212,7 +53447,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  pricechain.rd_net.registry.QueryAllRegistryResponse:
+  pricechain.cprc.registry.QueryAllRegistryResponse:
     type: object
     properties:
       Registry:
@@ -53270,7 +53505,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  pricechain.rd_net.registry.QueryGetPriceConsensusResponse:
+  pricechain.cprc.registry.QueryGetPriceConsensusResponse:
     type: object
     properties:
       PriceConsensus:
@@ -53301,7 +53536,7 @@ definitions:
             type: string
           reserved:
             type: string
-  pricechain.rd_net.registry.QueryGetRegistryMemberResponse:
+  pricechain.cprc.registry.QueryGetRegistryMemberResponse:
     type: object
     properties:
       RegistryMember:
@@ -53324,7 +53559,7 @@ definitions:
             type: string
           reserved:
             type: string
-  pricechain.rd_net.registry.QueryGetRegistryOwnerResponse:
+  pricechain.cprc.registry.QueryGetRegistryOwnerResponse:
     type: object
     properties:
       RegistryOwner:
@@ -53343,7 +53578,7 @@ definitions:
             type: string
           reserved:
             type: string
-  pricechain.rd_net.registry.QueryGetRegistryResponse:
+  pricechain.cprc.registry.QueryGetRegistryResponse:
     type: object
     properties:
       Registry:
@@ -53374,14 +53609,14 @@ definitions:
             type: string
           creator:
             type: string
-  pricechain.rd_net.registry.QueryParamsResponse:
+  pricechain.cprc.registry.QueryParamsResponse:
     type: object
     properties:
       params:
+        description: params holds all the parameters of this module.
         type: object
-        description: Params defines the parameters for the module.
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  pricechain.rd_net.registry.Registry:
+  pricechain.cprc.registry.Registry:
     type: object
     properties:
       id:
@@ -53409,7 +53644,7 @@ definitions:
         type: string
       creator:
         type: string
-  pricechain.rd_net.registry.RegistryMember:
+  pricechain.cprc.registry.RegistryMember:
     type: object
     properties:
       id:
@@ -53429,7 +53664,7 @@ definitions:
         type: string
       reserved:
         type: string
-  pricechain.rd_net.registry.RegistryOwner:
+  pricechain.cprc.registry.RegistryOwner:
     type: object
     properties:
       id:

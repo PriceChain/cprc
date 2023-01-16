@@ -14,7 +14,16 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 		PortId: types.PortID,
-		// this line is used by starport scaffolding # genesis/test/state
+		IbcMsgList: []types.IbcMsg{
+		{
+			Id: 0,
+		},
+		{
+			Id: 1,
+		},
+	},
+	IbcMsgCount: 2,
+	// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.PrcibcKeeper(t)
@@ -27,5 +36,7 @@ func TestGenesis(t *testing.T) {
 
 	require.Equal(t, genesisState.PortId, got.PortId)
 
-	// this line is used by starport scaffolding # genesis/test/assert
+	require.ElementsMatch(t, genesisState.IbcMsgList, got.IbcMsgList)
+require.Equal(t, genesisState.IbcMsgCount, got.IbcMsgCount)
+// this line is used by starport scaffolding # genesis/test/assert
 }

@@ -1,10 +1,11 @@
 syntax = "proto3";
-package pricechain.rd_net.prcibc;
+package pricechain.cprc.prcibc;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "prcibc/params.proto";
+import "prcibc/ibc_msg.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
@@ -15,7 +16,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/PriceChain/rd_net/prcibc/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a IbcMsg by id.
+	rpc IbcMsg(QueryGetIbcMsgRequest) returns (QueryGetIbcMsgResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/prcibc/ibc_msg/{id}";
+	}
+
+	// Queries a list of IbcMsg items.
+	rpc IbcMsgAll(QueryAllIbcMsgRequest) returns (QueryAllIbcMsgResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/prcibc/ibc_msg";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +36,23 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetIbcMsgRequest {
+	uint64 id = 1;
+}
+
+message QueryGetIbcMsgResponse {
+	IbcMsg IbcMsg = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllIbcMsgRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllIbcMsgResponse {
+	repeated IbcMsg IbcMsg = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3

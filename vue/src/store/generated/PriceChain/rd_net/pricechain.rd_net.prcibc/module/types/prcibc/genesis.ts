@@ -2,7 +2,7 @@
 import { Params } from "../prcibc/params";
 import { Writer, Reader } from "protobufjs/minimal";
 
-export const protobufPackage = "pricechain.rd_net.prcibc";
+export const protobufPackage = "pricechain.cprc.prcibc";
 
 /** GenesisState defines the prcibc module's genesis state. */
 export interface GenesisState {

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package pricechain.rd_net.registry;
+package pricechain.cprc.registry;
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
 

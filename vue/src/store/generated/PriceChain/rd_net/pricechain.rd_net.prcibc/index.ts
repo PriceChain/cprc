@@ -93,7 +93,7 @@ export default {
 	},
 	actions: {
 		init({ dispatch, rootGetters }) {
-			console.log('Vuex module: pricechain.rd_net.prcibc initialized!')
+			console.log('Vuex module: pricechain.cprc.prcibc initialized!')
 			if (rootGetters['common/env/client']) {
 				rootGetters['common/env/client'].on('newblock', () => {
 					dispatch('StoreUpdate')
