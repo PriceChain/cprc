@@ -3,8 +3,8 @@ package prcibc
 import (
 	"fmt"
 
-	"github.com/PriceChain/rd_net/x/prcibc/keeper"
-	"github.com/PriceChain/rd_net/x/prcibc/types"
+	"github.com/PriceChain/cprc/x/prcibc/keeper"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )

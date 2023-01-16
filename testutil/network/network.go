@@ -18,7 +18,7 @@ import (
 	tmrand "github.com/tendermint/tendermint/libs/rand"
 	tmdb "github.com/tendermint/tm-db"
 
-	"github.com/PriceChain/rd_net/app"
+	"github.com/PriceChain/cprc/app"
 )
 
 type (

@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/PriceChain/rd_net/x/mint/simulation"
-	"github.com/PriceChain/rd_net/x/mint/types"
+	"github.com/PriceChain/cprc/x/mint/simulation"
+	"github.com/PriceChain/cprc/x/mint/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"

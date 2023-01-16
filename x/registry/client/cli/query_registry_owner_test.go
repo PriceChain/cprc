@@ -11,10 +11,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/PriceChain/rd_net/testutil/network"
-	"github.com/PriceChain/rd_net/testutil/nullify"
-	"github.com/PriceChain/rd_net/x/registry/client/cli"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	"github.com/PriceChain/cprc/testutil/network"
+	"github.com/PriceChain/cprc/testutil/nullify"
+	"github.com/PriceChain/cprc/x/registry/client/cli"
+	"github.com/PriceChain/cprc/x/registry/types"
 )
 
 func networkWithRegistryOwnerObjects(t *testing.T, n int) (*network.Network, []types.RegistryOwner) {

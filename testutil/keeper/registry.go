@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"github.com/PriceChain/rd_net/x/registry/keeper"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	"github.com/PriceChain/cprc/x/registry/keeper"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"

@@ -7,9 +7,9 @@ import (
 	"github.com/ignite-hq/cli/ignite/pkg/cosmoscmd"
 	"github.com/stretchr/testify/require"
 
-	"github.com/PriceChain/rd_net/app"
-	"github.com/PriceChain/rd_net/x/mint/simulation"
-	"github.com/PriceChain/rd_net/x/mint/types"
+	"github.com/PriceChain/cprc/app"
+	"github.com/PriceChain/cprc/x/mint/simulation"
+	"github.com/PriceChain/cprc/x/mint/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/kv"

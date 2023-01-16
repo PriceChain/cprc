@@ -3,10 +3,10 @@ package registry_test
 import (
 	"testing"
 
-	keepertest "github.com/PriceChain/rd_net/testutil/keeper"
-	"github.com/PriceChain/rd_net/testutil/nullify"
-	"github.com/PriceChain/rd_net/x/registry"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	keepertest "github.com/PriceChain/cprc/testutil/keeper"
+	"github.com/PriceChain/cprc/testutil/nullify"
+	"github.com/PriceChain/cprc/x/registry"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/stretchr/testify/require"
 )
 

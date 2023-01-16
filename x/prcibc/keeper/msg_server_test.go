@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	keepertest "github.com/PriceChain/rd_net/testutil/keeper"
-	"github.com/PriceChain/rd_net/x/prcibc/keeper"
-	"github.com/PriceChain/rd_net/x/prcibc/types"
+	keepertest "github.com/PriceChain/cprc/testutil/keeper"
+	"github.com/PriceChain/cprc/x/prcibc/keeper"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

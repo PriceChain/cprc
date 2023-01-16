@@ -95,17 +95,17 @@ import (
 	monitoringpkeeper "github.com/tendermint/spn/x/monitoringp/keeper"
 	monitoringptypes "github.com/tendermint/spn/x/monitoringp/types"
 
-	"github.com/PriceChain/rd_net/docs"
+	"github.com/PriceChain/cprc/docs"
 
-	"github.com/PriceChain/rd_net/x/mint"
-	mintkeeper "github.com/PriceChain/rd_net/x/mint/keeper"
-	minttypes "github.com/PriceChain/rd_net/x/mint/types"
-	prcibcmodule "github.com/PriceChain/rd_net/x/prcibc"
-	prcibcmodulekeeper "github.com/PriceChain/rd_net/x/prcibc/keeper"
-	prcibcmoduletypes "github.com/PriceChain/rd_net/x/prcibc/types"
-	registrymodule "github.com/PriceChain/rd_net/x/registry"
-	registrymodulekeeper "github.com/PriceChain/rd_net/x/registry/keeper"
-	registrymoduletypes "github.com/PriceChain/rd_net/x/registry/types"
+	"github.com/PriceChain/cprc/x/mint"
+	mintkeeper "github.com/PriceChain/cprc/x/mint/keeper"
+	minttypes "github.com/PriceChain/cprc/x/mint/types"
+	prcibcmodule "github.com/PriceChain/cprc/x/prcibc"
+	prcibcmodulekeeper "github.com/PriceChain/cprc/x/prcibc/keeper"
+	prcibcmoduletypes "github.com/PriceChain/cprc/x/prcibc/types"
+	registrymodule "github.com/PriceChain/cprc/x/registry"
+	registrymodulekeeper "github.com/PriceChain/cprc/x/registry/keeper"
+	registrymoduletypes "github.com/PriceChain/cprc/x/registry/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 

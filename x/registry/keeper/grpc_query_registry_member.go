@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/PriceChain/rd_net/x/registry/types"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"

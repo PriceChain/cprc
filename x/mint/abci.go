@@ -3,8 +3,8 @@ package mint
 import (
 	"time"
 
-	"github.com/PriceChain/rd_net/x/mint/keeper"
-	"github.com/PriceChain/rd_net/x/mint/types"
+	"github.com/PriceChain/cprc/x/mint/keeper"
+	"github.com/PriceChain/cprc/x/mint/types"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"

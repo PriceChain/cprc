@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/PriceChain/rd_net/x/prcibc/types"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

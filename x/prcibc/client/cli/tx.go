@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/PriceChain/rd_net/x/prcibc/types"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 )
 
 var (

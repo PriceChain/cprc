@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/PriceChain/rd_net/x/mint/simulation"
+	"github.com/PriceChain/cprc/x/mint/simulation"
 )
 
 func TestParamChangest(t *testing.T) {

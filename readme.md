@@ -21,7 +21,7 @@ go version
 // Should return go version go1.18 linux/amd64
 
 ## Clone Master Repository
-git clone https://github.com/PriceChain/RD_Net_Cosmos.git
+git clone https://github.com/PriceChain/cprc_Cosmos.git
 
 ## Install the executables
 
@@ -150,7 +150,7 @@ go version
 // Should return go version go1.18 linux/amd64
 
 ## Clone Master Repository
-git clone https://github.com/PriceChain/RD_Net_Cosmos.git
+git clone https://github.com/PriceChain/cprc_Cosmos.git
 
 ## Install the executables
 

@@ -5,7 +5,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/upgrade"
 
-	customtypes "github.com/PriceChain/rd_net/custom/upgrade/types"
+	customtypes "github.com/PriceChain/cprc/custom/upgrade/types"
 )
 
 var (

@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/PriceChain/rd_net/app/params"
+	"github.com/PriceChain/cprc/app/params"
 	"github.com/cosmos/cosmos-sdk/std"
 )
 

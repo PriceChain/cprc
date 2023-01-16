@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	keepertest "github.com/PriceChain/rd_net/testutil/keeper"
-	"github.com/PriceChain/rd_net/testutil/nullify"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	keepertest "github.com/PriceChain/cprc/testutil/keeper"
+	"github.com/PriceChain/cprc/testutil/nullify"
+	"github.com/PriceChain/cprc/x/registry/types"
 )
 
 func TestRegistryQuerySingle(t *testing.T) {

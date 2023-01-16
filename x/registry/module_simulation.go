@@ -3,9 +3,9 @@ package registry
 import (
 	"math/rand"
 
-	"github.com/PriceChain/rd_net/testutil/sample"
-	registrysimulation "github.com/PriceChain/rd_net/x/registry/simulation"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	"github.com/PriceChain/cprc/testutil/sample"
+	registrysimulation "github.com/PriceChain/cprc/x/registry/simulation"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"

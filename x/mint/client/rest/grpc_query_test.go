@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/suite"
 
 	"bluechip/testutil/network"
-	minttypes "github.com/PriceChain/rd_net/x/mint/types"
+	minttypes "github.com/PriceChain/cprc/x/mint/types"
 )
 
 type IntegrationTestSuite struct {

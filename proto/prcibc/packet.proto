@@ -3,7 +3,7 @@ package pricechain.rd_net.prcibc;
 
 // this line is used by starport scaffolding # proto/packet/import
 
-option go_package = "github.com/PriceChain/rd_net/x/prcibc/types";
+option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
 
 message PrcibcPacketData {
     oneof packet {

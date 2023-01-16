@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"testing"
 
-	testkeeper "github.com/PriceChain/rd_net/testutil/keeper"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	testkeeper "github.com/PriceChain/cprc/testutil/keeper"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/stretchr/testify/require"
 )
 

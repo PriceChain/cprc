@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/PriceChain/rd_net/app"
+	"github.com/PriceChain/cprc/app"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 	"github.com/ignite/cli/ignite/pkg/cosmoscmd"
 )

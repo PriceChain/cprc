@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/PriceChain/rd_net/x/mint/types"
+	"github.com/PriceChain/cprc/x/mint/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 )
 

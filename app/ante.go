@@ -1,7 +1,7 @@
 package app
 
 import (
-	authtypes "github.com/PriceChain/rd_net/app/types"
+	authtypes "github.com/PriceChain/cprc/app/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"

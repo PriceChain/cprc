@@ -3,7 +3,7 @@ package pricechain.rd_net.prcibc;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/PriceChain/rd_net/x/prcibc/types";
+option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
 
 // Params defines the parameters for the module.
 message Params {

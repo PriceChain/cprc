@@ -3,7 +3,7 @@ package types
 import (
 	"testing"
 
-	"github.com/PriceChain/rd_net/testutil/sample"
+	"github.com/PriceChain/cprc/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 )

@@ -1,8 +1,8 @@
 package mint
 
 import (
-	"github.com/PriceChain/rd_net/x/mint/keeper"
-	"github.com/PriceChain/rd_net/x/mint/types"
+	"github.com/PriceChain/cprc/x/mint/keeper"
+	"github.com/PriceChain/cprc/x/mint/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

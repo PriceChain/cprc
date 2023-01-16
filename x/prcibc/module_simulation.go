@@ -3,9 +3,9 @@ package prcibc
 import (
 	"math/rand"
 
-	"github.com/PriceChain/rd_net/testutil/sample"
-	prcibcsimulation "github.com/PriceChain/rd_net/x/prcibc/simulation"
-	"github.com/PriceChain/rd_net/x/prcibc/types"
+	"github.com/PriceChain/cprc/testutil/sample"
+	prcibcsimulation "github.com/PriceChain/cprc/x/prcibc/simulation"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"

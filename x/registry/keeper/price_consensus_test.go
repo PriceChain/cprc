@@ -3,10 +3,10 @@ package keeper_test
 import (
 	"testing"
 
-	keepertest "github.com/PriceChain/rd_net/testutil/keeper"
-	"github.com/PriceChain/rd_net/testutil/nullify"
-	"github.com/PriceChain/rd_net/x/registry/keeper"
-	"github.com/PriceChain/rd_net/x/registry/types"
+	keepertest "github.com/PriceChain/cprc/testutil/keeper"
+	"github.com/PriceChain/cprc/testutil/nullify"
+	"github.com/PriceChain/cprc/x/registry/keeper"
+	"github.com/PriceChain/cprc/x/registry/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )

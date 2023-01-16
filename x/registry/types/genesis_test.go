@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"github.com/PriceChain/rd_net/x/registry/types"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/stretchr/testify/require"
 )
 

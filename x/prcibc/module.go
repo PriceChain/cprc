@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/PriceChain/rd_net/x/prcibc/client/cli"
-	"github.com/PriceChain/rd_net/x/prcibc/keeper"
-	"github.com/PriceChain/rd_net/x/prcibc/types"
+	"github.com/PriceChain/cprc/x/prcibc/client/cli"
+	"github.com/PriceChain/cprc/x/prcibc/keeper"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

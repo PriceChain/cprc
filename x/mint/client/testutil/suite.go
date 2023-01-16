@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/suite"
 	tmcli "github.com/tendermint/tendermint/libs/cli"
 
-	"github.com/PriceChain/rd_net/testutil/network"
-	"github.com/PriceChain/rd_net/x/mint/client/cli"
-	minttypes "github.com/PriceChain/rd_net/x/mint/types"
+	"github.com/PriceChain/cprc/testutil/network"
+	"github.com/PriceChain/cprc/x/mint/client/cli"
+	minttypes "github.com/PriceChain/cprc/x/mint/types"
 
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	clitestutil "github.com/cosmos/cosmos-sdk/testutil/cli"
