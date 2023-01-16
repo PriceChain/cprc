@@ -1,4 +1,4 @@
-# Pricechain R&D Net deployment script -- First Node
+# Pricechain CPRC deployment script -- First Node
 
 ```
 sudo apt update
