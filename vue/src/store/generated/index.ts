@@ -1,5 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
+import PriceChainRdNetPricechainRdNetPrcibc from './PriceChain/rd_net/pricechain.rd_net.prcibc'
 import PriceChainRdNetPricechainRdNetRdnet from './PriceChain/rd_net/pricechain.rd_net.rdnet'
 import PriceChainRdNetPricechainRdNetRegistry from './PriceChain/rd_net/pricechain.rd_net.registry'
 import CosmosCosmosSdkCosmosAuthV1Beta1 from './cosmos/cosmos-sdk/cosmos.auth.v1beta1'
@@ -25,6 +26,7 @@ import CosmosIbcGoIbcCorePortV1 from './cosmos/ibc-go/ibc.core.port.v1'
 
 
 export default { 
+  PriceChainRdNetPricechainRdNetPrcibc: load(PriceChainRdNetPricechainRdNetPrcibc, 'pricechain.rd_net.prcibc'),
   PriceChainRdNetPricechainRdNetRdnet: load(PriceChainRdNetPricechainRdNetRdnet, 'pricechain.rd_net.rdnet'),
   PriceChainRdNetPricechainRdNetRegistry: load(PriceChainRdNetPricechainRdNetRegistry, 'pricechain.rd_net.registry'),
   CosmosCosmosSdkCosmosAuthV1Beta1: load(CosmosCosmosSdkCosmosAuthV1Beta1, 'cosmos.auth.v1beta1'),

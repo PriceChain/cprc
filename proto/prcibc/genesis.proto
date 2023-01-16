@@ -1,0 +1,15 @@
+syntax = "proto3";
+package pricechain.rd_net.prcibc;
+
+import "gogoproto/gogo.proto";
+import "prcibc/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/PriceChain/rd_net/x/prcibc/types";
+
+// GenesisState defines the prcibc module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  string port_id = 2;
+  // this line is used by starport scaffolding # genesis/proto/state
+}

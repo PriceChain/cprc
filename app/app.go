@@ -100,6 +100,9 @@ import (
 	"github.com/PriceChain/rd_net/x/mint"
 	mintkeeper "github.com/PriceChain/rd_net/x/mint/keeper"
 	minttypes "github.com/PriceChain/rd_net/x/mint/types"
+	prcibcmodule "github.com/PriceChain/rd_net/x/prcibc"
+	prcibcmodulekeeper "github.com/PriceChain/rd_net/x/prcibc/keeper"
+	prcibcmoduletypes "github.com/PriceChain/rd_net/x/prcibc/types"
 	registrymodule "github.com/PriceChain/rd_net/x/registry"
 	registrymodulekeeper "github.com/PriceChain/rd_net/x/registry/keeper"
 	registrymoduletypes "github.com/PriceChain/rd_net/x/registry/types"
@@ -158,6 +161,7 @@ var (
 		vesting.AppModuleBasic{},
 		monitoringp.AppModuleBasic{},
 		registrymodule.AppModuleBasic{},
+		prcibcmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -232,7 +236,9 @@ type App struct {
 	ScopedTransferKeeper   capabilitykeeper.ScopedKeeper
 	ScopedMonitoringKeeper capabilitykeeper.ScopedKeeper
 
-	RegistryKeeper registrymodulekeeper.Keeper
+	RegistryKeeper     registrymodulekeeper.Keeper
+	ScopedPrcibcKeeper capabilitykeeper.ScopedKeeper
+	PrcibcKeeper       prcibcmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -270,6 +276,7 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
 		registrymoduletypes.StoreKey,
+		prcibcmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -401,12 +408,26 @@ func New(
 	)
 	registryModule := registrymodule.NewAppModule(appCodec, app.RegistryKeeper, app.AccountKeeper, app.BankKeeper)
 
+	scopedPrcibcKeeper := app.CapabilityKeeper.ScopeToModule(prcibcmoduletypes.ModuleName)
+	app.ScopedPrcibcKeeper = scopedPrcibcKeeper
+	app.PrcibcKeeper = *prcibcmodulekeeper.NewKeeper(
+		appCodec,
+		keys[prcibcmoduletypes.StoreKey],
+		keys[prcibcmoduletypes.MemStoreKey],
+		app.GetSubspace(prcibcmoduletypes.ModuleName),
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper,
+		scopedPrcibcKeeper,
+	)
+	prcibcModule := prcibcmodule.NewAppModule(appCodec, app.PrcibcKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
 	ibcRouter.AddRoute(ibctransfertypes.ModuleName, transferIBCModule)
 	ibcRouter.AddRoute(monitoringptypes.ModuleName, monitoringModule)
+	ibcRouter.AddRoute(prcibcmoduletypes.ModuleName, prcibcModule)
 	// this line is used by starport scaffolding # ibc/app/router
 	app.IBCKeeper.SetRouter(ibcRouter)
 
@@ -443,6 +464,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		registryModule,
+		prcibcModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -471,6 +493,7 @@ func New(
 		paramstypes.ModuleName,
 		monitoringptypes.ModuleName,
 		registrymoduletypes.ModuleName,
+		prcibcmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -495,6 +518,7 @@ func New(
 		ibctransfertypes.ModuleName,
 		monitoringptypes.ModuleName,
 		registrymoduletypes.ModuleName,
+		prcibcmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -524,6 +548,7 @@ func New(
 		feegrant.ModuleName,
 		monitoringptypes.ModuleName,
 		registrymoduletypes.ModuleName,
+		prcibcmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -549,6 +574,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		registryModule,
+		prcibcModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -746,6 +772,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(monitoringptypes.ModuleName)
 	paramsKeeper.Subspace(registrymoduletypes.ModuleName)
+	paramsKeeper.Subspace(prcibcmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
