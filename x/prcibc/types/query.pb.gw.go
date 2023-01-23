@@ -321,7 +321,7 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "rd_net", "prcibc", "params"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "cprc", "prcibc", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Query_IbcMsg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "cprc", "prcibc", "ibc_msg", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 

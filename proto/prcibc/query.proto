@@ -14,7 +14,7 @@ option go_package = "github.com/PriceChain/cprc/x/prcibc/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/PriceChain/rd_net/prcibc/params";
+    option (google.api.http).get = "/PriceChain/cprc/prcibc/params";
   }
   // Queries a IbcMsg by id.
 	rpc IbcMsg(QueryGetIbcMsgRequest) returns (QueryGetIbcMsgResponse) {

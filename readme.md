@@ -38,7 +38,7 @@ mkdir -p ~/.cprc/upgrade_manager/genesis/bin
 
 ## Symlink genesis binary to upgrade
 ```
-cp $(which cprc) ~/.cprc/upgrade_manager/genesis/bin
+cp $(which cprcd) ~/.cprc/upgrade_manager/genesis/bin
 sudo cp $(which cprcd-manager) /usr/bin
 ```
 
@@ -84,7 +84,7 @@ cprcd collect-gentxs
 
 ## Replace stake to PRC
 ```
-sed -i 's/stake/uprc/g' ~/.rd_net/config/genesis.json
+sed -i 's/stake/uprc/g' ~/.cprc/config/genesis.json
 ```
 
 ## Create the service file "/etc/systemd/system/rd_netd.service" with the following content
@@ -105,7 +105,7 @@ RestartSec=3
 User=ubuntu
 Group=ubuntu
 Environment=DAEMON_NAME=cprcd
-Environment=DAEMON_HOME=/home/ubuntu/.rd_net
+Environment=DAEMON_HOME=/home/ubuntu/.cprc
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=on
 Environment=DAEMON_RESTART_AFTER_UPGRADE=on
 PermissionsStartOnly=true
@@ -155,19 +155,19 @@ git clone https://github.com/PriceChain/cprc_Cosmos.git
 ## Install the executables
 
 ```
-sudo rm -rf ~/.rd_net
+sudo rm -rf ~/.cprc
 cd RD_Net_Cosmos
 make install
 
 clear
 
-mkdir -p ~/.rd_net/upgrade_manager/upgrades
-mkdir -p ~/.rd_net/upgrade_manager/genesis/bin
+mkdir -p ~/.cprc/upgrade_manager/upgrades
+mkdir -p ~/.cprc/upgrade_manager/genesis/bin
 ```
 
 ## Symlink genesis binary to upgrade
 ```
-cp $(which rd_netd) ~/.rd_net/upgrade_manager/genesis/bin
+cp $(which rd_netd) ~/.cprc/upgrade_manager/genesis/bin
 sudo cp $(which rd_netd-manager) /usr/bin
 ```
 
@@ -183,11 +183,11 @@ echo "bottom soccer blue sniff use improve rough use amateur senior transfer qua
 ```
 
 ## Fetch genesis configuration from the first node deployed.
-curl http://18.144.22.147:26657/genesis? | jq ".result.genesis" > ~/.rd_net/config/genesis.json
+curl http://18.144.22.147:26657/genesis? | jq ".result.genesis" > ~/.cprc/config/genesis.json
 
-## Change seeds item in ~/.rd_net/config/config.toml file.(Format: node_id@peer_node_ip:26656")
+## Change seeds item in ~/.cprc/config/config.toml file.(Format: node_id@peer_node_ip:26656")
 
-sudo nano ~/.rd_net/config/config.toml
+sudo nano ~/.cprc/config/config.toml
 
 Modify 'seeds = ""' to:
 
@@ -196,7 +196,7 @@ where id = validator id,  xx = validator address.
 
 ## Replace stake to PRC
 ```
-sed -i 's/stake/uprc/g' ~/.rd_net/config/genesis.json
+sed -i 's/stake/uprc/g' ~/.cprc/config/genesis.json
 ```
 
 ## Create the service file "/etc/systemd/system/rd_netd.service" with the following content
@@ -217,7 +217,7 @@ RestartSec=3
 User=ubuntu
 Group=ubuntu
 Environment=DAEMON_NAME=rd_netd
-Environment=DAEMON_HOME=/home/ubuntu/.rd_net
+Environment=DAEMON_HOME=/home/ubuntu/.cprc
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=on
 Environment=DAEMON_RESTART_AFTER_UPGRADE=on
 PermissionsStartOnly=true

@@ -849,23 +849,23 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "rd_net", "registry", "params"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "cprc", "registry", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_Registry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"PriceChain", "rd_net", "registry", "id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Registry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"PriceChain", "cprc", "registry", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_RegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 2}, []string{"PriceChain", "rd_net", "registry"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_RegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 2}, []string{"PriceChain", "cprc", "registry"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_RegistryOwner_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "rd_net", "registry", "registry_owner", "id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_RegistryOwner_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "cprc", "registry", "registry_owner", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_RegistryOwnerAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "rd_net", "registry", "registry_owner"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_RegistryOwnerAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "cprc", "registry", "registry_owner"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_RegistryMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "rd_net", "registry", "registry_member", "id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_RegistryMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "cprc", "registry", "registry_member", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_RegistryMemberAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "rd_net", "registry", "registry_member"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_RegistryMemberAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "cprc", "registry", "registry_member"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_PriceConsensus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "rd_net", "registry", "price_consensus", "id"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_PriceConsensus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"PriceChain", "cprc", "registry", "price_consensus", "id"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_PriceConsensusAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "rd_net", "registry", "price_consensus"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_PriceConsensusAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"PriceChain", "cprc", "registry", "price_consensus"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

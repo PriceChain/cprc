@@ -111,7 +111,7 @@ import (
 
 const (
 	AccountAddressPrefix = "price"
-	Name                 = "rd_net"
+	Name                 = "cprc"
 )
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals

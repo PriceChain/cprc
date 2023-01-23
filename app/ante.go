@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	RD_NET_COIN = "uprc"
+	CPRC = "uprc"
 )
 
 // HandlerOptions extends the SDK's AnteHandler options by requiring the IBC
@@ -65,7 +65,7 @@ func (min MinCommissionDecorator) AnteHandle(
 	maxCommissionRate := sdk.NewDecWithPrec(20, 2)
 
 	// Calc total supply
-	totalSupply := min.options.BankKeeper.GetSupply(ctx, RD_NET_COIN).Amount.Int64()
+	totalSupply := min.options.BankKeeper.GetSupply(ctx, CPRC).Amount.Int64()
 
 	validMsg := func(m sdk.Msg, totalSupply int64) error {
 		switch msg := m.(type) {

@@ -17,46 +17,46 @@ option go_package = "github.com/PriceChain/cprc/x/registry/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/PriceChain/rd_net/registry/params";
+    option (google.api.http).get = "/PriceChain/cprc/registry/params";
   }
   // Queries a Registry by id.
 	rpc Registry(QueryGetRegistryRequest) returns (QueryGetRegistryResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/registry/{id}";
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry/{id}";
 	}
 
 	// Queries a list of Registry items.
 	rpc RegistryAll(QueryAllRegistryRequest) returns (QueryAllRegistryResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/registry";
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry";
 	}
 
 // Queries a RegistryOwner by id.
 	rpc RegistryOwner(QueryGetRegistryOwnerRequest) returns (QueryGetRegistryOwnerResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/registry_owner/{id}";
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_owner/{id}";
 	}
 
 	// Queries a list of RegistryOwner items.
 	rpc RegistryOwnerAll(QueryAllRegistryOwnerRequest) returns (QueryAllRegistryOwnerResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/registry_owner";
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_owner";
 	}
 
 // Queries a RegistryMember by id.
 	rpc RegistryMember(QueryGetRegistryMemberRequest) returns (QueryGetRegistryMemberResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/registry_member/{id}";
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_member/{id}";
 	}
 
 	// Queries a list of RegistryMember items.
 	rpc RegistryMemberAll(QueryAllRegistryMemberRequest) returns (QueryAllRegistryMemberResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/registry_member";
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_member";
 	}
 
 // Queries a PriceConsensus by id.
 	rpc PriceConsensus(QueryGetPriceConsensusRequest) returns (QueryGetPriceConsensusResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/price_consensus/{id}";
+		option (google.api.http).get = "/PriceChain/cprc/registry/price_consensus/{id}";
 	}
 
 	// Queries a list of PriceConsensus items.
 	rpc PriceConsensusAll(QueryAllPriceConsensusRequest) returns (QueryAllPriceConsensusResponse) {
-		option (google.api.http).get = "/PriceChain/rd_net/registry/price_consensus";
+		option (google.api.http).get = "/PriceChain/cprc/registry/price_consensus";
 	}
 
 // this line is used by starport scaffolding # 2

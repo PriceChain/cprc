@@ -30234,7 +30234,7 @@ paths:
           format: uint64
       tags:
         - Query
-  /PriceChain/rd_net/prcibc/params:
+  /PriceChain/cprc/prcibc/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: PricechainCprcPrcibcParams
@@ -30270,7 +30270,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /PriceChain/rd_net/registry/params:
+  /PriceChain/cprc/registry/params:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: PricechainCprcRegistryParams
@@ -30306,7 +30306,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /PriceChain/rd_net/registry/price_consensus:
+  /PriceChain/cprc/registry/price_consensus:
     get:
       summary: Queries a list of PriceConsensus items.
       operationId: PricechainCprcRegistryPriceConsensusAll
@@ -30450,7 +30450,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/PriceChain/rd_net/registry/price_consensus/{id}':
+  '/PriceChain/cprc/registry/price_consensus/{id}':
     get:
       summary: Queries a PriceConsensus by id.
       operationId: PricechainCprcRegistryPriceConsensus
@@ -30514,7 +30514,7 @@ paths:
           format: uint64
       tags:
         - Query
-  /PriceChain/rd_net/registry/registry:
+  /PriceChain/cprc/registry/registry:
     get:
       summary: Queries a list of Registry items.
       operationId: PricechainCprcRegistryRegistryAll
@@ -30658,7 +30658,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/PriceChain/rd_net/registry/registry/{id}':
+  '/PriceChain/cprc/registry/registry/{id}':
     get:
       summary: Queries a Registry by id.
       operationId: PricechainCprcRegistryRegistry
@@ -30722,7 +30722,7 @@ paths:
           format: uint64
       tags:
         - Query
-  /PriceChain/rd_net/registry/registry_member:
+  /PriceChain/cprc/registry/registry_member:
     get:
       summary: Queries a list of RegistryMember items.
       operationId: PricechainCprcRegistryRegistryMemberAll
@@ -30858,7 +30858,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/PriceChain/rd_net/registry/registry_member/{id}':
+  '/PriceChain/cprc/registry/registry_member/{id}':
     get:
       summary: Queries a RegistryMember by id.
       operationId: PricechainCprcRegistryRegistryMember
@@ -30914,7 +30914,7 @@ paths:
           format: uint64
       tags:
         - Query
-  /PriceChain/rd_net/registry/registry_owner:
+  /PriceChain/cprc/registry/registry_owner:
     get:
       summary: Queries a list of RegistryOwner items.
       operationId: PricechainCprcRegistryRegistryOwnerAll
@@ -31046,7 +31046,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/PriceChain/rd_net/registry/registry_owner/{id}':
+  '/PriceChain/cprc/registry/registry_owner/{id}':
     get:
       summary: Queries a RegistryOwner by id.
       operationId: PricechainCprcRegistryRegistryOwner
