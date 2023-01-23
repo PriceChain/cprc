@@ -50,13 +50,13 @@ cprcd init validator --chain-id test
 ## Validator
 // price17zc58s96rxj79jtqqsnzt3wtx3tern6areu43g
 ```
-echo "pet apart myth reflect stuff force attract taste caught fit exact ice slide sheriff state since unusual gaze practice course mesh magnet ozone purchase" | cprc keys add validator --keyring-backend test --recover
+echo "pet apart myth reflect stuff force attract taste caught fit exact ice slide sheriff state since unusual gaze practice course mesh magnet ozone purchase" | cprcd keys add validator --keyring-backend test --recover
 ```
 
 ## Validator1
 // price14u53eghrurpeyx5cm47vm3qwugtmhcpnstfx9t
 ```
-echo "bottom soccer blue sniff use improve rough use amateur senior transfer quarter" | rd_netd keys add validator1 --keyring-backend test --recover
+echo "bottom soccer blue sniff use improve rough use amateur senior transfer quarter" | cprcd keys add validator1 --keyring-backend test --recover
 ```
 
 ## Test 1
@@ -67,9 +67,9 @@ echo "betray theory cargo way left cricket doll room donkey wire reunion fall le
 
 ## Add genesis accounts
 ```
-cprcd add-genesis-account $(rd_netd keys show validator -a --keyring-backend test) 8800000000000000uprc
-cprcd add-genesis-account $(rd_netd keys show validator1 -a --keyring-backend test) 1000000000000000uprc
-cprcd add-genesis-account $(rd_netd keys show test1 -a --keyring-backend test) 1000000000000000uprc
+cprcd add-genesis-account $(cprcd keys show validator -a --keyring-backend test) 8800000000000000uprc
+cprcd add-genesis-account $(cprcd keys show validator1 -a --keyring-backend test) 1000000000000000uprc
+cprcd add-genesis-account $(cprcd keys show test1 -a --keyring-backend test) 1000000000000000uprc
 ```
 
 ## Generate CreateValidator signed transaction
@@ -79,12 +79,12 @@ cprcd gentx validator 1000000000000000uprc --keyring-backend test --chain-id tes
 
 ## Collect genesis transactions
 ```
-cprc collect-gentxs
+cprcd collect-gentxs
 ```
 
 ## Replace stake to PRC
 ```
-sed -i 's/stake/uprc/g' ~/.cprc/config/genesis.json
+sed -i 's/stake/uprc/g' ~/.rd_net/config/genesis.json
 ```
 
 ## Create the service file "/etc/systemd/system/rd_netd.service" with the following content
@@ -105,7 +105,7 @@ RestartSec=3
 User=ubuntu
 Group=ubuntu
 Environment=DAEMON_NAME=cprc
-Environment=DAEMON_HOME=/home/ubuntu/.cprc
+Environment=DAEMON_HOME=/home/ubuntu/.rd_net
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=on
 Environment=DAEMON_RESTART_AFTER_UPGRADE=on
 PermissionsStartOnly=true
