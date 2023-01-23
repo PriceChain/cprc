@@ -39,7 +39,7 @@ mkdir -p ~/.cprc/upgrade_manager/genesis/bin
 ## Symlink genesis binary to upgrade
 ```
 cp $(which cprc) ~/.cprc/upgrade_manager/genesis/bin
-sudo cp $(which cprc-manager) /usr/bin
+sudo cp $(which cprcd-manager) /usr/bin
 ```
 
 ## Initialize the validator, where "validator" is a moniker name
