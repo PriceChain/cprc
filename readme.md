@@ -104,7 +104,7 @@ Restart=on-failure
 RestartSec=3
 User=ubuntu
 Group=ubuntu
-Environment=DAEMON_NAME=cprc
+Environment=DAEMON_NAME=cprcd
 Environment=DAEMON_HOME=/home/ubuntu/.rd_net
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=on
 Environment=DAEMON_RESTART_AFTER_UPGRADE=on
