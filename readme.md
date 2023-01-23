@@ -21,7 +21,7 @@ go version
 // Should return go version go1.18 linux/amd64
 
 ## Clone Master Repository
-git clone https://github.com/PriceChain/cprc_Cosmos.git
+git clone https://github.com/PriceChain/cprc.git
 
 ## Install the executables
 
