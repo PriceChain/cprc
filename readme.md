@@ -26,31 +26,31 @@ git clone https://github.com/PriceChain/cprc.git
 ## Install the executables
 
 ```
-sudo rm -rf ~/.rd_net
-cd RD_Net_Cosmos
+sudo rm -rf ~/.cprc
+cd cprc
 make install
 
 clear
 
-mkdir -p ~/.rd_net/upgrade_manager/upgrades
-mkdir -p ~/.rd_net/upgrade_manager/genesis/bin
+mkdir -p ~/.cprc/upgrade_manager/upgrades
+mkdir -p ~/.cprc/upgrade_manager/genesis/bin
 ```
 
 ## Symlink genesis binary to upgrade
 ```
-cp $(which rd_netd) ~/.rd_net/upgrade_manager/genesis/bin
-sudo cp $(which rd_netd-manager) /usr/bin
+cp $(which cprc) ~/.cprc/upgrade_manager/genesis/bin
+sudo cp $(which cprc-manager) /usr/bin
 ```
 
 ## Initialize the validator, where "validator" is a moniker name
 ```
-rd_netd init validator --chain-id test
+cprcd init validator --chain-id test
 ```
  
 ## Validator
 // price17zc58s96rxj79jtqqsnzt3wtx3tern6areu43g
 ```
-echo "pet apart myth reflect stuff force attract taste caught fit exact ice slide sheriff state since unusual gaze practice course mesh magnet ozone purchase" | rd_netd keys add validator --keyring-backend test --recover
+echo "pet apart myth reflect stuff force attract taste caught fit exact ice slide sheriff state since unusual gaze practice course mesh magnet ozone purchase" | cprc keys add validator --keyring-backend test --recover
 ```
 
 ## Validator1
@@ -62,40 +62,40 @@ echo "bottom soccer blue sniff use improve rough use amateur senior transfer qua
 ## Test 1
 // price1dfjns5lk748pzrd79z4zp9k22mrchm2a5t2f6u
 ```
-echo "betray theory cargo way left cricket doll room donkey wire reunion fall left surprise hamster corn village happy bulb token artist twelve whisper expire" | rd_netd keys add test1 --keyring-backend test --recover
+echo "betray theory cargo way left cricket doll room donkey wire reunion fall left surprise hamster corn village happy bulb token artist twelve whisper expire" | cprcd keys add test1 --keyring-backend test --recover
 ```
 
 ## Add genesis accounts
 ```
-rd_netd add-genesis-account $(rd_netd keys show validator -a --keyring-backend test) 8800000000000000uprc
-rd_netd add-genesis-account $(rd_netd keys show validator1 -a --keyring-backend test) 1000000000000000uprc
-rd_netd add-genesis-account $(rd_netd keys show test1 -a --keyring-backend test) 1000000000000000uprc
+cprcd add-genesis-account $(rd_netd keys show validator -a --keyring-backend test) 8800000000000000uprc
+cprcd add-genesis-account $(rd_netd keys show validator1 -a --keyring-backend test) 1000000000000000uprc
+cprcd add-genesis-account $(rd_netd keys show test1 -a --keyring-backend test) 1000000000000000uprc
 ```
 
 ## Generate CreateValidator signed transaction
 ```
-rd_netd gentx validator 1000000000000000uprc --keyring-backend test --chain-id test
+cprcd gentx validator 1000000000000000uprc --keyring-backend test --chain-id test
 ```
 
 ## Collect genesis transactions
 ```
-rd_netd collect-gentxs
+cprc collect-gentxs
 ```
 
 ## Replace stake to PRC
 ```
-sed -i 's/stake/uprc/g' ~/.rd_net/config/genesis.json
+sed -i 's/stake/uprc/g' ~/.cprc/config/genesis.json
 ```
 
 ## Create the service file "/etc/systemd/system/rd_netd.service" with the following content
 ```
-sudo nano /etc/systemd/system/rd_netd.service
+sudo nano /etc/systemd/system/cprcd.service
 ```
 
 ## Paste following content
 ```
 [Unit]
-Description=rd_netd
+Description=cprcd
 Requires=network-online.target
 After=network-online.target
 
@@ -104,14 +104,14 @@ Restart=on-failure
 RestartSec=3
 User=ubuntu
 Group=ubuntu
-Environment=DAEMON_NAME=rd_netd
-Environment=DAEMON_HOME=/home/ubuntu/.rd_net
+Environment=DAEMON_NAME=cprc
+Environment=DAEMON_HOME=/home/ubuntu/.cprc
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=on
 Environment=DAEMON_RESTART_AFTER_UPGRADE=on
 PermissionsStartOnly=true
-ExecStart=/usr/bin/rd_netd-manager start --pruning="nothing" --rpc.laddr "tcp://0.0.0.0:26657"
-StandardOutput=file:/var/log/rd_netd/rd_netd.log
-StandardError=file:/var/log/rd_netd/rd_netd_error.log
+ExecStart=/usr/bin/cprcd-manager start --pruning="nothing" --rpc.laddr "tcp://0.0.0.0:26657"
+StandardOutput=file:/var/log/cprcd/cprcd.log
+StandardError=file:/var/log/cprcd/cprcd_error.log
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGTERM
 LimitNOFILE=4096
@@ -124,8 +124,8 @@ WantedBy=multi-user.target
 ```
 make log-files
 
-sudo systemctl enable rd_netd
-sudo systemctl start rd_netd
+sudo systemctl enable cprcd
+sudo systemctl start cprcd
 ```
 # Pricechain R&D Net deployment script - Next Nodes
 
