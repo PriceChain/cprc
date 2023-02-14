@@ -665,190 +665,6 @@ func (m *QueryAllRegistryMemberResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
-type QueryGetPriceConsensusRequest struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *QueryGetPriceConsensusRequest) Reset()         { *m = QueryGetPriceConsensusRequest{} }
-func (m *QueryGetPriceConsensusRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetPriceConsensusRequest) ProtoMessage()    {}
-func (*QueryGetPriceConsensusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_33b7babacada5cb6, []int{14}
-}
-func (m *QueryGetPriceConsensusRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetPriceConsensusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetPriceConsensusRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetPriceConsensusRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetPriceConsensusRequest.Merge(m, src)
-}
-func (m *QueryGetPriceConsensusRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetPriceConsensusRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetPriceConsensusRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetPriceConsensusRequest proto.InternalMessageInfo
-
-func (m *QueryGetPriceConsensusRequest) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-type QueryGetPriceConsensusResponse struct {
-	PriceConsensus PriceConsensus `protobuf:"bytes,1,opt,name=PriceConsensus,proto3" json:"PriceConsensus"`
-}
-
-func (m *QueryGetPriceConsensusResponse) Reset()         { *m = QueryGetPriceConsensusResponse{} }
-func (m *QueryGetPriceConsensusResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetPriceConsensusResponse) ProtoMessage()    {}
-func (*QueryGetPriceConsensusResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_33b7babacada5cb6, []int{15}
-}
-func (m *QueryGetPriceConsensusResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryGetPriceConsensusResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryGetPriceConsensusResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryGetPriceConsensusResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetPriceConsensusResponse.Merge(m, src)
-}
-func (m *QueryGetPriceConsensusResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryGetPriceConsensusResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetPriceConsensusResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryGetPriceConsensusResponse proto.InternalMessageInfo
-
-func (m *QueryGetPriceConsensusResponse) GetPriceConsensus() PriceConsensus {
-	if m != nil {
-		return m.PriceConsensus
-	}
-	return PriceConsensus{}
-}
-
-type QueryAllPriceConsensusRequest struct {
-	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllPriceConsensusRequest) Reset()         { *m = QueryAllPriceConsensusRequest{} }
-func (m *QueryAllPriceConsensusRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllPriceConsensusRequest) ProtoMessage()    {}
-func (*QueryAllPriceConsensusRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_33b7babacada5cb6, []int{16}
-}
-func (m *QueryAllPriceConsensusRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllPriceConsensusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllPriceConsensusRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllPriceConsensusRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllPriceConsensusRequest.Merge(m, src)
-}
-func (m *QueryAllPriceConsensusRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllPriceConsensusRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllPriceConsensusRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllPriceConsensusRequest proto.InternalMessageInfo
-
-func (m *QueryAllPriceConsensusRequest) GetPagination() *query.PageRequest {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
-type QueryAllPriceConsensusResponse struct {
-	PriceConsensus []PriceConsensus    `protobuf:"bytes,1,rep,name=PriceConsensus,proto3" json:"PriceConsensus"`
-	Pagination     *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
-}
-
-func (m *QueryAllPriceConsensusResponse) Reset()         { *m = QueryAllPriceConsensusResponse{} }
-func (m *QueryAllPriceConsensusResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllPriceConsensusResponse) ProtoMessage()    {}
-func (*QueryAllPriceConsensusResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_33b7babacada5cb6, []int{17}
-}
-func (m *QueryAllPriceConsensusResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *QueryAllPriceConsensusResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_QueryAllPriceConsensusResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *QueryAllPriceConsensusResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllPriceConsensusResponse.Merge(m, src)
-}
-func (m *QueryAllPriceConsensusResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *QueryAllPriceConsensusResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllPriceConsensusResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_QueryAllPriceConsensusResponse proto.InternalMessageInfo
-
-func (m *QueryAllPriceConsensusResponse) GetPriceConsensus() []PriceConsensus {
-	if m != nil {
-		return m.PriceConsensus
-	}
-	return nil
-}
-
-func (m *QueryAllPriceConsensusResponse) GetPagination() *query.PageResponse {
-	if m != nil {
-		return m.Pagination
-	}
-	return nil
-}
-
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "pricechain.cprc.registry.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "pricechain.cprc.registry.QueryParamsResponse")
@@ -864,68 +680,59 @@ func init() {
 	proto.RegisterType((*QueryGetRegistryMemberResponse)(nil), "pricechain.cprc.registry.QueryGetRegistryMemberResponse")
 	proto.RegisterType((*QueryAllRegistryMemberRequest)(nil), "pricechain.cprc.registry.QueryAllRegistryMemberRequest")
 	proto.RegisterType((*QueryAllRegistryMemberResponse)(nil), "pricechain.cprc.registry.QueryAllRegistryMemberResponse")
-	proto.RegisterType((*QueryGetPriceConsensusRequest)(nil), "pricechain.cprc.registry.QueryGetPriceConsensusRequest")
-	proto.RegisterType((*QueryGetPriceConsensusResponse)(nil), "pricechain.cprc.registry.QueryGetPriceConsensusResponse")
-	proto.RegisterType((*QueryAllPriceConsensusRequest)(nil), "pricechain.cprc.registry.QueryAllPriceConsensusRequest")
-	proto.RegisterType((*QueryAllPriceConsensusResponse)(nil), "pricechain.cprc.registry.QueryAllPriceConsensusResponse")
 }
 
 func init() { proto.RegisterFile("registry/query.proto", fileDescriptor_33b7babacada5cb6) }
 
 var fileDescriptor_33b7babacada5cb6 = []byte{
-	// 828 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x97, 0x4f, 0x4f, 0xd4, 0x4e,
-	0x18, 0xc7, 0x77, 0x76, 0xf9, 0x91, 0x5f, 0x06, 0x25, 0x3a, 0x62, 0x20, 0x1b, 0xa8, 0x64, 0x62,
-	0x64, 0x01, 0x69, 0x59, 0x8c, 0xe8, 0xc9, 0x04, 0xfc, 0xc3, 0xc9, 0x88, 0x6b, 0xf4, 0xe0, 0x05,
-	0xbb, 0xcb, 0x58, 0x9a, 0xec, 0xb6, 0xa5, 0xed, 0x2a, 0xc4, 0x78, 0xf1, 0x0d, 0x68, 0xe2, 0x1b,
-	0x30, 0xde, 0x7c, 0x01, 0xc6, 0x18, 0xe3, 0xc1, 0x93, 0x1c, 0x49, 0xbc, 0x78, 0x32, 0x06, 0x7c,
-	0x21, 0xa6, 0x33, 0x4f, 0x77, 0x77, 0xda, 0xad, 0x6d, 0x61, 0xb9, 0x35, 0x9d, 0xe7, 0xcf, 0xe7,
-	0xfb, 0x7d, 0x36, 0xf3, 0x74, 0xf1, 0x98, 0xcb, 0x0c, 0xd3, 0xf3, 0xdd, 0x5d, 0x6d, 0xbb, 0xcd,
-	0xdc, 0x5d, 0xd5, 0x71, 0x6d, 0xdf, 0x26, 0x13, 0x8e, 0x6b, 0x36, 0x58, 0x63, 0x4b, 0x37, 0x2d,
-	0xb5, 0xe1, 0xb8, 0x0d, 0x35, 0x8c, 0x2a, 0x8f, 0x19, 0xb6, 0x61, 0xf3, 0x20, 0x2d, 0x78, 0x12,
-	0xf1, 0xe5, 0x49, 0xc3, 0xb6, 0x8d, 0x26, 0xd3, 0x74, 0xc7, 0xd4, 0x74, 0xcb, 0xb2, 0x7d, 0xdd,
-	0x37, 0x6d, 0xcb, 0x83, 0xd3, 0xb9, 0x86, 0xed, 0xb5, 0x6c, 0x4f, 0xab, 0xeb, 0x1e, 0x13, 0x6d,
-	0xb4, 0x67, 0xd5, 0x3a, 0xf3, 0xf5, 0xaa, 0xe6, 0xe8, 0x86, 0x69, 0xf1, 0x60, 0x88, 0x3d, 0xdf,
-	0xe1, 0x71, 0x74, 0x57, 0x6f, 0x85, 0x25, 0xc6, 0x3b, 0xaf, 0xc3, 0x07, 0x38, 0x98, 0x8a, 0x1d,
-	0x6c, 0xd8, 0xcf, 0x2d, 0xe6, 0xc2, 0xb1, 0x12, 0x3f, 0x6e, 0xb1, 0x56, 0xbd, 0xcf, 0x39, 0x57,
-	0xbc, 0xd1, 0xb0, 0x2d, 0x8f, 0x59, 0x5e, 0x1b, 0xfa, 0xd2, 0x31, 0x4c, 0xee, 0x07, 0xc0, 0xeb,
-	0x1c, 0xa6, 0xc6, 0xb6, 0xdb, 0xcc, 0xf3, 0xe9, 0x43, 0x7c, 0x4e, 0x7a, 0xeb, 0x39, 0x41, 0x1a,
-	0xb9, 0x81, 0x87, 0x05, 0xf4, 0x04, 0x9a, 0x46, 0x95, 0x91, 0xa5, 0x69, 0x35, 0xc9, 0x46, 0x55,
-	0x64, 0xae, 0x0e, 0xed, 0xfd, 0xba, 0x50, 0xa8, 0x41, 0x16, 0x9d, 0xc5, 0xe3, 0xbc, 0xec, 0x1a,
-	0xf3, 0x6b, 0x10, 0x08, 0x1d, 0xc9, 0x28, 0x2e, 0x9a, 0x9b, 0xbc, 0xec, 0x50, 0xad, 0x68, 0x6e,
-	0xd2, 0x27, 0x78, 0x22, 0x1e, 0x0a, 0x18, 0xb7, 0xf0, 0xff, 0xe1, 0x3b, 0x00, 0xa1, 0xc9, 0x20,
-	0x61, 0x24, 0xa0, 0x74, 0x32, 0xa9, 0x0e, 0x30, 0x2b, 0xcd, 0x66, 0x14, 0xe6, 0x0e, 0xc6, 0xdd,
-	0xb9, 0x41, 0x8b, 0x4b, 0xaa, 0x18, 0xb2, 0x1a, 0x0c, 0x59, 0x15, 0xbf, 0x25, 0x18, 0xb2, 0xba,
-	0xae, 0x1b, 0x0c, 0x72, 0x6b, 0x3d, 0x99, 0xf4, 0x03, 0x02, 0x15, 0x52, 0x8f, 0xbe, 0x2a, 0x4a,
-	0x47, 0x53, 0x41, 0xd6, 0x24, 0xd4, 0x22, 0x47, 0x9d, 0x49, 0x45, 0x15, 0x08, 0x12, 0xab, 0x8a,
-	0x27, 0xa3, 0x86, 0xdf, 0x0b, 0x7e, 0x67, 0x49, 0x03, 0xf2, 0xf1, 0x54, 0x42, 0x3c, 0xe8, 0x7b,
-	0x80, 0x4f, 0x4b, 0x07, 0xe0, 0xe3, 0x4c, 0xba, 0x48, 0x1e, 0x0e, 0x4a, 0xe5, 0x1a, 0xf4, 0x29,
-	0x50, 0xf6, 0x18, 0x2a, 0x51, 0x0e, 0x6a, 0x72, 0x5f, 0x11, 0xc8, 0x8b, 0x37, 0x4a, 0x96, 0x57,
-	0x3a, 0xae, 0xbc, 0xc1, 0x4d, 0x53, 0x8b, 0x4f, 0xe7, 0x2e, 0xbf, 0x16, 0x92, 0xc6, 0xb9, 0x83,
-	0x95, 0xa4, 0x04, 0x10, 0xfc, 0x08, 0x8f, 0xca, 0x27, 0x60, 0x6f, 0x25, 0x5d, 0xb1, 0x88, 0x07,
-	0xc9, 0x91, 0x2a, 0xd4, 0x88, 0x3b, 0x2d, 0xa3, 0x0e, 0x6a, 0xa6, 0xdf, 0x10, 0x68, 0xec, 0xd3,
-	0xe9, 0x1f, 0x1a, 0x4b, 0xc7, 0xd7, 0x78, 0x22, 0x73, 0x5d, 0x0f, 0x88, 0x6e, 0x86, 0xd7, 0x79,
-	0x86, 0xb9, 0x46, 0x13, 0xba, 0x9a, 0xe5, 0x93, 0xf4, 0xb9, 0xca, 0xf1, 0xa1, 0x66, 0xf9, 0x6d,
-	0xef, 0x5c, 0xfb, 0xa3, 0x9e, 0xc4, 0x5c, 0x73, 0x68, 0x2c, 0x1d, 0x5f, 0xe3, 0xc0, 0xe6, 0xba,
-	0xf4, 0xfd, 0x14, 0xfe, 0x8f, 0x6b, 0x20, 0xaf, 0x11, 0x1e, 0x16, 0xcb, 0x93, 0x5c, 0x4e, 0xa6,
-	0x8b, 0xef, 0xec, 0xf2, 0x42, 0xc6, 0x68, 0xd1, 0x9d, 0x56, 0x5e, 0xfd, 0xf8, 0xf3, 0xb6, 0x48,
-	0xc9, 0xb4, 0x26, 0x34, 0x05, 0x69, 0x5a, 0x90, 0xa6, 0x45, 0x3e, 0x50, 0xc8, 0x7b, 0xd4, 0xdd,
-	0x54, 0xa4, 0x9a, 0xd2, 0x25, 0xbe, 0xda, 0xcb, 0x4b, 0x79, 0x52, 0x80, 0x4e, 0xe3, 0x74, 0xb3,
-	0x64, 0x26, 0x99, 0xae, 0xf3, 0xf0, 0xc2, 0xdc, 0x7c, 0x49, 0xde, 0x21, 0x3c, 0x12, 0x56, 0x59,
-	0x69, 0x36, 0x53, 0x39, 0xe3, 0x5b, 0x3f, 0x95, 0xb3, 0xcf, 0x12, 0xa7, 0x73, 0x9c, 0xf3, 0x22,
-	0xa1, 0xe9, 0x9c, 0xe4, 0x13, 0x8a, 0xac, 0x0c, 0xb2, 0x9c, 0xdd, 0x99, 0xde, 0x2d, 0x57, 0xbe,
-	0x96, 0x3b, 0x0f, 0x70, 0xaf, 0x72, 0x5c, 0x8d, 0x2c, 0xa4, 0xe3, 0x8a, 0xaf, 0x4c, 0x61, 0xee,
-	0x47, 0x84, 0xcf, 0x48, 0x05, 0x03, 0x87, 0x97, 0xb3, 0xdb, 0x95, 0x0b, 0x3e, 0x69, 0xe3, 0xd2,
-	0x45, 0x0e, 0x3f, 0x47, 0x2a, 0x59, 0xe1, 0xc9, 0x17, 0x14, 0xbd, 0xcf, 0x49, 0x0e, 0xeb, 0xa4,
-	0x2d, 0x54, 0xbe, 0x9e, 0x3f, 0x11, 0xb8, 0x97, 0x39, 0xf7, 0x22, 0x51, 0x33, 0x70, 0x8b, 0x6f,
-	0x77, 0xe1, 0xfa, 0x67, 0x84, 0xcf, 0xca, 0x25, 0x03, 0xdb, 0x73, 0xd8, 0x97, 0x4f, 0x40, 0xe2,
-	0x56, 0xa4, 0x55, 0x2e, 0x60, 0x9e, 0xcc, 0x66, 0x16, 0xc0, 0x9d, 0x8f, 0xdc, 0x95, 0x19, 0x9c,
-	0xef, 0xbb, 0x27, 0xb2, 0x38, 0xdf, 0xff, 0xda, 0xcf, 0xe2, 0x7c, 0xe4, 0x5f, 0x51, 0xd7, 0x79,
-	0xb9, 0x64, 0x46, 0xe7, 0x8f, 0x26, 0x20, 0x71, 0x6f, 0x65, 0x71, 0x3e, 0x22, 0x60, 0xf5, 0xf6,
-	0xde, 0x81, 0x82, 0xf6, 0x0f, 0x14, 0xf4, 0xfb, 0x40, 0x41, 0x6f, 0x0e, 0x95, 0xc2, 0xfe, 0xa1,
-	0x52, 0xf8, 0x79, 0xa8, 0x14, 0x1e, 0xcf, 0x1b, 0xa6, 0xbf, 0xd5, 0xae, 0xab, 0x0d, 0xbb, 0x15,
-	0x2b, 0xb7, 0xd3, 0x2d, 0xe8, 0xef, 0x3a, 0xcc, 0xab, 0x0f, 0xf3, 0xbf, 0x87, 0x57, 0xfe, 0x06,
-	0x00, 0x00, 0xff, 0xff, 0xfd, 0x16, 0xc4, 0xf7, 0x3f, 0x0f, 0x00, 0x00,
+	// 745 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x96, 0x4f, 0x4f, 0xd4, 0x4e,
+	0x18, 0xc7, 0x77, 0x16, 0x7e, 0xe4, 0xe7, 0x10, 0x89, 0x8e, 0x18, 0xc8, 0x06, 0x2a, 0x99, 0x18,
+	0x59, 0x40, 0x3a, 0x2c, 0x46, 0xf4, 0x64, 0x02, 0xfe, 0xe1, 0x64, 0xc4, 0x35, 0x7a, 0xf0, 0xa2,
+	0xdd, 0x65, 0x2c, 0x4d, 0x76, 0x3b, 0xa5, 0x2d, 0x0a, 0x31, 0x5e, 0x7c, 0x03, 0x9a, 0xf8, 0x06,
+	0x8c, 0x37, 0x5f, 0x80, 0x31, 0xc6, 0x78, 0xf0, 0xc6, 0xc5, 0x84, 0xc4, 0x8b, 0x27, 0x63, 0xc0,
+	0x17, 0x62, 0x3a, 0xf3, 0x74, 0x61, 0xb6, 0x5b, 0xdb, 0xca, 0xde, 0x9a, 0xce, 0xf3, 0xe7, 0xf3,
+	0xfd, 0x3e, 0xed, 0xd3, 0xe2, 0x51, 0x9f, 0xdb, 0x4e, 0x10, 0xfa, 0x3b, 0x6c, 0x73, 0x8b, 0xfb,
+	0x3b, 0xa6, 0xe7, 0x8b, 0x50, 0x90, 0x71, 0xcf, 0x77, 0x9a, 0xbc, 0xb9, 0x61, 0x39, 0xae, 0xd9,
+	0xf4, 0xfc, 0xa6, 0x19, 0x47, 0x55, 0x46, 0x6d, 0x61, 0x0b, 0x19, 0xc4, 0xa2, 0x2b, 0x15, 0x5f,
+	0x99, 0xb0, 0x85, 0xb0, 0x5b, 0x9c, 0x59, 0x9e, 0xc3, 0x2c, 0xd7, 0x15, 0xa1, 0x15, 0x3a, 0xc2,
+	0x0d, 0xe0, 0x74, 0xb6, 0x29, 0x82, 0xb6, 0x08, 0x58, 0xc3, 0x0a, 0xb8, 0x6a, 0xc3, 0x9e, 0xd6,
+	0x1a, 0x3c, 0xb4, 0x6a, 0xcc, 0xb3, 0x6c, 0xc7, 0x95, 0xc1, 0x10, 0x7b, 0xb6, 0xc3, 0xe3, 0x59,
+	0xbe, 0xd5, 0x8e, 0x4b, 0x8c, 0x75, 0x6e, 0xc7, 0x17, 0x70, 0x30, 0x99, 0x38, 0x78, 0x24, 0x9e,
+	0xb9, 0xdc, 0x87, 0x63, 0x23, 0x79, 0xdc, 0xe6, 0xed, 0x46, 0x7c, 0x4e, 0x47, 0x31, 0xb9, 0x1b,
+	0x01, 0xad, 0xc9, 0x66, 0x75, 0xbe, 0xb9, 0xc5, 0x83, 0x90, 0xde, 0xc7, 0x67, 0xb4, 0xbb, 0x81,
+	0x27, 0xdc, 0x80, 0x93, 0x6b, 0x78, 0x48, 0x41, 0x8d, 0xa3, 0x29, 0x54, 0x1d, 0x5e, 0x9c, 0x32,
+	0xd3, 0x6c, 0x32, 0x55, 0xe6, 0xca, 0xe0, 0xee, 0xcf, 0x73, 0xa5, 0x3a, 0x64, 0xd1, 0x19, 0x3c,
+	0x26, 0xcb, 0xae, 0xf2, 0xb0, 0x0e, 0x81, 0xd0, 0x91, 0x8c, 0xe0, 0xb2, 0xb3, 0x2e, 0xcb, 0x0e,
+	0xd6, 0xcb, 0xce, 0x3a, 0x7d, 0x8c, 0xc7, 0x93, 0xa1, 0x80, 0x71, 0x03, 0xff, 0x1f, 0xdf, 0x03,
+	0x10, 0x9a, 0x0e, 0x12, 0x47, 0x02, 0x4a, 0x27, 0x93, 0x5a, 0x00, 0xb3, 0xdc, 0x6a, 0x75, 0xc3,
+	0xdc, 0xc2, 0xf8, 0x70, 0x2e, 0xd0, 0xe2, 0x82, 0xa9, 0x86, 0x68, 0x46, 0x43, 0x34, 0xd5, 0xb3,
+	0x02, 0x43, 0x34, 0xd7, 0x2c, 0x9b, 0x43, 0x6e, 0xfd, 0x48, 0x26, 0x7d, 0x8f, 0x40, 0x85, 0xd6,
+	0xa3, 0xa7, 0x8a, 0x81, 0x7f, 0x53, 0x41, 0x56, 0x35, 0xd4, 0xb2, 0x44, 0x9d, 0xce, 0x44, 0x55,
+	0x08, 0x1a, 0xab, 0x89, 0x27, 0xba, 0x0d, 0xbf, 0x13, 0x3d, 0x47, 0x69, 0x03, 0x0a, 0xf1, 0x64,
+	0x4a, 0x3c, 0xe8, 0xbb, 0x87, 0x4f, 0x6a, 0x07, 0xe0, 0xe3, 0x74, 0xb6, 0x48, 0x19, 0x0e, 0x4a,
+	0xf5, 0x1a, 0xf4, 0x09, 0x50, 0x1e, 0x31, 0x54, 0xa3, 0xec, 0xd7, 0xe4, 0xbe, 0x20, 0x90, 0x97,
+	0x6c, 0x94, 0x2e, 0x6f, 0xe0, 0xb8, 0xf2, 0xfa, 0x37, 0x4d, 0x96, 0x9c, 0xce, 0x6d, 0xf9, 0xda,
+	0xa7, 0x8d, 0x73, 0x1b, 0x1b, 0x69, 0x09, 0x20, 0xf8, 0x01, 0x1e, 0xd1, 0x4f, 0xc0, 0xde, 0x6a,
+	0xb6, 0x62, 0x15, 0x0f, 0x92, 0xbb, 0xaa, 0x50, 0x3b, 0xe9, 0xb4, 0x8e, 0xda, 0xaf, 0x99, 0x7e,
+	0x45, 0xa0, 0xb1, 0x47, 0xa7, 0xbf, 0x68, 0x1c, 0x38, 0xbe, 0xc6, 0xbe, 0xcd, 0x75, 0xf1, 0xdb,
+	0x09, 0xfc, 0x9f, 0xd4, 0x40, 0x5e, 0x21, 0x3c, 0xa4, 0x96, 0x2c, 0xb9, 0x98, 0x4e, 0x97, 0xdc,
+	0xed, 0x95, 0xf9, 0x9c, 0xd1, 0xaa, 0x3b, 0xad, 0xbe, 0xfc, 0xfe, 0xfb, 0x4d, 0x99, 0x92, 0x29,
+	0xb6, 0x16, 0xa5, 0x5d, 0x8f, 0xd2, 0x58, 0x94, 0xc6, 0xba, 0x3e, 0x54, 0xe4, 0x1d, 0x3a, 0xdc,
+	0x68, 0xa4, 0x96, 0xd1, 0x25, 0xf9, 0x09, 0xa8, 0x2c, 0x16, 0x49, 0x01, 0x3a, 0x26, 0xe9, 0x66,
+	0xc8, 0x74, 0x3a, 0x5d, 0xe7, 0xe2, 0xb9, 0xb3, 0xfe, 0x82, 0xbc, 0x45, 0x78, 0x38, 0xae, 0xb2,
+	0xdc, 0x6a, 0x65, 0x72, 0x26, 0xbf, 0x0e, 0x99, 0x9c, 0x3d, 0x96, 0x3d, 0x9d, 0x95, 0x9c, 0xe7,
+	0x09, 0xcd, 0xe6, 0x24, 0x1f, 0x51, 0xd7, 0x6a, 0x21, 0x4b, 0xf9, 0x9d, 0x39, 0xba, 0x0d, 0x2b,
+	0x57, 0x0a, 0xe7, 0x01, 0xee, 0x65, 0x89, 0xcb, 0xc8, 0x7c, 0x36, 0xae, 0xfa, 0xdb, 0x50, 0xe6,
+	0x7e, 0x40, 0xf8, 0x94, 0x56, 0x30, 0x72, 0x78, 0x29, 0xbf, 0x5d, 0x85, 0xe0, 0xd3, 0x36, 0x33,
+	0x5d, 0x90, 0xf0, 0xb3, 0xa4, 0x9a, 0x17, 0x9e, 0x7c, 0x46, 0xdd, 0xef, 0x3d, 0x29, 0x60, 0x9d,
+	0xb6, 0xad, 0x2a, 0x57, 0x8b, 0x27, 0x02, 0xf7, 0x92, 0xe4, 0x5e, 0x20, 0x66, 0x0e, 0x6e, 0xf5,
+	0x0f, 0xa7, 0x5c, 0xff, 0x84, 0xf0, 0x69, 0xbd, 0x64, 0x64, 0x7b, 0x01, 0xfb, 0x8a, 0x09, 0x48,
+	0xdd, 0x9e, 0xb4, 0x26, 0x05, 0xcc, 0x91, 0x99, 0xdc, 0x02, 0x56, 0x6e, 0xee, 0xee, 0x1b, 0x68,
+	0x6f, 0xdf, 0x40, 0xbf, 0xf6, 0x0d, 0xf4, 0xfa, 0xc0, 0x28, 0xed, 0x1d, 0x18, 0xa5, 0x1f, 0x07,
+	0x46, 0xe9, 0xe1, 0x9c, 0xed, 0x84, 0x1b, 0x5b, 0x0d, 0xb3, 0x29, 0xda, 0x89, 0x72, 0xdb, 0x87,
+	0x05, 0xc3, 0x1d, 0x8f, 0x07, 0x8d, 0x21, 0xf9, 0x33, 0x7b, 0xe9, 0x4f, 0x00, 0x00, 0x00, 0xff,
+	0xff, 0x11, 0x86, 0x58, 0x81, 0xcd, 0x0b, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -954,10 +761,6 @@ type QueryClient interface {
 	RegistryMember(ctx context.Context, in *QueryGetRegistryMemberRequest, opts ...grpc.CallOption) (*QueryGetRegistryMemberResponse, error)
 	// Queries a list of RegistryMember items.
 	RegistryMemberAll(ctx context.Context, in *QueryAllRegistryMemberRequest, opts ...grpc.CallOption) (*QueryAllRegistryMemberResponse, error)
-	// Queries a PriceConsensus by id.
-	PriceConsensus(ctx context.Context, in *QueryGetPriceConsensusRequest, opts ...grpc.CallOption) (*QueryGetPriceConsensusResponse, error)
-	// Queries a list of PriceConsensus items.
-	PriceConsensusAll(ctx context.Context, in *QueryAllPriceConsensusRequest, opts ...grpc.CallOption) (*QueryAllPriceConsensusResponse, error)
 }
 
 type queryClient struct {
@@ -1031,24 +834,6 @@ func (c *queryClient) RegistryMemberAll(ctx context.Context, in *QueryAllRegistr
 	return out, nil
 }
 
-func (c *queryClient) PriceConsensus(ctx context.Context, in *QueryGetPriceConsensusRequest, opts ...grpc.CallOption) (*QueryGetPriceConsensusResponse, error) {
-	out := new(QueryGetPriceConsensusResponse)
-	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/PriceConsensus", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *queryClient) PriceConsensusAll(ctx context.Context, in *QueryAllPriceConsensusRequest, opts ...grpc.CallOption) (*QueryAllPriceConsensusResponse, error) {
-	out := new(QueryAllPriceConsensusResponse)
-	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/PriceConsensusAll", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -1065,10 +850,6 @@ type QueryServer interface {
 	RegistryMember(context.Context, *QueryGetRegistryMemberRequest) (*QueryGetRegistryMemberResponse, error)
 	// Queries a list of RegistryMember items.
 	RegistryMemberAll(context.Context, *QueryAllRegistryMemberRequest) (*QueryAllRegistryMemberResponse, error)
-	// Queries a PriceConsensus by id.
-	PriceConsensus(context.Context, *QueryGetPriceConsensusRequest) (*QueryGetPriceConsensusResponse, error)
-	// Queries a list of PriceConsensus items.
-	PriceConsensusAll(context.Context, *QueryAllPriceConsensusRequest) (*QueryAllPriceConsensusResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -1095,12 +876,6 @@ func (*UnimplementedQueryServer) RegistryMember(ctx context.Context, req *QueryG
 }
 func (*UnimplementedQueryServer) RegistryMemberAll(ctx context.Context, req *QueryAllRegistryMemberRequest) (*QueryAllRegistryMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegistryMemberAll not implemented")
-}
-func (*UnimplementedQueryServer) PriceConsensus(ctx context.Context, req *QueryGetPriceConsensusRequest) (*QueryGetPriceConsensusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PriceConsensus not implemented")
-}
-func (*UnimplementedQueryServer) PriceConsensusAll(ctx context.Context, req *QueryAllPriceConsensusRequest) (*QueryAllPriceConsensusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PriceConsensusAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -1233,42 +1008,6 @@ func _Query_RegistryMemberAll_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_PriceConsensus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetPriceConsensusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).PriceConsensus(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pricechain.cprc.registry.Query/PriceConsensus",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PriceConsensus(ctx, req.(*QueryGetPriceConsensusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Query_PriceConsensusAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllPriceConsensusRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(QueryServer).PriceConsensusAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/pricechain.cprc.registry.Query/PriceConsensusAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PriceConsensusAll(ctx, req.(*QueryAllPriceConsensusRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "pricechain.cprc.registry.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -1300,14 +1039,6 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegistryMemberAll",
 			Handler:    _Query_RegistryMemberAll_Handler,
-		},
-		{
-			MethodName: "PriceConsensus",
-			Handler:    _Query_PriceConsensus_Handler,
-		},
-		{
-			MethodName: "PriceConsensusAll",
-			Handler:    _Query_PriceConsensusAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1805,151 +1536,6 @@ func (m *QueryAllRegistryMemberResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetPriceConsensusRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetPriceConsensusRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetPriceConsensusRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x8
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryGetPriceConsensusResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryGetPriceConsensusResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryGetPriceConsensusResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	{
-		size, err := m.PriceConsensus.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintQuery(dAtA, i, uint64(size))
-	}
-	i--
-	dAtA[i] = 0xa
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllPriceConsensusRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllPriceConsensusRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllPriceConsensusRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *QueryAllPriceConsensusResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *QueryAllPriceConsensusResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *QueryAllPriceConsensusResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		{
-			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
-			if err != nil {
-				return 0, err
-			}
-			i -= size
-			i = encodeVarintQuery(dAtA, i, uint64(size))
-		}
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.PriceConsensus) > 0 {
-		for iNdEx := len(m.PriceConsensus) - 1; iNdEx >= 0; iNdEx-- {
-			{
-				size, err := m.PriceConsensus[iNdEx].MarshalToSizedBuffer(dAtA[:i])
-				if err != nil {
-					return 0, err
-				}
-				i -= size
-				i = encodeVarintQuery(dAtA, i, uint64(size))
-			}
-			i--
-			dAtA[i] = 0xa
-		}
-	}
-	return len(dAtA) - i, nil
-}
-
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -2135,61 +1721,6 @@ func (m *QueryAllRegistryMemberResponse) Size() (n int) {
 	_ = l
 	if len(m.RegistryMember) > 0 {
 		for _, e := range m.RegistryMember {
-			l = e.Size()
-			n += 1 + l + sovQuery(uint64(l))
-		}
-	}
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryGetPriceConsensusRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Id != 0 {
-		n += 1 + sovQuery(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *QueryGetPriceConsensusResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = m.PriceConsensus.Size()
-	n += 1 + l + sovQuery(uint64(l))
-	return n
-}
-
-func (m *QueryAllPriceConsensusRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if m.Pagination != nil {
-		l = m.Pagination.Size()
-		n += 1 + l + sovQuery(uint64(l))
-	}
-	return n
-}
-
-func (m *QueryAllPriceConsensusResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	if len(m.PriceConsensus) > 0 {
-		for _, e := range m.PriceConsensus {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -3354,364 +2885,6 @@ func (m *QueryAllRegistryMemberResponse) Unmarshal(dAtA []byte) error {
 			}
 			m.RegistryMember = append(m.RegistryMember, RegistryMember{})
 			if err := m.RegistryMember[len(m.RegistryMember)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageResponse{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetPriceConsensusRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryGetPriceConsensusResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PriceConsensus", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if err := m.PriceConsensus.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllPriceConsensusRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			if m.Pagination == nil {
-				m.Pagination = &query.PageRequest{}
-			}
-			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
-			}
-			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipQuery(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *QueryAllPriceConsensusResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowQuery
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PriceConsensus", wireType)
-			}
-			var msglen int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowQuery
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				msglen |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			if msglen < 0 {
-				return ErrInvalidLengthQuery
-			}
-			postIndex := iNdEx + msglen
-			if postIndex < 0 {
-				return ErrInvalidLengthQuery
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.PriceConsensus = append(m.PriceConsensus, PriceConsensus{})
-			if err := m.PriceConsensus[len(m.PriceConsensus)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

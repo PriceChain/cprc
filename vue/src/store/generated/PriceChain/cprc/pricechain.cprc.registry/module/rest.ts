@@ -25,43 +25,10 @@ export type RegistryMsgProposePriceResponse = object;
 
 export type RegistryMsgUnbondRegistryResponse = object;
 
-export type RegistryMsgVotePriceResponse = object;
-
 /**
  * Params defines the parameters for the module.
  */
 export type RegistryParams = object;
-
-export interface RegistryPriceConsensus {
-  /** @format uint64 */
-  id?: string;
-  registryId?: string;
-  proposedPrice?: string;
-  proposedAt?: string;
-  status?: string;
-  yesCount?: string;
-  noCount?: string;
-  totalVoted?: string;
-  proposer?: string;
-  prodInfo?: string;
-  memo?: string;
-  reserved?: string;
-}
-
-export interface RegistryQueryAllPriceConsensusResponse {
-  PriceConsensus?: RegistryPriceConsensus[];
-
-  /**
-   * PageResponse is to be embedded in gRPC response messages where the
-   * corresponding request message has used PageRequest.
-   *
-   *  message SomeResponse {
-   *          repeated Bar results = 1;
-   *          PageResponse page = 2;
-   *  }
-   */
-  pagination?: V1Beta1PageResponse;
-}
 
 export interface RegistryQueryAllRegistryMemberResponse {
   RegistryMember?: RegistryRegistryMember[];
@@ -106,10 +73,6 @@ export interface RegistryQueryAllRegistryResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
-}
-
-export interface RegistryQueryGetPriceConsensusResponse {
-  PriceConsensus?: RegistryPriceConsensus;
 }
 
 export interface RegistryQueryGetRegistryMemberResponse {
@@ -214,6 +177,13 @@ export interface V1Beta1PageRequest {
    * is set.
    */
   count_total?: boolean;
+
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
+  reverse?: boolean;
 }
 
 /**
@@ -449,47 +419,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryPriceConsensusAll
-   * @summary Queries a list of PriceConsensus items.
-   * @request GET:/PriceChain/cprc/registry/price_consensus
-   */
-  queryPriceConsensusAll = (
-    query?: {
-      "pagination.key"?: string;
-      "pagination.offset"?: string;
-      "pagination.limit"?: string;
-      "pagination.count_total"?: boolean;
-    },
-    params: RequestParams = {},
-  ) =>
-    this.request<RegistryQueryAllPriceConsensusResponse, RpcStatus>({
-      path: `/PriceChain/cprc/registry/price_consensus`,
-      method: "GET",
-      query: query,
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
-   * @name QueryPriceConsensus
-   * @summary Queries a PriceConsensus by id.
-   * @request GET:/PriceChain/cprc/registry/price_consensus/{id}
-   */
-  queryPriceConsensus = (id: string, params: RequestParams = {}) =>
-    this.request<RegistryQueryGetPriceConsensusResponse, RpcStatus>({
-      path: `/PriceChain/cprc/registry/price_consensus/${id}`,
-      method: "GET",
-      format: "json",
-      ...params,
-    });
-
-  /**
-   * No description
-   *
-   * @tags Query
    * @name QueryRegistryAll
    * @summary Queries a list of Registry items.
    * @request GET:/PriceChain/cprc/registry/registry
@@ -500,6 +429,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.offset"?: string;
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>
@@ -541,6 +471,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.offset"?: string;
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>
@@ -582,6 +513,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.offset"?: string;
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>

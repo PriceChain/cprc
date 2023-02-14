@@ -14,14 +14,18 @@ var _ = strconv.Itoa(0)
 
 func CmdProposePrice() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "propose-price [registry-id] [price] [prod-info] [reserved]",
+		Use:   "propose-price [registry-id] [store-name] [store-addr] [purchase-time] [prod-name] [price] [receipt-code] [reserved]",
 		Short: "Broadcast message propose-price",
-		Args:  cobra.ExactArgs(4),
+		Args:  cobra.ExactArgs(8),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argRegistryId := args[0]
-			argPrice := args[1]
-			argProdInfo := args[2]
-			argReserved := args[3]
+			argStoreName := args[1]
+			argStoreAddr := args[2]
+			argPurchaseTime := args[3]
+			argProdName := args[4]
+			argPrice := args[5]
+			argReceiptCode := args[6]
+			argReserved := args[7]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -31,8 +35,12 @@ func CmdProposePrice() *cobra.Command {
 			msg := types.NewMsgProposePrice(
 				clientCtx.GetFromAddress().String(),
 				argRegistryId,
+				argStoreName,
+				argStoreAddr,
+				argPurchaseTime,
+				argProdName,
 				argPrice,
-				argProdInfo,
+				argReceiptCode,
 				argReserved,
 			)
 			if err := msg.ValidateBasic(); err != nil {

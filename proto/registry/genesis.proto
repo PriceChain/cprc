@@ -6,7 +6,6 @@ import "registry/params.proto";
 import "registry/registry.proto";
 import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
-import "registry/price_consensus.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
@@ -20,7 +19,5 @@ message GenesisState {
   uint64 registryOwnerCount = 5;
   repeated RegistryMember registryMemberList = 6 [(gogoproto.nullable) = false];
   uint64 registryMemberCount = 7;
-  repeated PriceConsensus priceConsensusList = 8 [(gogoproto.nullable) = false];
-  uint64 priceConsensusCount = 9;
   // this line is used by starport scaffolding # genesis/proto/state
 }

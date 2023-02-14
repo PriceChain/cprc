@@ -49,15 +49,6 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryMemberCount: 2,
-				PriceConsensusList: []types.PriceConsensus{
-					{
-						Id: 0,
-					},
-					{
-						Id: 1,
-					},
-				},
-				PriceConsensusCount: 2,
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -137,32 +128,6 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryMemberCount: 0,
-			},
-			valid: false,
-		},
-		{
-			desc: "duplicated priceConsensus",
-			genState: &types.GenesisState{
-				PriceConsensusList: []types.PriceConsensus{
-					{
-						Id: 0,
-					},
-					{
-						Id: 0,
-					},
-				},
-			},
-			valid: false,
-		},
-		{
-			desc: "invalid priceConsensus count",
-			genState: &types.GenesisState{
-				PriceConsensusList: []types.PriceConsensus{
-					{
-						Id: 1,
-					},
-				},
-				PriceConsensusCount: 0,
 			},
 			valid: false,
 		},

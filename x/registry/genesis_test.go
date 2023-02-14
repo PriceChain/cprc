@@ -41,15 +41,6 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		RegistryMemberCount: 2,
-		PriceConsensusList: []types.PriceConsensus{
-			{
-				Id: 0,
-			},
-			{
-				Id: 1,
-			},
-		},
-		PriceConsensusCount: 2,
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -67,7 +58,5 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.RegistryOwnerCount, got.RegistryOwnerCount)
 	require.ElementsMatch(t, genesisState.RegistryMemberList, got.RegistryMemberList)
 	require.Equal(t, genesisState.RegistryMemberCount, got.RegistryMemberCount)
-	require.ElementsMatch(t, genesisState.PriceConsensusList, got.PriceConsensusList)
-	require.Equal(t, genesisState.PriceConsensusCount, got.PriceConsensusCount)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

@@ -8,7 +8,6 @@ import "registry/params.proto";
 import "registry/registry.proto";
 import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
-import "registry/price_consensus.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
@@ -47,16 +46,6 @@ service Query {
 	// Queries a list of RegistryMember items.
 	rpc RegistryMemberAll(QueryAllRegistryMemberRequest) returns (QueryAllRegistryMemberResponse) {
 		option (google.api.http).get = "/PriceChain/cprc/registry/registry_member";
-	}
-
-// Queries a PriceConsensus by id.
-	rpc PriceConsensus(QueryGetPriceConsensusRequest) returns (QueryGetPriceConsensusResponse) {
-		option (google.api.http).get = "/PriceChain/cprc/registry/price_consensus/{id}";
-	}
-
-	// Queries a list of PriceConsensus items.
-	rpc PriceConsensusAll(QueryAllPriceConsensusRequest) returns (QueryAllPriceConsensusResponse) {
-		option (google.api.http).get = "/PriceChain/cprc/registry/price_consensus";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -119,23 +108,6 @@ message QueryAllRegistryMemberRequest {
 
 message QueryAllRegistryMemberResponse {
 	repeated RegistryMember RegistryMember = 1 [(gogoproto.nullable) = false];
-	cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
-
-message QueryGetPriceConsensusRequest {
-	uint64 id = 1;
-}
-
-message QueryGetPriceConsensusResponse {
-	PriceConsensus PriceConsensus = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryAllPriceConsensusRequest {
-	cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllPriceConsensusResponse {
-	repeated PriceConsensus PriceConsensus = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

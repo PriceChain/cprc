@@ -9,13 +9,17 @@ const TypeMsgProposePrice = "propose_price"
 
 var _ sdk.Msg = &MsgProposePrice{}
 
-func NewMsgProposePrice(creator string, registryId string, price string, prodInfo string, reserved string) *MsgProposePrice {
+func NewMsgProposePrice(creator string, registryId string, storeName string, storeAddr string, purchaseTime string, prodName string, price string, receiptCode string, reserved string) *MsgProposePrice {
 	return &MsgProposePrice{
-		Creator:    creator,
-		RegistryId: registryId,
-		Price:      price,
-		ProdInfo:   prodInfo,
-		Reserved:   reserved,
+		Creator:      creator,
+		RegistryId:   registryId,
+		StoreName:    storeName,
+		StoreAddr:    storeAddr,
+		PurchaseTime: purchaseTime,
+		ProdName:     prodName,
+		Price:        price,
+		ReceiptCode:  receiptCode,
+		Reserved:     reserved,
 	}
 }
 

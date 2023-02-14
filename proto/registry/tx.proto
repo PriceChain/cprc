@@ -13,7 +13,6 @@ service Msg {
   rpc UnbondRegistry(MsgUnbondRegistry) returns (MsgUnbondRegistryResponse);
   rpc ModifyRegistry(MsgModifyRegistry) returns (MsgModifyRegistryResponse);
   rpc ProposePrice(MsgProposePrice) returns (MsgProposePriceResponse);
-  rpc VotePrice(MsgVotePrice) returns (MsgVotePriceResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -21,8 +20,8 @@ message MsgCreateRegistry {
   string creator = 1;
   string name = 2;
   string stakeAmount = 3;
-  string quorum = 4;
-  string consensusExpiringTime = 5;
+  string description = 4;
+  string imageUrl = 5;
 }
 
 message MsgCreateRegistryResponse {
@@ -61,8 +60,8 @@ message MsgModifyRegistry {
   string registryId = 2;
   string stakeAmount = 3;
   string name = 4;
-  string quorum = 5;
-  string consensusExpringTime = 6;
+  string description = 5;
+  string imageUrl = 6;
   string reason = 7;
 }
 
@@ -72,22 +71,16 @@ message MsgModifyRegistryResponse {
 message MsgProposePrice {
   string creator = 1;
   string registryId = 2;
-  string price = 3;
-  string prodInfo = 4;
-  string reserved = 5;
+  string storeName = 3;
+  string storeAddr = 4;
+  string purchaseTime = 5;
+  string prodName = 6;
+  string price = 7;
+  string receiptCode = 8;
+  string reserved = 9;
 }
 
 message MsgProposePriceResponse {
-}
-
-message MsgVotePrice {
-  string creator = 1;
-  string registryId = 2;
-  string answer = 3;
-  string reserved = 4;
-}
-
-message MsgVotePriceResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

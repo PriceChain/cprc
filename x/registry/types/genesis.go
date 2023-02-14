@@ -13,7 +13,6 @@ func DefaultGenesis() *GenesisState {
 		RegistryList:       []Registry{},
 		RegistryOwnerList:  []RegistryOwner{},
 		RegistryMemberList: []RegistryMember{},
-		PriceConsensusList: []PriceConsensus{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -57,18 +56,6 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("registryMember id should be lower or equal than the last id")
 		}
 		registryMemberIdMap[elem.Id] = true
-	}
-	// Check for duplicated ID in priceConsensus
-	priceConsensusIdMap := make(map[uint64]bool)
-	priceConsensusCount := gs.GetPriceConsensusCount()
-	for _, elem := range gs.PriceConsensusList {
-		if _, ok := priceConsensusIdMap[elem.Id]; ok {
-			return fmt.Errorf("duplicated id for priceConsensus")
-		}
-		if elem.Id >= priceConsensusCount {
-			return fmt.Errorf("priceConsensus id should be lower or equal than the last id")
-		}
-		priceConsensusIdMap[elem.Id] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

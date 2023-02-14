@@ -107,17 +107,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		registrysimulation.SimulateMsgProposePrice(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgVotePrice int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgVotePrice, &weightMsgVotePrice, nil,
-		func(_ *rand.Rand) {
-			weightMsgVotePrice = defaultWeightMsgVotePrice
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgVotePrice,
-		registrysimulation.SimulateMsgVotePrice(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations

@@ -14,14 +14,14 @@ var _ = strconv.Itoa(0)
 
 func CmdCreateRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-registry [name] [stake-amount] [quorum] [consensus-expiring-time]",
+		Use:   "create-registry [name] [stake-amount] [description] [imageUrl]",
 		Short: "Broadcast message create-registry",
 		Args:  cobra.ExactArgs(4),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argName := args[0]
 			argStakeAmount := args[1]
-			argQuorum := args[2]
-			argConsensusExpiringTime := args[3]
+			argDescription := args[2]
+			argImageUrl := args[3]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -32,8 +32,8 @@ func CmdCreateRegistry() *cobra.Command {
 				clientCtx.GetFromAddress().String(),
 				argName,
 				argStakeAmount,
-				argQuorum,
-				argConsensusExpiringTime,
+				argDescription,
+				argImageUrl,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

@@ -7,8 +7,8 @@ export interface MsgCreateRegistry {
   creator: string;
   name: string;
   stakeAmount: string;
-  quorum: string;
-  consensusExpiringTime: string;
+  description: string;
+  imageUrl: string;
 }
 
 export interface MsgCreateRegistryResponse {}
@@ -43,8 +43,8 @@ export interface MsgModifyRegistry {
   registryId: string;
   stakeAmount: string;
   name: string;
-  quorum: string;
-  consensusExpringTime: string;
+  description: string;
+  imageUrl: string;
   reason: string;
 }
 
@@ -53,28 +53,23 @@ export interface MsgModifyRegistryResponse {}
 export interface MsgProposePrice {
   creator: string;
   registryId: string;
+  storeName: string;
+  storeAddr: string;
+  purchaseTime: string;
+  prodName: string;
   price: string;
-  prodInfo: string;
+  receiptCode: string;
   reserved: string;
 }
 
 export interface MsgProposePriceResponse {}
 
-export interface MsgVotePrice {
-  creator: string;
-  registryId: string;
-  answer: string;
-  reserved: string;
-}
-
-export interface MsgVotePriceResponse {}
-
 const baseMsgCreateRegistry: object = {
   creator: "",
   name: "",
   stakeAmount: "",
-  quorum: "",
-  consensusExpiringTime: "",
+  description: "",
+  imageUrl: "",
 };
 
 export const MsgCreateRegistry = {
@@ -88,11 +83,11 @@ export const MsgCreateRegistry = {
     if (message.stakeAmount !== "") {
       writer.uint32(26).string(message.stakeAmount);
     }
-    if (message.quorum !== "") {
-      writer.uint32(34).string(message.quorum);
+    if (message.description !== "") {
+      writer.uint32(34).string(message.description);
     }
-    if (message.consensusExpiringTime !== "") {
-      writer.uint32(42).string(message.consensusExpiringTime);
+    if (message.imageUrl !== "") {
+      writer.uint32(42).string(message.imageUrl);
     }
     return writer;
   },
@@ -114,10 +109,10 @@ export const MsgCreateRegistry = {
           message.stakeAmount = reader.string();
           break;
         case 4:
-          message.quorum = reader.string();
+          message.description = reader.string();
           break;
         case 5:
-          message.consensusExpiringTime = reader.string();
+          message.imageUrl = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -144,18 +139,15 @@ export const MsgCreateRegistry = {
     } else {
       message.stakeAmount = "";
     }
-    if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = String(object.quorum);
+    if (object.description !== undefined && object.description !== null) {
+      message.description = String(object.description);
     } else {
-      message.quorum = "";
+      message.description = "";
     }
-    if (
-      object.consensusExpiringTime !== undefined &&
-      object.consensusExpiringTime !== null
-    ) {
-      message.consensusExpiringTime = String(object.consensusExpiringTime);
+    if (object.imageUrl !== undefined && object.imageUrl !== null) {
+      message.imageUrl = String(object.imageUrl);
     } else {
-      message.consensusExpiringTime = "";
+      message.imageUrl = "";
     }
     return message;
   },
@@ -166,9 +158,9 @@ export const MsgCreateRegistry = {
     message.name !== undefined && (obj.name = message.name);
     message.stakeAmount !== undefined &&
       (obj.stakeAmount = message.stakeAmount);
-    message.quorum !== undefined && (obj.quorum = message.quorum);
-    message.consensusExpiringTime !== undefined &&
-      (obj.consensusExpiringTime = message.consensusExpiringTime);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.imageUrl !== undefined && (obj.imageUrl = message.imageUrl);
     return obj;
   },
 
@@ -189,18 +181,15 @@ export const MsgCreateRegistry = {
     } else {
       message.stakeAmount = "";
     }
-    if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = object.quorum;
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
     } else {
-      message.quorum = "";
+      message.description = "";
     }
-    if (
-      object.consensusExpiringTime !== undefined &&
-      object.consensusExpiringTime !== null
-    ) {
-      message.consensusExpiringTime = object.consensusExpiringTime;
+    if (object.imageUrl !== undefined && object.imageUrl !== null) {
+      message.imageUrl = object.imageUrl;
     } else {
-      message.consensusExpiringTime = "";
+      message.imageUrl = "";
     }
     return message;
   },
@@ -738,8 +727,8 @@ const baseMsgModifyRegistry: object = {
   registryId: "",
   stakeAmount: "",
   name: "",
-  quorum: "",
-  consensusExpringTime: "",
+  description: "",
+  imageUrl: "",
   reason: "",
 };
 
@@ -757,11 +746,11 @@ export const MsgModifyRegistry = {
     if (message.name !== "") {
       writer.uint32(34).string(message.name);
     }
-    if (message.quorum !== "") {
-      writer.uint32(42).string(message.quorum);
+    if (message.description !== "") {
+      writer.uint32(42).string(message.description);
     }
-    if (message.consensusExpringTime !== "") {
-      writer.uint32(50).string(message.consensusExpringTime);
+    if (message.imageUrl !== "") {
+      writer.uint32(50).string(message.imageUrl);
     }
     if (message.reason !== "") {
       writer.uint32(58).string(message.reason);
@@ -789,10 +778,10 @@ export const MsgModifyRegistry = {
           message.name = reader.string();
           break;
         case 5:
-          message.quorum = reader.string();
+          message.description = reader.string();
           break;
         case 6:
-          message.consensusExpringTime = reader.string();
+          message.imageUrl = reader.string();
           break;
         case 7:
           message.reason = reader.string();
@@ -827,18 +816,15 @@ export const MsgModifyRegistry = {
     } else {
       message.name = "";
     }
-    if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = String(object.quorum);
+    if (object.description !== undefined && object.description !== null) {
+      message.description = String(object.description);
     } else {
-      message.quorum = "";
+      message.description = "";
     }
-    if (
-      object.consensusExpringTime !== undefined &&
-      object.consensusExpringTime !== null
-    ) {
-      message.consensusExpringTime = String(object.consensusExpringTime);
+    if (object.imageUrl !== undefined && object.imageUrl !== null) {
+      message.imageUrl = String(object.imageUrl);
     } else {
-      message.consensusExpringTime = "";
+      message.imageUrl = "";
     }
     if (object.reason !== undefined && object.reason !== null) {
       message.reason = String(object.reason);
@@ -855,9 +841,9 @@ export const MsgModifyRegistry = {
     message.stakeAmount !== undefined &&
       (obj.stakeAmount = message.stakeAmount);
     message.name !== undefined && (obj.name = message.name);
-    message.quorum !== undefined && (obj.quorum = message.quorum);
-    message.consensusExpringTime !== undefined &&
-      (obj.consensusExpringTime = message.consensusExpringTime);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.imageUrl !== undefined && (obj.imageUrl = message.imageUrl);
     message.reason !== undefined && (obj.reason = message.reason);
     return obj;
   },
@@ -884,18 +870,15 @@ export const MsgModifyRegistry = {
     } else {
       message.name = "";
     }
-    if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = object.quorum;
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
     } else {
-      message.quorum = "";
+      message.description = "";
     }
-    if (
-      object.consensusExpringTime !== undefined &&
-      object.consensusExpringTime !== null
-    ) {
-      message.consensusExpringTime = object.consensusExpringTime;
+    if (object.imageUrl !== undefined && object.imageUrl !== null) {
+      message.imageUrl = object.imageUrl;
     } else {
-      message.consensusExpringTime = "";
+      message.imageUrl = "";
     }
     if (object.reason !== undefined && object.reason !== null) {
       message.reason = object.reason;
@@ -961,8 +944,12 @@ export const MsgModifyRegistryResponse = {
 const baseMsgProposePrice: object = {
   creator: "",
   registryId: "",
+  storeName: "",
+  storeAddr: "",
+  purchaseTime: "",
+  prodName: "",
   price: "",
-  prodInfo: "",
+  receiptCode: "",
   reserved: "",
 };
 
@@ -974,14 +961,26 @@ export const MsgProposePrice = {
     if (message.registryId !== "") {
       writer.uint32(18).string(message.registryId);
     }
-    if (message.price !== "") {
-      writer.uint32(26).string(message.price);
+    if (message.storeName !== "") {
+      writer.uint32(26).string(message.storeName);
     }
-    if (message.prodInfo !== "") {
-      writer.uint32(34).string(message.prodInfo);
+    if (message.storeAddr !== "") {
+      writer.uint32(34).string(message.storeAddr);
+    }
+    if (message.purchaseTime !== "") {
+      writer.uint32(42).string(message.purchaseTime);
+    }
+    if (message.prodName !== "") {
+      writer.uint32(50).string(message.prodName);
+    }
+    if (message.price !== "") {
+      writer.uint32(58).string(message.price);
+    }
+    if (message.receiptCode !== "") {
+      writer.uint32(66).string(message.receiptCode);
     }
     if (message.reserved !== "") {
-      writer.uint32(42).string(message.reserved);
+      writer.uint32(74).string(message.reserved);
     }
     return writer;
   },
@@ -1000,12 +999,24 @@ export const MsgProposePrice = {
           message.registryId = reader.string();
           break;
         case 3:
-          message.price = reader.string();
+          message.storeName = reader.string();
           break;
         case 4:
-          message.prodInfo = reader.string();
+          message.storeAddr = reader.string();
           break;
         case 5:
+          message.purchaseTime = reader.string();
+          break;
+        case 6:
+          message.prodName = reader.string();
+          break;
+        case 7:
+          message.price = reader.string();
+          break;
+        case 8:
+          message.receiptCode = reader.string();
+          break;
+        case 9:
           message.reserved = reader.string();
           break;
         default:
@@ -1028,15 +1039,35 @@ export const MsgProposePrice = {
     } else {
       message.registryId = "";
     }
+    if (object.storeName !== undefined && object.storeName !== null) {
+      message.storeName = String(object.storeName);
+    } else {
+      message.storeName = "";
+    }
+    if (object.storeAddr !== undefined && object.storeAddr !== null) {
+      message.storeAddr = String(object.storeAddr);
+    } else {
+      message.storeAddr = "";
+    }
+    if (object.purchaseTime !== undefined && object.purchaseTime !== null) {
+      message.purchaseTime = String(object.purchaseTime);
+    } else {
+      message.purchaseTime = "";
+    }
+    if (object.prodName !== undefined && object.prodName !== null) {
+      message.prodName = String(object.prodName);
+    } else {
+      message.prodName = "";
+    }
     if (object.price !== undefined && object.price !== null) {
       message.price = String(object.price);
     } else {
       message.price = "";
     }
-    if (object.prodInfo !== undefined && object.prodInfo !== null) {
-      message.prodInfo = String(object.prodInfo);
+    if (object.receiptCode !== undefined && object.receiptCode !== null) {
+      message.receiptCode = String(object.receiptCode);
     } else {
-      message.prodInfo = "";
+      message.receiptCode = "";
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = String(object.reserved);
@@ -1050,8 +1081,14 @@ export const MsgProposePrice = {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
     message.registryId !== undefined && (obj.registryId = message.registryId);
+    message.storeName !== undefined && (obj.storeName = message.storeName);
+    message.storeAddr !== undefined && (obj.storeAddr = message.storeAddr);
+    message.purchaseTime !== undefined &&
+      (obj.purchaseTime = message.purchaseTime);
+    message.prodName !== undefined && (obj.prodName = message.prodName);
     message.price !== undefined && (obj.price = message.price);
-    message.prodInfo !== undefined && (obj.prodInfo = message.prodInfo);
+    message.receiptCode !== undefined &&
+      (obj.receiptCode = message.receiptCode);
     message.reserved !== undefined && (obj.reserved = message.reserved);
     return obj;
   },
@@ -1068,15 +1105,35 @@ export const MsgProposePrice = {
     } else {
       message.registryId = "";
     }
+    if (object.storeName !== undefined && object.storeName !== null) {
+      message.storeName = object.storeName;
+    } else {
+      message.storeName = "";
+    }
+    if (object.storeAddr !== undefined && object.storeAddr !== null) {
+      message.storeAddr = object.storeAddr;
+    } else {
+      message.storeAddr = "";
+    }
+    if (object.purchaseTime !== undefined && object.purchaseTime !== null) {
+      message.purchaseTime = object.purchaseTime;
+    } else {
+      message.purchaseTime = "";
+    }
+    if (object.prodName !== undefined && object.prodName !== null) {
+      message.prodName = object.prodName;
+    } else {
+      message.prodName = "";
+    }
     if (object.price !== undefined && object.price !== null) {
       message.price = object.price;
     } else {
       message.price = "";
     }
-    if (object.prodInfo !== undefined && object.prodInfo !== null) {
-      message.prodInfo = object.prodInfo;
+    if (object.receiptCode !== undefined && object.receiptCode !== null) {
+      message.receiptCode = object.receiptCode;
     } else {
-      message.prodInfo = "";
+      message.receiptCode = "";
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = object.reserved;
@@ -1133,155 +1190,6 @@ export const MsgProposePriceResponse = {
   },
 };
 
-const baseMsgVotePrice: object = {
-  creator: "",
-  registryId: "",
-  answer: "",
-  reserved: "",
-};
-
-export const MsgVotePrice = {
-  encode(message: MsgVotePrice, writer: Writer = Writer.create()): Writer {
-    if (message.creator !== "") {
-      writer.uint32(10).string(message.creator);
-    }
-    if (message.registryId !== "") {
-      writer.uint32(18).string(message.registryId);
-    }
-    if (message.answer !== "") {
-      writer.uint32(26).string(message.answer);
-    }
-    if (message.reserved !== "") {
-      writer.uint32(34).string(message.reserved);
-    }
-    return writer;
-  },
-
-  decode(input: Reader | Uint8Array, length?: number): MsgVotePrice {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgVotePrice } as MsgVotePrice;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.creator = reader.string();
-          break;
-        case 2:
-          message.registryId = reader.string();
-          break;
-        case 3:
-          message.answer = reader.string();
-          break;
-        case 4:
-          message.reserved = reader.string();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): MsgVotePrice {
-    const message = { ...baseMsgVotePrice } as MsgVotePrice;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = String(object.creator);
-    } else {
-      message.creator = "";
-    }
-    if (object.registryId !== undefined && object.registryId !== null) {
-      message.registryId = String(object.registryId);
-    } else {
-      message.registryId = "";
-    }
-    if (object.answer !== undefined && object.answer !== null) {
-      message.answer = String(object.answer);
-    } else {
-      message.answer = "";
-    }
-    if (object.reserved !== undefined && object.reserved !== null) {
-      message.reserved = String(object.reserved);
-    } else {
-      message.reserved = "";
-    }
-    return message;
-  },
-
-  toJSON(message: MsgVotePrice): unknown {
-    const obj: any = {};
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.registryId !== undefined && (obj.registryId = message.registryId);
-    message.answer !== undefined && (obj.answer = message.answer);
-    message.reserved !== undefined && (obj.reserved = message.reserved);
-    return obj;
-  },
-
-  fromPartial(object: DeepPartial<MsgVotePrice>): MsgVotePrice {
-    const message = { ...baseMsgVotePrice } as MsgVotePrice;
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = object.creator;
-    } else {
-      message.creator = "";
-    }
-    if (object.registryId !== undefined && object.registryId !== null) {
-      message.registryId = object.registryId;
-    } else {
-      message.registryId = "";
-    }
-    if (object.answer !== undefined && object.answer !== null) {
-      message.answer = object.answer;
-    } else {
-      message.answer = "";
-    }
-    if (object.reserved !== undefined && object.reserved !== null) {
-      message.reserved = object.reserved;
-    } else {
-      message.reserved = "";
-    }
-    return message;
-  },
-};
-
-const baseMsgVotePriceResponse: object = {};
-
-export const MsgVotePriceResponse = {
-  encode(_: MsgVotePriceResponse, writer: Writer = Writer.create()): Writer {
-    return writer;
-  },
-
-  decode(input: Reader | Uint8Array, length?: number): MsgVotePriceResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgVotePriceResponse } as MsgVotePriceResponse;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(_: any): MsgVotePriceResponse {
-    const message = { ...baseMsgVotePriceResponse } as MsgVotePriceResponse;
-    return message;
-  },
-
-  toJSON(_: MsgVotePriceResponse): unknown {
-    const obj: any = {};
-    return obj;
-  },
-
-  fromPartial(_: DeepPartial<MsgVotePriceResponse>): MsgVotePriceResponse {
-    const message = { ...baseMsgVotePriceResponse } as MsgVotePriceResponse;
-    return message;
-  },
-};
-
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateRegistry(
@@ -1299,9 +1207,8 @@ export interface Msg {
   ModifyRegistry(
     request: MsgModifyRegistry
   ): Promise<MsgModifyRegistryResponse>;
-  ProposePrice(request: MsgProposePrice): Promise<MsgProposePriceResponse>;
   /** this line is used by starport scaffolding # proto/tx/rpc */
-  VotePrice(request: MsgVotePrice): Promise<MsgVotePriceResponse>;
+  ProposePrice(request: MsgProposePrice): Promise<MsgProposePriceResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1388,18 +1295,6 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgProposePriceResponse.decode(new Reader(data))
-    );
-  }
-
-  VotePrice(request: MsgVotePrice): Promise<MsgVotePriceResponse> {
-    const data = MsgVotePrice.encode(request).finish();
-    const promise = this.rpc.request(
-      "pricechain.cprc.registry.Msg",
-      "VotePrice",
-      data
-    );
-    return promise.then((data) =>
-      MsgVotePriceResponse.decode(new Reader(data))
     );
   }
 }

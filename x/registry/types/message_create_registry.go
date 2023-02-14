@@ -9,13 +9,13 @@ const TypeMsgCreateRegistry = "create_registry"
 
 var _ sdk.Msg = &MsgCreateRegistry{}
 
-func NewMsgCreateRegistry(creator string, name string, stakeAmount string, quorum string, consensusExpiringTime string) *MsgCreateRegistry {
+func NewMsgCreateRegistry(creator string, name string, stakeAmount string, description string, imageUrl string) *MsgCreateRegistry {
 	return &MsgCreateRegistry{
-		Creator:               creator,
-		Name:                  name,
-		StakeAmount:           stakeAmount,
-		Quorum:                quorum,
-		ConsensusExpiringTime: consensusExpiringTime,
+		Creator:     creator,
+		Name:        name,
+		StakeAmount: stakeAmount,
+		Description: description,
+		ImageUrl:    imageUrl,
 	}
 }
 

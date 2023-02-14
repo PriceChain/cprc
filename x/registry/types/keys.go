@@ -15,6 +15,9 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_registry"
+
+	// RegistryStakeCollector the root string for the registry stakers account address
+	RegistryStakeCollectorName = "registry_stake"
 )
 
 func KeyPrefix(p string) []byte {
