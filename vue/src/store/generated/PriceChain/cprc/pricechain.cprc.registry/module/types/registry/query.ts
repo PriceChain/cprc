@@ -9,6 +9,7 @@ import {
 } from "../cosmos/base/query/v1beta1/pagination";
 import { RegistryOwner } from "../registry/registry_owner";
 import { RegistryMember } from "../registry/registry_member";
+import { RegistryStakedAmount } from "../registry/registry_staked_amount";
 
 export const protobufPackage = "pricechain.cprc.registry";
 
@@ -69,6 +70,23 @@ export interface QueryAllRegistryMemberRequest {
 
 export interface QueryAllRegistryMemberResponse {
   RegistryMember: RegistryMember[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetRegistryStakedAmountRequest {
+  index: string;
+}
+
+export interface QueryGetRegistryStakedAmountResponse {
+  registryStakedAmount: RegistryStakedAmount | undefined;
+}
+
+export interface QueryAllRegistryStakedAmountRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllRegistryStakedAmountResponse {
+  registryStakedAmount: RegistryStakedAmount[];
   pagination: PageResponse | undefined;
 }
 
@@ -1120,6 +1138,344 @@ export const QueryAllRegistryMemberResponse = {
   },
 };
 
+const baseQueryGetRegistryStakedAmountRequest: object = { index: "" };
+
+export const QueryGetRegistryStakedAmountRequest = {
+  encode(
+    message: QueryGetRegistryStakedAmountRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetRegistryStakedAmountRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetRegistryStakedAmountRequest,
+    } as QueryGetRegistryStakedAmountRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetRegistryStakedAmountRequest {
+    const message = {
+      ...baseQueryGetRegistryStakedAmountRequest,
+    } as QueryGetRegistryStakedAmountRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetRegistryStakedAmountRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetRegistryStakedAmountRequest>
+  ): QueryGetRegistryStakedAmountRequest {
+    const message = {
+      ...baseQueryGetRegistryStakedAmountRequest,
+    } as QueryGetRegistryStakedAmountRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetRegistryStakedAmountResponse: object = {};
+
+export const QueryGetRegistryStakedAmountResponse = {
+  encode(
+    message: QueryGetRegistryStakedAmountResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.registryStakedAmount !== undefined) {
+      RegistryStakedAmount.encode(
+        message.registryStakedAmount,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetRegistryStakedAmountResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetRegistryStakedAmountResponse,
+    } as QueryGetRegistryStakedAmountResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.registryStakedAmount = RegistryStakedAmount.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetRegistryStakedAmountResponse {
+    const message = {
+      ...baseQueryGetRegistryStakedAmountResponse,
+    } as QueryGetRegistryStakedAmountResponse;
+    if (
+      object.registryStakedAmount !== undefined &&
+      object.registryStakedAmount !== null
+    ) {
+      message.registryStakedAmount = RegistryStakedAmount.fromJSON(
+        object.registryStakedAmount
+      );
+    } else {
+      message.registryStakedAmount = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetRegistryStakedAmountResponse): unknown {
+    const obj: any = {};
+    message.registryStakedAmount !== undefined &&
+      (obj.registryStakedAmount = message.registryStakedAmount
+        ? RegistryStakedAmount.toJSON(message.registryStakedAmount)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetRegistryStakedAmountResponse>
+  ): QueryGetRegistryStakedAmountResponse {
+    const message = {
+      ...baseQueryGetRegistryStakedAmountResponse,
+    } as QueryGetRegistryStakedAmountResponse;
+    if (
+      object.registryStakedAmount !== undefined &&
+      object.registryStakedAmount !== null
+    ) {
+      message.registryStakedAmount = RegistryStakedAmount.fromPartial(
+        object.registryStakedAmount
+      );
+    } else {
+      message.registryStakedAmount = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllRegistryStakedAmountRequest: object = {};
+
+export const QueryAllRegistryStakedAmountRequest = {
+  encode(
+    message: QueryAllRegistryStakedAmountRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllRegistryStakedAmountRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllRegistryStakedAmountRequest,
+    } as QueryAllRegistryStakedAmountRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllRegistryStakedAmountRequest {
+    const message = {
+      ...baseQueryAllRegistryStakedAmountRequest,
+    } as QueryAllRegistryStakedAmountRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllRegistryStakedAmountRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllRegistryStakedAmountRequest>
+  ): QueryAllRegistryStakedAmountRequest {
+    const message = {
+      ...baseQueryAllRegistryStakedAmountRequest,
+    } as QueryAllRegistryStakedAmountRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllRegistryStakedAmountResponse: object = {};
+
+export const QueryAllRegistryStakedAmountResponse = {
+  encode(
+    message: QueryAllRegistryStakedAmountResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.registryStakedAmount) {
+      RegistryStakedAmount.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllRegistryStakedAmountResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllRegistryStakedAmountResponse,
+    } as QueryAllRegistryStakedAmountResponse;
+    message.registryStakedAmount = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.registryStakedAmount.push(
+            RegistryStakedAmount.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllRegistryStakedAmountResponse {
+    const message = {
+      ...baseQueryAllRegistryStakedAmountResponse,
+    } as QueryAllRegistryStakedAmountResponse;
+    message.registryStakedAmount = [];
+    if (
+      object.registryStakedAmount !== undefined &&
+      object.registryStakedAmount !== null
+    ) {
+      for (const e of object.registryStakedAmount) {
+        message.registryStakedAmount.push(RegistryStakedAmount.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllRegistryStakedAmountResponse): unknown {
+    const obj: any = {};
+    if (message.registryStakedAmount) {
+      obj.registryStakedAmount = message.registryStakedAmount.map((e) =>
+        e ? RegistryStakedAmount.toJSON(e) : undefined
+      );
+    } else {
+      obj.registryStakedAmount = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllRegistryStakedAmountResponse>
+  ): QueryAllRegistryStakedAmountResponse {
+    const message = {
+      ...baseQueryAllRegistryStakedAmountResponse,
+    } as QueryAllRegistryStakedAmountResponse;
+    message.registryStakedAmount = [];
+    if (
+      object.registryStakedAmount !== undefined &&
+      object.registryStakedAmount !== null
+    ) {
+      for (const e of object.registryStakedAmount) {
+        message.registryStakedAmount.push(RegistryStakedAmount.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1146,6 +1502,14 @@ export interface Query {
   RegistryMemberAll(
     request: QueryAllRegistryMemberRequest
   ): Promise<QueryAllRegistryMemberResponse>;
+  /** Queries a RegistryStakedAmount by index. */
+  RegistryStakedAmount(
+    request: QueryGetRegistryStakedAmountRequest
+  ): Promise<QueryGetRegistryStakedAmountResponse>;
+  /** Queries a list of RegistryStakedAmount items. */
+  RegistryStakedAmountAll(
+    request: QueryAllRegistryStakedAmountRequest
+  ): Promise<QueryAllRegistryStakedAmountResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1244,6 +1608,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllRegistryMemberResponse.decode(new Reader(data))
+    );
+  }
+
+  RegistryStakedAmount(
+    request: QueryGetRegistryStakedAmountRequest
+  ): Promise<QueryGetRegistryStakedAmountResponse> {
+    const data = QueryGetRegistryStakedAmountRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.cprc.registry.Query",
+      "RegistryStakedAmount",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetRegistryStakedAmountResponse.decode(new Reader(data))
+    );
+  }
+
+  RegistryStakedAmountAll(
+    request: QueryAllRegistryStakedAmountRequest
+  ): Promise<QueryAllRegistryStakedAmountResponse> {
+    const data = QueryAllRegistryStakedAmountRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.cprc.registry.Query",
+      "RegistryStakedAmountAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllRegistryStakedAmountResponse.decode(new Reader(data))
     );
   }
 }

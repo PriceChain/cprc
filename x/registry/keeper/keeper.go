@@ -34,7 +34,7 @@ func NewKeeper(
 	if addr := ak.GetModuleAddress(types.RegistryStakeCollectorName); addr == nil {
 		panic("the mint module account has not been set")
 	}
-	
+
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())

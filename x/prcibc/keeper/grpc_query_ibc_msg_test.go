@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/PriceChain/cprc/x/prcibc/types"
-	"github.com/PriceChain/cprc/testutil/nullify"
 	keepertest "github.com/PriceChain/cprc/testutil/keeper"
+	"github.com/PriceChain/cprc/testutil/nullify"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 )
 
 func TestIbcMsgQuerySingle(t *testing.T) {
@@ -50,7 +50,7 @@ func TestIbcMsgQuerySingle(t *testing.T) {
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
-			    require.NoError(t, err)
+				require.NoError(t, err)
 				require.Equal(t,
 					nullify.Fill(tc.response),
 					nullify.Fill(response),
@@ -83,8 +83,8 @@ func TestIbcMsgQueryPaginated(t *testing.T) {
 			require.LessOrEqual(t, len(resp.IbcMsg), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-            	nullify.Fill(resp.IbcMsg),
-            )
+				nullify.Fill(resp.IbcMsg),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -96,8 +96,8 @@ func TestIbcMsgQueryPaginated(t *testing.T) {
 			require.LessOrEqual(t, len(resp.IbcMsg), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-            	nullify.Fill(resp.IbcMsg),
-            )
+				nullify.Fill(resp.IbcMsg),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

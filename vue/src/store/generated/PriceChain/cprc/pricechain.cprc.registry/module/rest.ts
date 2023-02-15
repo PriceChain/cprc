@@ -77,6 +77,21 @@ export interface RegistryQueryAllRegistryResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface RegistryQueryAllRegistryStakedAmountResponse {
+  registryStakedAmount?: RegistryRegistryStakedAmount[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface RegistryQueryGetRegistryMemberResponse {
   RegistryMember?: RegistryRegistryMember;
 }
@@ -87,6 +102,10 @@ export interface RegistryQueryGetRegistryOwnerResponse {
 
 export interface RegistryQueryGetRegistryResponse {
   Registry?: RegistryRegistry;
+}
+
+export interface RegistryQueryGetRegistryStakedAmountResponse {
+  registryStakedAmount?: RegistryRegistryStakedAmount;
 }
 
 /**
@@ -132,6 +151,11 @@ export interface RegistryRegistryOwner {
   address?: string;
   status?: string;
   reserved?: string;
+}
+
+export interface RegistryRegistryStakedAmount {
+  index?: string;
+  amount?: string;
 }
 
 export interface RpcStatus {
@@ -537,6 +561,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryRegistryOwner = (id: string, params: RequestParams = {}) =>
     this.request<RegistryQueryGetRegistryOwnerResponse, RpcStatus>({
       path: `/PriceChain/cprc/registry/registry_owner/${id}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryRegistryStakedAmountAll
+   * @summary Queries a list of RegistryStakedAmount items.
+   * @request GET:/PriceChain/cprc/registry/registry_staked_amount
+   */
+  queryRegistryStakedAmountAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<RegistryQueryAllRegistryStakedAmountResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/registry_staked_amount`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryRegistryStakedAmount
+   * @summary Queries a RegistryStakedAmount by index.
+   * @request GET:/PriceChain/cprc/registry/registry_staked_amount/{index}
+   */
+  queryRegistryStakedAmount = (index: string, params: RequestParams = {}) =>
+    this.request<RegistryQueryGetRegistryStakedAmountResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/registry_staked_amount/${index}`,
       method: "GET",
       format: "json",
       ...params,

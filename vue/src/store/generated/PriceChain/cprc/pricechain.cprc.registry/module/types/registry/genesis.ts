@@ -5,6 +5,7 @@ import { Params } from "../registry/params";
 import { Registry } from "../registry/registry";
 import { RegistryOwner } from "../registry/registry_owner";
 import { RegistryMember } from "../registry/registry_member";
+import { RegistryStakedAmount } from "../registry/registry_staked_amount";
 
 export const protobufPackage = "pricechain.cprc.registry";
 
@@ -16,8 +17,9 @@ export interface GenesisState {
   registryOwnerList: RegistryOwner[];
   registryOwnerCount: number;
   registryMemberList: RegistryMember[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   registryMemberCount: number;
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  registryStakedAmountList: RegistryStakedAmount[];
 }
 
 const baseGenesisState: object = {
@@ -49,6 +51,9 @@ export const GenesisState = {
     if (message.registryMemberCount !== 0) {
       writer.uint32(56).uint64(message.registryMemberCount);
     }
+    for (const v of message.registryStakedAmountList) {
+      RegistryStakedAmount.encode(v!, writer.uint32(66).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -59,6 +64,7 @@ export const GenesisState = {
     message.registryList = [];
     message.registryOwnerList = [];
     message.registryMemberList = [];
+    message.registryStakedAmountList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -87,6 +93,11 @@ export const GenesisState = {
         case 7:
           message.registryMemberCount = longToNumber(reader.uint64() as Long);
           break;
+        case 8:
+          message.registryStakedAmountList.push(
+            RegistryStakedAmount.decode(reader, reader.uint32())
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -100,6 +111,7 @@ export const GenesisState = {
     message.registryList = [];
     message.registryOwnerList = [];
     message.registryMemberList = [];
+    message.registryStakedAmountList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -147,6 +159,14 @@ export const GenesisState = {
     } else {
       message.registryMemberCount = 0;
     }
+    if (
+      object.registryStakedAmountList !== undefined &&
+      object.registryStakedAmountList !== null
+    ) {
+      for (const e of object.registryStakedAmountList) {
+        message.registryStakedAmountList.push(RegistryStakedAmount.fromJSON(e));
+      }
+    }
     return message;
   },
 
@@ -181,6 +201,13 @@ export const GenesisState = {
     }
     message.registryMemberCount !== undefined &&
       (obj.registryMemberCount = message.registryMemberCount);
+    if (message.registryStakedAmountList) {
+      obj.registryStakedAmountList = message.registryStakedAmountList.map((e) =>
+        e ? RegistryStakedAmount.toJSON(e) : undefined
+      );
+    } else {
+      obj.registryStakedAmountList = [];
+    }
     return obj;
   },
 
@@ -189,6 +216,7 @@ export const GenesisState = {
     message.registryList = [];
     message.registryOwnerList = [];
     message.registryMemberList = [];
+    message.registryStakedAmountList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -235,6 +263,16 @@ export const GenesisState = {
       message.registryMemberCount = object.registryMemberCount;
     } else {
       message.registryMemberCount = 0;
+    }
+    if (
+      object.registryStakedAmountList !== undefined &&
+      object.registryStakedAmountList !== null
+    ) {
+      for (const e of object.registryStakedAmountList) {
+        message.registryStakedAmountList.push(
+          RegistryStakedAmount.fromPartial(e)
+        );
+      }
     }
     return message;
   },

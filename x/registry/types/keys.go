@@ -21,7 +21,7 @@ const (
 )
 
 const (
-	STATUS_OPEN = "Open"
+	STATUS_OPEN  = "Open"
 	STATUS_CLOSE = "Closed"
 )
 

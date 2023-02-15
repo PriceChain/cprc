@@ -4,9 +4,10 @@ import { Params } from "./module/types/registry/params"
 import { Registry } from "./module/types/registry/registry"
 import { RegistryMember } from "./module/types/registry/registry_member"
 import { RegistryOwner } from "./module/types/registry/registry_owner"
+import { RegistryStakedAmount } from "./module/types/registry/registry_staked_amount"
 
 
-export { Params, Registry, RegistryMember, RegistryOwner };
+export { Params, Registry, RegistryMember, RegistryOwner, RegistryStakedAmount };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -51,12 +52,15 @@ const getDefaultState = () => {
 				RegistryOwnerAll: {},
 				RegistryMember: {},
 				RegistryMemberAll: {},
+				RegistryStakedAmount: {},
+				RegistryStakedAmountAll: {},
 				
 				_Structure: {
 						Params: getStructure(Params.fromPartial({})),
 						Registry: getStructure(Registry.fromPartial({})),
 						RegistryMember: getStructure(RegistryMember.fromPartial({})),
 						RegistryOwner: getStructure(RegistryOwner.fromPartial({})),
+						RegistryStakedAmount: getStructure(RegistryStakedAmount.fromPartial({})),
 						
 		},
 		_Registry: registry,
@@ -126,6 +130,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.RegistryMemberAll[JSON.stringify(params)] ?? {}
+		},
+				getRegistryStakedAmount: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.RegistryStakedAmount[JSON.stringify(params)] ?? {}
+		},
+				getRegistryStakedAmountAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.RegistryStakedAmountAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -327,21 +343,54 @@ export default {
 		},
 		
 		
-		async sendMsgModifyRegistry({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryRegistryStakedAmount({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgModifyRegistry(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryRegistryStakedAmount( key.index)).data
+				
+					
+				commit('QUERY', { query: 'RegistryStakedAmount', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryRegistryStakedAmount', payload: { options: { all }, params: {...key},query }})
+				return getters['getRegistryStakedAmount']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgModifyRegistry:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgModifyRegistry:Send Could not broadcast Tx: '+ e.message)
-				}
+				throw new Error('QueryClient:QueryRegistryStakedAmount API Node Unavailable. Could not perform query: ' + e.message)
+				
 			}
 		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryRegistryStakedAmountAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryRegistryStakedAmountAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryRegistryStakedAmountAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'RegistryStakedAmountAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryRegistryStakedAmountAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getRegistryStakedAmountAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryRegistryStakedAmountAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
 		async sendMsgUnbondRegistry({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -372,18 +421,18 @@ export default {
 				}
 			}
 		},
-		async sendMsgProposePrice({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgJoinRegistryMember({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgProposePrice(value)
+				const msg = await txClient.msgJoinRegistryMember(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgProposePrice:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgJoinRegistryMember:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgProposePrice:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgJoinRegistryMember:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -402,35 +451,37 @@ export default {
 				}
 			}
 		},
-		async sendMsgJoinRegistryMember({ rootGetters }, { value, fee = [], memo = '' }) {
+		async sendMsgProposePrice({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgJoinRegistryMember(value)
+				const msg = await txClient.msgProposePrice(value)
 				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
 	gas: "200000" }, memo})
 				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgJoinRegistryMember:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgProposePrice:Init Could not initialize signing client. Wallet is required.')
 				}else{
-					throw new Error('TxClient:MsgJoinRegistryMember:Send Could not broadcast Tx: '+ e.message)
+					throw new Error('TxClient:MsgProposePrice:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgModifyRegistry({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgModifyRegistry(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgModifyRegistry:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgModifyRegistry:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
 		
-		async MsgModifyRegistry({ rootGetters }, { value }) {
-			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgModifyRegistry(value)
-				return msg
-			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgModifyRegistry:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgModifyRegistry:Create Could not create message: ' + e.message)
-				}
-			}
-		},
 		async MsgUnbondRegistry({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -457,16 +508,16 @@ export default {
 				}
 			}
 		},
-		async MsgProposePrice({ rootGetters }, { value }) {
+		async MsgJoinRegistryMember({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgProposePrice(value)
+				const msg = await txClient.msgJoinRegistryMember(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgProposePrice:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgJoinRegistryMember:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgProposePrice:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgJoinRegistryMember:Create Could not create message: ' + e.message)
 				}
 			}
 		},
@@ -483,16 +534,29 @@ export default {
 				}
 			}
 		},
-		async MsgJoinRegistryMember({ rootGetters }, { value }) {
+		async MsgProposePrice({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgJoinRegistryMember(value)
+				const msg = await txClient.msgProposePrice(value)
 				return msg
 			} catch (e) {
 				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgJoinRegistryMember:Init Could not initialize signing client. Wallet is required.')
+					throw new Error('TxClient:MsgProposePrice:Init Could not initialize signing client. Wallet is required.')
 				} else{
-					throw new Error('TxClient:MsgJoinRegistryMember:Create Could not create message: ' + e.message)
+					throw new Error('TxClient:MsgProposePrice:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgModifyRegistry({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgModifyRegistry(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgModifyRegistry:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgModifyRegistry:Create Could not create message: ' + e.message)
 				}
 			}
 		},

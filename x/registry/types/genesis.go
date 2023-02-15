@@ -10,9 +10,10 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		RegistryList:       []Registry{},
-		RegistryOwnerList:  []RegistryOwner{},
-		RegistryMemberList: []RegistryMember{},
+		RegistryList:             []Registry{},
+		RegistryOwnerList:        []RegistryOwner{},
+		RegistryMemberList:       []RegistryMember{},
+		RegistryStakedAmountList: []RegistryStakedAmount{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -56,6 +57,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("registryMember id should be lower or equal than the last id")
 		}
 		registryMemberIdMap[elem.Id] = true
+	}
+	// Check for duplicated index in registryStakedAmount
+	registryStakedAmountIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.RegistryStakedAmountList {
+		index := string(RegistryStakedAmountKey(elem.Index))
+		if _, ok := registryStakedAmountIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for registryStakedAmount")
+		}
+		registryStakedAmountIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

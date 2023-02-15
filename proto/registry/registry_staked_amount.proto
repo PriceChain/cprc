@@ -1,0 +1,11 @@
+syntax = "proto3";
+package pricechain.cprc.registry;
+
+option go_package = "github.com/PriceChain/cprc/x/registry/types";
+
+message RegistryStakedAmount {
+  string index = 1; 
+  string amount = 2; 
+  
+}
+

@@ -2,18 +2,17 @@ package cli
 
 import (
 	"context"
-	"strconv"
 
-	"github.com/PriceChain/cprc/x/prcibc/types"
+	"github.com/PriceChain/cprc/x/registry/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
 )
 
-func CmdListIbcMsg() *cobra.Command {
+func CmdListRegistryStakedAmount() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-ibc-msg",
-		Short: "list all ibcMsg",
+		Use:   "list-registry-staked-amount",
+		Short: "list all registryStakedAmount",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -24,11 +23,11 @@ func CmdListIbcMsg() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllIbcMsgRequest{
+			params := &types.QueryAllRegistryStakedAmountRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.IbcMsgAll(context.Background(), params)
+			res, err := queryClient.RegistryStakedAmountAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -43,26 +42,23 @@ func CmdListIbcMsg() *cobra.Command {
 	return cmd
 }
 
-func CmdShowIbcMsg() *cobra.Command {
+func CmdShowRegistryStakedAmount() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-ibc-msg [id]",
-		Short: "shows a ibcMsg",
+		Use:   "show-registry-staked-amount [index]",
+		Short: "shows a registryStakedAmount",
 		Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			id, err := strconv.ParseUint(args[0], 10, 64)
-			if err != nil {
-				return err
+			argIndex := args[0]
+
+			params := &types.QueryGetRegistryStakedAmountRequest{
+				Index: argIndex,
 			}
 
-			params := &types.QueryGetIbcMsgRequest{
-				Id: id,
-			}
-
-			res, err := queryClient.IbcMsg(context.Background(), params)
+			res, err := queryClient.RegistryStakedAmount(context.Background(), params)
 			if err != nil {
 				return err
 			}

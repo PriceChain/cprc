@@ -8,6 +8,7 @@ import "registry/params.proto";
 import "registry/registry.proto";
 import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
+import "registry/registry_staked_amount.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
@@ -46,6 +47,16 @@ service Query {
 	// Queries a list of RegistryMember items.
 	rpc RegistryMemberAll(QueryAllRegistryMemberRequest) returns (QueryAllRegistryMemberResponse) {
 		option (google.api.http).get = "/PriceChain/cprc/registry/registry_member";
+	}
+
+// Queries a RegistryStakedAmount by index.
+	rpc RegistryStakedAmount(QueryGetRegistryStakedAmountRequest) returns (QueryGetRegistryStakedAmountResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_staked_amount/{index}";
+	}
+
+	// Queries a list of RegistryStakedAmount items.
+	rpc RegistryStakedAmountAll(QueryAllRegistryStakedAmountRequest) returns (QueryAllRegistryStakedAmountResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_staked_amount";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -108,6 +119,24 @@ message QueryAllRegistryMemberRequest {
 
 message QueryAllRegistryMemberResponse {
 	repeated RegistryMember RegistryMember = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetRegistryStakedAmountRequest {
+	  string index = 1;
+
+}
+
+message QueryGetRegistryStakedAmountResponse {
+	RegistryStakedAmount registryStakedAmount = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllRegistryStakedAmountRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllRegistryStakedAmountResponse {
+	repeated RegistryStakedAmount registryStakedAmount = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
