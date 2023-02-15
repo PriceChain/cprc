@@ -16,47 +16,12 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	// Get timestamp
 	timestamp := ctx.BlockTime().UTC().String()
 
-	// Parse creator bech32 address
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	// Validation check before process
+	creator, amount, collateral, err := k.PreProcess(ctx, msg.Creator, msg.StakeAmount)
+
+	// if invalid input
 	if err != nil {
 		return &types.MsgCreateRegistryResponse{}, err
-	}
-
-	// Parse amount of CPRC token
-	collateral, err := sdk.ParseCoinsNormalized(msg.StakeAmount)
-	if err != nil {
-		return &types.MsgCreateRegistryResponse{}, err
-	}
-
-	// Get denomination
-	denom := collateral.GetDenomByIndex(0)
-
-	// Get Int amount
-	amount := collateral.AmountOf(denom)
-
-	// If equals to 0
-	if amount.Equal(sdk.ZeroInt()) {
-		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "Invalid token amount")
-	}
-
-	// fetch stored params
-	params := k.GetParams(ctx)
-
-	// Parse amount of Minstake
-	minStakeCoin, err := sdk.ParseCoinsNormalized(params.MinimumStakeAmount)
-	if err != nil {
-		return &types.MsgCreateRegistryResponse{}, err
-	}
-
-	// Get denomination
-	denomMinStake := minStakeCoin.GetDenomByIndex(0)
-
-	// Get Int amount
-	amtMinStake := minStakeCoin.AmountOf(denomMinStake)
-
-	// if it is below than minimum stake amount
-	if denom != denomMinStake || amount.LT(amtMinStake) {
-		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount!")
 	}
 
 	// Check if it is already registered registry name
@@ -88,7 +53,7 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		ReviewCount:  "0",
 		Timestamp:    timestamp,
 		Reserved:     "",
-		Creator:      msg.Creator,
+		Creator:      creator.String(),
 	}
 
 	// Append registry data
