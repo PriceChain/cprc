@@ -9,12 +9,11 @@ export interface Registry {
   name: string;
   stakedAmount: string;
   status: string;
-  price: string;
-  quorum: string;
-  consensusExpiringTime: string;
-  activeMembers: string;
-  prodInfo: string;
-  memo: string;
+  description: string;
+  imageUrl: string;
+  priceCount: string;
+  reviewCount: string;
+  timestamp: string;
   reserved: string;
   creator: string;
 }
@@ -24,12 +23,11 @@ const baseRegistry: object = {
   name: "",
   stakedAmount: "",
   status: "",
-  price: "",
-  quorum: "",
-  consensusExpiringTime: "",
-  activeMembers: "",
-  prodInfo: "",
-  memo: "",
+  description: "",
+  imageUrl: "",
+  priceCount: "",
+  reviewCount: "",
+  timestamp: "",
   reserved: "",
   creator: "",
 };
@@ -48,29 +46,26 @@ export const Registry = {
     if (message.status !== "") {
       writer.uint32(34).string(message.status);
     }
-    if (message.price !== "") {
-      writer.uint32(42).string(message.price);
+    if (message.description !== "") {
+      writer.uint32(42).string(message.description);
     }
-    if (message.quorum !== "") {
-      writer.uint32(50).string(message.quorum);
+    if (message.imageUrl !== "") {
+      writer.uint32(50).string(message.imageUrl);
     }
-    if (message.consensusExpiringTime !== "") {
-      writer.uint32(58).string(message.consensusExpiringTime);
+    if (message.priceCount !== "") {
+      writer.uint32(58).string(message.priceCount);
     }
-    if (message.activeMembers !== "") {
-      writer.uint32(66).string(message.activeMembers);
+    if (message.reviewCount !== "") {
+      writer.uint32(66).string(message.reviewCount);
     }
-    if (message.prodInfo !== "") {
-      writer.uint32(74).string(message.prodInfo);
-    }
-    if (message.memo !== "") {
-      writer.uint32(82).string(message.memo);
+    if (message.timestamp !== "") {
+      writer.uint32(74).string(message.timestamp);
     }
     if (message.reserved !== "") {
-      writer.uint32(90).string(message.reserved);
+      writer.uint32(82).string(message.reserved);
     }
     if (message.creator !== "") {
-      writer.uint32(98).string(message.creator);
+      writer.uint32(90).string(message.creator);
     }
     return writer;
   },
@@ -95,27 +90,24 @@ export const Registry = {
           message.status = reader.string();
           break;
         case 5:
-          message.price = reader.string();
+          message.description = reader.string();
           break;
         case 6:
-          message.quorum = reader.string();
+          message.imageUrl = reader.string();
           break;
         case 7:
-          message.consensusExpiringTime = reader.string();
+          message.priceCount = reader.string();
           break;
         case 8:
-          message.activeMembers = reader.string();
+          message.reviewCount = reader.string();
           break;
         case 9:
-          message.prodInfo = reader.string();
+          message.timestamp = reader.string();
           break;
         case 10:
-          message.memo = reader.string();
-          break;
-        case 11:
           message.reserved = reader.string();
           break;
-        case 12:
+        case 11:
           message.creator = reader.string();
           break;
         default:
@@ -148,38 +140,30 @@ export const Registry = {
     } else {
       message.status = "";
     }
-    if (object.price !== undefined && object.price !== null) {
-      message.price = String(object.price);
+    if (object.description !== undefined && object.description !== null) {
+      message.description = String(object.description);
     } else {
-      message.price = "";
+      message.description = "";
     }
-    if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = String(object.quorum);
+    if (object.imageUrl !== undefined && object.imageUrl !== null) {
+      message.imageUrl = String(object.imageUrl);
     } else {
-      message.quorum = "";
+      message.imageUrl = "";
     }
-    if (
-      object.consensusExpiringTime !== undefined &&
-      object.consensusExpiringTime !== null
-    ) {
-      message.consensusExpiringTime = String(object.consensusExpiringTime);
+    if (object.priceCount !== undefined && object.priceCount !== null) {
+      message.priceCount = String(object.priceCount);
     } else {
-      message.consensusExpiringTime = "";
+      message.priceCount = "";
     }
-    if (object.activeMembers !== undefined && object.activeMembers !== null) {
-      message.activeMembers = String(object.activeMembers);
+    if (object.reviewCount !== undefined && object.reviewCount !== null) {
+      message.reviewCount = String(object.reviewCount);
     } else {
-      message.activeMembers = "";
+      message.reviewCount = "";
     }
-    if (object.prodInfo !== undefined && object.prodInfo !== null) {
-      message.prodInfo = String(object.prodInfo);
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = String(object.timestamp);
     } else {
-      message.prodInfo = "";
-    }
-    if (object.memo !== undefined && object.memo !== null) {
-      message.memo = String(object.memo);
-    } else {
-      message.memo = "";
+      message.timestamp = "";
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = String(object.reserved);
@@ -201,14 +185,13 @@ export const Registry = {
     message.stakedAmount !== undefined &&
       (obj.stakedAmount = message.stakedAmount);
     message.status !== undefined && (obj.status = message.status);
-    message.price !== undefined && (obj.price = message.price);
-    message.quorum !== undefined && (obj.quorum = message.quorum);
-    message.consensusExpiringTime !== undefined &&
-      (obj.consensusExpiringTime = message.consensusExpiringTime);
-    message.activeMembers !== undefined &&
-      (obj.activeMembers = message.activeMembers);
-    message.prodInfo !== undefined && (obj.prodInfo = message.prodInfo);
-    message.memo !== undefined && (obj.memo = message.memo);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.imageUrl !== undefined && (obj.imageUrl = message.imageUrl);
+    message.priceCount !== undefined && (obj.priceCount = message.priceCount);
+    message.reviewCount !== undefined &&
+      (obj.reviewCount = message.reviewCount);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
     message.reserved !== undefined && (obj.reserved = message.reserved);
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
@@ -236,38 +219,30 @@ export const Registry = {
     } else {
       message.status = "";
     }
-    if (object.price !== undefined && object.price !== null) {
-      message.price = object.price;
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
     } else {
-      message.price = "";
+      message.description = "";
     }
-    if (object.quorum !== undefined && object.quorum !== null) {
-      message.quorum = object.quorum;
+    if (object.imageUrl !== undefined && object.imageUrl !== null) {
+      message.imageUrl = object.imageUrl;
     } else {
-      message.quorum = "";
+      message.imageUrl = "";
     }
-    if (
-      object.consensusExpiringTime !== undefined &&
-      object.consensusExpiringTime !== null
-    ) {
-      message.consensusExpiringTime = object.consensusExpiringTime;
+    if (object.priceCount !== undefined && object.priceCount !== null) {
+      message.priceCount = object.priceCount;
     } else {
-      message.consensusExpiringTime = "";
+      message.priceCount = "";
     }
-    if (object.activeMembers !== undefined && object.activeMembers !== null) {
-      message.activeMembers = object.activeMembers;
+    if (object.reviewCount !== undefined && object.reviewCount !== null) {
+      message.reviewCount = object.reviewCount;
     } else {
-      message.activeMembers = "";
+      message.reviewCount = "";
     }
-    if (object.prodInfo !== undefined && object.prodInfo !== null) {
-      message.prodInfo = object.prodInfo;
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = object.timestamp;
     } else {
-      message.prodInfo = "";
-    }
-    if (object.memo !== undefined && object.memo !== null) {
-      message.memo = object.memo;
-    } else {
-      message.memo = "";
+      message.timestamp = "";
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = object.reserved;

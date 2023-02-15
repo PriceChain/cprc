@@ -30014,17 +30014,15 @@ paths:
                       type: string
                     status:
                       type: string
-                    price:
+                    description:
                       type: string
-                    quorum:
+                    imageUrl:
                       type: string
-                    consensusExpiringTime:
+                    priceCount:
                       type: string
-                    activeMembers:
+                    reviewCount:
                       type: string
-                    prodInfo:
-                      type: string
-                    memo:
+                    timestamp:
                       type: string
                     reserved:
                       type: string
@@ -30156,17 +30154,15 @@ paths:
                     type: string
                   status:
                     type: string
-                  price:
+                  description:
                     type: string
-                  quorum:
+                  imageUrl:
                     type: string
-                  consensusExpiringTime:
+                  priceCount:
                     type: string
-                  activeMembers:
+                  reviewCount:
                     type: string
-                  prodInfo:
-                    type: string
-                  memo:
+                  timestamp:
                     type: string
                   reserved:
                     type: string
@@ -52626,17 +52622,15 @@ definitions:
               type: string
             status:
               type: string
-            price:
+            description:
               type: string
-            quorum:
+            imageUrl:
               type: string
-            consensusExpiringTime:
+            priceCount:
               type: string
-            activeMembers:
+            reviewCount:
               type: string
-            prodInfo:
-              type: string
-            memo:
+            timestamp:
               type: string
             reserved:
               type: string
@@ -52724,17 +52718,15 @@ definitions:
             type: string
           status:
             type: string
-          price:
+          description:
             type: string
-          quorum:
+          imageUrl:
             type: string
-          consensusExpiringTime:
+          priceCount:
             type: string
-          activeMembers:
+          reviewCount:
             type: string
-          prodInfo:
-            type: string
-          memo:
+          timestamp:
             type: string
           reserved:
             type: string
@@ -52759,17 +52751,15 @@ definitions:
         type: string
       status:
         type: string
-      price:
+      description:
         type: string
-      quorum:
+      imageUrl:
         type: string
-      consensusExpiringTime:
+      priceCount:
         type: string
-      activeMembers:
+      reviewCount:
         type: string
-      prodInfo:
-        type: string
-      memo:
+      timestamp:
         type: string
       reserved:
         type: string
