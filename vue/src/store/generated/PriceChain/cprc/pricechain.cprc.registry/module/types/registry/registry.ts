@@ -15,7 +15,7 @@ export interface Registry {
   reviewCount: string;
   timestamp: string;
   reserved: string;
-  creator: string;
+  owners: string[];
 }
 
 const baseRegistry: object = {
@@ -29,7 +29,7 @@ const baseRegistry: object = {
   reviewCount: "",
   timestamp: "",
   reserved: "",
-  creator: "",
+  owners: "",
 };
 
 export const Registry = {
@@ -64,8 +64,8 @@ export const Registry = {
     if (message.reserved !== "") {
       writer.uint32(82).string(message.reserved);
     }
-    if (message.creator !== "") {
-      writer.uint32(90).string(message.creator);
+    for (const v of message.owners) {
+      writer.uint32(90).string(v!);
     }
     return writer;
   },
@@ -74,6 +74,7 @@ export const Registry = {
     const reader = input instanceof Uint8Array ? new Reader(input) : input;
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRegistry } as Registry;
+    message.owners = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -108,7 +109,7 @@ export const Registry = {
           message.reserved = reader.string();
           break;
         case 11:
-          message.creator = reader.string();
+          message.owners.push(reader.string());
           break;
         default:
           reader.skipType(tag & 7);
@@ -120,6 +121,7 @@ export const Registry = {
 
   fromJSON(object: any): Registry {
     const message = { ...baseRegistry } as Registry;
+    message.owners = [];
     if (object.id !== undefined && object.id !== null) {
       message.id = Number(object.id);
     } else {
@@ -170,10 +172,10 @@ export const Registry = {
     } else {
       message.reserved = "";
     }
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = String(object.creator);
-    } else {
-      message.creator = "";
+    if (object.owners !== undefined && object.owners !== null) {
+      for (const e of object.owners) {
+        message.owners.push(String(e));
+      }
     }
     return message;
   },
@@ -193,12 +195,17 @@ export const Registry = {
       (obj.reviewCount = message.reviewCount);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
     message.reserved !== undefined && (obj.reserved = message.reserved);
-    message.creator !== undefined && (obj.creator = message.creator);
+    if (message.owners) {
+      obj.owners = message.owners.map((e) => e);
+    } else {
+      obj.owners = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<Registry>): Registry {
     const message = { ...baseRegistry } as Registry;
+    message.owners = [];
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id;
     } else {
@@ -249,10 +256,10 @@ export const Registry = {
     } else {
       message.reserved = "";
     }
-    if (object.creator !== undefined && object.creator !== null) {
-      message.creator = object.creator;
-    } else {
-      message.creator = "";
+    if (object.owners !== undefined && object.owners !== null) {
+      for (const e of object.owners) {
+        message.owners.push(e);
+      }
     }
     return message;
   },

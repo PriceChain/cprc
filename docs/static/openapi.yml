@@ -30030,8 +30030,10 @@ paths:
                       type: string
                     reserved:
                       type: string
-                    creator:
-                      type: string
+                    owners:
+                      type: array
+                      items:
+                        type: string
               pagination:
                 type: object
                 properties:
@@ -30124,6 +30126,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry/{id}':
@@ -30160,8 +30172,10 @@ paths:
                     type: string
                   reserved:
                     type: string
-                  creator:
-                    type: string
+                  owners:
+                    type: array
+                    items:
+                      type: string
         default:
           description: An unexpected error response.
           schema:
@@ -30309,6 +30323,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -30490,6 +30514,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_owner/{id}':
@@ -30652,6 +30686,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -52767,8 +52811,10 @@ definitions:
               type: string
             reserved:
               type: string
-            creator:
-              type: string
+            owners:
+              type: array
+              items:
+                type: string
       pagination:
         type: object
         properties:
@@ -52900,8 +52946,10 @@ definitions:
             type: string
           reserved:
             type: string
-          creator:
-            type: string
+          owners:
+            type: array
+            items:
+              type: string
   pricechain.cprc.registry.QueryGetRegistryStakedAmountResponse:
     type: object
     properties:
@@ -52947,8 +52995,10 @@ definitions:
         type: string
       reserved:
         type: string
-      creator:
-        type: string
+      owners:
+        type: array
+        items:
+          type: string
   pricechain.cprc.registry.RegistryMember:
     type: object
     properties:

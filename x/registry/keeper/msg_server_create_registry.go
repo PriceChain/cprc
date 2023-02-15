@@ -53,7 +53,7 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		ReviewCount:  "0",
 		Timestamp:    timestamp,
 		Reserved:     "",
-		Creator:      creator.String(),
+		Owners:       []string{creator.String()},
 	}
 
 	// Append registry data

@@ -35,6 +35,13 @@ func (k msgServer) JoinRegistryCoOperator(goCtx context.Context, msg *types.MsgJ
 		return &types.MsgJoinRegistryCoOperatorResponse{}, err
 	}
 
+	// Check if it is already owner
+	for _, owner := range registry.Owners {
+		if owner == creator.String() {
+			return &types.MsgJoinRegistryCoOperatorResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "You are already an owner of this registry!")
+		}
+	}
+
 	// Collect fund from user's wallet to stake
 	sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, creator, types.RegistryStakeCollectorName, collateral)
 	if sdkError != nil {
@@ -48,6 +55,7 @@ func (k msgServer) JoinRegistryCoOperator(goCtx context.Context, msg *types.MsgJ
 	// Update registry
 	registry.StakedAmount = fmt.Sprintf("%d", amt)
 	registry.Timestamp = timestamp
+	registry.Owners = append(registry.Owners, creator.String())
 	k.SetRegistry(ctx, registry)
 
 	// Fetch previous total staked amount

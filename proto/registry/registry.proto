@@ -14,5 +14,5 @@ message Registry {
   string reviewCount = 8; 
   string timestamp = 9; 
   string reserved = 10; 
-  string creator = 11;
+  repeated string owners = 11;
 }
