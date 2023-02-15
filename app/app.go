@@ -785,6 +785,6 @@ func (app *App) SimulationManager() *module.SimulationManager {
 }
 
 func RegisterCoinDenominations() {
-	_ = sdk.RegisterDenom("prc", sdk.OneDec())
-	_ = sdk.RegisterDenom("uprc", sdk.NewDecWithPrec(1, 6))
+	_ = sdk.RegisterDenom("cprc", sdk.OneDec())
+	_ = sdk.RegisterDenom("ucprc", sdk.NewDecWithPrec(1, 6))
 }
