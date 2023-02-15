@@ -10,6 +10,7 @@ import {
 import { RegistryOwner } from "../registry/registry_owner";
 import { RegistryMember } from "../registry/registry_member";
 import { RegistryStakedAmount } from "../registry/registry_staked_amount";
+import { StakedAmountPerWallet } from "../registry/staked_amount_per_wallet";
 
 export const protobufPackage = "pricechain.cprc.registry";
 
@@ -87,6 +88,23 @@ export interface QueryAllRegistryStakedAmountRequest {
 
 export interface QueryAllRegistryStakedAmountResponse {
   registryStakedAmount: RegistryStakedAmount[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetStakedAmountPerWalletRequest {
+  index: string;
+}
+
+export interface QueryGetStakedAmountPerWalletResponse {
+  stakedAmountPerWallet: StakedAmountPerWallet | undefined;
+}
+
+export interface QueryAllStakedAmountPerWalletRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllStakedAmountPerWalletResponse {
+  stakedAmountPerWallet: StakedAmountPerWallet[];
   pagination: PageResponse | undefined;
 }
 
@@ -1476,6 +1494,346 @@ export const QueryAllRegistryStakedAmountResponse = {
   },
 };
 
+const baseQueryGetStakedAmountPerWalletRequest: object = { index: "" };
+
+export const QueryGetStakedAmountPerWalletRequest = {
+  encode(
+    message: QueryGetStakedAmountPerWalletRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStakedAmountPerWalletRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStakedAmountPerWalletRequest,
+    } as QueryGetStakedAmountPerWalletRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStakedAmountPerWalletRequest {
+    const message = {
+      ...baseQueryGetStakedAmountPerWalletRequest,
+    } as QueryGetStakedAmountPerWalletRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStakedAmountPerWalletRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStakedAmountPerWalletRequest>
+  ): QueryGetStakedAmountPerWalletRequest {
+    const message = {
+      ...baseQueryGetStakedAmountPerWalletRequest,
+    } as QueryGetStakedAmountPerWalletRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetStakedAmountPerWalletResponse: object = {};
+
+export const QueryGetStakedAmountPerWalletResponse = {
+  encode(
+    message: QueryGetStakedAmountPerWalletResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.stakedAmountPerWallet !== undefined) {
+      StakedAmountPerWallet.encode(
+        message.stakedAmountPerWallet,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetStakedAmountPerWalletResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetStakedAmountPerWalletResponse,
+    } as QueryGetStakedAmountPerWalletResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.stakedAmountPerWallet = StakedAmountPerWallet.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetStakedAmountPerWalletResponse {
+    const message = {
+      ...baseQueryGetStakedAmountPerWalletResponse,
+    } as QueryGetStakedAmountPerWalletResponse;
+    if (
+      object.stakedAmountPerWallet !== undefined &&
+      object.stakedAmountPerWallet !== null
+    ) {
+      message.stakedAmountPerWallet = StakedAmountPerWallet.fromJSON(
+        object.stakedAmountPerWallet
+      );
+    } else {
+      message.stakedAmountPerWallet = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetStakedAmountPerWalletResponse): unknown {
+    const obj: any = {};
+    message.stakedAmountPerWallet !== undefined &&
+      (obj.stakedAmountPerWallet = message.stakedAmountPerWallet
+        ? StakedAmountPerWallet.toJSON(message.stakedAmountPerWallet)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetStakedAmountPerWalletResponse>
+  ): QueryGetStakedAmountPerWalletResponse {
+    const message = {
+      ...baseQueryGetStakedAmountPerWalletResponse,
+    } as QueryGetStakedAmountPerWalletResponse;
+    if (
+      object.stakedAmountPerWallet !== undefined &&
+      object.stakedAmountPerWallet !== null
+    ) {
+      message.stakedAmountPerWallet = StakedAmountPerWallet.fromPartial(
+        object.stakedAmountPerWallet
+      );
+    } else {
+      message.stakedAmountPerWallet = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStakedAmountPerWalletRequest: object = {};
+
+export const QueryAllStakedAmountPerWalletRequest = {
+  encode(
+    message: QueryAllStakedAmountPerWalletRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStakedAmountPerWalletRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStakedAmountPerWalletRequest,
+    } as QueryAllStakedAmountPerWalletRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStakedAmountPerWalletRequest {
+    const message = {
+      ...baseQueryAllStakedAmountPerWalletRequest,
+    } as QueryAllStakedAmountPerWalletRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStakedAmountPerWalletRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStakedAmountPerWalletRequest>
+  ): QueryAllStakedAmountPerWalletRequest {
+    const message = {
+      ...baseQueryAllStakedAmountPerWalletRequest,
+    } as QueryAllStakedAmountPerWalletRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllStakedAmountPerWalletResponse: object = {};
+
+export const QueryAllStakedAmountPerWalletResponse = {
+  encode(
+    message: QueryAllStakedAmountPerWalletResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.stakedAmountPerWallet) {
+      StakedAmountPerWallet.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllStakedAmountPerWalletResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllStakedAmountPerWalletResponse,
+    } as QueryAllStakedAmountPerWalletResponse;
+    message.stakedAmountPerWallet = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.stakedAmountPerWallet.push(
+            StakedAmountPerWallet.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllStakedAmountPerWalletResponse {
+    const message = {
+      ...baseQueryAllStakedAmountPerWalletResponse,
+    } as QueryAllStakedAmountPerWalletResponse;
+    message.stakedAmountPerWallet = [];
+    if (
+      object.stakedAmountPerWallet !== undefined &&
+      object.stakedAmountPerWallet !== null
+    ) {
+      for (const e of object.stakedAmountPerWallet) {
+        message.stakedAmountPerWallet.push(StakedAmountPerWallet.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllStakedAmountPerWalletResponse): unknown {
+    const obj: any = {};
+    if (message.stakedAmountPerWallet) {
+      obj.stakedAmountPerWallet = message.stakedAmountPerWallet.map((e) =>
+        e ? StakedAmountPerWallet.toJSON(e) : undefined
+      );
+    } else {
+      obj.stakedAmountPerWallet = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllStakedAmountPerWalletResponse>
+  ): QueryAllStakedAmountPerWalletResponse {
+    const message = {
+      ...baseQueryAllStakedAmountPerWalletResponse,
+    } as QueryAllStakedAmountPerWalletResponse;
+    message.stakedAmountPerWallet = [];
+    if (
+      object.stakedAmountPerWallet !== undefined &&
+      object.stakedAmountPerWallet !== null
+    ) {
+      for (const e of object.stakedAmountPerWallet) {
+        message.stakedAmountPerWallet.push(
+          StakedAmountPerWallet.fromPartial(e)
+        );
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1510,6 +1868,14 @@ export interface Query {
   RegistryStakedAmountAll(
     request: QueryAllRegistryStakedAmountRequest
   ): Promise<QueryAllRegistryStakedAmountResponse>;
+  /** Queries a StakedAmountPerWallet by index. */
+  StakedAmountPerWallet(
+    request: QueryGetStakedAmountPerWalletRequest
+  ): Promise<QueryGetStakedAmountPerWalletResponse>;
+  /** Queries a list of StakedAmountPerWallet items. */
+  StakedAmountPerWalletAll(
+    request: QueryAllStakedAmountPerWalletRequest
+  ): Promise<QueryAllStakedAmountPerWalletResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1636,6 +2002,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllRegistryStakedAmountResponse.decode(new Reader(data))
+    );
+  }
+
+  StakedAmountPerWallet(
+    request: QueryGetStakedAmountPerWalletRequest
+  ): Promise<QueryGetStakedAmountPerWalletResponse> {
+    const data = QueryGetStakedAmountPerWalletRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.cprc.registry.Query",
+      "StakedAmountPerWallet",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetStakedAmountPerWalletResponse.decode(new Reader(data))
+    );
+  }
+
+  StakedAmountPerWalletAll(
+    request: QueryAllStakedAmountPerWalletRequest
+  ): Promise<QueryAllStakedAmountPerWalletResponse> {
+    const data = QueryAllStakedAmountPerWalletRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.cprc.registry.Query",
+      "StakedAmountPerWalletAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllStakedAmountPerWalletResponse.decode(new Reader(data))
     );
   }
 }

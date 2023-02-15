@@ -57,6 +57,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				StakedAmountPerWalletList: []types.StakedAmountPerWallet{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -143,6 +151,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated registryStakedAmount",
 			genState: &types.GenesisState{
 				RegistryStakedAmountList: []types.RegistryStakedAmount{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated stakedAmountPerWallet",
+			genState: &types.GenesisState{
+				StakedAmountPerWalletList: []types.StakedAmountPerWallet{
 					{
 						Index: "0",
 					},

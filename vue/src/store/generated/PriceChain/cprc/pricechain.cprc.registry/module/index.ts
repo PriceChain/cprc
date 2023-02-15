@@ -4,21 +4,21 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgJoinRegistryMember } from "./types/registry/tx";
 import { MsgModifyRegistry } from "./types/registry/tx";
 import { MsgCreateRegistry } from "./types/registry/tx";
-import { MsgJoinRegistryCoOperator } from "./types/registry/tx";
-import { MsgJoinRegistryMember } from "./types/registry/tx";
 import { MsgUnbondRegistry } from "./types/registry/tx";
 import { MsgProposePrice } from "./types/registry/tx";
+import { MsgJoinRegistryCoOperator } from "./types/registry/tx";
 
 
 const types = [
+  ["/pricechain.cprc.registry.MsgJoinRegistryMember", MsgJoinRegistryMember],
   ["/pricechain.cprc.registry.MsgModifyRegistry", MsgModifyRegistry],
   ["/pricechain.cprc.registry.MsgCreateRegistry", MsgCreateRegistry],
-  ["/pricechain.cprc.registry.MsgJoinRegistryCoOperator", MsgJoinRegistryCoOperator],
-  ["/pricechain.cprc.registry.MsgJoinRegistryMember", MsgJoinRegistryMember],
   ["/pricechain.cprc.registry.MsgUnbondRegistry", MsgUnbondRegistry],
   ["/pricechain.cprc.registry.MsgProposePrice", MsgProposePrice],
+  ["/pricechain.cprc.registry.MsgJoinRegistryCoOperator", MsgJoinRegistryCoOperator],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -51,12 +51,12 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgJoinRegistryMember: (data: MsgJoinRegistryMember): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgJoinRegistryMember", value: MsgJoinRegistryMember.fromPartial( data ) }),
     msgModifyRegistry: (data: MsgModifyRegistry): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgModifyRegistry", value: MsgModifyRegistry.fromPartial( data ) }),
     msgCreateRegistry: (data: MsgCreateRegistry): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgCreateRegistry", value: MsgCreateRegistry.fromPartial( data ) }),
-    msgJoinRegistryCoOperator: (data: MsgJoinRegistryCoOperator): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgJoinRegistryCoOperator", value: MsgJoinRegistryCoOperator.fromPartial( data ) }),
-    msgJoinRegistryMember: (data: MsgJoinRegistryMember): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgJoinRegistryMember", value: MsgJoinRegistryMember.fromPartial( data ) }),
     msgUnbondRegistry: (data: MsgUnbondRegistry): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgUnbondRegistry", value: MsgUnbondRegistry.fromPartial( data ) }),
     msgProposePrice: (data: MsgProposePrice): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgProposePrice", value: MsgProposePrice.fromPartial( data ) }),
+    msgJoinRegistryCoOperator: (data: MsgJoinRegistryCoOperator): EncodeObject => ({ typeUrl: "/pricechain.cprc.registry.MsgJoinRegistryCoOperator", value: MsgJoinRegistryCoOperator.fromPartial( data ) }),
     
   };
 };

@@ -10,10 +10,11 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		RegistryList:             []Registry{},
-		RegistryOwnerList:        []RegistryOwner{},
-		RegistryMemberList:       []RegistryMember{},
-		RegistryStakedAmountList: []RegistryStakedAmount{},
+		RegistryList:              []Registry{},
+		RegistryOwnerList:         []RegistryOwner{},
+		RegistryMemberList:        []RegistryMember{},
+		RegistryStakedAmountList:  []RegistryStakedAmount{},
+		StakedAmountPerWalletList: []StakedAmountPerWallet{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -67,6 +68,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for registryStakedAmount")
 		}
 		registryStakedAmountIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in stakedAmountPerWallet
+	stakedAmountPerWalletIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.StakedAmountPerWalletList {
+		index := string(StakedAmountPerWalletKey(elem.Index))
+		if _, ok := stakedAmountPerWalletIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for stakedAmountPerWallet")
+		}
+		stakedAmountPerWalletIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

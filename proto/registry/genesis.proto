@@ -7,6 +7,7 @@ import "registry/registry.proto";
 import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
 import "registry/registry_staked_amount.proto";
+import "registry/staked_amount_per_wallet.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
@@ -21,5 +22,6 @@ message GenesisState {
   repeated RegistryMember registryMemberList = 6 [(gogoproto.nullable) = false];
   uint64 registryMemberCount = 7;
   repeated RegistryStakedAmount registryStakedAmountList = 8 [(gogoproto.nullable) = false];
+  repeated StakedAmountPerWallet stakedAmountPerWalletList = 9 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

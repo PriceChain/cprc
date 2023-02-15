@@ -92,6 +92,21 @@ export interface RegistryQueryAllRegistryStakedAmountResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface RegistryQueryAllStakedAmountPerWalletResponse {
+  stakedAmountPerWallet?: RegistryStakedAmountPerWallet[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface RegistryQueryGetRegistryMemberResponse {
   RegistryMember?: RegistryRegistryMember;
 }
@@ -106,6 +121,10 @@ export interface RegistryQueryGetRegistryResponse {
 
 export interface RegistryQueryGetRegistryStakedAmountResponse {
   registryStakedAmount?: RegistryRegistryStakedAmount;
+}
+
+export interface RegistryQueryGetStakedAmountPerWalletResponse {
+  stakedAmountPerWallet?: RegistryStakedAmountPerWallet;
 }
 
 /**
@@ -156,6 +175,12 @@ export interface RegistryRegistryOwner {
 export interface RegistryRegistryStakedAmount {
   index?: string;
   amount?: string;
+}
+
+export interface RegistryStakedAmountPerWallet {
+  index?: string;
+  wallet?: string;
+  stakedAmount?: string;
 }
 
 export interface RpcStatus {
@@ -603,6 +628,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryRegistryStakedAmount = (index: string, params: RequestParams = {}) =>
     this.request<RegistryQueryGetRegistryStakedAmountResponse, RpcStatus>({
       path: `/PriceChain/cprc/registry/registry_staked_amount/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStakedAmountPerWalletAll
+   * @summary Queries a list of StakedAmountPerWallet items.
+   * @request GET:/PriceChain/cprc/registry/staked_amount_per_wallet
+   */
+  queryStakedAmountPerWalletAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+      "pagination.reverse"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<RegistryQueryAllStakedAmountPerWalletResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/staked_amount_per_wallet`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryStakedAmountPerWallet
+   * @summary Queries a StakedAmountPerWallet by index.
+   * @request GET:/PriceChain/cprc/registry/staked_amount_per_wallet/{index}
+   */
+  queryStakedAmountPerWallet = (index: string, params: RequestParams = {}) =>
+    this.request<RegistryQueryGetStakedAmountPerWalletResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/staked_amount_per_wallet/${index}`,
       method: "GET",
       format: "json",
       ...params,
