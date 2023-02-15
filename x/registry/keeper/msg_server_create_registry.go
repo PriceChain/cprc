@@ -13,9 +13,6 @@ import (
 func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateRegistry) (*types.MsgCreateRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// Get registry count
-	n := k.GetRegistryCount(ctx)
-
 	// Get timestamp
 	timestamp := ctx.BlockTime().UTC().String()
 
@@ -76,6 +73,9 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		return nil, sdkError
 	}
 
+	// Get registry count
+	n := k.GetRegistryCount(ctx)
+
 	// Create an registry item
 	registry := types.Registry{
 		Id:           n + 1,
@@ -92,7 +92,7 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	}
 
 	// Append registry data
-	count := k.AppendRegistry(ctx, registry)
+	k.SetRegistry(ctx, registry)
 
 	// Fetch previous total staked amount
 	prevStakedAmount := (uint64)(0)
@@ -112,7 +112,7 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	k.SetRegistryStakedAmount(ctx, rsa)
 
 	// Update registry count
-	k.SetRegistryCount(ctx, count)
+	k.SetRegistryCount(ctx, n+1)
 
 	return &types.MsgCreateRegistryResponse{}, nil
 }
