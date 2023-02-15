@@ -404,7 +404,7 @@ func New(
 		keys[registrymoduletypes.StoreKey],
 		keys[registrymoduletypes.MemStoreKey],
 		app.GetSubspace(registrymoduletypes.ModuleName),
-
+		app.AccountKeeper,
 		app.BankKeeper,
 	)
 	registryModule := registrymodule.NewAppModule(appCodec, app.RegistryKeeper, app.AccountKeeper, app.BankKeeper)

@@ -10,5 +10,5 @@ message Params {
   option (gogoproto.goproto_stringer) = false;
 
     // type of coin to mint
-    string min_stake = 1;
+    string minimum_stake = 1;
 }
