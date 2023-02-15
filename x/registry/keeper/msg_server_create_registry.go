@@ -2,6 +2,8 @@ package keeper
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 
 	"github.com/PriceChain/cprc/x/registry/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -33,10 +35,10 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	denom := collateral.GetDenomByIndex(0)
 
 	// Get Int amount
-	amt := collateral.AmountOf(denom)
+	amount := collateral.AmountOf(denom)
 
 	// If equals to 0
-	if amt.Equal(sdk.ZeroInt()) {
+	if amount.Equal(sdk.ZeroInt()) {
 		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "Invalid token amount")
 	}
 
@@ -56,8 +58,16 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	amtMinStake := minStakeCoin.AmountOf(denomMinStake)
 
 	// if it is below than minimum stake amount
-	if denom != denomMinStake || amt.LT(amtMinStake) {
+	if denom != denomMinStake || amount.LT(amtMinStake) {
 		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount.")
+	}
+
+	// Check if it is already registered registry name
+	allRegistries := k.GetAllRegistry(ctx)
+	for _, r := range allRegistries {
+		if r.Name == msg.Name {
+			return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount.")
+		}
 	}
 
 	// Collect fund from user's wallet to stake
@@ -66,10 +76,11 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		return nil, sdkError
 	}
 
-	var registry = types.Registry{
+	// Create an registry item
+	registry := types.Registry{
 		Id:           n + 1,
 		Name:         msg.Name,
-		StakedAmount: amt.String(),
+		StakedAmount: amount.String(),
 		Status:       types.STATUS_OPEN,
 		Description:  msg.Description,
 		ImageUrl:     msg.ImageUrl,
@@ -82,6 +93,23 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 
 	// Append registry data
 	count := k.AppendRegistry(ctx, registry)
+
+	// Fetch previous total staked amount
+	prevStakedAmount := (uint64)(0)
+	stakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
+	if bFound {
+		amt, _ := strconv.ParseUint(stakedAmount.Amount, 10, 64)
+		prevStakedAmount = amt
+	}
+	
+	// Initalize a new total staked amount item
+	rsa := types.RegistryStakedAmount {
+		Index: "total",
+		Amount: fmt.Sprintf("%d", prevStakedAmount + amount.Uint64()),
+	}
+
+	// Update total staked amount
+	k.SetRegistryStakedAmount(ctx, rsa)
 
 	// Update registry count
 	k.SetRegistryCount(ctx, count)
