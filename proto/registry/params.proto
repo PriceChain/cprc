@@ -9,6 +9,6 @@ option go_package = "github.com/PriceChain/cprc/x/registry/types";
 message Params {
   option (gogoproto.goproto_stringer) = false;
 
-    // type of coin to mint
-    string minimum_stake = 1;
+    // minimum cprc amount in order to become a registry owner
+    string minimumStakeAmount = 1;
 }

@@ -5,16 +5,16 @@ export const protobufPackage = "pricechain.cprc.registry";
 
 /** Params defines the parameters for the module. */
 export interface Params {
-  /** type of coin to mint */
-  minimum_stake: string;
+  /** minimum cprc amount in order to become a registry owner */
+  minimumStakeAmount: string;
 }
 
-const baseParams: object = { minimum_stake: "" };
+const baseParams: object = { minimumStakeAmount: "" };
 
 export const Params = {
   encode(message: Params, writer: Writer = Writer.create()): Writer {
-    if (message.minimum_stake !== "") {
-      writer.uint32(10).string(message.minimum_stake);
+    if (message.minimumStakeAmount !== "") {
+      writer.uint32(10).string(message.minimumStakeAmount);
     }
     return writer;
   },
@@ -27,7 +27,7 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minimum_stake = reader.string();
+          message.minimumStakeAmount = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -39,27 +39,33 @@ export const Params = {
 
   fromJSON(object: any): Params {
     const message = { ...baseParams } as Params;
-    if (object.minimum_stake !== undefined && object.minimum_stake !== null) {
-      message.minimum_stake = String(object.minimum_stake);
+    if (
+      object.minimumStakeAmount !== undefined &&
+      object.minimumStakeAmount !== null
+    ) {
+      message.minimumStakeAmount = String(object.minimumStakeAmount);
     } else {
-      message.minimum_stake = "";
+      message.minimumStakeAmount = "";
     }
     return message;
   },
 
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.minimum_stake !== undefined &&
-      (obj.minimum_stake = message.minimum_stake);
+    message.minimumStakeAmount !== undefined &&
+      (obj.minimumStakeAmount = message.minimumStakeAmount);
     return obj;
   },
 
   fromPartial(object: DeepPartial<Params>): Params {
     const message = { ...baseParams } as Params;
-    if (object.minimum_stake !== undefined && object.minimum_stake !== null) {
-      message.minimum_stake = object.minimum_stake;
+    if (
+      object.minimumStakeAmount !== undefined &&
+      object.minimumStakeAmount !== null
+    ) {
+      message.minimumStakeAmount = object.minimumStakeAmount;
     } else {
-      message.minimum_stake = "";
+      message.minimumStakeAmount = "";
     }
     return message;
   },

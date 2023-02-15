@@ -44,7 +44,7 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	params := k.GetParams(ctx)
 
 	// Parse amount of Minstake
-	minStakeCoin, err := sdk.ParseCoinsNormalized(params.MinimumStake)
+	minStakeCoin, err := sdk.ParseCoinsNormalized(params.MinimumStakeAmount)
 	if err != nil {
 		return &types.MsgCreateRegistryResponse{}, err
 	}

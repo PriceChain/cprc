@@ -32,7 +32,7 @@ func NewKeeper(
 ) *Keeper {
 	// ensure registry stake collector module account is set
 	if addr := ak.GetModuleAddress(types.RegistryStakeCollectorName); addr == nil {
-		panic("the mint module account has not been set")
+		panic("the registry stake collect account has not been set")
 	}
 
 	// set KeyTable if it has not already been set
