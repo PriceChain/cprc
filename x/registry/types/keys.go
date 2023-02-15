@@ -20,6 +20,11 @@ const (
 	RegistryStakeCollectorName = "registry_stake"
 )
 
+const (
+	STATUS_OPEN = "Open"
+	STATUS_CLOSE = "Closed"
+)
+
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }

@@ -11,14 +11,14 @@ import (
 func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateRegistry) (*types.MsgCreateRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// Increase transfer request count
+	// Get registry count
 	n := k.GetRegistryCount(ctx)
 
 	// Get timestamp
 	timestamp := ctx.BlockTime().UTC().String()
 
-	// Parse creator bec32 address
-	registry_owner, err := sdk.AccAddressFromBech32(msg.Creator)
+	// Parse creator bech32 address
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return &types.MsgCreateRegistryResponse{}, err
 	}
@@ -29,16 +29,39 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		return &types.MsgCreateRegistryResponse{}, err
 	}
 
-	//
-	amt := collateral.AmountOf("ucprc")
+	// Get denomination
+	denom := collateral.GetDenomByIndex(0)
+
+	// Get Int amount
+	amt := collateral.AmountOf(denom)
 
 	// If equals to 0
 	if amt.Equal(sdk.ZeroInt()) {
 		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "Invalid token amount")
 	}
 
+	// fetch stored params
+	params := k.GetParams(ctx)
+
+	// Parse amount of Minstake
+	minStakeCoin, err := sdk.ParseCoinsNormalized(params.MinimumStake)
+	if err != nil {
+		return &types.MsgCreateRegistryResponse{}, err
+	}
+
+	// Get denomination
+	denomMinStake := minStakeCoin.GetDenomByIndex(0)
+
+	// Get Int amount
+	amtMinStake := minStakeCoin.AmountOf(denomMinStake)
+
+	// if it is below than minimum stake amount
+	if denom != denomMinStake || amt.LT(amtMinStake) {
+		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount.")
+	}
+
 	// Collect fund from user's wallet to stake
-	sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, registry_owner, types.RegistryStakeCollectorName, collateral)
+	sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, creator, types.RegistryStakeCollectorName, collateral)
 	if sdkError != nil {
 		return nil, sdkError
 	}
@@ -47,7 +70,7 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		Id:           n + 1,
 		Name:         msg.Name,
 		StakedAmount: amt.String(),
-		Status:       "Open",
+		Status:       types.STATUS_OPEN,
 		Description:  msg.Description,
 		ImageUrl:     msg.ImageUrl,
 		PriceCount:   "0",
