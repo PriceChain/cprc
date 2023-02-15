@@ -59,14 +59,14 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 
 	// if it is below than minimum stake amount
 	if denom != denomMinStake || amount.LT(amtMinStake) {
-		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount.")
+		return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount!")
 	}
 
 	// Check if it is already registered registry name
 	allRegistries := k.GetAllRegistry(ctx)
 	for _, r := range allRegistries {
 		if r.Name == msg.Name {
-			return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidCoins, "It shouldn't be below than minimum staking amount.")
+			return &types.MsgCreateRegistryResponse{}, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "There is already registry created with the same name!")
 		}
 	}
 
@@ -101,11 +101,11 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 		amt, _ := strconv.ParseUint(stakedAmount.Amount, 10, 64)
 		prevStakedAmount = amt
 	}
-	
+
 	// Initalize a new total staked amount item
-	rsa := types.RegistryStakedAmount {
-		Index: "total",
-		Amount: fmt.Sprintf("%d", prevStakedAmount + amount.Uint64()),
+	rsa := types.RegistryStakedAmount{
+		Index:  "total",
+		Amount: fmt.Sprintf("%d", prevStakedAmount+amount.Uint64()),
 	}
 
 	// Update total staked amount
