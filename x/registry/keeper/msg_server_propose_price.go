@@ -2,24 +2,74 @@ package keeper
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 
 	"github.com/PriceChain/cprc/x/registry/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) ProposePrice(goCtx context.Context, msg *types.MsgProposePrice) (*types.MsgProposePriceResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	_ = ctx
-	// Creator      string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	// RegistryId   string `protobuf:"bytes,2,opt,name=registryId,proto3" json:"registryId,omitempty"`
-	// StoreName    string `protobuf:"bytes,3,opt,name=storeName,proto3" json:"storeName,omitempty"`
-	// StoreAddr    string `protobuf:"bytes,4,opt,name=storeAddr,proto3" json:"storeAddr,omitempty"`
-	// PurchaseTime string `protobuf:"bytes,5,opt,name=purchaseTime,proto3" json:"purchaseTime,omitempty"`
-	// ProdName     string `protobuf:"bytes,6,opt,name=prodName,proto3" json:"prodName,omitempty"`
-	// Price        string `protobuf:"bytes,7,opt,name=price,proto3" json:"price,omitempty"`
-	// ReceiptCode  string `protobuf:"bytes,8,opt,name=receiptCode,proto3" json:"receiptCode,omitempty"`
-	// Reserved     string `protobuf:"bytes,9,opt,name=reserved,proto3" json:"reserved,omitempty"`
+	// price validation check
+	price, err := strconv.ParseFloat(msg.Price, 64)
+	// If invalid price
+	if price <= 0.0 || err != nil {
+		return nil, err
+	}
+
+	// registry id validation check
+	registryId, err := strconv.ParseUint(msg.RegistryId, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	// registry validation check
+	registry, bFound := k.GetRegistry(ctx, registryId)
+	if !bFound {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "There isn't such registry exists!")
+	}
+
+	// signer validation check
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	if err != nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Invalid signer!")
+	}
+
+	bValidProposer := false
+	// check if the sender has the rights to propose price
+	for _, v := range registry.Validators {
+		if v == creator.String() {
+			bValidProposer = true
+		}
+	}
+
+	// if he is not a valid proposer
+	if !bValidProposer {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "You are not allowed to propose price to this registry!")
+	}
+
+	prices := k.GetAllPriceData(ctx)
+	index := fmt.Sprintf("%d", len(prices)+1)
+
+	// Construct price data
+	priceData := types.PriceData{
+		Index:        index,
+		RegistryId:   msg.RegistryId,
+		Creator:      creator.String(),
+		StoreName:    msg.StoreName,
+		StoreAddr:    msg.StoreAddr,
+		PurchaseTime: msg.PurchaseTime,
+		ProdName:     msg.ProdName,
+		Price:        msg.Price,
+		ReceiptCode:  msg.ReceiptCode,
+		Reserved:     msg.Reserved,
+	}
+
+	// Set price data to keeper
+	k.SetPriceData(ctx, priceData)
 
 	return &types.MsgProposePriceResponse{}, nil
 }
