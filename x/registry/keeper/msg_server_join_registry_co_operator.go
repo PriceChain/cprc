@@ -58,22 +58,11 @@ func (k msgServer) JoinRegistryCoOperator(goCtx context.Context, msg *types.MsgJ
 	registry.Owners = append(registry.Owners, creator.String())
 	k.SetRegistry(ctx, registry)
 
-	// Fetch previous total staked amount
-	prevStakedAmount := (uint64)(0)
-	stakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
-	if bFound {
-		amt, _ := strconv.ParseUint(stakedAmount.Amount, 10, 64)
-		prevStakedAmount = amt
-	}
-
-	// Initalize a new total staked amount item
-	rsa := types.RegistryStakedAmount{
-		Index:  "total",
-		Amount: fmt.Sprintf("%d", prevStakedAmount+amount.Uint64()),
-	}
+	// Update staked amount per wallet
+	k.UpdateStakedAmountPerWallet(ctx, creator.String(), msg.StakeAmount)
 
 	// Update total staked amount
-	k.SetRegistryStakedAmount(ctx, rsa)
+	k.UpdateTotalStakedAmount(ctx, msg.StakeAmount)
 
 	return &types.MsgJoinRegistryCoOperatorResponse{}, nil
 }

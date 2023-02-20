@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/tendermint/tendermint/libs/log"
 
@@ -101,4 +102,74 @@ func (k msgServer) PreProcess(ctx sdk.Context, sender string, stakeAmount string
 
 	// return normal value
 	return creator, amount, collateral, nil
+}
+
+// Update Total Staked amount
+func (k msgServer) UpdateTotalStakedAmount(ctx sdk.Context, stakeAmount string) bool {
+	amount, err := strconv.ParseUint(stakeAmount, 10, 64)
+	if err != nil {
+		return false
+	}
+
+	// Fetch previous total staked amount
+	prevStakedAmount := (uint64)(0)
+	stakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
+	if bFound {
+		amt, _ := strconv.ParseUint(stakedAmount.Amount, 10, 64)
+		prevStakedAmount = amt
+	}
+
+	// Initalize a new total staked amount item
+	rsa := types.RegistryStakedAmount{
+		Index:  "total",
+		Amount: fmt.Sprintf("%d", prevStakedAmount+amount),
+	}
+
+	// Update total staked amount
+	k.SetRegistryStakedAmount(ctx, rsa)
+
+	return true
+}
+
+// Update staked amount per wallet
+func (k msgServer) UpdateStakedAmountPerWallet(ctx sdk.Context, sender string, stakeAmount string) bool {
+	amount, err := strconv.ParseUint(stakeAmount, 10, 64)
+	if err != nil {
+		return false
+	}
+
+	// Staked amount per wallet
+	stakedAmtPerWallet := k.GetAllStakedAmountPerWallet(ctx)
+
+	// Find if there is already existing wallet
+	foundIndex := -1
+	for i, s := range stakedAmtPerWallet {
+		// If already exists
+		if s.Index == sender {
+			foundIndex = i
+		}
+	}
+
+	// Initialize Staked amount per wallet value
+	sapw := types.StakedAmountPerWallet{
+		Index:        sender,
+		Wallet:       sender,
+		StakedAmount: stakeAmount,
+	}
+
+	// If there is already an item found
+	if foundIndex > -1 {
+		sapw = stakedAmtPerWallet[foundIndex]
+
+		// Sum the amount
+		amt, _ := strconv.ParseUint(sapw.StakedAmount, 10, 64)
+		amt += amount
+
+		sapw.StakedAmount = fmt.Sprintf("%d", amt)
+	}
+
+	// Update Keeper Store
+	k.SetStakedAmountPerWallet(ctx, sapw)
+
+	return true
 }

@@ -2,8 +2,6 @@ package keeper
 
 import (
 	"context"
-	"fmt"
-	"strconv"
 
 	"github.com/PriceChain/cprc/x/registry/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -59,25 +57,15 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	// Append registry data
 	k.SetRegistry(ctx, registry)
 
-	// Fetch previous total staked amount
-	prevStakedAmount := (uint64)(0)
-	stakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
-	if bFound {
-		amt, _ := strconv.ParseUint(stakedAmount.Amount, 10, 64)
-		prevStakedAmount = amt
-	}
-
-	// Initalize a new total staked amount item
-	rsa := types.RegistryStakedAmount{
-		Index:  "total",
-		Amount: fmt.Sprintf("%d", prevStakedAmount+amount.Uint64()),
-	}
-
-	// Update total staked amount
-	k.SetRegistryStakedAmount(ctx, rsa)
-
 	// Update registry count
 	k.SetRegistryCount(ctx, n+1)
 
+	// Update staked amount per wallet
+	k.UpdateStakedAmountPerWallet(ctx, creator.String(), msg.StakeAmount)
+
+	// Update total staked amount
+	k.UpdateTotalStakedAmount(ctx, msg.StakeAmount)
+
+	// Return result
 	return &types.MsgCreateRegistryResponse{}, nil
 }
