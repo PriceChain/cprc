@@ -57,6 +57,14 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
+		PriceDataList: []types.PriceData{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -76,5 +84,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.RegistryMemberCount, got.RegistryMemberCount)
 	require.ElementsMatch(t, genesisState.RegistryStakedAmountList, got.RegistryStakedAmountList)
 	require.ElementsMatch(t, genesisState.StakedAmountPerWalletList, got.StakedAmountPerWalletList)
+	require.ElementsMatch(t, genesisState.PriceDataList, got.PriceDataList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

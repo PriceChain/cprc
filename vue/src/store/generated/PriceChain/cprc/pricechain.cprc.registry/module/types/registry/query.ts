@@ -11,6 +11,7 @@ import { RegistryOwner } from "../registry/registry_owner";
 import { RegistryMember } from "../registry/registry_member";
 import { RegistryStakedAmount } from "../registry/registry_staked_amount";
 import { StakedAmountPerWallet } from "../registry/staked_amount_per_wallet";
+import { PriceData } from "../registry/price_data";
 
 export const protobufPackage = "pricechain.cprc.registry";
 
@@ -105,6 +106,23 @@ export interface QueryAllStakedAmountPerWalletRequest {
 
 export interface QueryAllStakedAmountPerWalletResponse {
   stakedAmountPerWallet: StakedAmountPerWallet[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetPriceDataRequest {
+  index: string;
+}
+
+export interface QueryGetPriceDataResponse {
+  priceData: PriceData | undefined;
+}
+
+export interface QueryAllPriceDataRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllPriceDataResponse {
+  priceData: PriceData[];
   pagination: PageResponse | undefined;
 }
 
@@ -1834,6 +1852,320 @@ export const QueryAllStakedAmountPerWalletResponse = {
   },
 };
 
+const baseQueryGetPriceDataRequest: object = { index: "" };
+
+export const QueryGetPriceDataRequest = {
+  encode(
+    message: QueryGetPriceDataRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetPriceDataRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetPriceDataRequest,
+    } as QueryGetPriceDataRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetPriceDataRequest {
+    const message = {
+      ...baseQueryGetPriceDataRequest,
+    } as QueryGetPriceDataRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetPriceDataRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetPriceDataRequest>
+  ): QueryGetPriceDataRequest {
+    const message = {
+      ...baseQueryGetPriceDataRequest,
+    } as QueryGetPriceDataRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetPriceDataResponse: object = {};
+
+export const QueryGetPriceDataResponse = {
+  encode(
+    message: QueryGetPriceDataResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.priceData !== undefined) {
+      PriceData.encode(message.priceData, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetPriceDataResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetPriceDataResponse,
+    } as QueryGetPriceDataResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.priceData = PriceData.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetPriceDataResponse {
+    const message = {
+      ...baseQueryGetPriceDataResponse,
+    } as QueryGetPriceDataResponse;
+    if (object.priceData !== undefined && object.priceData !== null) {
+      message.priceData = PriceData.fromJSON(object.priceData);
+    } else {
+      message.priceData = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetPriceDataResponse): unknown {
+    const obj: any = {};
+    message.priceData !== undefined &&
+      (obj.priceData = message.priceData
+        ? PriceData.toJSON(message.priceData)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetPriceDataResponse>
+  ): QueryGetPriceDataResponse {
+    const message = {
+      ...baseQueryGetPriceDataResponse,
+    } as QueryGetPriceDataResponse;
+    if (object.priceData !== undefined && object.priceData !== null) {
+      message.priceData = PriceData.fromPartial(object.priceData);
+    } else {
+      message.priceData = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllPriceDataRequest: object = {};
+
+export const QueryAllPriceDataRequest = {
+  encode(
+    message: QueryAllPriceDataRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllPriceDataRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllPriceDataRequest,
+    } as QueryAllPriceDataRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllPriceDataRequest {
+    const message = {
+      ...baseQueryAllPriceDataRequest,
+    } as QueryAllPriceDataRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllPriceDataRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllPriceDataRequest>
+  ): QueryAllPriceDataRequest {
+    const message = {
+      ...baseQueryAllPriceDataRequest,
+    } as QueryAllPriceDataRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllPriceDataResponse: object = {};
+
+export const QueryAllPriceDataResponse = {
+  encode(
+    message: QueryAllPriceDataResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.priceData) {
+      PriceData.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllPriceDataResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllPriceDataResponse,
+    } as QueryAllPriceDataResponse;
+    message.priceData = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.priceData.push(PriceData.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllPriceDataResponse {
+    const message = {
+      ...baseQueryAllPriceDataResponse,
+    } as QueryAllPriceDataResponse;
+    message.priceData = [];
+    if (object.priceData !== undefined && object.priceData !== null) {
+      for (const e of object.priceData) {
+        message.priceData.push(PriceData.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllPriceDataResponse): unknown {
+    const obj: any = {};
+    if (message.priceData) {
+      obj.priceData = message.priceData.map((e) =>
+        e ? PriceData.toJSON(e) : undefined
+      );
+    } else {
+      obj.priceData = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllPriceDataResponse>
+  ): QueryAllPriceDataResponse {
+    const message = {
+      ...baseQueryAllPriceDataResponse,
+    } as QueryAllPriceDataResponse;
+    message.priceData = [];
+    if (object.priceData !== undefined && object.priceData !== null) {
+      for (const e of object.priceData) {
+        message.priceData.push(PriceData.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1876,6 +2208,14 @@ export interface Query {
   StakedAmountPerWalletAll(
     request: QueryAllStakedAmountPerWalletRequest
   ): Promise<QueryAllStakedAmountPerWalletResponse>;
+  /** Queries a PriceData by index. */
+  PriceData(
+    request: QueryGetPriceDataRequest
+  ): Promise<QueryGetPriceDataResponse>;
+  /** Queries a list of PriceData items. */
+  PriceDataAll(
+    request: QueryAllPriceDataRequest
+  ): Promise<QueryAllPriceDataResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -2030,6 +2370,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllStakedAmountPerWalletResponse.decode(new Reader(data))
+    );
+  }
+
+  PriceData(
+    request: QueryGetPriceDataRequest
+  ): Promise<QueryGetPriceDataResponse> {
+    const data = QueryGetPriceDataRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.cprc.registry.Query",
+      "PriceData",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetPriceDataResponse.decode(new Reader(data))
+    );
+  }
+
+  PriceDataAll(
+    request: QueryAllPriceDataRequest
+  ): Promise<QueryAllPriceDataResponse> {
+    const data = QueryAllPriceDataRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "pricechain.cprc.registry.Query",
+      "PriceDataAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllPriceDataResponse.decode(new Reader(data))
     );
   }
 }

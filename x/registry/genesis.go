@@ -39,6 +39,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.StakedAmountPerWalletList {
 		k.SetStakedAmountPerWallet(ctx, elem)
 	}
+	// Set all the priceData
+	for _, elem := range genState.PriceDataList {
+		k.SetPriceData(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
 }
@@ -56,6 +60,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.RegistryMemberCount = k.GetRegistryMemberCount(ctx)
 	genesis.RegistryStakedAmountList = k.GetAllRegistryStakedAmount(ctx)
 	genesis.StakedAmountPerWalletList = k.GetAllStakedAmountPerWallet(ctx)
+	genesis.PriceDataList = k.GetAllPriceData(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

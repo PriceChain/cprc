@@ -10,6 +10,7 @@ import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
 import "registry/registry_staked_amount.proto";
 import "registry/staked_amount_per_wallet.proto";
+import "registry/price_data.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
@@ -68,6 +69,16 @@ service Query {
 	// Queries a list of StakedAmountPerWallet items.
 	rpc StakedAmountPerWalletAll(QueryAllStakedAmountPerWalletRequest) returns (QueryAllStakedAmountPerWalletResponse) {
 		option (google.api.http).get = "/PriceChain/cprc/registry/staked_amount_per_wallet";
+	}
+
+// Queries a PriceData by index.
+	rpc PriceData(QueryGetPriceDataRequest) returns (QueryGetPriceDataResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/registry/price_data/{index}";
+	}
+
+	// Queries a list of PriceData items.
+	rpc PriceDataAll(QueryAllPriceDataRequest) returns (QueryAllPriceDataResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/registry/price_data";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -166,6 +177,24 @@ message QueryAllStakedAmountPerWalletRequest {
 
 message QueryAllStakedAmountPerWalletResponse {
 	repeated StakedAmountPerWallet stakedAmountPerWallet = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetPriceDataRequest {
+	  string index = 1;
+
+}
+
+message QueryGetPriceDataResponse {
+	PriceData priceData = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllPriceDataRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllPriceDataResponse {
+	repeated PriceData priceData = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

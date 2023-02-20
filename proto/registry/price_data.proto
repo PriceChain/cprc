@@ -1,0 +1,19 @@
+syntax = "proto3";
+package pricechain.cprc.registry;
+
+option go_package = "github.com/PriceChain/cprc/x/registry/types";
+
+message PriceData {
+  string index = 1; 
+  string registryId = 2; 
+  string creator = 3; 
+  string storeName = 4; 
+  string storeAddr = 5; 
+  string purchaseTime = 6; 
+  string prodName = 7; 
+  string price = 8; 
+  string receiptCode = 9; 
+  string reserved = 10; 
+  
+}
+

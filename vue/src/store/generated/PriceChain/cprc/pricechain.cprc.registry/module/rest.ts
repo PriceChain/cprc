@@ -32,6 +32,34 @@ export interface RegistryParams {
   minimumStakeAmount?: string;
 }
 
+export interface RegistryPriceData {
+  index?: string;
+  registryId?: string;
+  creator?: string;
+  storeName?: string;
+  storeAddr?: string;
+  purchaseTime?: string;
+  prodName?: string;
+  price?: string;
+  receiptCode?: string;
+  reserved?: string;
+}
+
+export interface RegistryQueryAllPriceDataResponse {
+  priceData?: RegistryPriceData[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface RegistryQueryAllRegistryMemberResponse {
   RegistryMember?: RegistryRegistryMember[];
 
@@ -105,6 +133,10 @@ export interface RegistryQueryAllStakedAmountPerWalletResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface RegistryQueryGetPriceDataResponse {
+  priceData?: RegistryPriceData;
 }
 
 export interface RegistryQueryGetRegistryMemberResponse {
@@ -454,6 +486,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<RegistryQueryParamsResponse, RpcStatus>({
       path: `/PriceChain/cprc/registry/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryPriceDataAll
+   * @summary Queries a list of PriceData items.
+   * @request GET:/PriceChain/cprc/registry/price_data
+   */
+  queryPriceDataAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<RegistryQueryAllPriceDataResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/price_data`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryPriceData
+   * @summary Queries a PriceData by index.
+   * @request GET:/PriceChain/cprc/registry/price_data/{index}
+   */
+  queryPriceData = (index: string, params: RequestParams = {}) =>
+    this.request<RegistryQueryGetPriceDataResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/price_data/${index}`,
       method: "GET",
       format: "json",
       ...params,

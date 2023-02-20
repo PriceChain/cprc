@@ -15,6 +15,7 @@ func DefaultGenesis() *GenesisState {
 		RegistryMemberList:        []RegistryMember{},
 		RegistryStakedAmountList:  []RegistryStakedAmount{},
 		StakedAmountPerWalletList: []StakedAmountPerWallet{},
+		PriceDataList:             []PriceData{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -78,6 +79,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for stakedAmountPerWallet")
 		}
 		stakedAmountPerWalletIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in priceData
+	priceDataIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.PriceDataList {
+		index := string(PriceDataKey(elem.Index))
+		if _, ok := priceDataIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for priceData")
+		}
+		priceDataIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
