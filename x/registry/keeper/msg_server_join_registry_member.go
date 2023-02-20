@@ -59,6 +59,42 @@ func (k msgServer) JoinRegistryMember(goCtx context.Context, msg *types.MsgJoinR
 	registry.Validators = append(registry.Validators, creator.String())
 	k.SetRegistry(ctx, registry)
 
+	// Get all registry memebers - price validators
+	registryMembers := k.GetAllRegistryMember(ctx)
+
+	// Cosntruct an item of registry memeber
+	registryMember := types.RegistryMember{
+		Id:           uint64(len(registryMembers) + 1),
+		Wallet:       creator.String(),
+		RegistryId:   msg.RegistryId,
+		StakedAmount: msg.StakeAmount,
+		Address:      "",
+		Status:       "",
+		PopCount:     "0",
+		Level:        "0",
+		Reputations:  []string{},
+		Scores:       []string{},
+		Reserved:     "",
+	}
+
+	// Check if he is already joined as a memeber
+	for i, r := range registryMembers {
+		// wallet address and registry Id, one user can join several registries
+		if r.Wallet == creator.String() && r.RegistryId == msg.RegistryId {
+			registryMember = registryMembers[i]
+
+			ramt, _ := strconv.ParseUint(registryMember.StakedAmount, 10, 64)
+			amt, _ = strconv.ParseUint(amount.String(), 10, 64)
+
+			ramt += amt
+
+			registryMember.StakedAmount = fmt.Sprintf("%d", ramt)
+		}
+	}
+
+	// Set registry member
+	k.SetRegistryMember(ctx, registryMember)
+
 	// Update staked amount per wallet
 	k.UpdateStakedAmountPerWallet(ctx, creator.String(), msg.StakeAmount)
 

@@ -6,23 +6,29 @@ export const protobufPackage = "pricechain.cprc.registry";
 
 export interface RegistryMember {
   id: number;
+  wallet: string;
   registryId: string;
   stakedAmount: string;
   address: string;
   status: string;
-  memberSince: string;
-  memo: string;
+  popCount: string;
+  level: string;
+  reputations: string[];
+  scores: string[];
   reserved: string;
 }
 
 const baseRegistryMember: object = {
   id: 0,
+  wallet: "",
   registryId: "",
   stakedAmount: "",
   address: "",
   status: "",
-  memberSince: "",
-  memo: "",
+  popCount: "",
+  level: "",
+  reputations: "",
+  scores: "",
   reserved: "",
 };
 
@@ -31,26 +37,35 @@ export const RegistryMember = {
     if (message.id !== 0) {
       writer.uint32(8).uint64(message.id);
     }
+    if (message.wallet !== "") {
+      writer.uint32(18).string(message.wallet);
+    }
     if (message.registryId !== "") {
-      writer.uint32(18).string(message.registryId);
+      writer.uint32(26).string(message.registryId);
     }
     if (message.stakedAmount !== "") {
-      writer.uint32(26).string(message.stakedAmount);
+      writer.uint32(34).string(message.stakedAmount);
     }
     if (message.address !== "") {
-      writer.uint32(34).string(message.address);
+      writer.uint32(42).string(message.address);
     }
     if (message.status !== "") {
-      writer.uint32(42).string(message.status);
+      writer.uint32(50).string(message.status);
     }
-    if (message.memberSince !== "") {
-      writer.uint32(50).string(message.memberSince);
+    if (message.popCount !== "") {
+      writer.uint32(58).string(message.popCount);
     }
-    if (message.memo !== "") {
-      writer.uint32(58).string(message.memo);
+    if (message.level !== "") {
+      writer.uint32(66).string(message.level);
+    }
+    for (const v of message.reputations) {
+      writer.uint32(74).string(v!);
+    }
+    for (const v of message.scores) {
+      writer.uint32(82).string(v!);
     }
     if (message.reserved !== "") {
-      writer.uint32(66).string(message.reserved);
+      writer.uint32(90).string(message.reserved);
     }
     return writer;
   },
@@ -59,6 +74,8 @@ export const RegistryMember = {
     const reader = input instanceof Uint8Array ? new Reader(input) : input;
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRegistryMember } as RegistryMember;
+    message.reputations = [];
+    message.scores = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -66,24 +83,33 @@ export const RegistryMember = {
           message.id = longToNumber(reader.uint64() as Long);
           break;
         case 2:
-          message.registryId = reader.string();
+          message.wallet = reader.string();
           break;
         case 3:
-          message.stakedAmount = reader.string();
+          message.registryId = reader.string();
           break;
         case 4:
-          message.address = reader.string();
+          message.stakedAmount = reader.string();
           break;
         case 5:
-          message.status = reader.string();
+          message.address = reader.string();
           break;
         case 6:
-          message.memberSince = reader.string();
+          message.status = reader.string();
           break;
         case 7:
-          message.memo = reader.string();
+          message.popCount = reader.string();
           break;
         case 8:
+          message.level = reader.string();
+          break;
+        case 9:
+          message.reputations.push(reader.string());
+          break;
+        case 10:
+          message.scores.push(reader.string());
+          break;
+        case 11:
           message.reserved = reader.string();
           break;
         default:
@@ -96,10 +122,17 @@ export const RegistryMember = {
 
   fromJSON(object: any): RegistryMember {
     const message = { ...baseRegistryMember } as RegistryMember;
+    message.reputations = [];
+    message.scores = [];
     if (object.id !== undefined && object.id !== null) {
       message.id = Number(object.id);
     } else {
       message.id = 0;
+    }
+    if (object.wallet !== undefined && object.wallet !== null) {
+      message.wallet = String(object.wallet);
+    } else {
+      message.wallet = "";
     }
     if (object.registryId !== undefined && object.registryId !== null) {
       message.registryId = String(object.registryId);
@@ -121,15 +154,25 @@ export const RegistryMember = {
     } else {
       message.status = "";
     }
-    if (object.memberSince !== undefined && object.memberSince !== null) {
-      message.memberSince = String(object.memberSince);
+    if (object.popCount !== undefined && object.popCount !== null) {
+      message.popCount = String(object.popCount);
     } else {
-      message.memberSince = "";
+      message.popCount = "";
     }
-    if (object.memo !== undefined && object.memo !== null) {
-      message.memo = String(object.memo);
+    if (object.level !== undefined && object.level !== null) {
+      message.level = String(object.level);
     } else {
-      message.memo = "";
+      message.level = "";
+    }
+    if (object.reputations !== undefined && object.reputations !== null) {
+      for (const e of object.reputations) {
+        message.reputations.push(String(e));
+      }
+    }
+    if (object.scores !== undefined && object.scores !== null) {
+      for (const e of object.scores) {
+        message.scores.push(String(e));
+      }
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = String(object.reserved);
@@ -142,24 +185,41 @@ export const RegistryMember = {
   toJSON(message: RegistryMember): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
+    message.wallet !== undefined && (obj.wallet = message.wallet);
     message.registryId !== undefined && (obj.registryId = message.registryId);
     message.stakedAmount !== undefined &&
       (obj.stakedAmount = message.stakedAmount);
     message.address !== undefined && (obj.address = message.address);
     message.status !== undefined && (obj.status = message.status);
-    message.memberSince !== undefined &&
-      (obj.memberSince = message.memberSince);
-    message.memo !== undefined && (obj.memo = message.memo);
+    message.popCount !== undefined && (obj.popCount = message.popCount);
+    message.level !== undefined && (obj.level = message.level);
+    if (message.reputations) {
+      obj.reputations = message.reputations.map((e) => e);
+    } else {
+      obj.reputations = [];
+    }
+    if (message.scores) {
+      obj.scores = message.scores.map((e) => e);
+    } else {
+      obj.scores = [];
+    }
     message.reserved !== undefined && (obj.reserved = message.reserved);
     return obj;
   },
 
   fromPartial(object: DeepPartial<RegistryMember>): RegistryMember {
     const message = { ...baseRegistryMember } as RegistryMember;
+    message.reputations = [];
+    message.scores = [];
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id;
     } else {
       message.id = 0;
+    }
+    if (object.wallet !== undefined && object.wallet !== null) {
+      message.wallet = object.wallet;
+    } else {
+      message.wallet = "";
     }
     if (object.registryId !== undefined && object.registryId !== null) {
       message.registryId = object.registryId;
@@ -181,15 +241,25 @@ export const RegistryMember = {
     } else {
       message.status = "";
     }
-    if (object.memberSince !== undefined && object.memberSince !== null) {
-      message.memberSince = object.memberSince;
+    if (object.popCount !== undefined && object.popCount !== null) {
+      message.popCount = object.popCount;
     } else {
-      message.memberSince = "";
+      message.popCount = "";
     }
-    if (object.memo !== undefined && object.memo !== null) {
-      message.memo = object.memo;
+    if (object.level !== undefined && object.level !== null) {
+      message.level = object.level;
     } else {
-      message.memo = "";
+      message.level = "";
+    }
+    if (object.reputations !== undefined && object.reputations !== null) {
+      for (const e of object.reputations) {
+        message.reputations.push(e);
+      }
+    }
+    if (object.scores !== undefined && object.scores !== null) {
+      for (const e of object.scores) {
+        message.scores.push(e);
+      }
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = object.reserved;

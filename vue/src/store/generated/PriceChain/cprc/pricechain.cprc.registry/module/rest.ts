@@ -186,12 +186,15 @@ export interface RegistryRegistry {
 export interface RegistryRegistryMember {
   /** @format uint64 */
   id?: string;
+  wallet?: string;
   registryId?: string;
   stakedAmount?: string;
   address?: string;
   status?: string;
-  memberSince?: string;
-  memo?: string;
+  popCount?: string;
+  level?: string;
+  reputations?: string[];
+  scores?: string[];
   reserved?: string;
 }
 

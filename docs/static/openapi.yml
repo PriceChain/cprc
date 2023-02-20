@@ -30121,16 +30121,6 @@ paths:
           in: query
           required: false
           type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/price_data/{index}':
@@ -30327,16 +30317,6 @@ paths:
           in: query
           required: false
           type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry/{id}':
@@ -30425,6 +30405,8 @@ paths:
                     id:
                       type: string
                       format: uint64
+                    wallet:
+                      type: string
                     registryId:
                       type: string
                     stakedAmount:
@@ -30433,10 +30415,18 @@ paths:
                       type: string
                     status:
                       type: string
-                    memberSince:
+                    popCount:
                       type: string
-                    memo:
+                    level:
                       type: string
+                    reputations:
+                      type: array
+                      items:
+                        type: string
+                    scores:
+                      type: array
+                      items:
+                        type: string
                     reserved:
                       type: string
               pagination:
@@ -30531,16 +30521,6 @@ paths:
           in: query
           required: false
           type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_member/{id}':
@@ -30559,6 +30539,8 @@ paths:
                   id:
                     type: string
                     format: uint64
+                  wallet:
+                    type: string
                   registryId:
                     type: string
                   stakedAmount:
@@ -30567,10 +30549,18 @@ paths:
                     type: string
                   status:
                     type: string
-                  memberSince:
+                  popCount:
                     type: string
-                  memo:
+                  level:
                     type: string
+                  reputations:
+                    type: array
+                    items:
+                      type: string
+                  scores:
+                    type: array
+                    items:
+                      type: string
                   reserved:
                     type: string
         default:
@@ -30716,16 +30706,6 @@ paths:
             when key
 
             is set.
-          in: query
-          required: false
-          type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -30894,16 +30874,6 @@ paths:
           in: query
           required: false
           type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_staked_amount/{index}':
@@ -31058,16 +31028,6 @@ paths:
             when key
 
             is set.
-          in: query
-          required: false
-          type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -53147,6 +53107,8 @@ definitions:
             id:
               type: string
               format: uint64
+            wallet:
+              type: string
             registryId:
               type: string
             stakedAmount:
@@ -53155,10 +53117,18 @@ definitions:
               type: string
             status:
               type: string
-            memberSince:
+            popCount:
               type: string
-            memo:
+            level:
               type: string
+            reputations:
+              type: array
+              items:
+                type: string
+            scores:
+              type: array
+              items:
+                type: string
             reserved:
               type: string
       pagination:
@@ -53405,6 +53375,8 @@ definitions:
           id:
             type: string
             format: uint64
+          wallet:
+            type: string
           registryId:
             type: string
           stakedAmount:
@@ -53413,10 +53385,18 @@ definitions:
             type: string
           status:
             type: string
-          memberSince:
+          popCount:
             type: string
-          memo:
+          level:
             type: string
+          reputations:
+            type: array
+            items:
+              type: string
+          scores:
+            type: array
+            items:
+              type: string
           reserved:
             type: string
   pricechain.cprc.registry.QueryGetRegistryOwnerResponse:
@@ -53544,6 +53524,8 @@ definitions:
       id:
         type: string
         format: uint64
+      wallet:
+        type: string
       registryId:
         type: string
       stakedAmount:
@@ -53552,10 +53534,18 @@ definitions:
         type: string
       status:
         type: string
-      memberSince:
+      popCount:
         type: string
-      memo:
+      level:
         type: string
+      reputations:
+        type: array
+        items:
+          type: string
+      scores:
+        type: array
+        items:
+          type: string
       reserved:
         type: string
   pricechain.cprc.registry.RegistryOwner:
