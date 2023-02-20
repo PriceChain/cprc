@@ -30034,6 +30034,10 @@ paths:
                       type: array
                       items:
                         type: string
+                    validators:
+                      type: array
+                      items:
+                        type: string
               pagination:
                 type: object
                 properties:
@@ -30173,6 +30177,10 @@ paths:
                   reserved:
                     type: string
                   owners:
+                    type: array
+                    items:
+                      type: string
+                  validators:
                     type: array
                     items:
                       type: string
@@ -52984,6 +52992,10 @@ definitions:
               type: array
               items:
                 type: string
+            validators:
+              type: array
+              items:
+                type: string
       pagination:
         type: object
         properties:
@@ -53158,6 +53170,10 @@ definitions:
             type: array
             items:
               type: string
+          validators:
+            type: array
+            items:
+              type: string
   pricechain.cprc.registry.QueryGetRegistryStakedAmountResponse:
     type: object
     properties:
@@ -53216,6 +53232,10 @@ definitions:
       reserved:
         type: string
       owners:
+        type: array
+        items:
+          type: string
+      validators:
         type: array
         items:
           type: string

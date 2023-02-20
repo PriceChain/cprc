@@ -16,6 +16,7 @@ export interface Registry {
   timestamp: string;
   reserved: string;
   owners: string[];
+  validators: string[];
 }
 
 const baseRegistry: object = {
@@ -30,6 +31,7 @@ const baseRegistry: object = {
   timestamp: "",
   reserved: "",
   owners: "",
+  validators: "",
 };
 
 export const Registry = {
@@ -67,6 +69,9 @@ export const Registry = {
     for (const v of message.owners) {
       writer.uint32(90).string(v!);
     }
+    for (const v of message.validators) {
+      writer.uint32(98).string(v!);
+    }
     return writer;
   },
 
@@ -75,6 +80,7 @@ export const Registry = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseRegistry } as Registry;
     message.owners = [];
+    message.validators = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -111,6 +117,9 @@ export const Registry = {
         case 11:
           message.owners.push(reader.string());
           break;
+        case 12:
+          message.validators.push(reader.string());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -122,6 +131,7 @@ export const Registry = {
   fromJSON(object: any): Registry {
     const message = { ...baseRegistry } as Registry;
     message.owners = [];
+    message.validators = [];
     if (object.id !== undefined && object.id !== null) {
       message.id = Number(object.id);
     } else {
@@ -177,6 +187,11 @@ export const Registry = {
         message.owners.push(String(e));
       }
     }
+    if (object.validators !== undefined && object.validators !== null) {
+      for (const e of object.validators) {
+        message.validators.push(String(e));
+      }
+    }
     return message;
   },
 
@@ -200,12 +215,18 @@ export const Registry = {
     } else {
       obj.owners = [];
     }
+    if (message.validators) {
+      obj.validators = message.validators.map((e) => e);
+    } else {
+      obj.validators = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<Registry>): Registry {
     const message = { ...baseRegistry } as Registry;
     message.owners = [];
+    message.validators = [];
     if (object.id !== undefined && object.id !== null) {
       message.id = object.id;
     } else {
@@ -259,6 +280,11 @@ export const Registry = {
     if (object.owners !== undefined && object.owners !== null) {
       for (const e of object.owners) {
         message.owners.push(e);
+      }
+    }
+    if (object.validators !== undefined && object.validators !== null) {
+      for (const e of object.validators) {
+        message.validators.push(e);
       }
     }
     return message;

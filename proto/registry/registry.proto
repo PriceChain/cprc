@@ -15,4 +15,5 @@ message Registry {
   string timestamp = 9; 
   string reserved = 10; 
   repeated string owners = 11;
+  repeated string validators = 12;
 }
