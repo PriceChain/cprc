@@ -41,4 +41,5 @@ type RegistryKeeper interface {
 	GetRegistry(sdk.Context, uint64) (rtypes.Registry, bool)
 	GetRegistryStakedAmount(sdk.Context, string) (rtypes.RegistryStakedAmount, bool)
 	GetStakedAmountPerWallet(sdk.Context, string) (rtypes.StakedAmountPerWallet, bool)
+	SetRegistryMember(sdk.Context, rtypes.RegistryMember)
 }

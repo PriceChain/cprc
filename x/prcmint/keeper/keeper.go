@@ -15,20 +15,21 @@ import (
 
 type (
 	Keeper struct {
-		cdc              codec.BinaryCodec
-		storeKey         storetypes.StoreKey
-		paramSpace       paramtypes.Subspace
-		stakingKeeper    types.StakingKeeper
-		bankKeeper       types.BankKeeper
-		registryKeeper   types.RegistryKeeper
-		feeCollectorName string
+		cdc                      codec.BinaryCodec
+		storeKey                 storetypes.StoreKey
+		paramSpace               paramtypes.Subspace
+		stakingKeeper            types.StakingKeeper
+		bankKeeper               types.BankKeeper
+		registryKeeper           types.RegistryKeeper
+		feeCollectorName         string
+		registryFeeCollectorName string
 	}
 )
 
 func NewKeeper(
 	cdc codec.BinaryCodec, key storetypes.StoreKey, ps paramtypes.Subspace,
 	sk types.StakingKeeper, ak types.AccountKeeper, bk types.BankKeeper, rk types.RegistryKeeper,
-	feeCollectorName string,
+	feeCollectorName string, registryFeeCollectorName string,
 ) Keeper {
 	// ensure mint module account is set
 	if addr := ak.GetModuleAddress(types.ModuleName); addr == nil {
@@ -40,13 +41,14 @@ func NewKeeper(
 	}
 
 	return Keeper{
-		cdc:              cdc,
-		storeKey:         key,
-		paramSpace:       ps,
-		stakingKeeper:    sk,
-		bankKeeper:       bk,
-		registryKeeper:   rk,
-		feeCollectorName: feeCollectorName,
+		cdc:                      cdc,
+		storeKey:                 key,
+		paramSpace:               ps,
+		stakingKeeper:            sk,
+		bankKeeper:               bk,
+		registryKeeper:           rk,
+		feeCollectorName:         feeCollectorName,
+		registryFeeCollectorName: registryFeeCollectorName,
 	}
 }
 
@@ -119,6 +121,12 @@ func (k Keeper) AddCollectedFees(ctx sdk.Context, fees sdk.Coins) error {
 	return k.bankKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.feeCollectorName, fees)
 }
 
+// AddCollectedFees implements an alias call to the underlying supply keeper's
+// AddCollectedFees to be used in BeginBlocker.
+func (k Keeper) AddCollectedFeesToRegistry(ctx sdk.Context, fees sdk.Coins) error {
+	return k.bankKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.registryFeeCollectorName, fees)
+}
+
 // Get All registries
 func (k Keeper) GetAllRegistry(ctx sdk.Context) (list []rtypes.Registry) {
 	return k.registryKeeper.GetAllRegistry(ctx)
@@ -157,4 +165,9 @@ func (k Keeper) GetRegistryStakedAmount(ctx sdk.Context, index string) (rtypes.R
 // Get total staked amount per wallet
 func (k Keeper) GetStakedAmountPerWallet(ctx sdk.Context, index string) (rtypes.StakedAmountPerWallet, bool) {
 	return k.registryKeeper.GetStakedAmountPerWallet(ctx, index)
+}
+
+// Update registry member
+func (k Keeper) SetRegistryMember(ctx sdk.Context, rm rtypes.RegistryMember) {
+	k.registryKeeper.SetRegistryMember(ctx, rm)
 }

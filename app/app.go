@@ -170,7 +170,7 @@ var (
 	maccPerms = map[string][]string{
 		authtypes.FeeCollectorName:                     nil,
 		distrtypes.ModuleName:                          nil,
-		registrymoduletypes.RegistryStakeCollectorName: nil,
+		registrymoduletypes.RegistryStakeCollectorName: {authtypes.Minter},
 		minttypes.ModuleName:                           {authtypes.Minter},
 		stakingtypes.BondedPoolName:                    {authtypes.Burner, authtypes.Staking},
 		stakingtypes.NotBondedPoolName:                 {authtypes.Burner, authtypes.Staking},
@@ -410,7 +410,7 @@ func New(
 
 	app.MintKeeper = mintkeeper.NewKeeper(
 		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
-		app.AccountKeeper, app.BankKeeper, app.RegistryKeeper, authtypes.FeeCollectorName,
+		app.AccountKeeper, app.BankKeeper, app.RegistryKeeper, authtypes.FeeCollectorName, registrymoduletypes.RegistryStakeCollectorName,
 	)
 
 	scopedPrcibcKeeper := app.CapabilityKeeper.ScopeToModule(prcibcmoduletypes.ModuleName)
