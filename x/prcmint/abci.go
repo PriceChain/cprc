@@ -1,6 +1,9 @@
 package prcmint
 
 import (
+	"fmt"
+	"math"
+	"strconv"
 	"time"
 
 	"github.com/PriceChain/cprc/x/prcmint/keeper"
@@ -61,5 +64,55 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculatio
 	)
 }
 
-func CalculateRewards(ctx sdk.Context, k keeper.Keeper) {
+func CalculateRewards(ctx sdk.Context, k keeper.Keeper, totalSupply sdk.Int, blocksPerYear uint64) {
+	allPriceData := k.GetAllPriceData(ctx)
+	allRegistryMembers := k.GetAllRegistryMember(ctx)
+
+	numberOfBlocks := (float64)(ctx.BlockHeight())
+	fTotalPoPSent := (float64)(len(allPriceData))
+
+	registryStakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
+	if !bFound {
+		return
+	}
+
+	// Parse total staked amount
+	amount, err := strconv.ParseUint(registryStakedAmount.Amount, 10, 64)
+	if err != nil {
+		return
+	}
+
+	fTotalStakedToken := (float64)(amount)
+	for _, pv := range allRegistryMembers {
+		registryId, _ := strconv.ParseUint(pv.RegistryId, 10, 64)
+		registry, bFound := k.GetRegistry(ctx, registryId)
+		if !bFound {
+			continue
+		}
+
+		// Total staked token at the registry
+		totalDeposited, _ := strconv.ParseUint(registry.StakedAmount, 10, 64)
+		fTotalDeposited := (float64)(totalDeposited)
+
+		// PoP Sent by wallet
+		popCount, _ := strconv.ParseUint(pv.PopCount, 10, 64)
+		fPopCount := (float64)(popCount)
+
+		// Total staked amount per wallet
+		stakedAmountPerWallet, bFound := k.GetStakedAmountPerWallet(ctx, pv.Wallet)
+		if !bFound {
+			continue
+		}
+
+		// Total staked amount per wallet
+		stakedAmount, _ := strconv.ParseUint(stakedAmountPerWallet.StakedAmount, 10, 64)
+		fStakedAmount := (float64)(stakedAmount)
+
+		// Rewards calculation
+		fRewards := fTotalDeposited * math.Pow(0.5, (numberOfBlocks/(float64)(blocksPerYear))) * ((fPopCount / fTotalPoPSent) * (fStakedAmount / fTotalStakedToken))
+		Rewards := (uint64)(fRewards)
+
+		// Set RewardSum
+		pv.RewardSum = fmt.Sprintf("%d", Rewards)
+	}
 }

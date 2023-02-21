@@ -14,10 +14,13 @@ import (
 )
 
 type RegistryKeeperI interface {
-	GetAllRegistry(ctx sdk.Context) (list []types.Registry)
-	GetAllStakedAmountPerWallet(ctx sdk.Context) (list []types.StakedAmountPerWallet)
-	GetAllRegistryStakedAmount(ctx sdk.Context) (list []types.RegistryStakedAmount)
-	GetAllRegistryMember(ctx sdk.Context) (list []types.RegistryMember)
+	GetAllRegistry(sdk.Context) []types.Registry
+	GetAllStakedAmountPerWallet(sdk.Context) []types.StakedAmountPerWallet
+	GetAllRegistryMember(sdk.Context) []types.RegistryMember
+	GetAllPriceData(sdk.Context) []types.PriceData
+	GetRegistry(sdk.Context, uint64) (types.Registry, bool)
+	GetRegistryStakedAmount(sdk.Context, string) (types.RegistryStakedAmount, bool)
+	GetStakedAmountPerWallet(sdk.Context, string) (types.StakedAmountPerWallet, bool)
 }
 
 var _ RegistryKeeperI = Keeper{}

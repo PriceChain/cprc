@@ -6,6 +6,7 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 
 	"github.com/PriceChain/cprc/x/prcmint/types"
+	rtypes "github.com/PriceChain/cprc/x/registry/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -116,4 +117,44 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) error {
 // AddCollectedFees to be used in BeginBlocker.
 func (k Keeper) AddCollectedFees(ctx sdk.Context, fees sdk.Coins) error {
 	return k.bankKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.feeCollectorName, fees)
+}
+
+// Get All registries
+func (k Keeper) GetAllRegistry(ctx sdk.Context) (list []rtypes.Registry) {
+	return k.registryKeeper.GetAllRegistry(ctx)
+}
+
+// Get All staked amount per wallet
+func (k Keeper) GetAllStakedAmountPerWallet(ctx sdk.Context) (list []rtypes.StakedAmountPerWallet) {
+	return k.registryKeeper.GetAllStakedAmountPerWallet(ctx)
+}
+
+// Get all registry staked amount
+func (k Keeper) GetAllRegistryStakedAmount(ctx sdk.Context) (list []rtypes.RegistryStakedAmount) {
+	return k.registryKeeper.GetAllRegistryStakedAmount(ctx)
+}
+
+// Get all registry memeber - price validators
+func (k Keeper) GetAllRegistryMember(ctx sdk.Context) (list []rtypes.RegistryMember) {
+	return k.registryKeeper.GetAllRegistryMember(ctx)
+}
+
+// Get all price data
+func (k Keeper) GetAllPriceData(ctx sdk.Context) (list []rtypes.PriceData) {
+	return k.registryKeeper.GetAllPriceData(ctx)
+}
+
+// Get registry using Id
+func (k Keeper) GetRegistry(ctx sdk.Context, index uint64) (rtypes.Registry, bool) {
+	return k.registryKeeper.GetRegistry(ctx, index)
+}
+
+// Get registry staked amount using Id
+func (k Keeper) GetRegistryStakedAmount(ctx sdk.Context, index string) (rtypes.RegistryStakedAmount, bool) {
+	return k.registryKeeper.GetRegistryStakedAmount(ctx, index)
+}
+
+// Get total staked amount per wallet
+func (k Keeper) GetStakedAmountPerWallet(ctx sdk.Context, index string) (rtypes.StakedAmountPerWallet, bool) {
+	return k.registryKeeper.GetStakedAmountPerWallet(ctx, index)
 }
