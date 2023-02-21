@@ -1,6 +1,7 @@
 package types
 
 import (
+	rtypes "github.com/PriceChain/cprc/x/registry/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
@@ -30,5 +31,10 @@ type BankKeeper interface {
 	// Methods imported from bank should be defined here
 }
 
+// RegistryKeeper defines expected interface
 type RegistryKeeper interface {
+	GetAllRegistry(ctx sdk.Context) (list []rtypes.Registry)
+	GetAllStakedAmountPerWallet(ctx sdk.Context) (list []rtypes.StakedAmountPerWallet)
+	GetAllRegistryStakedAmount(ctx sdk.Context) (list []rtypes.RegistryStakedAmount)
+	GetAllRegistryMember(ctx sdk.Context) (list []rtypes.RegistryMember)
 }

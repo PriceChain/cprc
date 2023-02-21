@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"context"
 	"fmt"
 	"strconv"
 
@@ -15,9 +14,10 @@ import (
 )
 
 type RegistryKeeperI interface {
-	RegistryMemberAll(context.Context, *types.QueryAllRegistryMemberRequest) (*types.QueryAllRegistryMemberResponse, error)
-	RegistryStakedAmountAll(context.Context, *types.QueryAllRegistryStakedAmountRequest) (*types.QueryAllRegistryStakedAmountResponse, error)
-	StakedAmountPerWalletAll(context.Context, *types.QueryAllStakedAmountPerWalletRequest) (*types.QueryAllStakedAmountPerWalletResponse, error)
+	GetAllRegistry(ctx sdk.Context) (list []types.Registry)
+	GetAllStakedAmountPerWallet(ctx sdk.Context) (list []types.StakedAmountPerWallet)
+	GetAllRegistryStakedAmount(ctx sdk.Context) (list []types.RegistryStakedAmount)
+	GetAllRegistryMember(ctx sdk.Context) (list []types.RegistryMember)
 }
 
 var _ RegistryKeeperI = Keeper{}
