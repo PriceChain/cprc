@@ -3,6 +3,7 @@ package prcmint
 import (
 	"encoding/json"
 	"fmt"
+
 	// this line is used by starport scaffolding # 1
 
 	"github.com/gorilla/mux"
@@ -87,7 +88,7 @@ func (a AppModuleBasic) GetTxCmd() *cobra.Command {
 
 // GetQueryCmd returns the capability module's root query command.
 func (AppModuleBasic) GetQueryCmd() *cobra.Command {
-	return cli.GetQueryCmd(types.StoreKey)
+	return cli.GetQueryCmd()
 }
 
 // ----------------------------------------------------------------------------
@@ -100,20 +101,22 @@ type AppModule struct {
 
 	keeper        keeper.Keeper
 	accountKeeper types.AccountKeeper
-	bankKeeper    types.BankKeeper
+
+	// inflationCalculator is used to calculate the inflation rate during BeginBlock.
+	// If inflationCalculator is nil, the default inflation calculation logic is used.
+	inflationCalculator types.InflationCalculationFn
 }
 
-func NewAppModule(
-	cdc codec.Codec,
-	keeper keeper.Keeper,
-	accountKeeper types.AccountKeeper,
-	bankKeeper types.BankKeeper,
-) AppModule {
+func NewAppModule(cdc codec.Codec, keeper keeper.Keeper, ak types.AccountKeeper, ic types.InflationCalculationFn) AppModule {
+	if ic == nil {
+		ic = types.DefaultInflationCalculationFn
+	}
+
 	return AppModule{
-		AppModuleBasic: NewAppModuleBasic(cdc),
-		keeper:         keeper,
-		accountKeeper:  accountKeeper,
-		bankKeeper:     bankKeeper,
+		AppModuleBasic:      NewAppModuleBasic(cdc),
+		keeper:              keeper,
+		accountKeeper:       ak,
+		inflationCalculator: ic,
 	}
 }
 
@@ -132,7 +135,7 @@ func (AppModule) QuerierRoute() string { return types.QuerierRoute }
 
 // LegacyQuerierHandler returns the capability module's Querier.
 func (am AppModule) LegacyQuerierHandler(legacyQuerierCdc *codec.LegacyAmino) sdk.Querier {
-	return nil
+	return keeper.NewQuerier(am.keeper, legacyQuerierCdc)
 }
 
 // RegisterServices registers a GRPC query service to respond to the
@@ -151,7 +154,7 @@ func (am AppModule) InitGenesis(ctx sdk.Context, cdc codec.JSONCodec, gs json.Ra
 	// Initialize global index to index in genesis state
 	cdc.MustUnmarshalJSON(gs, &genState)
 
-	InitGenesis(ctx, am.keeper, genState)
+	InitGenesis(ctx, am.keeper, am.accountKeeper, genState)
 
 	return []abci.ValidatorUpdate{}
 }
@@ -166,7 +169,9 @@ func (am AppModule) ExportGenesis(ctx sdk.Context, cdc codec.JSONCodec) json.Raw
 func (AppModule) ConsensusVersion() uint64 { return 2 }
 
 // BeginBlock executes all ABCI BeginBlock logic respective to the capability module.
-func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
+func (am AppModule) BeginBlock(ctx sdk.Context, _ abci.RequestBeginBlock) {
+	BeginBlocker(ctx, am.keeper, am.inflationCalculator)
+}
 
 // EndBlock executes all ABCI EndBlock logic respective to the capability module. It
 // returns no validator updates.

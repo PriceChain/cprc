@@ -97,15 +97,13 @@ import (
 
 	"github.com/PriceChain/cprc/docs"
 
-	"github.com/PriceChain/cprc/x/mint"
-	mintkeeper "github.com/PriceChain/cprc/x/mint/keeper"
-	minttypes "github.com/PriceChain/cprc/x/mint/types"
 	prcibcmodule "github.com/PriceChain/cprc/x/prcibc"
 	prcibcmodulekeeper "github.com/PriceChain/cprc/x/prcibc/keeper"
 	prcibcmoduletypes "github.com/PriceChain/cprc/x/prcibc/types"
-	prcmintmodule "github.com/PriceChain/cprc/x/prcmint"
-	prcmintmodulekeeper "github.com/PriceChain/cprc/x/prcmint/keeper"
-	prcmintmoduletypes "github.com/PriceChain/cprc/x/prcmint/types"
+
+	"github.com/PriceChain/cprc/x/prcmint"
+	mintkeeper "github.com/PriceChain/cprc/x/prcmint/keeper"
+	minttypes "github.com/PriceChain/cprc/x/prcmint/types"
 	registrymodule "github.com/PriceChain/cprc/x/registry"
 	registrymodulekeeper "github.com/PriceChain/cprc/x/registry/keeper"
 	registrymoduletypes "github.com/PriceChain/cprc/x/registry/types"
@@ -150,7 +148,7 @@ var (
 		bank.AppModuleBasic{},
 		capability.AppModuleBasic{},
 		staking.AppModuleBasic{},
-		mint.AppModuleBasic{},
+		prcmint.AppModuleBasic{},
 		distr.AppModuleBasic{},
 		gov.NewAppModuleBasic(getGovProposalHandlers()...),
 		params.AppModuleBasic{},
@@ -165,7 +163,6 @@ var (
 		monitoringp.AppModuleBasic{},
 		registrymodule.AppModuleBasic{},
 		prcibcmodule.AppModuleBasic{},
-		prcmintmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -245,7 +242,6 @@ type App struct {
 	ScopedPrcibcKeeper capabilitykeeper.ScopedKeeper
 	PrcibcKeeper       prcibcmodulekeeper.Keeper
 
-	PrcmintKeeper prcmintmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -284,7 +280,6 @@ func New(
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
 		registrymoduletypes.StoreKey,
 		prcibcmoduletypes.StoreKey,
-		prcmintmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -429,16 +424,6 @@ func New(
 	)
 	prcibcModule := prcibcmodule.NewAppModule(appCodec, app.PrcibcKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.PrcmintKeeper = *prcmintmodulekeeper.NewKeeper(
-		appCodec,
-		keys[prcmintmoduletypes.StoreKey],
-		keys[prcmintmoduletypes.MemStoreKey],
-		app.GetSubspace(prcmintmoduletypes.ModuleName),
-
-		app.MintKeeper,
-	)
-	prcmintModule := prcmintmodule.NewAppModule(appCodec, app.PrcmintKeeper, app.AccountKeeper, app.BankKeeper)
-
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -471,7 +456,7 @@ func New(
 		feegrantmodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper, app.FeeGrantKeeper, app.interfaceRegistry),
 		crisis.NewAppModule(&app.CrisisKeeper, skipGenesisInvariants),
 		gov.NewAppModule(appCodec, app.GovKeeper, app.AccountKeeper, app.BankKeeper),
-		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
+		prcmint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper, nil),
 		slashing.NewAppModule(appCodec, app.SlashingKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		distr.NewAppModule(appCodec, app.DistrKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		staking.NewAppModule(appCodec, app.StakingKeeper, app.AccountKeeper, app.BankKeeper),
@@ -483,7 +468,6 @@ func New(
 		monitoringModule,
 		registryModule,
 		prcibcModule,
-		prcmintModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -513,7 +497,6 @@ func New(
 		monitoringptypes.ModuleName,
 		registrymoduletypes.ModuleName,
 		prcibcmoduletypes.ModuleName,
-		prcmintmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -539,7 +522,6 @@ func New(
 		monitoringptypes.ModuleName,
 		registrymoduletypes.ModuleName,
 		prcibcmoduletypes.ModuleName,
-		prcmintmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -570,7 +552,6 @@ func New(
 		monitoringptypes.ModuleName,
 		registrymoduletypes.ModuleName,
 		prcibcmoduletypes.ModuleName,
-		prcmintmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -586,7 +567,7 @@ func New(
 		capability.NewAppModule(appCodec, *app.CapabilityKeeper),
 		feegrantmodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper, app.FeeGrantKeeper, app.interfaceRegistry),
 		gov.NewAppModule(appCodec, app.GovKeeper, app.AccountKeeper, app.BankKeeper),
-		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
+		prcmint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper, nil),
 		staking.NewAppModule(appCodec, app.StakingKeeper, app.AccountKeeper, app.BankKeeper),
 		distr.NewAppModule(appCodec, app.DistrKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		slashing.NewAppModule(appCodec, app.SlashingKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
@@ -597,7 +578,6 @@ func New(
 		monitoringModule,
 		registryModule,
 		prcibcModule,
-		prcmintModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -796,7 +776,6 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(monitoringptypes.ModuleName)
 	paramsKeeper.Subspace(registrymoduletypes.ModuleName)
 	paramsKeeper.Subspace(prcibcmoduletypes.ModuleName)
-	paramsKeeper.Subspace(prcmintmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

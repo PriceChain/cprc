@@ -1,44 +1,28 @@
-package mint
+package prcmint
 
 import (
 	"time"
 
-	"github.com/PriceChain/cprc/x/mint/keeper"
-	"github.com/PriceChain/cprc/x/mint/types"
-
+	"github.com/PriceChain/cprc/x/prcmint/keeper"
+	"github.com/PriceChain/cprc/x/prcmint/types"
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // BeginBlocker mints new tokens for the previous block.
-func BeginBlocker(ctx sdk.Context, k keeper.Keeper) {
+func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculationFn) {
 	defer telemetry.ModuleMeasureSince(types.ModuleName, time.Now(), telemetry.MetricKeyBeginBlocker)
 
-	// fetch stored minter
+	// fetch stored minter & params
 	minter := k.GetMinter(ctx)
-
-	// inflation phase end
-	if minter.Inflation.Equal(sdk.ZeroInt()) {
-		return
-	}
-
-	// fetch stored params
 	params := k.GetParams(ctx)
-	currentBlock := uint64(ctx.BlockHeight())
 
-	// store new inflation rate by phase
-	newInflation := sdk.ZeroInt() //minter.InflationcalculationFn(nextPhase)
-	// totalSupply := k.TokenSupply(ctx, params.MintDenom)
-	minter.Inflation = newInflation
-	// minter.Phase = nextPhase
-	minter.StartPhaseBlock = currentBlock
-	minter.AnnualProvisions = newInflation
+	// recalculate inflation rate
+	totalStakingSupply := k.StakingTokenSupply(ctx)
+	bondedRatio := k.BondedRatio(ctx)
+	minter.Inflation = ic(ctx, minter, params, bondedRatio)
+	minter.AnnualProvisions = minter.NextAnnualProvisions(params, totalStakingSupply)
 	k.SetMinter(ctx, minter)
-
-	// inflation phase end
-	if minter.Inflation.Equal(sdk.ZeroInt()) {
-		return
-	}
 
 	// mint coins, update supply
 	mintedCoin := minter.BlockProvision(params)
@@ -62,6 +46,7 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper) {
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(
 			types.EventTypeMint,
+			sdk.NewAttribute(types.AttributeKeyBondedRatio, bondedRatio.String()),
 			sdk.NewAttribute(types.AttributeKeyInflation, minter.Inflation.String()),
 			sdk.NewAttribute(types.AttributeKeyAnnualProvisions, minter.AnnualProvisions.String()),
 			sdk.NewAttribute(sdk.AttributeKeyAmount, mintedCoin.Amount.String()),

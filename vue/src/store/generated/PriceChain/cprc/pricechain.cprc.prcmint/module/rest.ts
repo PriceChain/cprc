@@ -12,7 +12,40 @@
 /**
  * Params defines the parameters for the module.
  */
-export type PrcmintParams = object;
+export interface PrcmintParams {
+  mint_denom?: string;
+  inflation_rate_change?: string;
+  inflation_max?: string;
+  inflation_min?: string;
+  goal_bonded?: string;
+
+  /** @format uint64 */
+  blocks_per_year?: string;
+}
+
+/**
+* QueryAnnualProvisionsResponse is the response type for the
+Query/AnnualProvisions RPC method.
+*/
+export interface PrcmintQueryAnnualProvisionsResponse {
+  /**
+   * annual_provisions is the current minting annual provisions value.
+   * @format byte
+   */
+  annual_provisions?: string;
+}
+
+/**
+* QueryInflationResponse is the response type for the Query/Inflation RPC
+method.
+*/
+export interface PrcmintQueryInflationResponse {
+  /**
+   * inflation is the current minting inflation value.
+   * @format byte
+   */
+  inflation?: string;
+}
 
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
@@ -240,6 +273,38 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<PrcmintQueryParamsResponse, RpcStatus>({
       path: `/PriceChain/cprc/prcmint/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryAnnualProvisions
+   * @summary AnnualProvisions current minting annual provisions value.
+   * @request GET:/cosmos/mint/v1beta1/annual_provisions
+   */
+  queryAnnualProvisions = (params: RequestParams = {}) =>
+    this.request<PrcmintQueryAnnualProvisionsResponse, RpcStatus>({
+      path: `/cosmos/mint/v1beta1/annual_provisions`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryInflation
+   * @summary Inflation returns the current minting inflation value.
+   * @request GET:/cosmos/mint/v1beta1/inflation
+   */
+  queryInflation = (params: RequestParams = {}) =>
+    this.request<PrcmintQueryInflationResponse, RpcStatus>({
+      path: `/cosmos/mint/v1beta1/inflation`,
       method: "GET",
       format: "json",
       ...params,

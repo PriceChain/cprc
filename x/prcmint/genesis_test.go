@@ -13,13 +13,14 @@ import (
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
+		Minter: types.DefaultInitialMinter(),
 
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.PrcmintKeeper(t)
-	prcmint.InitGenesis(ctx, *k, genesisState)
-	got := prcmint.ExportGenesis(ctx, *k)
+	prcmint.InitGenesis(ctx, k, nil, genesisState)
+	got := prcmint.ExportGenesis(ctx, k)
 	require.NotNil(t, got)
 
 	nullify.Fill(&genesisState)

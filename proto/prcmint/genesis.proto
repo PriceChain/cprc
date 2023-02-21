@@ -3,12 +3,16 @@ package pricechain.cprc.prcmint;
 
 import "gogoproto/gogo.proto";
 import "prcmint/params.proto";
+import "prcmint/mint.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/PriceChain/cprc/x/prcmint/types";
 
 // GenesisState defines the prcmint module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+  // minter is a space for holding current inflation information.
+  Minter minter = 1 [(gogoproto.nullable) = false];
+
+  Params params = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

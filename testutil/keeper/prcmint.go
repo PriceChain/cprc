@@ -17,7 +17,7 @@ import (
 	tmdb "github.com/tendermint/tm-db"
 )
 
-func PrcmintKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+func PrcmintKeeper(t testing.TB) (keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -36,12 +36,15 @@ func PrcmintKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		memStoreKey,
 		"PrcmintParams",
 	)
+
 	k := keeper.NewKeeper(
 		cdc,
 		storeKey,
-		memStoreKey,
 		paramsSubspace,
 		nil,
+		nil,
+		nil,
+		"",
 	)
 
 	ctx := sdk.NewContext(stateStore, tmproto.Header{}, false, log.NewNopLogger())
