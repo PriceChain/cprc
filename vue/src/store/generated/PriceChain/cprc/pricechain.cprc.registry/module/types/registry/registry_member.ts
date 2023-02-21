@@ -15,6 +15,9 @@ export interface RegistryMember {
   level: string;
   reputations: string[];
   scores: string[];
+  rewardSum: string;
+  rewardPaid: string;
+  rewardPaidDate: string;
   reserved: string;
 }
 
@@ -29,6 +32,9 @@ const baseRegistryMember: object = {
   level: "",
   reputations: "",
   scores: "",
+  rewardSum: "",
+  rewardPaid: "",
+  rewardPaidDate: "",
   reserved: "",
 };
 
@@ -64,8 +70,17 @@ export const RegistryMember = {
     for (const v of message.scores) {
       writer.uint32(82).string(v!);
     }
+    if (message.rewardSum !== "") {
+      writer.uint32(90).string(message.rewardSum);
+    }
+    if (message.rewardPaid !== "") {
+      writer.uint32(98).string(message.rewardPaid);
+    }
+    if (message.rewardPaidDate !== "") {
+      writer.uint32(106).string(message.rewardPaidDate);
+    }
     if (message.reserved !== "") {
-      writer.uint32(90).string(message.reserved);
+      writer.uint32(114).string(message.reserved);
     }
     return writer;
   },
@@ -110,6 +125,15 @@ export const RegistryMember = {
           message.scores.push(reader.string());
           break;
         case 11:
+          message.rewardSum = reader.string();
+          break;
+        case 12:
+          message.rewardPaid = reader.string();
+          break;
+        case 13:
+          message.rewardPaidDate = reader.string();
+          break;
+        case 14:
           message.reserved = reader.string();
           break;
         default:
@@ -174,6 +198,21 @@ export const RegistryMember = {
         message.scores.push(String(e));
       }
     }
+    if (object.rewardSum !== undefined && object.rewardSum !== null) {
+      message.rewardSum = String(object.rewardSum);
+    } else {
+      message.rewardSum = "";
+    }
+    if (object.rewardPaid !== undefined && object.rewardPaid !== null) {
+      message.rewardPaid = String(object.rewardPaid);
+    } else {
+      message.rewardPaid = "";
+    }
+    if (object.rewardPaidDate !== undefined && object.rewardPaidDate !== null) {
+      message.rewardPaidDate = String(object.rewardPaidDate);
+    } else {
+      message.rewardPaidDate = "";
+    }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = String(object.reserved);
     } else {
@@ -203,6 +242,10 @@ export const RegistryMember = {
     } else {
       obj.scores = [];
     }
+    message.rewardSum !== undefined && (obj.rewardSum = message.rewardSum);
+    message.rewardPaid !== undefined && (obj.rewardPaid = message.rewardPaid);
+    message.rewardPaidDate !== undefined &&
+      (obj.rewardPaidDate = message.rewardPaidDate);
     message.reserved !== undefined && (obj.reserved = message.reserved);
     return obj;
   },
@@ -260,6 +303,21 @@ export const RegistryMember = {
       for (const e of object.scores) {
         message.scores.push(e);
       }
+    }
+    if (object.rewardSum !== undefined && object.rewardSum !== null) {
+      message.rewardSum = object.rewardSum;
+    } else {
+      message.rewardSum = "";
+    }
+    if (object.rewardPaid !== undefined && object.rewardPaid !== null) {
+      message.rewardPaid = object.rewardPaid;
+    } else {
+      message.rewardPaid = "";
+    }
+    if (object.rewardPaidDate !== undefined && object.rewardPaidDate !== null) {
+      message.rewardPaidDate = object.rewardPaidDate;
+    } else {
+      message.rewardPaidDate = "";
     }
     if (object.reserved !== undefined && object.reserved !== null) {
       message.reserved = object.reserved;

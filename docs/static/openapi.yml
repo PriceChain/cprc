@@ -30121,6 +30121,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/price_data/{index}':
@@ -30317,6 +30327,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry/{id}':
@@ -30427,6 +30447,12 @@ paths:
                       type: array
                       items:
                         type: string
+                    rewardSum:
+                      type: string
+                    rewardPaid:
+                      type: string
+                    rewardPaidDate:
+                      type: string
                     reserved:
                       type: string
               pagination:
@@ -30521,6 +30547,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_member/{id}':
@@ -30561,6 +30597,12 @@ paths:
                     type: array
                     items:
                       type: string
+                  rewardSum:
+                    type: string
+                  rewardPaid:
+                    type: string
+                  rewardPaidDate:
+                    type: string
                   reserved:
                     type: string
         default:
@@ -30706,6 +30748,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -30874,6 +30926,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_staked_amount/{index}':
@@ -31028,6 +31090,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -53129,6 +53201,12 @@ definitions:
               type: array
               items:
                 type: string
+            rewardSum:
+              type: string
+            rewardPaid:
+              type: string
+            rewardPaidDate:
+              type: string
             reserved:
               type: string
       pagination:
@@ -53397,6 +53475,12 @@ definitions:
             type: array
             items:
               type: string
+          rewardSum:
+            type: string
+          rewardPaid:
+            type: string
+          rewardPaidDate:
+            type: string
           reserved:
             type: string
   pricechain.cprc.registry.QueryGetRegistryOwnerResponse:
@@ -53546,6 +53630,12 @@ definitions:
         type: array
         items:
           type: string
+      rewardSum:
+        type: string
+      rewardPaid:
+        type: string
+      rewardPaidDate:
+        type: string
       reserved:
         type: string
   pricechain.cprc.registry.RegistryOwner:

@@ -14,5 +14,8 @@ message RegistryMember {
   string level = 8;
   repeated string reputations = 9;
   repeated string scores = 10;
-  string reserved = 11; 
+  string rewardSum = 11; 
+  string rewardPaid = 12; 
+  string rewardPaidDate = 13; 
+  string reserved = 14; 
 }

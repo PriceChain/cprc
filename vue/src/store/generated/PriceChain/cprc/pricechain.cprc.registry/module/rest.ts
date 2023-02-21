@@ -195,6 +195,9 @@ export interface RegistryRegistryMember {
   level?: string;
   reputations?: string[];
   scores?: string[];
+  rewardSum?: string;
+  rewardPaid?: string;
+  rewardPaidDate?: string;
   reserved?: string;
 }
 

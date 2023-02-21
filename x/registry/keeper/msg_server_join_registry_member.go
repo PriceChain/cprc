@@ -69,7 +69,7 @@ func (k msgServer) JoinRegistryMember(goCtx context.Context, msg *types.MsgJoinR
 		RegistryId:   msg.RegistryId,
 		StakedAmount: msg.StakeAmount,
 		Address:      "",
-		Status:       "",
+		Status:       types.STATUS_OPEN,
 		PopCount:     "0",
 		Level:        "0",
 		Reputations:  []string{},
