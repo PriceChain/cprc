@@ -402,3 +402,99 @@ func (k msgServer) UnbondRegistry(goCtx context.Context, msg *types.MsgUnbondReg
 
 	return &types.MsgUnbondRegistryResponse{}, nil
 }
+
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+// ------------Withdraw rewards-------------------------------------
+// 1. Remove tokens from registry by owners
+// 2. Should change registry status according to his staked amount
+// 3. There is unbonding period etc.
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+func (k msgServer) WithdrawRewards(goCtx context.Context, msg *types.MsgWithdrawRewards) (*types.MsgWithdrawRewardsResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	// registry id validation check
+	registryId, err := strconv.ParseUint(msg.RegistryId, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	// registry validation check
+	registry, bFound := k.GetRegistry(ctx, registryId)
+	if !bFound {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "There isn't such registry exists!")
+	}
+
+	// signer validation check
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	if err != nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Invalid signer!")
+	}
+
+	bValidProposer := false
+	// check if the sender has the rights to propose price
+	for _, v := range registry.Validators {
+		if v == creator.String() {
+			bValidProposer = true
+		}
+	}
+
+	// if he is not a valid proposer
+	if !bValidProposer {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "You are not allowed to propose price to this registry!")
+	}
+
+	rmemberId := -1
+	allRegistryMembers := k.GetAllRegistryMember(ctx)
+	for i, pv := range allRegistryMembers {
+		if pv.Wallet == creator.String() && pv.RegistryId == msg.RegistryId {
+			rmemberId = i
+			break
+		}
+	}
+
+	// Not found proper member
+	if rmemberId < 0 {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "You are not proper registry member!")
+	}
+
+	rMember := allRegistryMembers[rmemberId]
+	rewardSum, _ := strconv.ParseUint(rMember.RewardSum, 10, 64)
+	rewardPaidSum, _ := strconv.ParseUint(rMember.RewardPaid, 10, 64)
+
+	// rewards amount to pay
+	rewards := rewardSum - rewardPaidSum
+
+	// Parse amount of CPRC token
+	collateral, err := sdk.ParseCoinsNormalized(msg.Amount)
+	if err != nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Invalid withdraw amount!")
+	}
+
+	// Get denomination
+	denom := collateral.GetDenomByIndex(0)
+
+	// Get Int amount
+	amount := collateral.AmountOf(denom)
+
+	// If invalid price
+	if amount.Uint64() > rewards || err != nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Invalid withdraw amount!")
+	}
+
+	err = k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.RegistryStakeCollectorName, creator, collateral)
+	if err != nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Not enough balance!")
+	}
+
+	// Increase paid amount
+	rewardPaidSum += amount.Uint64()
+	rMember.RewardPaid = fmt.Sprintf("%d", rewardPaidSum)
+	rMember.RewardPaidDate = ctx.BlockTime().UTC().String()
+
+	// Set registry member
+	k.SetRegistryMember(ctx, rMember)
+	
+	return &types.MsgWithdrawRewardsResponse{}, nil
+}

@@ -9,10 +9,11 @@ const TypeMsgWithdrawRewards = "withdraw_rewards"
 
 var _ sdk.Msg = &MsgWithdrawRewards{}
 
-func NewMsgWithdrawRewards(creator string, amount string) *MsgWithdrawRewards {
+func NewMsgWithdrawRewards(creator string, amount string, registryId string) *MsgWithdrawRewards {
 	return &MsgWithdrawRewards{
-		Creator: creator,
-		Amount:  amount,
+		Creator:    creator,
+		Amount:     amount,
+		RegistryId: registryId,
 	}
 }
 
