@@ -22,7 +22,17 @@ func NewMsgServerImpl(keeper Keeper) types.MsgServer {
 
 var _ types.MsgServer = msgServer{}
 
-// Create Registry
+//------------------------------------------------------------------
+//--------------------------Create Registry-------------------------
+//------------------------------------------------------------------
+// 1. Check min staking amount
+// 2. Check if already exists registry, it shouldn't already exists
+// 3. Send coins from user wallet to module account
+// 4. Increase registry index and set it to keeper
+// 5. Update staked amount per wallet
+// 6. Updaste total staked amount
+//------------------------------------------------------------------
+//------------------------------------------------------------------
 func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateRegistry) (*types.MsgCreateRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -86,7 +96,18 @@ func (k msgServer) CreateRegistry(goCtx context.Context, msg *types.MsgCreateReg
 	return &types.MsgCreateRegistryResponse{}, nil
 }
 
-// Join a registry as a co owner
+//-------------------------------------------------------------------
+//-------------------Join a registry as a co owner-------------------
+//-------------------------------------------------------------------
+// 1. Check min staking amount
+// 2. Check if already exists registry, it should already exists
+// 4. Check if he is already in the owners list
+// 5. Send coins from user wallet to module account
+// 6. Update the registry staked amount, add itself to owners list
+// 7. Update staked amount per wallet
+// 8. Updaste total staked amount
+//-------------------------------------------------------------------
+//-------------------------------------------------------------------
 func (k msgServer) JoinRegistryCoOperator(goCtx context.Context, msg *types.MsgJoinRegistryCoOperator) (*types.MsgJoinRegistryCoOperatorResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -144,7 +165,19 @@ func (k msgServer) JoinRegistryCoOperator(goCtx context.Context, msg *types.MsgJ
 	return &types.MsgJoinRegistryCoOperatorResponse{}, nil
 }
 
-// Join as a member
+//-------------------------------------------------------------------------
+//---------------------------Join as a member------------------------------
+//-------------------------------------------------------------------------
+// 1. Check min staking amount
+// 2. Check if already exists registry, it should already exists
+// 4. Check if he is already in the validators list
+// 5. Send coins from user wallet to module account
+// 6. Update the registry staked amount, and add itself to validator list
+// 7. Add itself to registry member list with zero rewards
+// 8. Update staked amount per wallet
+// 9. Updaste total staked amount
+//--------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 func (k msgServer) JoinRegistryMember(goCtx context.Context, msg *types.MsgJoinRegistryMember) (*types.MsgJoinRegistryMemberResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -198,17 +231,20 @@ func (k msgServer) JoinRegistryMember(goCtx context.Context, msg *types.MsgJoinR
 
 	// Cosntruct an item of registry memeber
 	registryMember := types.RegistryMember{
-		Id:           uint64(len(registryMembers) + 1),
-		Wallet:       creator.String(),
-		RegistryId:   msg.RegistryId,
-		StakedAmount: msg.StakeAmount,
-		Address:      "",
-		Status:       types.STATUS_OPEN,
-		PopCount:     "0",
-		Level:        "0",
-		Reputations:  []string{},
-		Scores:       []string{},
-		Reserved:     "",
+		Id:             uint64(len(registryMembers) + 1),
+		Wallet:         creator.String(),
+		RegistryId:     msg.RegistryId,
+		StakedAmount:   msg.StakeAmount,
+		Address:        "",
+		Status:         types.STATUS_OPEN,
+		PopCount:       "0",
+		Level:          "0",
+		Reputations:    []string{},
+		Scores:         []string{},
+		RewardSum:      "0",
+		RewardPaid:     "0",
+		RewardPaidDate: "",
+		Reserved:       "",
 	}
 
 	// Check if he is already joined as a memeber
@@ -238,6 +274,11 @@ func (k msgServer) JoinRegistryMember(goCtx context.Context, msg *types.MsgJoinR
 	return &types.MsgJoinRegistryMemberResponse{}, nil
 }
 
+//-----------------------------------------------------------------
+// ---------Modify an existing registry----------------------------
+// 1. This should be handled through governance proposal by owners
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
 func (k msgServer) ModifyRegistry(goCtx context.Context, msg *types.MsgModifyRegistry) (*types.MsgModifyRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -247,7 +288,13 @@ func (k msgServer) ModifyRegistry(goCtx context.Context, msg *types.MsgModifyReg
 	return &types.MsgModifyRegistryResponse{}, nil
 }
 
-// Propose a price data
+//-------------------------------------------------------------------------------------------------------
+// ---------Propose a price data-------------------------------------------------------------------------
+// 1. Validation check for input parameters - price, registryId, creator address, valid proposer
+// 2. Add a new price data to keeper (on chain)
+// 3. Add PoP count of the chosen proposer(validator), level up if he proposed more than 10 price data.
+//-------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------
 func (k msgServer) ProposePrice(goCtx context.Context, msg *types.MsgProposePrice) (*types.MsgProposePriceResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
@@ -338,7 +385,15 @@ func (k msgServer) ProposePrice(goCtx context.Context, msg *types.MsgProposePric
 	return &types.MsgProposePriceResponse{}, nil
 }
 
-// Unbond registry
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+// ------------Unbond registry-------------------------------------
+// 1. Remove tokens from registry by owners
+// 2. Should change registry status according to his staked amount
+// 3. There is unbonding period etc.
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
+//-----------------------------------------------------------------
 func (k msgServer) UnbondRegistry(goCtx context.Context, msg *types.MsgUnbondRegistry) (*types.MsgUnbondRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 

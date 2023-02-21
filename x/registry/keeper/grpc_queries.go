@@ -14,6 +14,7 @@ import (
 
 var _ types.QueryServer = Keeper{}
 
+// Fetch Params
 func (k Keeper) Params(c context.Context, req *types.QueryParamsRequest) (*types.QueryParamsResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -23,6 +24,7 @@ func (k Keeper) Params(c context.Context, req *types.QueryParamsRequest) (*types
 	return &types.QueryParamsResponse{Params: k.GetParams(ctx)}, nil
 }
 
+// Fetcha all price data
 func (k Keeper) PriceDataAll(c context.Context, req *types.QueryAllPriceDataRequest) (*types.QueryAllPriceDataResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -51,6 +53,7 @@ func (k Keeper) PriceDataAll(c context.Context, req *types.QueryAllPriceDataRequ
 	return &types.QueryAllPriceDataResponse{PriceData: priceDatas, Pagination: pageRes}, nil
 }
 
+// Fetch price data per index
 func (k Keeper) PriceData(c context.Context, req *types.QueryGetPriceDataRequest) (*types.QueryGetPriceDataResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -68,6 +71,7 @@ func (k Keeper) PriceData(c context.Context, req *types.QueryGetPriceDataRequest
 	return &types.QueryGetPriceDataResponse{PriceData: val}, nil
 }
 
+// Fetch all registry members
 func (k Keeper) RegistryMemberAll(c context.Context, req *types.QueryAllRegistryMemberRequest) (*types.QueryAllRegistryMemberResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -96,6 +100,7 @@ func (k Keeper) RegistryMemberAll(c context.Context, req *types.QueryAllRegistry
 	return &types.QueryAllRegistryMemberResponse{RegistryMember: registryMembers, Pagination: pageRes}, nil
 }
 
+// Fetch registry member with index
 func (k Keeper) RegistryMember(c context.Context, req *types.QueryGetRegistryMemberRequest) (*types.QueryGetRegistryMemberResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -110,6 +115,7 @@ func (k Keeper) RegistryMember(c context.Context, req *types.QueryGetRegistryMem
 	return &types.QueryGetRegistryMemberResponse{RegistryMember: registryMember}, nil
 }
 
+// Fetch all registry owners
 func (k Keeper) RegistryOwnerAll(c context.Context, req *types.QueryAllRegistryOwnerRequest) (*types.QueryAllRegistryOwnerResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -138,6 +144,7 @@ func (k Keeper) RegistryOwnerAll(c context.Context, req *types.QueryAllRegistryO
 	return &types.QueryAllRegistryOwnerResponse{RegistryOwner: registryOwners, Pagination: pageRes}, nil
 }
 
+// Fetch registry owner
 func (k Keeper) RegistryOwner(c context.Context, req *types.QueryGetRegistryOwnerRequest) (*types.QueryGetRegistryOwnerResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -152,6 +159,7 @@ func (k Keeper) RegistryOwner(c context.Context, req *types.QueryGetRegistryOwne
 	return &types.QueryGetRegistryOwnerResponse{RegistryOwner: registryOwner}, nil
 }
 
+// Fetch all registry staked amount
 func (k Keeper) RegistryStakedAmountAll(c context.Context, req *types.QueryAllRegistryStakedAmountRequest) (*types.QueryAllRegistryStakedAmountResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -180,6 +188,7 @@ func (k Keeper) RegistryStakedAmountAll(c context.Context, req *types.QueryAllRe
 	return &types.QueryAllRegistryStakedAmountResponse{RegistryStakedAmount: registryStakedAmounts, Pagination: pageRes}, nil
 }
 
+// Fetch registry staked amount per index
 func (k Keeper) RegistryStakedAmount(c context.Context, req *types.QueryGetRegistryStakedAmountRequest) (*types.QueryGetRegistryStakedAmountResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -197,6 +206,7 @@ func (k Keeper) RegistryStakedAmount(c context.Context, req *types.QueryGetRegis
 	return &types.QueryGetRegistryStakedAmountResponse{RegistryStakedAmount: val}, nil
 }
 
+// Fetch all registries
 func (k Keeper) RegistryAll(c context.Context, req *types.QueryAllRegistryRequest) (*types.QueryAllRegistryResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -225,6 +235,7 @@ func (k Keeper) RegistryAll(c context.Context, req *types.QueryAllRegistryReques
 	return &types.QueryAllRegistryResponse{Registry: registrys, Pagination: pageRes}, nil
 }
 
+// Fetch a registry with an index
 func (k Keeper) Registry(c context.Context, req *types.QueryGetRegistryRequest) (*types.QueryGetRegistryResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -239,6 +250,7 @@ func (k Keeper) Registry(c context.Context, req *types.QueryGetRegistryRequest) 
 	return &types.QueryGetRegistryResponse{Registry: registry}, nil
 }
 
+// Fetch all staked amount per wallet
 func (k Keeper) StakedAmountPerWalletAll(c context.Context, req *types.QueryAllStakedAmountPerWalletRequest) (*types.QueryAllStakedAmountPerWalletResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
@@ -267,6 +279,7 @@ func (k Keeper) StakedAmountPerWalletAll(c context.Context, req *types.QueryAllS
 	return &types.QueryAllStakedAmountPerWalletResponse{StakedAmountPerWallet: stakedAmountPerWallets, Pagination: pageRes}, nil
 }
 
+// Fetch all staked amount per wallet of an index
 func (k Keeper) StakedAmountPerWallet(c context.Context, req *types.QueryGetStakedAmountPerWalletRequest) (*types.QueryGetStakedAmountPerWalletResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
