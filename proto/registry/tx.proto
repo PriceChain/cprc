@@ -13,6 +13,7 @@ service Msg {
   rpc UnbondRegistry(MsgUnbondRegistry) returns (MsgUnbondRegistryResponse);
   rpc ModifyRegistry(MsgModifyRegistry) returns (MsgModifyRegistryResponse);
   rpc ProposePrice(MsgProposePrice) returns (MsgProposePriceResponse);
+  rpc WithdrawRewards(MsgWithdrawRewards) returns (MsgWithdrawRewardsResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -81,6 +82,15 @@ message MsgProposePrice {
 }
 
 message MsgProposePriceResponse {
+}
+
+message MsgWithdrawRewards {
+  string creator = 1;
+  string amount = 2;
+  string registryId = 3;
+}
+
+message MsgWithdrawRewardsResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
