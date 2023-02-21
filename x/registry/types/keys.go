@@ -25,6 +25,10 @@ const (
 	STATUS_CLOSE = "Closed"
 )
 
+const (
+	LEVEL_1_THRESH = 10
+)
+
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }

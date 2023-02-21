@@ -71,5 +71,31 @@ func (k msgServer) ProposePrice(goCtx context.Context, msg *types.MsgProposePric
 	// Set price data to keeper
 	k.SetPriceData(ctx, priceData)
 
+	//------------------------------
+	//------Update PoP count--------
+	//------------------------------
+	// Get all registry memebers - price validators
+	registryMembers := k.GetAllRegistryMember(ctx)
+	// Check if he is already joined as a memeber
+	for i, r := range registryMembers {
+		// wallet address and registry Id, one user can join several registries
+		if r.Wallet == creator.String() && r.RegistryId == msg.RegistryId {
+			rm := registryMembers[i]
+			popCount, _ := strconv.ParseUint(rm.PopCount, 10, 64)
+			level, _ := strconv.ParseUint(rm.Level, 10, 64)
+
+			rm.PopCount = fmt.Sprintf("%d", popCount+1)
+
+			// If he has attended more than 10 PoP, it would starts receiving rewards
+			if popCount+1 > types.LEVEL_1_THRESH && level < 1 {
+				rm.Level = "1"
+			}
+
+			// Update registry member
+			k.SetRegistryMember(ctx, rm)
+		}
+	}
+
+	// Returning
 	return &types.MsgProposePriceResponse{}, nil
 }
