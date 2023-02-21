@@ -82,7 +82,7 @@ containerProtoFmt=$(PROJECT_NAME)-proto-fmt-$(protoVer)
 proto-all: proto-format proto-lint proto-gen
 
 proto-gen:
-	docker run --rm -v $(CURDIR):/workspace --workdir /workspace bharvest/liquidity-proto-gen sh ./scripts/protocgen.sh
+	./scripts/protocgen.sh
 	go mod tidy
 
 # This generates the SDK's custom wrapper for google.protobuf.Any. It should only be run manually when needed

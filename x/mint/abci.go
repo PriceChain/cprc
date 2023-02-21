@@ -25,22 +25,19 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper) {
 	// fetch stored params
 	params := k.GetParams(ctx)
 	currentBlock := uint64(ctx.BlockHeight())
-	nextPhase := minter.NextPhase(params, currentBlock)
 
-	if nextPhase != minter.Phase {
-		// store new inflation rate by phase
-		newInflation := minter.InflationcalculationFn(nextPhase)
-		// totalSupply := k.TokenSupply(ctx, params.MintDenom)
-		minter.Inflation = newInflation
-		minter.Phase = nextPhase
-		minter.StartPhaseBlock = currentBlock
-		minter.AnnualProvisions = newInflation
-		k.SetMinter(ctx, minter)
+	// store new inflation rate by phase
+	newInflation := sdk.ZeroInt() //minter.InflationcalculationFn(nextPhase)
+	// totalSupply := k.TokenSupply(ctx, params.MintDenom)
+	minter.Inflation = newInflation
+	// minter.Phase = nextPhase
+	minter.StartPhaseBlock = currentBlock
+	minter.AnnualProvisions = newInflation
+	k.SetMinter(ctx, minter)
 
-		// inflation phase end
-		if minter.Inflation.Equal(sdk.ZeroInt()) {
-			return
-		}
+	// inflation phase end
+	if minter.Inflation.Equal(sdk.ZeroInt()) {
+		return
 	}
 
 	// mint coins, update supply

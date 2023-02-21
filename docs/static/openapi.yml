@@ -29954,6 +29954,42 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /PriceChain/cprc/prcmint/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: PricechainCprcPrcmintParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /PriceChain/cprc/registry/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -53067,6 +53103,16 @@ definitions:
           creator:
             type: string
   pricechain.cprc.prcibc.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
+  pricechain.cprc.prcmint.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  pricechain.cprc.prcmint.QueryParamsResponse:
     type: object
     properties:
       params:
