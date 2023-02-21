@@ -41,12 +41,18 @@ func ValidateMinter(minter Minter) error {
 }
 
 // NextInflationRate returns the new inflation rate for the next hour.
-func (m Minter) NextInflationRate(params Params, bondedRatio sdk.Dec) sdk.Dec {
+func (m Minter) NextInflationRate(params Params, bondedRatio sdk.Dec, totalSupply sdk.Int) sdk.Dec {
 	// The target annual inflation rate is recalculated for each previsions cycle. The
 	// inflation is also subject to a rate change (positive or negative) depending on
-	// the distance from the desired ratio (67%). The maximum rate change possible is
+	// the distance from the desired ratio (66%). The maximum rate change possible is
 	// defined to be 13% per year, however the annual inflation is capped as between
-	// 7% and 20%.
+	// 5% and 20%.
+	// Maximum is 12B by default
+
+	maxPrcToken := sdk.NewInt(int64(params.MaxPrcToken))
+	if totalSupply.GT(maxPrcToken) {
+		return sdk.ZeroDec()
+	}
 
 	// (1 - bondedRatio/GoalBonded) * InflationRateChange
 	inflationRateChangePerYear := sdk.OneDec().

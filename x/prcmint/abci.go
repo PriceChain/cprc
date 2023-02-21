@@ -19,8 +19,15 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculatio
 
 	// recalculate inflation rate
 	totalStakingSupply := k.StakingTokenSupply(ctx)
+	totalSupply := k.TokenSupply(ctx, params.MintDenom)
 	bondedRatio := k.BondedRatio(ctx)
-	minter.Inflation = ic(ctx, minter, params, bondedRatio)
+	minter.Inflation = ic(ctx, minter, params, bondedRatio, totalSupply)
+
+	// If no inflation, just skip
+	if minter.Inflation == sdk.ZeroDec() {
+		return
+	}
+
 	minter.AnnualProvisions = minter.NextAnnualProvisions(params, totalStakingSupply)
 	k.SetMinter(ctx, minter)
 
@@ -52,4 +59,7 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculatio
 			sdk.NewAttribute(sdk.AttributeKeyAmount, mintedCoin.Amount.String()),
 		),
 	)
+}
+
+func CalculateRewards(ctx sdk.Context, k keeper.Keeper) {
 }

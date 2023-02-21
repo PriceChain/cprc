@@ -18,6 +18,8 @@ export interface Params {
   goal_bonded: string;
   /** expected blocks per year */
   blocks_per_year: number;
+  /** maximum available mint */
+  max_prc_token: number;
 }
 
 const baseParams: object = {
@@ -27,6 +29,7 @@ const baseParams: object = {
   inflation_min: "",
   goal_bonded: "",
   blocks_per_year: 0,
+  max_prc_token: 0,
 };
 
 export const Params = {
@@ -48,6 +51,9 @@ export const Params = {
     }
     if (message.blocks_per_year !== 0) {
       writer.uint32(48).uint64(message.blocks_per_year);
+    }
+    if (message.max_prc_token !== 0) {
+      writer.uint32(56).uint64(message.max_prc_token);
     }
     return writer;
   },
@@ -76,6 +82,9 @@ export const Params = {
           break;
         case 6:
           message.blocks_per_year = longToNumber(reader.uint64() as Long);
+          break;
+        case 7:
+          message.max_prc_token = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -123,6 +132,11 @@ export const Params = {
     } else {
       message.blocks_per_year = 0;
     }
+    if (object.max_prc_token !== undefined && object.max_prc_token !== null) {
+      message.max_prc_token = Number(object.max_prc_token);
+    } else {
+      message.max_prc_token = 0;
+    }
     return message;
   },
 
@@ -139,6 +153,8 @@ export const Params = {
       (obj.goal_bonded = message.goal_bonded);
     message.blocks_per_year !== undefined &&
       (obj.blocks_per_year = message.blocks_per_year);
+    message.max_prc_token !== undefined &&
+      (obj.max_prc_token = message.max_prc_token);
     return obj;
   },
 
@@ -179,6 +195,11 @@ export const Params = {
       message.blocks_per_year = object.blocks_per_year;
     } else {
       message.blocks_per_year = 0;
+    }
+    if (object.max_prc_token !== undefined && object.max_prc_token !== null) {
+      message.max_prc_token = object.max_prc_token;
+    } else {
+      message.max_prc_token = 0;
     }
     return message;
   },

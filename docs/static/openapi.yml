@@ -29987,6 +29987,10 @@ paths:
                     type: string
                     format: uint64
                     title: expected blocks per year
+                  max_prc_token:
+                    type: string
+                    format: uint64
+                    title: maximum available mint
             description: >-
               QueryParamsResponse is response type for the Query/Params RPC
               method.
@@ -53229,6 +53233,10 @@ definitions:
         type: string
         format: uint64
         title: expected blocks per year
+      max_prc_token:
+        type: string
+        format: uint64
+        title: maximum available mint
     description: Params defines the parameters for the module.
   pricechain.cprc.prcmint.QueryAnnualProvisionsResponse:
     type: object
@@ -53276,6 +53284,10 @@ definitions:
             type: string
             format: uint64
             title: expected blocks per year
+          max_prc_token:
+            type: string
+            format: uint64
+            title: maximum available mint
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   pricechain.cprc.registry.MsgCreateRegistryResponse:
     type: object

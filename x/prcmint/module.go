@@ -15,6 +15,7 @@ import (
 	"github.com/PriceChain/cprc/x/prcmint/client/cli"
 	"github.com/PriceChain/cprc/x/prcmint/keeper"
 	"github.com/PriceChain/cprc/x/prcmint/types"
+
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
@@ -101,7 +102,6 @@ type AppModule struct {
 
 	keeper        keeper.Keeper
 	accountKeeper types.AccountKeeper
-
 	// inflationCalculator is used to calculate the inflation rate during BeginBlock.
 	// If inflationCalculator is nil, the default inflation calculation logic is used.
 	inflationCalculator types.InflationCalculationFn

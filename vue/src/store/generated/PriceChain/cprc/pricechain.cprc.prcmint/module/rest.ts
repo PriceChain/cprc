@@ -21,6 +21,9 @@ export interface PrcmintParams {
 
   /** @format uint64 */
   blocks_per_year?: string;
+
+  /** @format uint64 */
+  max_prc_token?: string;
 }
 
 /**

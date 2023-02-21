@@ -19,13 +19,14 @@ type (
 		paramSpace       paramtypes.Subspace
 		stakingKeeper    types.StakingKeeper
 		bankKeeper       types.BankKeeper
+		registryKeeper   types.RegistryKeeper
 		feeCollectorName string
 	}
 )
 
 func NewKeeper(
 	cdc codec.BinaryCodec, key storetypes.StoreKey, ps paramtypes.Subspace,
-	sk types.StakingKeeper, ak types.AccountKeeper, bk types.BankKeeper,
+	sk types.StakingKeeper, ak types.AccountKeeper, bk types.BankKeeper, rk types.RegistryKeeper,
 	feeCollectorName string,
 ) Keeper {
 	// ensure mint module account is set
@@ -43,6 +44,7 @@ func NewKeeper(
 		paramSpace:       ps,
 		stakingKeeper:    sk,
 		bankKeeper:       bk,
+		registryKeeper:   rk,
 		feeCollectorName: feeCollectorName,
 	}
 }
@@ -91,6 +93,12 @@ func (k Keeper) StakingTokenSupply(ctx sdk.Context) sdk.Int {
 // BondedRatio to be used in BeginBlocker.
 func (k Keeper) BondedRatio(ctx sdk.Context) sdk.Dec {
 	return k.stakingKeeper.BondedRatio(ctx)
+}
+
+// TokenSupply implements an alias call to the underlying bank keeper's
+// TokenSupply to be used in BeginBlocker.
+func (k Keeper) TokenSupply(ctx sdk.Context, denom string) sdk.Int {
+	return k.bankKeeper.GetSupply(ctx, denom).Amount
 }
 
 // MintCoins implements an alias call to the underlying supply keeper's

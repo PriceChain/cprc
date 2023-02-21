@@ -19,6 +19,7 @@ var (
 	KeyInflationMin        = []byte("InflationMin")
 	KeyGoalBonded          = []byte("GoalBonded")
 	KeyBlocksPerYear       = []byte("BlocksPerYear")
+	KeyMaxPRCToken         = []byte("MaxPRCToken")
 )
 
 // ParamTable for minting module.
@@ -27,7 +28,7 @@ func ParamKeyTable() paramtypes.KeyTable {
 }
 
 func NewParams(
-	mintDenom string, inflationRateChange, inflationMax, inflationMin, goalBonded sdk.Dec, blocksPerYear uint64,
+	mintDenom string, inflationRateChange, inflationMax, inflationMin, goalBonded sdk.Dec, blocksPerYear uint64, maxPrcTokens uint64,
 ) Params {
 	return Params{
 		MintDenom:           mintDenom,
@@ -36,6 +37,7 @@ func NewParams(
 		InflationMin:        inflationMin,
 		GoalBonded:          goalBonded,
 		BlocksPerYear:       blocksPerYear,
+		MaxPrcToken:         maxPrcTokens,
 	}
 }
 
@@ -47,7 +49,8 @@ func DefaultParams() Params {
 		InflationMax:        sdk.NewDecWithPrec(20, 2),
 		InflationMin:        sdk.NewDecWithPrec(5, 2),
 		GoalBonded:          sdk.NewDecWithPrec(66, 2),
-		BlocksPerYear:       uint64(60 * 60 * 8766 / 5), // assuming 5 second block times
+		BlocksPerYear:       uint64(60 * 60 * 8766 / 5),        // assuming 5 second block times
+		MaxPrcToken:         uint64(12 * 1000000000 * 1000000), // 12B PRC token
 	}
 }
 
@@ -69,6 +72,9 @@ func (p Params) Validate() error {
 		return err
 	}
 	if err := validateBlocksPerYear(p.BlocksPerYear); err != nil {
+		return err
+	}
+	if err := validateBlocksPerYear(p.MaxPrcToken); err != nil {
 		return err
 	}
 	if p.InflationMax.LT(p.InflationMin) {
@@ -96,6 +102,7 @@ func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 		paramtypes.NewParamSetPair(KeyInflationMin, &p.InflationMin, validateInflationMin),
 		paramtypes.NewParamSetPair(KeyGoalBonded, &p.GoalBonded, validateGoalBonded),
 		paramtypes.NewParamSetPair(KeyBlocksPerYear, &p.BlocksPerYear, validateBlocksPerYear),
+		paramtypes.NewParamSetPair(KeyMaxPRCToken, &p.MaxPrcToken, validateMaxPRCToken),
 	}
 }
 
@@ -187,6 +194,19 @@ func validateBlocksPerYear(i interface{}) error {
 
 	if v == 0 {
 		return fmt.Errorf("blocks per year must be positive: %d", v)
+	}
+
+	return nil
+}
+
+func validateMaxPRCToken(i interface{}) error {
+	v, ok := i.(uint64)
+	if !ok {
+		return fmt.Errorf("invalid parameter type: %T", i)
+	}
+
+	if v == 0 {
+		return fmt.Errorf("max prc token must be positive: %d", v)
 	}
 
 	return nil

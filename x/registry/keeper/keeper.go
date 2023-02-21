@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 
@@ -12,6 +13,14 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
+
+type RegistryKeeperI interface {
+	RegistryMemberAll(context.Context, *types.QueryAllRegistryMemberRequest) (*types.QueryAllRegistryMemberResponse, error)
+	RegistryStakedAmountAll(context.Context, *types.QueryAllRegistryStakedAmountRequest) (*types.QueryAllRegistryStakedAmountResponse, error)
+	StakedAmountPerWalletAll(context.Context, *types.QueryAllStakedAmountPerWalletRequest) (*types.QueryAllStakedAmountPerWalletResponse, error)
+}
+
+var _ RegistryKeeperI = Keeper{}
 
 type (
 	Keeper struct {
