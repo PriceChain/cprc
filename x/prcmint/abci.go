@@ -96,35 +96,44 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculatio
 
 // Calculate rewards per wallet
 func CalculateRewards(ctx sdk.Context, k keeper.Keeper, totalSupply sdk.Int, blocksPerYear uint64) sdk.Int {
+	allRegistries := k.GetAllRegistry(ctx)
+
+	totalStakedAmount := uint64(0)
+	// Loop all registries
+	for _, ar := range allRegistries {
+		sa, _ := strconv.ParseUint(ar.StakedAmount, 10, 64)
+		totalStakedAmount += sa
+	}
+
+	// Get total staked tokens by registry owners
+	fTotalStakedToken := float64(totalStakedAmount)
+
+	// All price data
 	allPriceData := k.GetAllPriceData(ctx)
 	allRegistryMembers := k.GetAllRegistryMember(ctx)
 
 	numberOfBlocks := (float64)(ctx.BlockHeight())
 	fTotalPoPSent := (float64)(len(allPriceData))
 
-	registryStakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
+	registryTotalStakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
 	if !bFound {
 		return sdk.ZeroInt()
 	}
 
 	// Parse total staked amount
-	amount, err := strconv.ParseUint(registryStakedAmount.Amount, 10, 64)
+	amount, err := strconv.ParseUint(registryTotalStakedAmount.Amount, 10, 64)
 	if err != nil {
 		return sdk.ZeroInt()
 	}
 
 	newlyMinted := int64(0)
-	fTotalStakedToken := (float64)(amount)
+	fTotalDeposited := (float64)(amount)
 	for _, pv := range allRegistryMembers {
 		registryId, _ := strconv.ParseUint(pv.RegistryId, 10, 64)
-		registry, bFound := k.GetRegistry(ctx, registryId)
+		_, bFound := k.GetRegistry(ctx, registryId)
 		if !bFound {
 			continue
 		}
-
-		// Total staked token at the registry
-		totalDeposited, _ := strconv.ParseUint(registry.StakedAmount, 10, 64)
-		fTotalDeposited := (float64)(totalDeposited)
 
 		// PoP Sent by wallet
 		popCount, _ := strconv.ParseUint(pv.PopCount, 10, 64)
