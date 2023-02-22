@@ -24,37 +24,57 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculatio
 
 	// Get the total amount of rewards to be minted newly
 	rewardsTokenAmount := CalculateRewards(ctx, k, totalSupply, params.BlocksPerYear)
-	rewardsTokens := sdk.NewCoin(params.MintDenom, rewardsTokenAmount)
-	mintedRewardCoins := sdk.NewCoins(rewardsTokens)
 
-	// telemetry log
-	if rewardsTokens.Amount.IsInt64() {
-		defer telemetry.ModuleSetGauge(types.ModuleName, float32(rewardsTokens.Amount.Int64()), "minted_tokens_rewards")
+	// If there is rewards to be minted
+	if rewardsTokenAmount.GT(sdk.ZeroInt()) {
+		rewardsTokens := sdk.NewCoin(params.MintDenom, rewardsTokenAmount)
+		mintedRewardCoins := sdk.NewCoins(rewardsTokens)
+
+		// telemetry log
+		if rewardsTokens.Amount.IsInt64() {
+			defer telemetry.ModuleSetGauge(types.ModuleName, float32(rewardsTokens.Amount.Int64()), "minted_tokens_rewards")
+		}
+
+		// Mint Coins for rewards of price validators
+		err := k.MintCoins(ctx, mintedRewardCoins)
+		if err != nil {
+			panic(err)
+		}
+
+		// send the minted coins to the fee registry fee collector account
+		err = k.AddCollectedFeesToRegistry(ctx, mintedRewardCoins)
+		if err != nil {
+			panic(err)
+		}
+
+		// Emit Rewards minted events
+		ctx.EventManager().EmitEvent(
+			sdk.NewEvent(
+				types.EventTypeMint,
+				sdk.NewAttribute(types.AttributeKeyRewards, rewardsTokenAmount.String()),
+			),
+		)
 	}
-
-	// Mint Coins for rewards of price validators
-	err := k.MintCoins(ctx, mintedRewardCoins)
-	if err != nil {
-		panic(err)
-	}
-
-	// send the minted coins to the fee registry fee collector account
-	err = k.AddCollectedFeesToRegistry(ctx, mintedRewardCoins)
-	if err != nil {
-		panic(err)
-	}
-
-	// Emit Rewards minted events
-	ctx.EventManager().EmitEvent(
-		sdk.NewEvent(
-			types.EventTypeMint,
-			sdk.NewAttribute(types.AttributeKeyRewards, rewardsTokenAmount.String()),
-		),
-	)
 
 	// recalculate inflation rate
 	totalStakingSupply := k.StakingTokenSupply(ctx)
-	bondedRatio := k.BondedRatio(ctx)
+
+	registryTotalStakedSupply := sdk.ZeroInt()
+	registryTotalStakedAmount, bFound := k.GetRegistryStakedAmount(ctx, "total")
+	if bFound {
+		// Parse total staked amount
+		amount, err := strconv.ParseInt(registryTotalStakedAmount.Amount, 10, 64)
+		if err == nil {
+			registryTotalStakedSupply = sdk.NewInt(amount)
+		}
+	}
+
+	// Increase total staked supply
+	totalStakingSupply = totalStakingSupply.Add(registryTotalStakedSupply)
+
+	// BondedRatio the fraction of the staking tokens which are currently bonded
+	bondedRatio := sdk.NewDecFromInt(k.TotalBondedTokens(ctx)).QuoInt(totalStakingSupply)
+
 	minter.Inflation = ic(ctx, minter, params, bondedRatio, totalSupply)
 	// If no inflation, just skip
 	if minter.Inflation == sdk.ZeroDec() {
@@ -68,7 +88,7 @@ func BeginBlocker(ctx sdk.Context, k keeper.Keeper, ic types.InflationCalculatio
 	mintedCoin := minter.BlockProvision(params)
 	mintedCoins := sdk.NewCoins(mintedCoin)
 
-	err = k.MintCoins(ctx, mintedCoins)
+	err := k.MintCoins(ctx, mintedCoins)
 	if err != nil {
 		panic(err)
 	}

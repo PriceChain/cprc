@@ -98,6 +98,11 @@ func (k Keeper) BondedRatio(ctx sdk.Context) sdk.Dec {
 	return k.stakingKeeper.BondedRatio(ctx)
 }
 
+// BondedRatio the fraction of the staking tokens which are currently bonded
+func (k Keeper) TotalBondedTokens(ctx sdk.Context) sdk.Int {
+	return k.stakingKeeper.TotalBondedTokens(ctx)
+}
+
 // TokenSupply implements an alias call to the underlying bank keeper's
 // TokenSupply to be used in BeginBlocker.
 func (k Keeper) TokenSupply(ctx sdk.Context, denom string) sdk.Int {

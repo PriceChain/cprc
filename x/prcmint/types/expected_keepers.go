@@ -10,6 +10,7 @@ import (
 type StakingKeeper interface {
 	StakingTokenSupply(ctx sdk.Context) sdk.Int
 	BondedRatio(ctx sdk.Context) sdk.Dec
+	TotalBondedTokens(ctx sdk.Context) sdk.Int
 }
 
 // AccountKeeper defines the expected account keeper used for simulations (noalias)
