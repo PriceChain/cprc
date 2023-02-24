@@ -111,7 +111,7 @@ import (
 )
 
 const (
-	AccountAddressPrefix = "price"
+	AccountAddressPrefix = "naprc"
 	Name                 = "cprc"
 )
 
@@ -789,6 +789,6 @@ func (app *App) SimulationManager() *module.SimulationManager {
 }
 
 func RegisterCoinDenominations() {
-	_ = sdk.RegisterDenom("cprc", sdk.OneDec())
-	_ = sdk.RegisterDenom("ucprc", sdk.NewDecWithPrec(1, 6))
+	_ = sdk.RegisterDenom("prcna", sdk.OneDec())
+	_ = sdk.RegisterDenom("uprcna", sdk.NewDecWithPrec(1, 6))
 }
