@@ -160,7 +160,7 @@ func CalculateRewards(ctx sdk.Context, k keeper.Keeper, totalSupply sdk.Int, blo
 		fPopCount := (float64)(popCount)
 
 		// Total staked amount per wallet
-		stakedAmountPerWallet, bFound := k.GetStakedAmountPerWallet(ctx, pv.Wallet)
+		stakedAmountPerWallet, bFound := k.GetRegistryStakedAmountPerWallet(ctx, pv.Wallet)
 		if !bFound {
 			continue
 		}

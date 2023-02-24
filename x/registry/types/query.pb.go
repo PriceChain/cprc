@@ -849,22 +849,26 @@ func (m *QueryAllRegistryStakedAmountResponse) GetPagination() *query.PageRespon
 	return nil
 }
 
-type QueryGetStakedAmountPerWalletRequest struct {
+type QueryGetRegistryStakedAmountPerWalletRequest struct {
 	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
 }
 
-func (m *QueryGetStakedAmountPerWalletRequest) Reset()         { *m = QueryGetStakedAmountPerWalletRequest{} }
-func (m *QueryGetStakedAmountPerWalletRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetStakedAmountPerWalletRequest) ProtoMessage()    {}
-func (*QueryGetStakedAmountPerWalletRequest) Descriptor() ([]byte, []int) {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Reset() {
+	*m = QueryGetRegistryStakedAmountPerWalletRequest{}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryGetRegistryStakedAmountPerWalletRequest) ProtoMessage() {}
+func (*QueryGetRegistryStakedAmountPerWalletRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{18}
 }
-func (m *QueryGetStakedAmountPerWalletRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetStakedAmountPerWalletRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetStakedAmountPerWalletRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -874,41 +878,45 @@ func (m *QueryGetStakedAmountPerWalletRequest) XXX_Marshal(b []byte, determinist
 		return b[:n], nil
 	}
 }
-func (m *QueryGetStakedAmountPerWalletRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetStakedAmountPerWalletRequest.Merge(m, src)
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest.Merge(m, src)
 }
-func (m *QueryGetStakedAmountPerWalletRequest) XXX_Size() int {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetStakedAmountPerWalletRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetStakedAmountPerWalletRequest.DiscardUnknown(m)
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetStakedAmountPerWalletRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest proto.InternalMessageInfo
 
-func (m *QueryGetStakedAmountPerWalletRequest) GetIndex() string {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) GetIndex() string {
 	if m != nil {
 		return m.Index
 	}
 	return ""
 }
 
-type QueryGetStakedAmountPerWalletResponse struct {
-	StakedAmountPerWallet StakedAmountPerWallet `protobuf:"bytes,1,opt,name=stakedAmountPerWallet,proto3" json:"stakedAmountPerWallet"`
+type QueryGetRegistryStakedAmountPerWalletResponse struct {
+	RegistryStakedAmountPerWallet RegistryStakedAmountPerWallet `protobuf:"bytes,1,opt,name=registryStakedAmountPerWallet,proto3" json:"registryStakedAmountPerWallet"`
 }
 
-func (m *QueryGetStakedAmountPerWalletResponse) Reset()         { *m = QueryGetStakedAmountPerWalletResponse{} }
-func (m *QueryGetStakedAmountPerWalletResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetStakedAmountPerWalletResponse) ProtoMessage()    {}
-func (*QueryGetStakedAmountPerWalletResponse) Descriptor() ([]byte, []int) {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Reset() {
+	*m = QueryGetRegistryStakedAmountPerWalletResponse{}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryGetRegistryStakedAmountPerWalletResponse) ProtoMessage() {}
+func (*QueryGetRegistryStakedAmountPerWalletResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{19}
 }
-func (m *QueryGetStakedAmountPerWalletResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetStakedAmountPerWalletResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetStakedAmountPerWalletResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -918,41 +926,45 @@ func (m *QueryGetStakedAmountPerWalletResponse) XXX_Marshal(b []byte, determinis
 		return b[:n], nil
 	}
 }
-func (m *QueryGetStakedAmountPerWalletResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetStakedAmountPerWalletResponse.Merge(m, src)
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse.Merge(m, src)
 }
-func (m *QueryGetStakedAmountPerWalletResponse) XXX_Size() int {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetStakedAmountPerWalletResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetStakedAmountPerWalletResponse.DiscardUnknown(m)
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetStakedAmountPerWalletResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse proto.InternalMessageInfo
 
-func (m *QueryGetStakedAmountPerWalletResponse) GetStakedAmountPerWallet() StakedAmountPerWallet {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) GetRegistryStakedAmountPerWallet() RegistryStakedAmountPerWallet {
 	if m != nil {
-		return m.StakedAmountPerWallet
+		return m.RegistryStakedAmountPerWallet
 	}
-	return StakedAmountPerWallet{}
+	return RegistryStakedAmountPerWallet{}
 }
 
-type QueryAllStakedAmountPerWalletRequest struct {
+type QueryAllRegistryStakedAmountPerWalletRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllStakedAmountPerWalletRequest) Reset()         { *m = QueryAllStakedAmountPerWalletRequest{} }
-func (m *QueryAllStakedAmountPerWalletRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllStakedAmountPerWalletRequest) ProtoMessage()    {}
-func (*QueryAllStakedAmountPerWalletRequest) Descriptor() ([]byte, []int) {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Reset() {
+	*m = QueryAllRegistryStakedAmountPerWalletRequest{}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllRegistryStakedAmountPerWalletRequest) ProtoMessage() {}
+func (*QueryAllRegistryStakedAmountPerWalletRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{20}
 }
-func (m *QueryAllStakedAmountPerWalletRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllStakedAmountPerWalletRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllStakedAmountPerWalletRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -962,42 +974,46 @@ func (m *QueryAllStakedAmountPerWalletRequest) XXX_Marshal(b []byte, determinist
 		return b[:n], nil
 	}
 }
-func (m *QueryAllStakedAmountPerWalletRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllStakedAmountPerWalletRequest.Merge(m, src)
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest.Merge(m, src)
 }
-func (m *QueryAllStakedAmountPerWalletRequest) XXX_Size() int {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllStakedAmountPerWalletRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllStakedAmountPerWalletRequest.DiscardUnknown(m)
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllStakedAmountPerWalletRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest proto.InternalMessageInfo
 
-func (m *QueryAllStakedAmountPerWalletRequest) GetPagination() *query.PageRequest {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-type QueryAllStakedAmountPerWalletResponse struct {
-	StakedAmountPerWallet []StakedAmountPerWallet `protobuf:"bytes,1,rep,name=stakedAmountPerWallet,proto3" json:"stakedAmountPerWallet"`
-	Pagination            *query.PageResponse     `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+type QueryAllRegistryStakedAmountPerWalletResponse struct {
+	RegistryStakedAmountPerWallet []RegistryStakedAmountPerWallet `protobuf:"bytes,1,rep,name=registryStakedAmountPerWallet,proto3" json:"registryStakedAmountPerWallet"`
+	Pagination                    *query.PageResponse             `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllStakedAmountPerWalletResponse) Reset()         { *m = QueryAllStakedAmountPerWalletResponse{} }
-func (m *QueryAllStakedAmountPerWalletResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllStakedAmountPerWalletResponse) ProtoMessage()    {}
-func (*QueryAllStakedAmountPerWalletResponse) Descriptor() ([]byte, []int) {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Reset() {
+	*m = QueryAllRegistryStakedAmountPerWalletResponse{}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllRegistryStakedAmountPerWalletResponse) ProtoMessage() {}
+func (*QueryAllRegistryStakedAmountPerWalletResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{21}
 }
-func (m *QueryAllStakedAmountPerWalletResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllStakedAmountPerWalletResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllStakedAmountPerWalletResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -1007,26 +1023,26 @@ func (m *QueryAllStakedAmountPerWalletResponse) XXX_Marshal(b []byte, determinis
 		return b[:n], nil
 	}
 }
-func (m *QueryAllStakedAmountPerWalletResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllStakedAmountPerWalletResponse.Merge(m, src)
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse.Merge(m, src)
 }
-func (m *QueryAllStakedAmountPerWalletResponse) XXX_Size() int {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllStakedAmountPerWalletResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllStakedAmountPerWalletResponse.DiscardUnknown(m)
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllStakedAmountPerWalletResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse proto.InternalMessageInfo
 
-func (m *QueryAllStakedAmountPerWalletResponse) GetStakedAmountPerWallet() []StakedAmountPerWallet {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) GetRegistryStakedAmountPerWallet() []RegistryStakedAmountPerWallet {
 	if m != nil {
-		return m.StakedAmountPerWallet
+		return m.RegistryStakedAmountPerWallet
 	}
 	return nil
 }
 
-func (m *QueryAllStakedAmountPerWalletResponse) GetPagination() *query.PageResponse {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -1236,10 +1252,10 @@ func init() {
 	proto.RegisterType((*QueryGetRegistryStakedAmountResponse)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountResponse")
 	proto.RegisterType((*QueryAllRegistryStakedAmountRequest)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountRequest")
 	proto.RegisterType((*QueryAllRegistryStakedAmountResponse)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountResponse")
-	proto.RegisterType((*QueryGetStakedAmountPerWalletRequest)(nil), "pricechain.cprc.registry.QueryGetStakedAmountPerWalletRequest")
-	proto.RegisterType((*QueryGetStakedAmountPerWalletResponse)(nil), "pricechain.cprc.registry.QueryGetStakedAmountPerWalletResponse")
-	proto.RegisterType((*QueryAllStakedAmountPerWalletRequest)(nil), "pricechain.cprc.registry.QueryAllStakedAmountPerWalletRequest")
-	proto.RegisterType((*QueryAllStakedAmountPerWalletResponse)(nil), "pricechain.cprc.registry.QueryAllStakedAmountPerWalletResponse")
+	proto.RegisterType((*QueryGetRegistryStakedAmountPerWalletRequest)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountPerWalletRequest")
+	proto.RegisterType((*QueryGetRegistryStakedAmountPerWalletResponse)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountPerWalletResponse")
+	proto.RegisterType((*QueryAllRegistryStakedAmountPerWalletRequest)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountPerWalletRequest")
+	proto.RegisterType((*QueryAllRegistryStakedAmountPerWalletResponse)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountPerWalletResponse")
 	proto.RegisterType((*QueryGetPriceDataRequest)(nil), "pricechain.cprc.registry.QueryGetPriceDataRequest")
 	proto.RegisterType((*QueryGetPriceDataResponse)(nil), "pricechain.cprc.registry.QueryGetPriceDataResponse")
 	proto.RegisterType((*QueryAllPriceDataRequest)(nil), "pricechain.cprc.registry.QueryAllPriceDataRequest")
@@ -1249,80 +1265,81 @@ func init() {
 func init() { proto.RegisterFile("registry/query.proto", fileDescriptor_33b7babacada5cb6) }
 
 var fileDescriptor_33b7babacada5cb6 = []byte{
-	// 1166 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x58, 0xcf, 0x6f, 0xdc, 0x44,
-	0x14, 0xce, 0x64, 0xdb, 0x88, 0x4c, 0xa1, 0x82, 0xe9, 0x46, 0x49, 0xad, 0x76, 0x89, 0xa6, 0x69,
-	0xf3, 0xa3, 0xa9, 0x9d, 0x6c, 0x4b, 0x88, 0x42, 0x5b, 0x48, 0x28, 0xe4, 0x84, 0x08, 0x5b, 0x01,
-	0x12, 0x97, 0x65, 0x76, 0x77, 0x70, 0xac, 0xee, 0xda, 0xae, 0xed, 0xd0, 0x44, 0x55, 0x2f, 0x1c,
-	0xb9, 0x50, 0x09, 0xfe, 0x00, 0x84, 0xc4, 0x01, 0x24, 0x8e, 0x08, 0x21, 0xc4, 0x81, 0x5b, 0x8f,
-	0x15, 0x1c, 0x02, 0x12, 0x20, 0x94, 0xf0, 0x87, 0x54, 0x1e, 0x3f, 0xdb, 0xeb, 0xb5, 0xbd, 0xb6,
-	0x37, 0xbe, 0xed, 0x7a, 0xde, 0x8f, 0xef, 0xfb, 0xde, 0x93, 0xfd, 0xd9, 0xb8, 0x6a, 0x71, 0x55,
-	0xb3, 0x1d, 0xeb, 0x40, 0xb9, 0xbf, 0xc7, 0xad, 0x03, 0xd9, 0xb4, 0x0c, 0xc7, 0x20, 0x33, 0xa6,
-	0xa5, 0xb5, 0x79, 0x7b, 0x97, 0x69, 0xba, 0xdc, 0x36, 0xad, 0xb6, 0xec, 0x47, 0x49, 0x55, 0xd5,
-	0x50, 0x0d, 0x11, 0xa4, 0xb8, 0xbf, 0xbc, 0x78, 0xe9, 0x82, 0x6a, 0x18, 0x6a, 0x97, 0x2b, 0xcc,
-	0xd4, 0x14, 0xa6, 0xeb, 0x86, 0xc3, 0x1c, 0xcd, 0xd0, 0x6d, 0x38, 0x5d, 0x6a, 0x1b, 0x76, 0xcf,
-	0xb0, 0x95, 0x16, 0xb3, 0xb9, 0xd7, 0x46, 0xf9, 0x74, 0xb5, 0xc5, 0x1d, 0xb6, 0xaa, 0x98, 0x4c,
-	0xd5, 0x74, 0x11, 0x0c, 0xb1, 0x53, 0x01, 0x1e, 0x93, 0x59, 0xac, 0xe7, 0x97, 0x98, 0x0e, 0x2e,
-	0xfb, 0x3f, 0xe0, 0xe0, 0x62, 0xec, 0xa0, 0x69, 0x3c, 0xd0, 0xb9, 0x05, 0xc7, 0xb5, 0xf8, 0x71,
-	0x8f, 0xf7, 0x5a, 0xc1, 0xf9, 0xe5, 0xf8, 0xb9, 0xed, 0xb0, 0x7b, 0xbc, 0xd3, 0x64, 0x3d, 0x63,
-	0x4f, 0x77, 0x20, 0x6c, 0x3e, 0x08, 0x8b, 0x9c, 0x36, 0x4d, 0x6e, 0x35, 0x1f, 0xb0, 0x6e, 0x97,
-	0xfb, 0x81, 0xe7, 0x43, 0xf8, 0xae, 0x82, 0xcd, 0x0e, 0x73, 0x98, 0x77, 0x44, 0xab, 0x98, 0xbc,
-	0xe7, 0x72, 0xdf, 0x11, 0xbc, 0x1a, 0xfc, 0xfe, 0x1e, 0xb7, 0x1d, 0xfa, 0x3e, 0x3e, 0x17, 0xb9,
-	0x6a, 0x9b, 0x86, 0x6e, 0x73, 0x72, 0x1b, 0x4f, 0x78, 0xfc, 0x67, 0xd0, 0x2c, 0x5a, 0x38, 0x53,
-	0x9f, 0x95, 0xd3, 0x26, 0x22, 0x7b, 0x99, 0x5b, 0xa7, 0x9e, 0xfc, 0xfb, 0xf2, 0x58, 0x03, 0xb2,
-	0xe8, 0x22, 0x9e, 0x16, 0x65, 0xb7, 0xb9, 0xd3, 0x80, 0x40, 0xe8, 0x48, 0xce, 0xe2, 0x71, 0xad,
-	0x23, 0xca, 0x9e, 0x6a, 0x8c, 0x6b, 0x1d, 0xfa, 0x31, 0x9e, 0x89, 0x87, 0x02, 0x8c, 0x3b, 0xf8,
-	0x39, 0xff, 0x1a, 0x00, 0xa1, 0xe9, 0x40, 0xfc, 0x48, 0x80, 0x12, 0x64, 0x52, 0x06, 0x60, 0x36,
-	0xbb, 0xdd, 0x41, 0x30, 0x6f, 0x63, 0x1c, 0xae, 0x00, 0xb4, 0xb8, 0x22, 0x7b, 0xfb, 0x22, 0xbb,
-	0xfb, 0x22, 0x7b, 0x6b, 0x09, 0xfb, 0x22, 0xef, 0x30, 0x95, 0x43, 0x6e, 0xa3, 0x2f, 0x93, 0x7e,
-	0x87, 0x80, 0x45, 0xa4, 0x47, 0x22, 0x8b, 0xca, 0x68, 0x2c, 0xc8, 0x76, 0x04, 0xea, 0xb8, 0x80,
-	0x3a, 0x9f, 0x09, 0xd5, 0x83, 0x10, 0xc1, 0x2a, 0xe3, 0x0b, 0x83, 0x82, 0xbf, 0xeb, 0xae, 0x6c,
-	0xda, 0x80, 0x1c, 0x7c, 0x31, 0x25, 0x1e, 0xf8, 0xdd, 0xc5, 0x2f, 0x44, 0x0e, 0x40, 0xc7, 0xf9,
-	0x6c, 0x92, 0x22, 0x1c, 0x98, 0x46, 0x6b, 0xd0, 0x4f, 0x00, 0x65, 0x9f, 0xa0, 0x11, 0x94, 0x65,
-	0x4d, 0xee, 0x57, 0x04, 0xf4, 0xe2, 0x8d, 0xd2, 0xe9, 0x55, 0x4e, 0x4a, 0xaf, 0xbc, 0x69, 0x2a,
-	0xf1, 0xe9, 0xbc, 0x23, 0xee, 0x30, 0x69, 0xe3, 0xdc, 0xc7, 0xb5, 0xb4, 0x04, 0x20, 0xfc, 0x01,
-	0x3e, 0x1b, 0x3d, 0x01, 0x79, 0x17, 0xb2, 0x19, 0x7b, 0xf1, 0x40, 0x79, 0xa0, 0x0a, 0x55, 0xe3,
-	0x4a, 0x47, 0xa1, 0x96, 0x35, 0xd3, 0xdf, 0x10, 0x70, 0x4c, 0xe8, 0x34, 0x84, 0x63, 0xe5, 0xe4,
-	0x1c, 0xcb, 0x9b, 0xeb, 0x6b, 0xf8, 0xd2, 0xe0, 0x98, 0xee, 0x8a, 0x7b, 0xff, 0xa6, 0xb8, 0xf5,
-	0xfb, 0x92, 0x55, 0xf1, 0x69, 0x4d, 0xef, 0xf0, 0x7d, 0xa1, 0xd6, 0x64, 0xc3, 0xfb, 0x43, 0x1f,
-	0x23, 0x3c, 0x37, 0x3c, 0x1b, 0x64, 0xd8, 0x0d, 0x1f, 0xc0, 0xfd, 0xe7, 0xa0, 0xbd, 0x9c, 0x2d,
-	0x46, 0x7f, 0x16, 0x48, 0x92, 0x58, 0x91, 0xf6, 0x80, 0x4f, 0xdf, 0x48, 0x92, 0xf8, 0x94, 0xb5,
-	0x02, 0x7f, 0xf9, 0x0a, 0xa4, 0xf6, 0xcb, 0x54, 0xa0, 0x52, 0xae, 0x02, 0xe5, 0xad, 0xc6, 0xcd,
-	0x70, 0xb8, 0xfd, 0x0d, 0x76, 0xb8, 0xf5, 0xa1, 0xf0, 0x02, 0xc3, 0x77, 0xe3, 0x2b, 0x84, 0x2f,
-	0x67, 0xa4, 0x83, 0x34, 0xf7, 0xf0, 0x94, 0x9d, 0x14, 0x00, 0x63, 0x51, 0xd2, 0xb5, 0x49, 0xac,
-	0x0b, 0xe2, 0x24, 0xd7, 0xa4, 0x7a, 0x38, 0xaf, 0xa1, 0xa4, 0xca, 0x5a, 0x90, 0x7f, 0x7c, 0x19,
-	0xd2, 0x1b, 0x66, 0xcb, 0x50, 0x29, 0x5b, 0x86, 0xf2, 0x96, 0x64, 0x25, 0xb4, 0x55, 0x3b, 0x2e,
-	0xbe, 0x3b, 0xcc, 0x61, 0xc3, 0x17, 0xa3, 0x83, 0xcf, 0x27, 0x64, 0x80, 0x08, 0xdb, 0x78, 0xd2,
-	0xf4, 0x2f, 0x82, 0xea, 0x97, 0x86, 0x78, 0x42, 0x3f, 0x14, 0xc8, 0x86, 0xb9, 0xb4, 0x15, 0x1a,
-	0xa5, 0x18, 0xae, 0xb2, 0x66, 0xfb, 0x03, 0x02, 0x2a, 0xd1, 0x26, 0xc9, 0x54, 0x2a, 0xa3, 0x52,
-	0x29, 0x6d, 0x56, 0xf5, 0xcf, 0xcf, 0xe1, 0xd3, 0x02, 0x2f, 0xf9, 0x02, 0xe1, 0x09, 0xcf, 0x50,
-	0x93, 0xe5, 0x74, 0x4c, 0x71, 0x1f, 0x2f, 0x5d, 0xcb, 0x19, 0xed, 0x75, 0xa7, 0x0b, 0x9f, 0xfd,
-	0xf1, 0xff, 0x97, 0xe3, 0x94, 0xcc, 0x2a, 0x82, 0xdf, 0x9b, 0x6e, 0x9a, 0xe2, 0xa6, 0x29, 0x03,
-	0xef, 0x3f, 0xe4, 0x1b, 0x14, 0xba, 0x57, 0xb2, 0x9a, 0xd1, 0x25, 0x6e, 0xf7, 0xa5, 0x7a, 0x91,
-	0x14, 0x40, 0xa7, 0x08, 0x74, 0x8b, 0x64, 0x3e, 0x1d, 0x5d, 0xf0, 0xe3, 0xa1, 0xd6, 0x79, 0x44,
-	0xbe, 0x46, 0xf8, 0x8c, 0x5f, 0x65, 0xb3, 0xdb, 0xcd, 0xc4, 0x19, 0x7f, 0x13, 0xc8, 0xc4, 0x99,
-	0x60, 0xec, 0xe9, 0x92, 0xc0, 0x39, 0x47, 0x68, 0x36, 0x4e, 0xf2, 0x13, 0x1a, 0xb0, 0x91, 0x64,
-	0x2d, 0xbf, 0x32, 0xfd, 0xce, 0x57, 0x7a, 0xb5, 0x70, 0x1e, 0xc0, 0x7d, 0x45, 0xc0, 0x55, 0xc8,
-	0xb5, 0x6c, 0xb8, 0xde, 0x4b, 0xac, 0x27, 0xee, 0x8f, 0x08, 0xbf, 0x18, 0x29, 0xe8, 0x2a, 0xbc,
-	0x96, 0x5f, 0xae, 0x42, 0xe0, 0xd3, 0x5c, 0x38, 0x5d, 0x11, 0xe0, 0x97, 0xc8, 0x42, 0x5e, 0xf0,
-	0xe4, 0x17, 0x34, 0xe8, 0xf1, 0x48, 0x01, 0xe9, 0x22, 0xce, 0x54, 0x5a, 0x2f, 0x9e, 0x08, 0xb8,
-	0xd7, 0x04, 0xee, 0x15, 0x22, 0xe7, 0xc0, 0xed, 0x7d, 0x1a, 0xf0, 0x54, 0xff, 0x19, 0xe1, 0x97,
-	0xa2, 0x25, 0x5d, 0xd9, 0x0b, 0xc8, 0x57, 0x8c, 0x40, 0xaa, 0x53, 0xa6, 0xab, 0x82, 0xc0, 0x55,
-	0xb2, 0x98, 0x9b, 0x00, 0x39, 0x44, 0xb8, 0x9a, 0x64, 0x8f, 0xc8, 0xad, 0xfc, 0x32, 0x26, 0x98,
-	0x43, 0xe9, 0xf6, 0xa8, 0xe9, 0x40, 0xe5, 0x0d, 0x41, 0x65, 0x83, 0xac, 0xe7, 0xa0, 0x12, 0xf9,
-	0xd0, 0xa2, 0x3c, 0x14, 0x8f, 0xc8, 0x47, 0xe4, 0x77, 0x84, 0xa7, 0x93, 0x5a, 0xb8, 0xb3, 0xb9,
-	0x95, 0x5f, 0xe2, 0x51, 0xc8, 0x65, 0x18, 0x59, 0xba, 0x2e, 0xc8, 0xd5, 0xc9, 0x4a, 0x51, 0x72,
-	0xe4, 0x6f, 0x84, 0xa7, 0x12, 0xad, 0x0a, 0xc9, 0x21, 0xf8, 0x30, 0xb3, 0x26, 0xbd, 0x3e, 0x72,
-	0x3e, 0x90, 0xda, 0x12, 0xa4, 0x6e, 0x92, 0x8d, 0x74, 0x52, 0x69, 0x5f, 0xc4, 0x82, 0x99, 0x1d,
-	0x22, 0x3c, 0x93, 0xd8, 0xc5, 0x1d, 0x5a, 0x0e, 0xd5, 0x4f, 0xc4, 0x30, 0xcb, 0x5d, 0xd2, 0x0d,
-	0xc1, 0xf0, 0x06, 0xa9, 0x17, 0x67, 0x48, 0xbe, 0x47, 0x78, 0x32, 0xf0, 0x27, 0x24, 0xc7, 0x93,
-	0x76, 0xd0, 0x71, 0x49, 0xd7, 0x0b, 0xe5, 0x00, 0xe4, 0x1b, 0x02, 0xb2, 0x4c, 0x96, 0x87, 0x98,
-	0x87, 0xe0, 0xeb, 0x63, 0x30, 0x86, 0x6f, 0x11, 0x7e, 0x3e, 0xa8, 0xe5, 0x4a, 0x9f, 0xe3, 0x89,
-	0x5b, 0x18, 0x6f, 0x92, 0xe1, 0xa3, 0xcb, 0x02, 0xef, 0x15, 0x32, 0x97, 0x07, 0xef, 0xd6, 0x5b,
-	0x4f, 0x8e, 0x6a, 0xe8, 0xe9, 0x51, 0x0d, 0xfd, 0x77, 0x54, 0x43, 0x8f, 0x8f, 0x6b, 0x63, 0x4f,
-	0x8f, 0x6b, 0x63, 0x7f, 0x1e, 0xd7, 0xc6, 0x3e, 0xba, 0xaa, 0x6a, 0xce, 0xee, 0x5e, 0x4b, 0x6e,
-	0x1b, 0xbd, 0x58, 0xa5, 0xfd, 0xb0, 0x96, 0x73, 0x60, 0x72, 0xbb, 0x35, 0x21, 0xbe, 0xba, 0x5e,
-	0x7f, 0x16, 0x00, 0x00, 0xff, 0xff, 0xf7, 0x72, 0x34, 0x09, 0xe1, 0x16, 0x00, 0x00,
+	// 1174 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x58, 0xcb, 0x6f, 0xdc, 0x44,
+	0x18, 0xcf, 0x64, 0xdb, 0x88, 0x4c, 0xa1, 0x82, 0x69, 0x50, 0xd2, 0x55, 0xb3, 0x44, 0xd3, 0xd0,
+	0x3c, 0x9a, 0xd8, 0x9b, 0x14, 0xd2, 0x88, 0x2a, 0x15, 0x69, 0xd2, 0xe4, 0x80, 0x10, 0x61, 0x2b,
+	0x40, 0xe2, 0xb2, 0xcc, 0xee, 0x0e, 0x8e, 0xc5, 0xae, 0xed, 0xda, 0x4e, 0x9b, 0xa8, 0xea, 0x05,
+	0xfe, 0x00, 0x2a, 0xf1, 0x0f, 0x20, 0x24, 0x0e, 0x20, 0x71, 0xac, 0x10, 0x42, 0x1c, 0xb8, 0xf5,
+	0xc0, 0xa1, 0x82, 0x03, 0x70, 0x41, 0x28, 0xe1, 0x8f, 0xe0, 0x02, 0x42, 0x1e, 0x7f, 0xf6, 0xae,
+	0xdf, 0xf6, 0xc6, 0xdc, 0x76, 0x3d, 0xdf, 0xe3, 0xf7, 0xf8, 0x64, 0x7f, 0x36, 0x9e, 0x30, 0xb9,
+	0xa2, 0x5a, 0xb6, 0x79, 0x24, 0xdf, 0x3d, 0xe0, 0xe6, 0x91, 0x64, 0x98, 0xba, 0xad, 0x93, 0x29,
+	0xc3, 0x54, 0xdb, 0xbc, 0xbd, 0xcf, 0x54, 0x4d, 0x6a, 0x1b, 0x66, 0x5b, 0xf2, 0xa2, 0xaa, 0x13,
+	0x8a, 0xae, 0xe8, 0x22, 0x48, 0x76, 0x7e, 0xb9, 0xf1, 0xd5, 0x4b, 0x8a, 0xae, 0x2b, 0x5d, 0x2e,
+	0x33, 0x43, 0x95, 0x99, 0xa6, 0xe9, 0x36, 0xb3, 0x55, 0x5d, 0xb3, 0xe0, 0x74, 0xb1, 0xad, 0x5b,
+	0x3d, 0xdd, 0x92, 0x5b, 0xcc, 0xe2, 0x6e, 0x1b, 0xf9, 0xde, 0x4a, 0x8b, 0xdb, 0x6c, 0x45, 0x36,
+	0x98, 0xa2, 0x6a, 0x22, 0x18, 0x62, 0x5f, 0xf4, 0xf1, 0x18, 0xcc, 0x64, 0x3d, 0xaf, 0xc4, 0xa4,
+	0x7f, 0xd9, 0xfb, 0x01, 0x07, 0xd3, 0x91, 0x83, 0xa6, 0x7e, 0x5f, 0xe3, 0x26, 0x1c, 0xd7, 0xa2,
+	0xc7, 0x3d, 0xde, 0x6b, 0xf9, 0xe7, 0x2f, 0x47, 0xcf, 0x2d, 0x9b, 0x7d, 0xc4, 0x3b, 0x4d, 0xd6,
+	0xd3, 0x0f, 0x34, 0x1b, 0xc2, 0xea, 0x19, 0x61, 0x4d, 0x83, 0x9b, 0xcd, 0xfb, 0xac, 0xdb, 0xe5,
+	0x5e, 0xc6, 0xc5, 0x3e, 0x0f, 0x47, 0xca, 0x66, 0x87, 0xd9, 0xcc, 0x3d, 0xa2, 0x13, 0x98, 0xbc,
+	0xed, 0x88, 0xb0, 0x27, 0x08, 0x36, 0xf8, 0xdd, 0x03, 0x6e, 0xd9, 0xf4, 0x1d, 0x7c, 0x21, 0x70,
+	0xd5, 0x32, 0x74, 0xcd, 0xe2, 0xe4, 0x26, 0x1e, 0x73, 0x85, 0x98, 0x42, 0x33, 0x68, 0xfe, 0xdc,
+	0xea, 0x8c, 0x94, 0x64, 0x8d, 0xe4, 0x66, 0xde, 0x3a, 0xf3, 0xe4, 0x8f, 0x97, 0x46, 0x1a, 0x90,
+	0x45, 0x17, 0xf0, 0xa4, 0x28, 0xbb, 0xcb, 0xed, 0x06, 0x04, 0x42, 0x47, 0x72, 0x1e, 0x8f, 0xaa,
+	0x1d, 0x51, 0xf6, 0x4c, 0x63, 0x54, 0xed, 0xd0, 0x0f, 0xf0, 0x54, 0x34, 0x14, 0x60, 0x6c, 0xe3,
+	0x67, 0xbc, 0x6b, 0x00, 0x84, 0x26, 0x03, 0xf1, 0x22, 0x01, 0x8a, 0x9f, 0x49, 0x19, 0x80, 0xd9,
+	0xec, 0x76, 0xc3, 0x60, 0x76, 0x30, 0xee, 0xcf, 0x02, 0xb4, 0xb8, 0x22, 0xb9, 0x83, 0x23, 0x39,
+	0x83, 0x23, 0xb9, 0xf3, 0x09, 0x83, 0x23, 0xed, 0x31, 0x85, 0x43, 0x6e, 0x63, 0x20, 0x93, 0x7e,
+	0x85, 0x80, 0x45, 0xa0, 0x47, 0x2c, 0x8b, 0xca, 0x70, 0x2c, 0xc8, 0x6e, 0x00, 0xea, 0xa8, 0x80,
+	0x3a, 0x97, 0x09, 0xd5, 0x85, 0x10, 0xc0, 0x2a, 0xe1, 0x4b, 0x61, 0xc1, 0xdf, 0x72, 0x66, 0x37,
+	0xc9, 0x20, 0x1b, 0x4f, 0x27, 0xc4, 0x03, 0xbf, 0x3b, 0xf8, 0xb9, 0xc0, 0x01, 0xe8, 0x38, 0x97,
+	0x4d, 0x52, 0x84, 0x03, 0xd3, 0x60, 0x0d, 0xfa, 0x21, 0xa0, 0x1c, 0x10, 0x34, 0x80, 0xb2, 0x2c,
+	0xe7, 0x7e, 0x40, 0x40, 0x2f, 0xda, 0x28, 0x99, 0x5e, 0xe5, 0xb4, 0xf4, 0xca, 0x73, 0x53, 0x8e,
+	0xba, 0xf3, 0xa6, 0xb8, 0xd5, 0x24, 0xd9, 0x79, 0x88, 0x6b, 0x49, 0x09, 0x40, 0xf8, 0x5d, 0x7c,
+	0x3e, 0x78, 0x02, 0xf2, 0xce, 0x67, 0x33, 0x76, 0xe3, 0x81, 0x72, 0xa8, 0x0a, 0x55, 0xa2, 0x4a,
+	0x07, 0xa1, 0x96, 0xe5, 0xe9, 0x8f, 0x08, 0x38, 0xc6, 0x74, 0x4a, 0xe1, 0x58, 0x39, 0x3d, 0xc7,
+	0xf2, 0x7c, 0xbd, 0x81, 0x2f, 0x87, 0x6d, 0xba, 0x23, 0xee, 0xfd, 0x9b, 0xe2, 0xd6, 0xef, 0x49,
+	0x36, 0x81, 0xcf, 0xaa, 0x5a, 0x87, 0x1f, 0x0a, 0xb5, 0xc6, 0x1b, 0xee, 0x1f, 0xfa, 0x08, 0xe1,
+	0xd9, 0xf4, 0x6c, 0x90, 0x61, 0xbf, 0xff, 0x24, 0x1e, 0x3c, 0x07, 0xed, 0xa5, 0x6c, 0x31, 0x06,
+	0xb3, 0x40, 0x92, 0xd8, 0x8a, 0xb4, 0x07, 0x7c, 0x06, 0x2c, 0x89, 0xe3, 0x53, 0xd6, 0x08, 0xfc,
+	0xee, 0x29, 0x90, 0xd8, 0x2f, 0x53, 0x81, 0x4a, 0xb9, 0x0a, 0x94, 0x37, 0x1a, 0xdb, 0x78, 0x29,
+	0xcd, 0xdc, 0x3d, 0x6e, 0xbe, 0x27, 0x76, 0x82, 0xf4, 0x19, 0x79, 0x8c, 0xf0, 0x72, 0xce, 0x32,
+	0x20, 0xd5, 0x27, 0x08, 0x4f, 0x9b, 0x69, 0x91, 0xe0, 0xd7, 0xf5, 0x62, 0xa2, 0xf9, 0xe9, 0xa0,
+	0x5e, 0x7a, 0x0f, 0x7a, 0x0f, 0xd8, 0x27, 0x18, 0x1b, 0x61, 0x5f, 0xd6, 0x44, 0xfd, 0xeb, 0xe9,
+	0x95, 0xdd, 0xb8, 0x80, 0x5e, 0x95, 0xff, 0x5b, 0xaf, 0xf2, 0xc6, 0xae, 0xde, 0x5f, 0xd4, 0xf6,
+	0x1c, 0xbc, 0xdb, 0xcc, 0x66, 0xe9, 0x23, 0xd6, 0xc1, 0x17, 0x63, 0x32, 0x40, 0x9d, 0x5d, 0x3c,
+	0x6e, 0x78, 0x17, 0xc1, 0x96, 0xcb, 0x29, 0x5b, 0xa6, 0x17, 0x0a, 0xa4, 0xfb, 0xb9, 0xb4, 0xd5,
+	0x5f, 0xbd, 0x22, 0xb8, 0xca, 0x32, 0xff, 0x1b, 0x04, 0x54, 0x82, 0x4d, 0xe2, 0xa9, 0x54, 0x86,
+	0xa5, 0x52, 0x9a, 0x57, 0xab, 0x3f, 0x5d, 0xc0, 0x67, 0x05, 0x5e, 0xf2, 0x29, 0xc2, 0x63, 0xee,
+	0x8a, 0x4e, 0x96, 0x92, 0x31, 0x45, 0xdf, 0x0c, 0xaa, 0xcb, 0x39, 0xa3, 0xdd, 0xee, 0x74, 0xfe,
+	0xe3, 0x5f, 0xfe, 0xfa, 0x6c, 0x94, 0x92, 0x19, 0x59, 0xf0, 0xdb, 0x72, 0xd2, 0x64, 0x27, 0x4d,
+	0x0e, 0xbd, 0x5a, 0x91, 0x2f, 0x50, 0x7f, 0x1f, 0x26, 0x2b, 0x19, 0x5d, 0xa2, 0x2f, 0x10, 0xd5,
+	0xd5, 0x22, 0x29, 0x80, 0x4e, 0x16, 0xe8, 0x16, 0xc8, 0x5c, 0x32, 0x3a, 0xff, 0xc7, 0x03, 0xb5,
+	0xf3, 0x90, 0x7c, 0x8e, 0xf0, 0x39, 0xaf, 0xca, 0x66, 0xb7, 0x9b, 0x89, 0x33, 0xfa, 0x6e, 0x91,
+	0x89, 0x33, 0xe6, 0x55, 0x81, 0x2e, 0x0a, 0x9c, 0xb3, 0x84, 0x66, 0xe3, 0x24, 0xdf, 0xa2, 0xd0,
+	0x62, 0x4a, 0xd6, 0xf2, 0x2b, 0x33, 0xb8, 0x4b, 0x57, 0xaf, 0x17, 0xce, 0x03, 0xb8, 0xaf, 0x0a,
+	0xb8, 0x32, 0x59, 0xce, 0x86, 0xeb, 0xbe, 0x1f, 0xbb, 0xe2, 0x3e, 0x46, 0xf8, 0xf9, 0x40, 0x41,
+	0x47, 0xe1, 0xb5, 0xfc, 0x72, 0x15, 0x02, 0x9f, 0xb4, 0xd7, 0xd3, 0xba, 0x00, 0xbf, 0x48, 0xe6,
+	0xf3, 0x82, 0x27, 0xdf, 0xa3, 0xf0, 0xd6, 0x48, 0x0a, 0x48, 0x17, 0xd8, 0x75, 0xab, 0xeb, 0xc5,
+	0x13, 0x01, 0xf7, 0x9a, 0xc0, 0x5d, 0x27, 0x52, 0x0e, 0xdc, 0xee, 0x57, 0x07, 0x57, 0xf5, 0xef,
+	0x10, 0x7e, 0x21, 0x58, 0xd2, 0x91, 0xbd, 0x80, 0x7c, 0xc5, 0x08, 0x24, 0xee, 0xde, 0x74, 0x45,
+	0x10, 0xb8, 0x4a, 0x16, 0x72, 0x13, 0x20, 0xbf, 0x22, 0x3c, 0x11, 0xf7, 0x2c, 0x24, 0x1b, 0xf9,
+	0x65, 0x8c, 0x59, 0x37, 0xab, 0x37, 0x87, 0x4d, 0x07, 0x2a, 0xaf, 0x0b, 0x2a, 0xaf, 0x91, 0xf5,
+	0x1c, 0x54, 0x02, 0x9f, 0x6e, 0xe4, 0x07, 0xe2, 0x11, 0xf9, 0x90, 0xfc, 0x8c, 0xf0, 0x64, 0x5c,
+	0x0b, 0xc7, 0x9b, 0x8d, 0xfc, 0x12, 0x0f, 0x43, 0x2e, 0x63, 0x35, 0xa6, 0xeb, 0x82, 0xdc, 0x2a,
+	0xa9, 0x17, 0x25, 0x47, 0xfe, 0x41, 0x78, 0x3a, 0x75, 0x75, 0x21, 0x3b, 0xc3, 0x09, 0x1f, 0xde,
+	0xee, 0xaa, 0xbb, 0xa7, 0xae, 0x03, 0x64, 0xdf, 0x10, 0x64, 0x6f, 0x93, 0xad, 0xa2, 0x64, 0x07,
+	0x3e, 0xc2, 0xf9, 0xa6, 0xfe, 0x8d, 0xf0, 0x4c, 0x6a, 0x5b, 0xc7, 0xdd, 0x9d, 0xe1, 0xec, 0x29,
+	0x2c, 0x41, 0xde, 0x7d, 0x95, 0x6e, 0x09, 0x09, 0x36, 0xc8, 0x8d, 0x53, 0x48, 0x40, 0xbe, 0x46,
+	0x78, 0xdc, 0xdf, 0x70, 0x48, 0x8e, 0x67, 0x75, 0x78, 0x67, 0xab, 0x5e, 0x2b, 0x94, 0x03, 0xd8,
+	0x5f, 0x11, 0xd8, 0x25, 0xb2, 0x94, 0xb2, 0x7e, 0xf8, 0x5f, 0x44, 0x7d, 0x9f, 0xbe, 0x44, 0xf8,
+	0x59, 0xbf, 0x96, 0xe3, 0x49, 0x8e, 0x67, 0x76, 0x61, 0xbc, 0x71, 0x2b, 0x23, 0x5d, 0x12, 0x78,
+	0xaf, 0x90, 0xd9, 0x3c, 0x78, 0x6f, 0xdd, 0x7e, 0x72, 0x5c, 0x43, 0x4f, 0x8f, 0x6b, 0xe8, 0xcf,
+	0xe3, 0x1a, 0x7a, 0x74, 0x52, 0x1b, 0x79, 0x7a, 0x52, 0x1b, 0xf9, 0xed, 0xa4, 0x36, 0xf2, 0xfe,
+	0x55, 0x45, 0xb5, 0xf7, 0x0f, 0x5a, 0x52, 0x5b, 0xef, 0x45, 0x2a, 0x1d, 0xf6, 0x6b, 0xd9, 0x47,
+	0x06, 0xb7, 0x5a, 0x63, 0xe2, 0x4b, 0xf0, 0xb5, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x29, 0x40,
+	0xe6, 0xbf, 0x7e, 0x17, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1356,9 +1373,9 @@ type QueryClient interface {
 	// Queries a list of RegistryStakedAmount items.
 	RegistryStakedAmountAll(ctx context.Context, in *QueryAllRegistryStakedAmountRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountResponse, error)
 	// Queries a StakedAmountPerWallet by index.
-	StakedAmountPerWallet(ctx context.Context, in *QueryGetStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryGetStakedAmountPerWalletResponse, error)
+	RegistryStakedAmountPerWallet(ctx context.Context, in *QueryGetRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryGetRegistryStakedAmountPerWalletResponse, error)
 	// Queries a list of StakedAmountPerWallet items.
-	StakedAmountPerWalletAll(ctx context.Context, in *QueryAllStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryAllStakedAmountPerWalletResponse, error)
+	RegistryStakedAmountPerWalletAll(ctx context.Context, in *QueryAllRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountPerWalletResponse, error)
 	// Queries a PriceData by index.
 	PriceData(ctx context.Context, in *QueryGetPriceDataRequest, opts ...grpc.CallOption) (*QueryGetPriceDataResponse, error)
 	// Queries a list of PriceData items.
@@ -1454,18 +1471,18 @@ func (c *queryClient) RegistryStakedAmountAll(ctx context.Context, in *QueryAllR
 	return out, nil
 }
 
-func (c *queryClient) StakedAmountPerWallet(ctx context.Context, in *QueryGetStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryGetStakedAmountPerWalletResponse, error) {
-	out := new(QueryGetStakedAmountPerWalletResponse)
-	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/StakedAmountPerWallet", in, out, opts...)
+func (c *queryClient) RegistryStakedAmountPerWallet(ctx context.Context, in *QueryGetRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryGetRegistryStakedAmountPerWalletResponse, error) {
+	out := new(QueryGetRegistryStakedAmountPerWalletResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWallet", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) StakedAmountPerWalletAll(ctx context.Context, in *QueryAllStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryAllStakedAmountPerWalletResponse, error) {
-	out := new(QueryAllStakedAmountPerWalletResponse)
-	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/StakedAmountPerWalletAll", in, out, opts...)
+func (c *queryClient) RegistryStakedAmountPerWalletAll(ctx context.Context, in *QueryAllRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountPerWalletResponse, error) {
+	out := new(QueryAllRegistryStakedAmountPerWalletResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWalletAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1511,9 +1528,9 @@ type QueryServer interface {
 	// Queries a list of RegistryStakedAmount items.
 	RegistryStakedAmountAll(context.Context, *QueryAllRegistryStakedAmountRequest) (*QueryAllRegistryStakedAmountResponse, error)
 	// Queries a StakedAmountPerWallet by index.
-	StakedAmountPerWallet(context.Context, *QueryGetStakedAmountPerWalletRequest) (*QueryGetStakedAmountPerWalletResponse, error)
+	RegistryStakedAmountPerWallet(context.Context, *QueryGetRegistryStakedAmountPerWalletRequest) (*QueryGetRegistryStakedAmountPerWalletResponse, error)
 	// Queries a list of StakedAmountPerWallet items.
-	StakedAmountPerWalletAll(context.Context, *QueryAllStakedAmountPerWalletRequest) (*QueryAllStakedAmountPerWalletResponse, error)
+	RegistryStakedAmountPerWalletAll(context.Context, *QueryAllRegistryStakedAmountPerWalletRequest) (*QueryAllRegistryStakedAmountPerWalletResponse, error)
 	// Queries a PriceData by index.
 	PriceData(context.Context, *QueryGetPriceDataRequest) (*QueryGetPriceDataResponse, error)
 	// Queries a list of PriceData items.
@@ -1551,11 +1568,11 @@ func (*UnimplementedQueryServer) RegistryStakedAmount(ctx context.Context, req *
 func (*UnimplementedQueryServer) RegistryStakedAmountAll(ctx context.Context, req *QueryAllRegistryStakedAmountRequest) (*QueryAllRegistryStakedAmountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmountAll not implemented")
 }
-func (*UnimplementedQueryServer) StakedAmountPerWallet(ctx context.Context, req *QueryGetStakedAmountPerWalletRequest) (*QueryGetStakedAmountPerWalletResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StakedAmountPerWallet not implemented")
+func (*UnimplementedQueryServer) RegistryStakedAmountPerWallet(ctx context.Context, req *QueryGetRegistryStakedAmountPerWalletRequest) (*QueryGetRegistryStakedAmountPerWalletResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmountPerWallet not implemented")
 }
-func (*UnimplementedQueryServer) StakedAmountPerWalletAll(ctx context.Context, req *QueryAllStakedAmountPerWalletRequest) (*QueryAllStakedAmountPerWalletResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StakedAmountPerWalletAll not implemented")
+func (*UnimplementedQueryServer) RegistryStakedAmountPerWalletAll(ctx context.Context, req *QueryAllRegistryStakedAmountPerWalletRequest) (*QueryAllRegistryStakedAmountPerWalletResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmountPerWalletAll not implemented")
 }
 func (*UnimplementedQueryServer) PriceData(ctx context.Context, req *QueryGetPriceDataRequest) (*QueryGetPriceDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PriceData not implemented")
@@ -1730,38 +1747,38 @@ func _Query_RegistryStakedAmountAll_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_StakedAmountPerWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetStakedAmountPerWalletRequest)
+func _Query_RegistryStakedAmountPerWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetRegistryStakedAmountPerWalletRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).StakedAmountPerWallet(ctx, in)
+		return srv.(QueryServer).RegistryStakedAmountPerWallet(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pricechain.cprc.registry.Query/StakedAmountPerWallet",
+		FullMethod: "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWallet",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).StakedAmountPerWallet(ctx, req.(*QueryGetStakedAmountPerWalletRequest))
+		return srv.(QueryServer).RegistryStakedAmountPerWallet(ctx, req.(*QueryGetRegistryStakedAmountPerWalletRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_StakedAmountPerWalletAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllStakedAmountPerWalletRequest)
+func _Query_RegistryStakedAmountPerWalletAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllRegistryStakedAmountPerWalletRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).StakedAmountPerWalletAll(ctx, in)
+		return srv.(QueryServer).RegistryStakedAmountPerWalletAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pricechain.cprc.registry.Query/StakedAmountPerWalletAll",
+		FullMethod: "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWalletAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).StakedAmountPerWalletAll(ctx, req.(*QueryAllStakedAmountPerWalletRequest))
+		return srv.(QueryServer).RegistryStakedAmountPerWalletAll(ctx, req.(*QueryAllRegistryStakedAmountPerWalletRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1843,12 +1860,12 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_RegistryStakedAmountAll_Handler,
 		},
 		{
-			MethodName: "StakedAmountPerWallet",
-			Handler:    _Query_StakedAmountPerWallet_Handler,
+			MethodName: "RegistryStakedAmountPerWallet",
+			Handler:    _Query_RegistryStakedAmountPerWallet_Handler,
 		},
 		{
-			MethodName: "StakedAmountPerWalletAll",
-			Handler:    _Query_StakedAmountPerWalletAll_Handler,
+			MethodName: "RegistryStakedAmountPerWalletAll",
+			Handler:    _Query_RegistryStakedAmountPerWalletAll_Handler,
 		},
 		{
 			MethodName: "PriceData",
@@ -2501,7 +2518,7 @@ func (m *QueryAllRegistryStakedAmountResponse) MarshalToSizedBuffer(dAtA []byte)
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2511,12 +2528,12 @@ func (m *QueryGetStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetStakedAmountPerWalletRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2531,7 +2548,7 @@ func (m *QueryGetStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte)
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2541,18 +2558,18 @@ func (m *QueryGetStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err erro
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetStakedAmountPerWalletResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.StakedAmountPerWallet.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.RegistryStakedAmountPerWallet.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -2564,7 +2581,7 @@ func (m *QueryGetStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2574,12 +2591,12 @@ func (m *QueryAllStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllStakedAmountPerWalletRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2599,7 +2616,7 @@ func (m *QueryAllStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte)
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -2609,12 +2626,12 @@ func (m *QueryAllStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err erro
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllStakedAmountPerWalletResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2631,10 +2648,10 @@ func (m *QueryAllStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.StakedAmountPerWallet) > 0 {
-		for iNdEx := len(m.StakedAmountPerWallet) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.RegistryStakedAmountPerWallet) > 0 {
+		for iNdEx := len(m.RegistryStakedAmountPerWallet) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.StakedAmountPerWallet[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.RegistryStakedAmountPerWallet[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -3047,7 +3064,7 @@ func (m *QueryAllRegistryStakedAmountResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetStakedAmountPerWalletRequest) Size() (n int) {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -3060,18 +3077,18 @@ func (m *QueryGetStakedAmountPerWalletRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetStakedAmountPerWalletResponse) Size() (n int) {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = m.StakedAmountPerWallet.Size()
+	l = m.RegistryStakedAmountPerWallet.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
 
-func (m *QueryAllStakedAmountPerWalletRequest) Size() (n int) {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -3084,14 +3101,14 @@ func (m *QueryAllStakedAmountPerWalletRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryAllStakedAmountPerWalletResponse) Size() (n int) {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.StakedAmountPerWallet) > 0 {
-		for _, e := range m.StakedAmountPerWallet {
+	if len(m.RegistryStakedAmountPerWallet) > 0 {
+		for _, e := range m.RegistryStakedAmountPerWallet {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -4743,7 +4760,7 @@ func (m *QueryAllRegistryStakedAmountResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4766,10 +4783,10 @@ func (m *QueryGetStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetStakedAmountPerWalletRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetStakedAmountPerWalletRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -4825,7 +4842,7 @@ func (m *QueryGetStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4848,15 +4865,15 @@ func (m *QueryGetStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetStakedAmountPerWalletResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetStakedAmountPerWalletResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StakedAmountPerWallet", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryStakedAmountPerWallet", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -4883,7 +4900,7 @@ func (m *QueryGetStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.StakedAmountPerWallet.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.RegistryStakedAmountPerWallet.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -4908,7 +4925,7 @@ func (m *QueryGetStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -4931,10 +4948,10 @@ func (m *QueryAllStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllStakedAmountPerWalletRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllStakedAmountPerWalletRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -4994,7 +5011,7 @@ func (m *QueryAllStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -5017,15 +5034,15 @@ func (m *QueryAllStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllStakedAmountPerWalletResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllStakedAmountPerWalletResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field StakedAmountPerWallet", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryStakedAmountPerWallet", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -5052,8 +5069,8 @@ func (m *QueryAllStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.StakedAmountPerWallet = append(m.StakedAmountPerWallet, StakedAmountPerWallet{})
-			if err := m.StakedAmountPerWallet[len(m.StakedAmountPerWallet)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.RegistryStakedAmountPerWallet = append(m.RegistryStakedAmountPerWallet, RegistryStakedAmountPerWallet{})
+			if err := m.RegistryStakedAmountPerWallet[len(m.RegistryStakedAmountPerWallet)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

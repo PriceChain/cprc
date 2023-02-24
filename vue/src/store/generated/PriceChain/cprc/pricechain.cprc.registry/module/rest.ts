@@ -107,8 +107,8 @@ export interface RegistryQueryAllRegistryResponse {
   pagination?: V1Beta1PageResponse;
 }
 
-export interface RegistryQueryAllRegistryStakedAmountResponse {
-  registryStakedAmount?: RegistryRegistryStakedAmount[];
+export interface RegistryQueryAllRegistryStakedAmountPerWalletResponse {
+  registryStakedAmountPerWallet?: RegistryRegistryStakedAmountPerWallet[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -122,8 +122,8 @@ export interface RegistryQueryAllRegistryStakedAmountResponse {
   pagination?: V1Beta1PageResponse;
 }
 
-export interface RegistryQueryAllStakedAmountPerWalletResponse {
-  stakedAmountPerWallet?: RegistryStakedAmountPerWallet[];
+export interface RegistryQueryAllRegistryStakedAmountResponse {
+  registryStakedAmount?: RegistryRegistryStakedAmount[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -153,12 +153,12 @@ export interface RegistryQueryGetRegistryResponse {
   Registry?: RegistryRegistry;
 }
 
-export interface RegistryQueryGetRegistryStakedAmountResponse {
-  registryStakedAmount?: RegistryRegistryStakedAmount;
+export interface RegistryQueryGetRegistryStakedAmountPerWalletResponse {
+  registryStakedAmountPerWallet?: RegistryRegistryStakedAmountPerWallet;
 }
 
-export interface RegistryQueryGetStakedAmountPerWalletResponse {
-  stakedAmountPerWallet?: RegistryStakedAmountPerWallet;
+export interface RegistryQueryGetRegistryStakedAmountResponse {
+  registryStakedAmount?: RegistryRegistryStakedAmount;
 }
 
 /**
@@ -218,7 +218,7 @@ export interface RegistryRegistryStakedAmount {
   amount?: string;
 }
 
-export interface RegistryStakedAmountPerWallet {
+export interface RegistryRegistryStakedAmountPerWallet {
   index?: string;
   wallet?: string;
   stakedAmount?: string;
@@ -720,11 +720,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryStakedAmountPerWalletAll
+   * @name QueryRegistryStakedAmountPerWalletAll
    * @summary Queries a list of StakedAmountPerWallet items.
-   * @request GET:/PriceChain/cprc/registry/staked_amount_per_wallet
+   * @request GET:/PriceChain/cprc/registry/registry_staked_amount_per_wallet
    */
-  queryStakedAmountPerWalletAll = (
+  queryRegistryStakedAmountPerWalletAll = (
     query?: {
       "pagination.key"?: string;
       "pagination.offset"?: string;
@@ -734,8 +734,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     },
     params: RequestParams = {},
   ) =>
-    this.request<RegistryQueryAllStakedAmountPerWalletResponse, RpcStatus>({
-      path: `/PriceChain/cprc/registry/staked_amount_per_wallet`,
+    this.request<RegistryQueryAllRegistryStakedAmountPerWalletResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/registry_staked_amount_per_wallet`,
       method: "GET",
       query: query,
       format: "json",
@@ -746,13 +746,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
    * No description
    *
    * @tags Query
-   * @name QueryStakedAmountPerWallet
+   * @name QueryRegistryStakedAmountPerWallet
    * @summary Queries a StakedAmountPerWallet by index.
-   * @request GET:/PriceChain/cprc/registry/staked_amount_per_wallet/{index}
+   * @request GET:/PriceChain/cprc/registry/registry_staked_amount_per_wallet/{index}
    */
-  queryStakedAmountPerWallet = (index: string, params: RequestParams = {}) =>
-    this.request<RegistryQueryGetStakedAmountPerWalletResponse, RpcStatus>({
-      path: `/PriceChain/cprc/registry/staked_amount_per_wallet/${index}`,
+  queryRegistryStakedAmountPerWallet = (index: string, params: RequestParams = {}) =>
+    this.request<RegistryQueryGetRegistryStakedAmountPerWalletResponse, RpcStatus>({
+      path: `/PriceChain/cprc/registry/registry_staked_amount_per_wallet/${index}`,
       method: "GET",
       format: "json",
       ...params,

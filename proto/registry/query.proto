@@ -9,7 +9,7 @@ import "registry/registry.proto";
 import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
 import "registry/registry_staked_amount.proto";
-import "registry/staked_amount_per_wallet.proto";
+import "registry/registry_staked_amount_per_wallet.proto";
 import "registry/price_data.proto";
 // this line is used by starport scaffolding # 1
 
@@ -62,13 +62,13 @@ service Query {
 	}
 
 // Queries a StakedAmountPerWallet by index.
-	rpc StakedAmountPerWallet(QueryGetStakedAmountPerWalletRequest) returns (QueryGetStakedAmountPerWalletResponse) {
-		option (google.api.http).get = "/PriceChain/cprc/registry/staked_amount_per_wallet/{index}";
+	rpc RegistryStakedAmountPerWallet(QueryGetRegistryStakedAmountPerWalletRequest) returns (QueryGetRegistryStakedAmountPerWalletResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_staked_amount_per_wallet/{index}";
 	}
 
 	// Queries a list of StakedAmountPerWallet items.
-	rpc StakedAmountPerWalletAll(QueryAllStakedAmountPerWalletRequest) returns (QueryAllStakedAmountPerWalletResponse) {
-		option (google.api.http).get = "/PriceChain/cprc/registry/staked_amount_per_wallet";
+	rpc RegistryStakedAmountPerWalletAll(QueryAllRegistryStakedAmountPerWalletRequest) returns (QueryAllRegistryStakedAmountPerWalletResponse) {
+		option (google.api.http).get = "/PriceChain/cprc/registry/registry_staked_amount_per_wallet";
 	}
 
 // Queries a PriceData by index.
@@ -162,21 +162,21 @@ message QueryAllRegistryStakedAmountResponse {
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
-message QueryGetStakedAmountPerWalletRequest {
+message QueryGetRegistryStakedAmountPerWalletRequest {
 	  string index = 1;
 
 }
 
-message QueryGetStakedAmountPerWalletResponse {
-	StakedAmountPerWallet stakedAmountPerWallet = 1 [(gogoproto.nullable) = false];
+message QueryGetRegistryStakedAmountPerWalletResponse {
+	RegistryStakedAmountPerWallet registryStakedAmountPerWallet = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryAllStakedAmountPerWalletRequest {
+message QueryAllRegistryStakedAmountPerWalletRequest {
 	cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
-message QueryAllStakedAmountPerWalletResponse {
-	repeated StakedAmountPerWallet stakedAmountPerWallet = 1 [(gogoproto.nullable) = false];
+message QueryAllRegistryStakedAmountPerWalletResponse {
+	repeated RegistryStakedAmountPerWallet registryStakedAmountPerWallet = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

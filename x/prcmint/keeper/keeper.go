@@ -138,8 +138,8 @@ func (k Keeper) GetAllRegistry(ctx sdk.Context) (list []rtypes.Registry) {
 }
 
 // Get All staked amount per wallet
-func (k Keeper) GetAllStakedAmountPerWallet(ctx sdk.Context) (list []rtypes.StakedAmountPerWallet) {
-	return k.registryKeeper.GetAllStakedAmountPerWallet(ctx)
+func (k Keeper) GetAllStakedAmountPerWallet(ctx sdk.Context) (list []rtypes.RegistryStakedAmountPerWallet) {
+	return k.registryKeeper.GetAllRegistryStakedAmountPerWallet(ctx)
 }
 
 // Get all registry staked amount
@@ -168,8 +168,8 @@ func (k Keeper) GetRegistryStakedAmount(ctx sdk.Context, index string) (rtypes.R
 }
 
 // Get total staked amount per wallet
-func (k Keeper) GetStakedAmountPerWallet(ctx sdk.Context, index string) (rtypes.StakedAmountPerWallet, bool) {
-	return k.registryKeeper.GetStakedAmountPerWallet(ctx, index)
+func (k Keeper) GetRegistryStakedAmountPerWallet(ctx sdk.Context, index string) (rtypes.RegistryStakedAmountPerWallet, bool) {
+	return k.registryKeeper.GetRegistryStakedAmountPerWallet(ctx, index)
 }
 
 // Update registry member

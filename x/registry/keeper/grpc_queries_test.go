@@ -452,27 +452,27 @@ func TestStakedAmountPerWalletQuerySingle(t *testing.T) {
 	msgs := createNStakedAmountPerWallet(keeper, ctx, 2)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetStakedAmountPerWalletRequest
-		response *types.QueryGetStakedAmountPerWalletResponse
+		request  *types.QueryGetRegistryStakedAmountPerWalletRequest
+		response *types.QueryGetRegistryStakedAmountPerWalletResponse
 		err      error
 	}{
 		{
 			desc: "First",
-			request: &types.QueryGetStakedAmountPerWalletRequest{
+			request: &types.QueryGetRegistryStakedAmountPerWalletRequest{
 				Index: msgs[0].Index,
 			},
-			response: &types.QueryGetStakedAmountPerWalletResponse{StakedAmountPerWallet: msgs[0]},
+			response: &types.QueryGetRegistryStakedAmountPerWalletResponse{RegistryStakedAmountPerWallet: msgs[0]},
 		},
 		{
 			desc: "Second",
-			request: &types.QueryGetStakedAmountPerWalletRequest{
+			request: &types.QueryGetRegistryStakedAmountPerWalletRequest{
 				Index: msgs[1].Index,
 			},
-			response: &types.QueryGetStakedAmountPerWalletResponse{StakedAmountPerWallet: msgs[1]},
+			response: &types.QueryGetRegistryStakedAmountPerWalletResponse{RegistryStakedAmountPerWallet: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.QueryGetStakedAmountPerWalletRequest{
+			request: &types.QueryGetRegistryStakedAmountPerWalletRequest{
 				Index: strconv.Itoa(100000),
 			},
 			err: status.Error(codes.NotFound, "not found"),
@@ -483,7 +483,7 @@ func TestStakedAmountPerWalletQuerySingle(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.StakedAmountPerWallet(wctx, tc.request)
+			response, err := keeper.RegistryStakedAmountPerWallet(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -502,8 +502,8 @@ func TestStakedAmountPerWalletQueryPaginated(t *testing.T) {
 	wctx := sdk.WrapSDKContext(ctx)
 	msgs := createNStakedAmountPerWallet(keeper, ctx, 5)
 
-	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllStakedAmountPerWalletRequest {
-		return &types.QueryAllStakedAmountPerWalletRequest{
+	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllRegistryStakedAmountPerWalletRequest {
+		return &types.QueryAllRegistryStakedAmountPerWalletRequest{
 			Pagination: &query.PageRequest{
 				Key:        next,
 				Offset:     offset,
@@ -515,12 +515,12 @@ func TestStakedAmountPerWalletQueryPaginated(t *testing.T) {
 	t.Run("ByOffset", func(t *testing.T) {
 		step := 2
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.StakedAmountPerWalletAll(wctx, request(nil, uint64(i), uint64(step), false))
+			resp, err := keeper.RegistryStakedAmountPerWalletAll(wctx, request(nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.StakedAmountPerWallet), step)
+			require.LessOrEqual(t, len(resp.RegistryStakedAmountPerWallet), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.StakedAmountPerWallet),
+				nullify.Fill(resp.RegistryStakedAmountPerWallet),
 			)
 		}
 	})
@@ -528,27 +528,27 @@ func TestStakedAmountPerWalletQueryPaginated(t *testing.T) {
 		step := 2
 		var next []byte
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.StakedAmountPerWalletAll(wctx, request(next, 0, uint64(step), false))
+			resp, err := keeper.RegistryStakedAmountPerWalletAll(wctx, request(next, 0, uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.StakedAmountPerWallet), step)
+			require.LessOrEqual(t, len(resp.RegistryStakedAmountPerWallet), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.StakedAmountPerWallet),
+				nullify.Fill(resp.RegistryStakedAmountPerWallet),
 			)
 			next = resp.Pagination.NextKey
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
-		resp, err := keeper.StakedAmountPerWalletAll(wctx, request(nil, 0, 0, true))
+		resp, err := keeper.RegistryStakedAmountPerWalletAll(wctx, request(nil, 0, 0, true))
 		require.NoError(t, err)
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(msgs),
-			nullify.Fill(resp.StakedAmountPerWallet),
+			nullify.Fill(resp.RegistryStakedAmountPerWallet),
 		)
 	})
 	t.Run("InvalidRequest", func(t *testing.T) {
-		_, err := keeper.StakedAmountPerWalletAll(wctx, nil)
+		_, err := keeper.RegistryStakedAmountPerWalletAll(wctx, nil)
 		require.ErrorIs(t, err, status.Error(codes.InvalidArgument, "invalid request"))
 	})
 }

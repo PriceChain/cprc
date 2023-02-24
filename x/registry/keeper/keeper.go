@@ -15,12 +15,12 @@ import (
 
 type RegistryKeeperI interface {
 	GetAllRegistry(sdk.Context) []types.Registry
-	GetAllStakedAmountPerWallet(sdk.Context) []types.StakedAmountPerWallet
+	GetAllRegistryStakedAmountPerWallet(sdk.Context) []types.RegistryStakedAmountPerWallet
 	GetAllRegistryMember(sdk.Context) []types.RegistryMember
 	GetAllPriceData(sdk.Context) []types.PriceData
 	GetRegistry(sdk.Context, uint64) (types.Registry, bool)
 	GetRegistryStakedAmount(sdk.Context, string) (types.RegistryStakedAmount, bool)
-	GetStakedAmountPerWallet(sdk.Context, string) (types.StakedAmountPerWallet, bool)
+	GetRegistryStakedAmountPerWallet(sdk.Context, string) (types.RegistryStakedAmountPerWallet, bool)
 	SetRegistryMember(sdk.Context, types.RegistryMember)
 }
 
@@ -152,7 +152,7 @@ func (k msgServer) UpdateStakedAmountPerWallet(ctx sdk.Context, sender string, s
 	}
 
 	// Staked amount per wallet
-	stakedAmtPerWallet := k.GetAllStakedAmountPerWallet(ctx)
+	stakedAmtPerWallet := k.GetAllRegistryStakedAmountPerWallet(ctx)
 
 	// Find if there is already existing wallet
 	foundIndex := -1
@@ -164,7 +164,7 @@ func (k msgServer) UpdateStakedAmountPerWallet(ctx sdk.Context, sender string, s
 	}
 
 	// Initialize Staked amount per wallet value
-	sapw := types.StakedAmountPerWallet{
+	sapw := types.RegistryStakedAmountPerWallet{
 		Index:        sender,
 		Wallet:       sender,
 		StakedAmount: stakeAmount,
@@ -182,7 +182,7 @@ func (k msgServer) UpdateStakedAmountPerWallet(ctx sdk.Context, sender string, s
 	}
 
 	// Update Keeper Store
-	k.SetStakedAmountPerWallet(ctx, sapw)
+	k.SetRegistryStakedAmountPerWallet(ctx, sapw)
 
 	return true
 }

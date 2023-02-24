@@ -57,7 +57,7 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				StakedAmountPerWalletList: []types.StakedAmountPerWallet{
+				RegistryStakedAmountPerWalletList: []types.RegistryStakedAmountPerWallet{
 					{
 						Index: "0",
 					},
@@ -172,7 +172,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "duplicated stakedAmountPerWallet",
 			genState: &types.GenesisState{
-				StakedAmountPerWalletList: []types.StakedAmountPerWallet{
+				RegistryStakedAmountPerWalletList: []types.RegistryStakedAmountPerWallet{
 					{
 						Index: "0",
 					},

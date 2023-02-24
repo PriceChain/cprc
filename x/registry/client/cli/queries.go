@@ -360,8 +360,8 @@ func CmdShowRegistry() *cobra.Command {
 
 func CmdListStakedAmountPerWallet() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-staked-amount-per-wallet",
-		Short: "list all stakedAmountPerWallet",
+		Use:   "list-registry-staked-amount-per-wallet",
+		Short: "list all RegistryStakedAmountPerWallet",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -372,11 +372,11 @@ func CmdListStakedAmountPerWallet() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryAllStakedAmountPerWalletRequest{
+			params := &types.QueryAllRegistryStakedAmountPerWalletRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.StakedAmountPerWalletAll(context.Background(), params)
+			res, err := queryClient.RegistryStakedAmountPerWalletAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -403,11 +403,11 @@ func CmdShowStakedAmountPerWallet() *cobra.Command {
 
 			argIndex := args[0]
 
-			params := &types.QueryGetStakedAmountPerWalletRequest{
+			params := &types.QueryGetRegistryStakedAmountPerWalletRequest{
 				Index: argIndex,
 			}
 
-			res, err := queryClient.StakedAmountPerWallet(context.Background(), params)
+			res, err := queryClient.RegistryStakedAmountPerWallet(context.Background(), params)
 			if err != nil {
 				return err
 			}

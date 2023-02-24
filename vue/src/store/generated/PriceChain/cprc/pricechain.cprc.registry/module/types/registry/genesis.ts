@@ -6,7 +6,7 @@ import { Registry } from "../registry/registry";
 import { RegistryOwner } from "../registry/registry_owner";
 import { RegistryMember } from "../registry/registry_member";
 import { RegistryStakedAmount } from "../registry/registry_staked_amount";
-import { StakedAmountPerWallet } from "../registry/staked_amount_per_wallet";
+import { RegistryStakedAmountPerWallet } from "../registry/registry_staked_amount_per_wallet";
 import { PriceData } from "../registry/price_data";
 
 export const protobufPackage = "pricechain.cprc.registry";
@@ -21,7 +21,7 @@ export interface GenesisState {
   registryMemberList: RegistryMember[];
   registryMemberCount: number;
   registryStakedAmountList: RegistryStakedAmount[];
-  stakedAmountPerWalletList: StakedAmountPerWallet[];
+  registryStakedAmountPerWalletList: RegistryStakedAmountPerWallet[];
   /** this line is used by starport scaffolding # genesis/proto/state */
   priceDataList: PriceData[];
 }
@@ -58,8 +58,11 @@ export const GenesisState = {
     for (const v of message.registryStakedAmountList) {
       RegistryStakedAmount.encode(v!, writer.uint32(66).fork()).ldelim();
     }
-    for (const v of message.stakedAmountPerWalletList) {
-      StakedAmountPerWallet.encode(v!, writer.uint32(74).fork()).ldelim();
+    for (const v of message.registryStakedAmountPerWalletList) {
+      RegistryStakedAmountPerWallet.encode(
+        v!,
+        writer.uint32(74).fork()
+      ).ldelim();
     }
     for (const v of message.priceDataList) {
       PriceData.encode(v!, writer.uint32(82).fork()).ldelim();
@@ -75,7 +78,7 @@ export const GenesisState = {
     message.registryOwnerList = [];
     message.registryMemberList = [];
     message.registryStakedAmountList = [];
-    message.stakedAmountPerWalletList = [];
+    message.registryStakedAmountPerWalletList = [];
     message.priceDataList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
@@ -111,8 +114,8 @@ export const GenesisState = {
           );
           break;
         case 9:
-          message.stakedAmountPerWalletList.push(
-            StakedAmountPerWallet.decode(reader, reader.uint32())
+          message.registryStakedAmountPerWalletList.push(
+            RegistryStakedAmountPerWallet.decode(reader, reader.uint32())
           );
           break;
         case 10:
@@ -132,7 +135,7 @@ export const GenesisState = {
     message.registryOwnerList = [];
     message.registryMemberList = [];
     message.registryStakedAmountList = [];
-    message.stakedAmountPerWalletList = [];
+    message.registryStakedAmountPerWalletList = [];
     message.priceDataList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
@@ -190,12 +193,12 @@ export const GenesisState = {
       }
     }
     if (
-      object.stakedAmountPerWalletList !== undefined &&
-      object.stakedAmountPerWalletList !== null
+      object.registryStakedAmountPerWalletList !== undefined &&
+      object.registryStakedAmountPerWalletList !== null
     ) {
-      for (const e of object.stakedAmountPerWalletList) {
-        message.stakedAmountPerWalletList.push(
-          StakedAmountPerWallet.fromJSON(e)
+      for (const e of object.registryStakedAmountPerWalletList) {
+        message.registryStakedAmountPerWalletList.push(
+          RegistryStakedAmountPerWallet.fromJSON(e)
         );
       }
     }
@@ -245,12 +248,12 @@ export const GenesisState = {
     } else {
       obj.registryStakedAmountList = [];
     }
-    if (message.stakedAmountPerWalletList) {
-      obj.stakedAmountPerWalletList = message.stakedAmountPerWalletList.map(
-        (e) => (e ? StakedAmountPerWallet.toJSON(e) : undefined)
+    if (message.registryStakedAmountPerWalletList) {
+      obj.registryStakedAmountPerWalletList = message.registryStakedAmountPerWalletList.map(
+        (e) => (e ? RegistryStakedAmountPerWallet.toJSON(e) : undefined)
       );
     } else {
-      obj.stakedAmountPerWalletList = [];
+      obj.registryStakedAmountPerWalletList = [];
     }
     if (message.priceDataList) {
       obj.priceDataList = message.priceDataList.map((e) =>
@@ -268,7 +271,7 @@ export const GenesisState = {
     message.registryOwnerList = [];
     message.registryMemberList = [];
     message.registryStakedAmountList = [];
-    message.stakedAmountPerWalletList = [];
+    message.registryStakedAmountPerWalletList = [];
     message.priceDataList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
@@ -328,12 +331,12 @@ export const GenesisState = {
       }
     }
     if (
-      object.stakedAmountPerWalletList !== undefined &&
-      object.stakedAmountPerWalletList !== null
+      object.registryStakedAmountPerWalletList !== undefined &&
+      object.registryStakedAmountPerWalletList !== null
     ) {
-      for (const e of object.stakedAmountPerWalletList) {
-        message.stakedAmountPerWalletList.push(
-          StakedAmountPerWallet.fromPartial(e)
+      for (const e of object.registryStakedAmountPerWalletList) {
+        message.registryStakedAmountPerWalletList.push(
+          RegistryStakedAmountPerWallet.fromPartial(e)
         );
       }
     }

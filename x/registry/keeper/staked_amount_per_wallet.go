@@ -7,7 +7,7 @@ import (
 )
 
 // SetStakedAmountPerWallet set a specific stakedAmountPerWallet in the store from its index
-func (k Keeper) SetStakedAmountPerWallet(ctx sdk.Context, stakedAmountPerWallet types.StakedAmountPerWallet) {
+func (k Keeper) SetRegistryStakedAmountPerWallet(ctx sdk.Context, stakedAmountPerWallet types.RegistryStakedAmountPerWallet) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StakedAmountPerWalletKeyPrefix))
 	b := k.cdc.MustMarshal(&stakedAmountPerWallet)
 	store.Set(types.StakedAmountPerWalletKey(
@@ -16,11 +16,11 @@ func (k Keeper) SetStakedAmountPerWallet(ctx sdk.Context, stakedAmountPerWallet 
 }
 
 // GetStakedAmountPerWallet returns a stakedAmountPerWallet from its index
-func (k Keeper) GetStakedAmountPerWallet(
+func (k Keeper) GetRegistryStakedAmountPerWallet(
 	ctx sdk.Context,
 	index string,
 
-) (val types.StakedAmountPerWallet, found bool) {
+) (val types.RegistryStakedAmountPerWallet, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StakedAmountPerWalletKeyPrefix))
 
 	b := store.Get(types.StakedAmountPerWalletKey(
@@ -35,7 +35,7 @@ func (k Keeper) GetStakedAmountPerWallet(
 }
 
 // RemoveStakedAmountPerWallet removes a stakedAmountPerWallet from the store
-func (k Keeper) RemoveStakedAmountPerWallet(
+func (k Keeper) RemoveRegistryStakedAmountPerWallet(
 	ctx sdk.Context,
 	index string,
 
@@ -47,14 +47,14 @@ func (k Keeper) RemoveStakedAmountPerWallet(
 }
 
 // GetAllStakedAmountPerWallet returns all stakedAmountPerWallet
-func (k Keeper) GetAllStakedAmountPerWallet(ctx sdk.Context) (list []types.StakedAmountPerWallet) {
+func (k Keeper) GetAllRegistryStakedAmountPerWallet(ctx sdk.Context) (list []types.RegistryStakedAmountPerWallet) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.StakedAmountPerWalletKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.StakedAmountPerWallet
+		var val types.RegistryStakedAmountPerWallet
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}

@@ -30259,6 +30259,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/price_data/{index}':
@@ -30452,6 +30462,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -30665,6 +30685,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_member/{id}':
@@ -30859,6 +30889,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_owner/{id}':
@@ -31024,6 +31064,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/PriceChain/cprc/registry/registry_staked_amount/{index}':
@@ -31068,17 +31118,17 @@ paths:
           type: string
       tags:
         - Query
-  /PriceChain/cprc/registry/staked_amount_per_wallet:
+  /PriceChain/cprc/registry/registry_staked_amount_per_wallet:
     get:
       summary: Queries a list of StakedAmountPerWallet items.
-      operationId: PricechainCprcRegistryStakedAmountPerWalletAll
+      operationId: PricechainCprcRegistryRegistryStakedAmountPerWalletAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              stakedAmountPerWallet:
+              registryStakedAmountPerWallet:
                 type: array
                 items:
                   type: object
@@ -31181,19 +31231,29 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
-  '/PriceChain/cprc/registry/staked_amount_per_wallet/{index}':
+  '/PriceChain/cprc/registry/registry_staked_amount_per_wallet/{index}':
     get:
       summary: Queries a StakedAmountPerWallet by index.
-      operationId: PricechainCprcRegistryStakedAmountPerWallet
+      operationId: PricechainCprcRegistryRegistryStakedAmountPerWallet
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              stakedAmountPerWallet:
+              registryStakedAmountPerWallet:
                 type: object
                 properties:
                   index:
@@ -53500,17 +53560,19 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  pricechain.cprc.registry.QueryAllRegistryStakedAmountResponse:
+  pricechain.cprc.registry.QueryAllRegistryStakedAmountPerWalletResponse:
     type: object
     properties:
-      registryStakedAmount:
+      registryStakedAmountPerWallet:
         type: array
         items:
           type: object
           properties:
             index:
               type: string
-            amount:
+            wallet:
+              type: string
+            stakedAmount:
               type: string
       pagination:
         type: object
@@ -53537,19 +53599,17 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  pricechain.cprc.registry.QueryAllStakedAmountPerWalletResponse:
+  pricechain.cprc.registry.QueryAllRegistryStakedAmountResponse:
     type: object
     properties:
-      stakedAmountPerWallet:
+      registryStakedAmount:
         type: array
         items:
           type: object
           properties:
             index:
               type: string
-            wallet:
-              type: string
-            stakedAmount:
+            amount:
               type: string
       pagination:
         type: object
@@ -53695,6 +53755,18 @@ definitions:
             type: array
             items:
               type: string
+  pricechain.cprc.registry.QueryGetRegistryStakedAmountPerWalletResponse:
+    type: object
+    properties:
+      registryStakedAmountPerWallet:
+        type: object
+        properties:
+          index:
+            type: string
+          wallet:
+            type: string
+          stakedAmount:
+            type: string
   pricechain.cprc.registry.QueryGetRegistryStakedAmountResponse:
     type: object
     properties:
@@ -53704,18 +53776,6 @@ definitions:
           index:
             type: string
           amount:
-            type: string
-  pricechain.cprc.registry.QueryGetStakedAmountPerWalletResponse:
-    type: object
-    properties:
-      stakedAmountPerWallet:
-        type: object
-        properties:
-          index:
-            type: string
-          wallet:
-            type: string
-          stakedAmount:
             type: string
   pricechain.cprc.registry.QueryParamsResponse:
     type: object
@@ -53819,7 +53879,7 @@ definitions:
         type: string
       amount:
         type: string
-  pricechain.cprc.registry.StakedAmountPerWallet:
+  pricechain.cprc.registry.RegistryStakedAmountPerWallet:
     type: object
     properties:
       index:

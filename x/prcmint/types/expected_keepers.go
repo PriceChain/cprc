@@ -35,12 +35,12 @@ type BankKeeper interface {
 // RegistryKeeper defines expected interface
 type RegistryKeeper interface {
 	GetAllRegistry(ctx sdk.Context) (list []rtypes.Registry)
-	GetAllStakedAmountPerWallet(ctx sdk.Context) (list []rtypes.StakedAmountPerWallet)
-	GetAllRegistryStakedAmount(ctx sdk.Context) (list []rtypes.RegistryStakedAmount)
 	GetAllRegistryMember(ctx sdk.Context) (list []rtypes.RegistryMember)
 	GetAllPriceData(ctx sdk.Context) (list []rtypes.PriceData)
 	GetRegistry(sdk.Context, uint64) (rtypes.Registry, bool)
 	GetRegistryStakedAmount(sdk.Context, string) (rtypes.RegistryStakedAmount, bool)
-	GetStakedAmountPerWallet(sdk.Context, string) (rtypes.StakedAmountPerWallet, bool)
+	GetAllRegistryStakedAmount(ctx sdk.Context) (list []rtypes.RegistryStakedAmount)
+	GetRegistryStakedAmountPerWallet(sdk.Context, string) (rtypes.RegistryStakedAmountPerWallet, bool)
+	GetAllRegistryStakedAmountPerWallet(ctx sdk.Context) (list []rtypes.RegistryStakedAmountPerWallet)
 	SetRegistryMember(sdk.Context, rtypes.RegistryMember)
 }

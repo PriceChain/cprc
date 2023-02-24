@@ -704,23 +704,23 @@ func TestListRegistry(t *testing.T) {
 	})
 }
 
-func networkWithStakedAmountPerWalletObjects(t *testing.T, n int) (*network.Network, []types.StakedAmountPerWallet) {
+func networkWithStakedAmountPerWalletObjects(t *testing.T, n int) (*network.Network, []types.RegistryStakedAmountPerWallet) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
 	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
-		stakedAmountPerWallet := types.StakedAmountPerWallet{
+		registryStakedAmountPerWallet := types.RegistryStakedAmountPerWallet{
 			Index: strconv.Itoa(i),
 		}
-		nullify.Fill(&stakedAmountPerWallet)
-		state.StakedAmountPerWalletList = append(state.StakedAmountPerWalletList, stakedAmountPerWallet)
+		nullify.Fill(&registryStakedAmountPerWallet)
+		state.RegistryStakedAmountPerWalletList = append(state.RegistryStakedAmountPerWalletList, registryStakedAmountPerWallet)
 	}
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
 	cfg.GenesisState[types.ModuleName] = buf
-	return network.New(t, cfg), state.StakedAmountPerWalletList
+	return network.New(t, cfg), state.RegistryStakedAmountPerWalletList
 }
 
 func TestShowStakedAmountPerWallet(t *testing.T) {
@@ -736,7 +736,7 @@ func TestShowStakedAmountPerWallet(t *testing.T) {
 
 		args []string
 		err  error
-		obj  types.StakedAmountPerWallet
+		obj  types.RegistryStakedAmountPerWallet
 	}{
 		{
 			desc:    "found",
@@ -765,12 +765,12 @@ func TestShowStakedAmountPerWallet(t *testing.T) {
 				require.ErrorIs(t, stat.Err(), tc.err)
 			} else {
 				require.NoError(t, err)
-				var resp types.QueryGetStakedAmountPerWalletResponse
+				var resp types.QueryGetRegistryStakedAmountPerWalletResponse
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-				require.NotNil(t, resp.StakedAmountPerWallet)
+				require.NotNil(t, resp.RegistryStakedAmountPerWallet)
 				require.Equal(t,
 					nullify.Fill(&tc.obj),
-					nullify.Fill(&resp.StakedAmountPerWallet),
+					nullify.Fill(&resp.RegistryStakedAmountPerWallet),
 				)
 			}
 		})
@@ -802,12 +802,12 @@ func TestListStakedAmountPerWallet(t *testing.T) {
 			args := request(nil, uint64(i), uint64(step), false)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStakedAmountPerWallet(), args)
 			require.NoError(t, err)
-			var resp types.QueryAllStakedAmountPerWalletResponse
+			var resp types.QueryAllRegistryStakedAmountPerWalletResponse
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-			require.LessOrEqual(t, len(resp.StakedAmountPerWallet), step)
+			require.LessOrEqual(t, len(resp.RegistryStakedAmountPerWallet), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-				nullify.Fill(resp.StakedAmountPerWallet),
+				nullify.Fill(resp.RegistryStakedAmountPerWallet),
 			)
 		}
 	})
@@ -818,12 +818,12 @@ func TestListStakedAmountPerWallet(t *testing.T) {
 			args := request(next, 0, uint64(step), false)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStakedAmountPerWallet(), args)
 			require.NoError(t, err)
-			var resp types.QueryAllStakedAmountPerWalletResponse
+			var resp types.QueryAllRegistryStakedAmountPerWalletResponse
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-			require.LessOrEqual(t, len(resp.StakedAmountPerWallet), step)
+			require.LessOrEqual(t, len(resp.RegistryStakedAmountPerWallet), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-				nullify.Fill(resp.StakedAmountPerWallet),
+				nullify.Fill(resp.RegistryStakedAmountPerWallet),
 			)
 			next = resp.Pagination.NextKey
 		}
@@ -832,13 +832,13 @@ func TestListStakedAmountPerWallet(t *testing.T) {
 		args := request(nil, 0, uint64(len(objs)), true)
 		out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdListStakedAmountPerWallet(), args)
 		require.NoError(t, err)
-		var resp types.QueryAllStakedAmountPerWalletResponse
+		var resp types.QueryAllRegistryStakedAmountPerWalletResponse
 		require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 		require.NoError(t, err)
 		require.Equal(t, len(objs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(objs),
-			nullify.Fill(resp.StakedAmountPerWallet),
+			nullify.Fill(resp.RegistryStakedAmountPerWallet),
 		)
 	})
 }

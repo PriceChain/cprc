@@ -251,19 +251,19 @@ func (k Keeper) Registry(c context.Context, req *types.QueryGetRegistryRequest) 
 }
 
 // Fetch all staked amount per wallet
-func (k Keeper) StakedAmountPerWalletAll(c context.Context, req *types.QueryAllStakedAmountPerWalletRequest) (*types.QueryAllStakedAmountPerWalletResponse, error) {
+func (k Keeper) RegistryStakedAmountPerWalletAll(c context.Context, req *types.QueryAllRegistryStakedAmountPerWalletRequest) (*types.QueryAllRegistryStakedAmountPerWalletResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	var stakedAmountPerWallets []types.StakedAmountPerWallet
+	var stakedAmountPerWallets []types.RegistryStakedAmountPerWallet
 	ctx := sdk.UnwrapSDKContext(c)
 
 	store := ctx.KVStore(k.storeKey)
 	stakedAmountPerWalletStore := prefix.NewStore(store, types.KeyPrefix(types.StakedAmountPerWalletKeyPrefix))
 
 	pageRes, err := query.Paginate(stakedAmountPerWalletStore, req.Pagination, func(key []byte, value []byte) error {
-		var stakedAmountPerWallet types.StakedAmountPerWallet
+		var stakedAmountPerWallet types.RegistryStakedAmountPerWallet
 		if err := k.cdc.Unmarshal(value, &stakedAmountPerWallet); err != nil {
 			return err
 		}
@@ -276,17 +276,17 @@ func (k Keeper) StakedAmountPerWalletAll(c context.Context, req *types.QueryAllS
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllStakedAmountPerWalletResponse{StakedAmountPerWallet: stakedAmountPerWallets, Pagination: pageRes}, nil
+	return &types.QueryAllRegistryStakedAmountPerWalletResponse{RegistryStakedAmountPerWallet: stakedAmountPerWallets, Pagination: pageRes}, nil
 }
 
 // Fetch all staked amount per wallet of an index
-func (k Keeper) StakedAmountPerWallet(c context.Context, req *types.QueryGetStakedAmountPerWalletRequest) (*types.QueryGetStakedAmountPerWalletResponse, error) {
+func (k Keeper) RegistryStakedAmountPerWallet(c context.Context, req *types.QueryGetRegistryStakedAmountPerWalletRequest) (*types.QueryGetRegistryStakedAmountPerWalletResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(c)
 
-	val, found := k.GetStakedAmountPerWallet(
+	val, found := k.GetRegistryStakedAmountPerWallet(
 		ctx,
 		req.Index,
 	)
@@ -294,5 +294,5 @@ func (k Keeper) StakedAmountPerWallet(c context.Context, req *types.QueryGetStak
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetStakedAmountPerWalletResponse{StakedAmountPerWallet: val}, nil
+	return &types.QueryGetRegistryStakedAmountPerWalletResponse{RegistryStakedAmountPerWallet: val}, nil
 }

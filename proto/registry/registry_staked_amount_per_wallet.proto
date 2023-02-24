@@ -3,7 +3,7 @@ package pricechain.cprc.registry;
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
 
-message StakedAmountPerWallet {
+message RegistryStakedAmountPerWallet {
   string index = 1; 
   string wallet = 2; 
   string stakedAmount = 3; 
