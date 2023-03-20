@@ -94,11 +94,11 @@ func GetConfigFromEnv() (*Config, error) {
 		Name: os.Getenv("DAEMON_NAME"),
 	}
 
-	if os.Getenv("DAEMON_ALLOW_DOWNLOAD_BINARIES") == "true" {
+	if os.Getenv("DAEMON_ALLOW_DOWNLOAD_BINARIES") == "on" {
 		cfg.AllowDownloadBinaries = true
 	}
 
-	if os.Getenv("DAEMON_RESTART_AFTER_UPGRADE") == "true" {
+	if os.Getenv("DAEMON_RESTART_AFTER_UPGRADE") == "on" {
 		cfg.RestartAfterUpgrade = true
 	}
 
