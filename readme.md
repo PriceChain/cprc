@@ -144,11 +144,11 @@ cp $(which cprcd) ~/.cprc/upgrade_manager/genesis/bin
 sudo cp $(which cprcd) /usr/bin
 sudo cp $(which cprcd-manager) /usr/bin
 ```
-## Initialize the validator1
+## Initialize the sentry node
 ```
-cprcd init "validator1" --chain-id chainname
+cprcd init sentrynode_name --chain-id chain_name, where sentrynode_name = sentry name, chain_name = chain name
 ```
-## Add new wallet & buy PRCNA Coin to stake, but here is just using a genesis account
+## Add new wallet & buy PRCNA Coin to stake, but here is just using a genesis account ( NOT NEEDED)
 ```
 cprcd keys add "validator1" --keyring-backend os --recover
 ```
