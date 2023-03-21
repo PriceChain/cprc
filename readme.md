@@ -1,6 +1,6 @@
 # Pricechain CPRC Deployment
 ### This guide provides instructions on how to set up the first two nodes in a Pricechain Continental Price Registry Chain. It includes steps for installing dependencies, cloning the master repository, setting up a validator, and configuring the network.
-# First Node
+# First Node (Validator)
 ```
 sudo apt update
 sudo apt upgrade -y
@@ -114,7 +114,7 @@ WantedBy=multi-user.target
 sudo systemctl enable cprcd
 sudo systemctl start cprcd
 ```
-# Next Node
+# Next Node (Sentry)
 ## Update and upgrade the system packages and install build-essential and jq packages
 ```
 sudo apt update
