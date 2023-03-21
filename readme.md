@@ -1,5 +1,6 @@
 # Pricechain CPRC Deployment
-### This guide provides instructions on how to set up the first two nodes in a Pricechain Continental Price Registry Chain (CPRC). It includes steps for installing dependencies, cloning the master repository, setting up a validator, and configuring the network.
+### This guide provides instructions on how to set up a Validator/Sentry node pair in a Pricechain Continental Price Registry Chain (CPRC). 
+
 # Validator
 ```
 sudo apt update
