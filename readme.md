@@ -26,7 +26,7 @@ git clone https://github.com/PriceChain/cprc.git
 ```
 ## Install the executables
 ```
-sudo rm -rf ~/.tprc
+sudo rm -rf ~/.cprc
 cd cprc
 make install
 
