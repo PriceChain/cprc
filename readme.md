@@ -27,7 +27,7 @@ git clone https://github.com/PriceChain/cprc.git
 ## Install the executables
 ```
 sudo rm -rf ~/.tprc
-cd cprc_chain
+cd cprc
 make install
 
 clear
