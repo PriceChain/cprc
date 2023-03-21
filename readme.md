@@ -1,5 +1,5 @@
-# Pricechain Cprc Chain Deployment
-### This guide provides instructions on how to set up the first two nodes in a Pricechain Cprc Chain deployment. It includes steps for installing dependencies, cloning the master repository, setting up a validator, and configuring the network.
+# Pricechain CPRC Deployment
+### This guide provides instructions on how to set up the first two nodes in a Pricechain Continental Price Registry Chain. It includes steps for installing dependencies, cloning the master repository, setting up a validator, and configuring the network.
 # First Node
 ```
 sudo apt update
