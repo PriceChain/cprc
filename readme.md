@@ -132,7 +132,7 @@ sudo git clone https://github.com/PriceChain/Cprc_chain.git
 ## Install the executables
 ```
 sudo rm -rf ~/.cprc
-cd cprc_chain
+cd cprc
 make install
 clear
 mkdir -p ~/.cprc/upgrade_manager/upgrades
