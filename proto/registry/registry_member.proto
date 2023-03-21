@@ -5,12 +5,17 @@ option go_package = "github.com/PriceChain/cprc/x/registry/types";
 
 message RegistryMember {
   uint64 id = 1;
-  string registryId = 2; 
-  string stakedAmount = 3; 
-  string address = 4; 
-  string status = 5; 
-  string memberSince = 6; 
-  string memo = 7; 
-  string reserved = 8; 
-  
+  string wallet = 2;
+  string registryId = 3; 
+  string stakedAmount = 4; 
+  string address = 5; 
+  string status = 6; 
+  string popCount = 7;
+  string level = 8;
+  repeated string reputations = 9;
+  repeated string scores = 10;
+  string rewardSum = 11; 
+  string rewardPaid = 12; 
+  string rewardPaidDate = 13; 
+  string reserved = 14; 
 }

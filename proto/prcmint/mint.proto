@@ -1,0 +1,22 @@
+syntax = "proto3";
+package pricechain.cprc.prcmint;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/PriceChain/cprc/x/prcmint/types";
+
+// Minter represents the minting state.
+message Minter {
+  // current annual inflation rate
+  string inflation = 1 [
+    (gogoproto.moretags)   = "yaml:\"inflation\"",
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable)   = false
+  ];
+  // current annual expected provisions
+  string annual_provisions = 2 [
+    (gogoproto.moretags)   = "yaml:\"annual_provisions\"",
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable)   = false
+  ];
+}

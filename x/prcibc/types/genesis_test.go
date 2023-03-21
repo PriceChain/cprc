@@ -23,45 +23,45 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				PortId: types.PortID,
 				IbcMsgList: []types.IbcMsg{
-	{
-		Id: 0,
-	},
-	{
-		Id: 1,
-	},
-},
-IbcMsgCount: 2,
-// this line is used by starport scaffolding # types/genesis/validField
+					{
+						Id: 0,
+					},
+					{
+						Id: 1,
+					},
+				},
+				IbcMsgCount: 2,
+				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
 		},
 		{
-	desc:     "duplicated ibcMsg",
-	genState: &types.GenesisState{
-		IbcMsgList: []types.IbcMsg{
-			{
-				Id: 0,
+			desc: "duplicated ibcMsg",
+			genState: &types.GenesisState{
+				IbcMsgList: []types.IbcMsg{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
 			},
-			{
-				Id: 0,
-			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-{
-	desc:     "invalid ibcMsg count",
-	genState: &types.GenesisState{
-		IbcMsgList: []types.IbcMsg{
-			{
-				Id: 1,
+		{
+			desc: "invalid ibcMsg count",
+			genState: &types.GenesisState{
+				IbcMsgList: []types.IbcMsg{
+					{
+						Id: 1,
+					},
+				},
+				IbcMsgCount: 0,
 			},
+			valid: false,
 		},
-		IbcMsgCount: 0,
-	},
-	valid:    false,
-},
-// this line is used by starport scaffolding # types/genesis/testcase
+		// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()

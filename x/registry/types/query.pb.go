@@ -665,22 +665,22 @@ func (m *QueryAllRegistryMemberResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
-type QueryGetPriceConsensusRequest struct {
-	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+type QueryGetRegistryStakedAmountRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
 }
 
-func (m *QueryGetPriceConsensusRequest) Reset()         { *m = QueryGetPriceConsensusRequest{} }
-func (m *QueryGetPriceConsensusRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetPriceConsensusRequest) ProtoMessage()    {}
-func (*QueryGetPriceConsensusRequest) Descriptor() ([]byte, []int) {
+func (m *QueryGetRegistryStakedAmountRequest) Reset()         { *m = QueryGetRegistryStakedAmountRequest{} }
+func (m *QueryGetRegistryStakedAmountRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetRegistryStakedAmountRequest) ProtoMessage()    {}
+func (*QueryGetRegistryStakedAmountRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{14}
 }
-func (m *QueryGetPriceConsensusRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetRegistryStakedAmountRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetPriceConsensusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetRegistryStakedAmountRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetPriceConsensusRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetRegistryStakedAmountRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -690,41 +690,41 @@ func (m *QueryGetPriceConsensusRequest) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
-func (m *QueryGetPriceConsensusRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetPriceConsensusRequest.Merge(m, src)
+func (m *QueryGetRegistryStakedAmountRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetRegistryStakedAmountRequest.Merge(m, src)
 }
-func (m *QueryGetPriceConsensusRequest) XXX_Size() int {
+func (m *QueryGetRegistryStakedAmountRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetPriceConsensusRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetPriceConsensusRequest.DiscardUnknown(m)
+func (m *QueryGetRegistryStakedAmountRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetRegistryStakedAmountRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetPriceConsensusRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetRegistryStakedAmountRequest proto.InternalMessageInfo
 
-func (m *QueryGetPriceConsensusRequest) GetId() uint64 {
+func (m *QueryGetRegistryStakedAmountRequest) GetIndex() string {
 	if m != nil {
-		return m.Id
+		return m.Index
 	}
-	return 0
+	return ""
 }
 
-type QueryGetPriceConsensusResponse struct {
-	PriceConsensus PriceConsensus `protobuf:"bytes,1,opt,name=PriceConsensus,proto3" json:"PriceConsensus"`
+type QueryGetRegistryStakedAmountResponse struct {
+	RegistryStakedAmount RegistryStakedAmount `protobuf:"bytes,1,opt,name=registryStakedAmount,proto3" json:"registryStakedAmount"`
 }
 
-func (m *QueryGetPriceConsensusResponse) Reset()         { *m = QueryGetPriceConsensusResponse{} }
-func (m *QueryGetPriceConsensusResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetPriceConsensusResponse) ProtoMessage()    {}
-func (*QueryGetPriceConsensusResponse) Descriptor() ([]byte, []int) {
+func (m *QueryGetRegistryStakedAmountResponse) Reset()         { *m = QueryGetRegistryStakedAmountResponse{} }
+func (m *QueryGetRegistryStakedAmountResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetRegistryStakedAmountResponse) ProtoMessage()    {}
+func (*QueryGetRegistryStakedAmountResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{15}
 }
-func (m *QueryGetPriceConsensusResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetRegistryStakedAmountResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetPriceConsensusResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetRegistryStakedAmountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetPriceConsensusResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetRegistryStakedAmountResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -734,41 +734,41 @@ func (m *QueryGetPriceConsensusResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *QueryGetPriceConsensusResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetPriceConsensusResponse.Merge(m, src)
+func (m *QueryGetRegistryStakedAmountResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetRegistryStakedAmountResponse.Merge(m, src)
 }
-func (m *QueryGetPriceConsensusResponse) XXX_Size() int {
+func (m *QueryGetRegistryStakedAmountResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetPriceConsensusResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetPriceConsensusResponse.DiscardUnknown(m)
+func (m *QueryGetRegistryStakedAmountResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetRegistryStakedAmountResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetPriceConsensusResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetRegistryStakedAmountResponse proto.InternalMessageInfo
 
-func (m *QueryGetPriceConsensusResponse) GetPriceConsensus() PriceConsensus {
+func (m *QueryGetRegistryStakedAmountResponse) GetRegistryStakedAmount() RegistryStakedAmount {
 	if m != nil {
-		return m.PriceConsensus
+		return m.RegistryStakedAmount
 	}
-	return PriceConsensus{}
+	return RegistryStakedAmount{}
 }
 
-type QueryAllPriceConsensusRequest struct {
+type QueryAllRegistryStakedAmountRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllPriceConsensusRequest) Reset()         { *m = QueryAllPriceConsensusRequest{} }
-func (m *QueryAllPriceConsensusRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllPriceConsensusRequest) ProtoMessage()    {}
-func (*QueryAllPriceConsensusRequest) Descriptor() ([]byte, []int) {
+func (m *QueryAllRegistryStakedAmountRequest) Reset()         { *m = QueryAllRegistryStakedAmountRequest{} }
+func (m *QueryAllRegistryStakedAmountRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllRegistryStakedAmountRequest) ProtoMessage()    {}
+func (*QueryAllRegistryStakedAmountRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{16}
 }
-func (m *QueryAllPriceConsensusRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllRegistryStakedAmountRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllPriceConsensusRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllRegistryStakedAmountRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllPriceConsensusRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllRegistryStakedAmountRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -778,42 +778,42 @@ func (m *QueryAllPriceConsensusRequest) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
-func (m *QueryAllPriceConsensusRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllPriceConsensusRequest.Merge(m, src)
+func (m *QueryAllRegistryStakedAmountRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllRegistryStakedAmountRequest.Merge(m, src)
 }
-func (m *QueryAllPriceConsensusRequest) XXX_Size() int {
+func (m *QueryAllRegistryStakedAmountRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllPriceConsensusRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllPriceConsensusRequest.DiscardUnknown(m)
+func (m *QueryAllRegistryStakedAmountRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllRegistryStakedAmountRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllPriceConsensusRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllRegistryStakedAmountRequest proto.InternalMessageInfo
 
-func (m *QueryAllPriceConsensusRequest) GetPagination() *query.PageRequest {
+func (m *QueryAllRegistryStakedAmountRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-type QueryAllPriceConsensusResponse struct {
-	PriceConsensus []PriceConsensus    `protobuf:"bytes,1,rep,name=PriceConsensus,proto3" json:"PriceConsensus"`
-	Pagination     *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+type QueryAllRegistryStakedAmountResponse struct {
+	RegistryStakedAmount []RegistryStakedAmount `protobuf:"bytes,1,rep,name=registryStakedAmount,proto3" json:"registryStakedAmount"`
+	Pagination           *query.PageResponse    `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllPriceConsensusResponse) Reset()         { *m = QueryAllPriceConsensusResponse{} }
-func (m *QueryAllPriceConsensusResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllPriceConsensusResponse) ProtoMessage()    {}
-func (*QueryAllPriceConsensusResponse) Descriptor() ([]byte, []int) {
+func (m *QueryAllRegistryStakedAmountResponse) Reset()         { *m = QueryAllRegistryStakedAmountResponse{} }
+func (m *QueryAllRegistryStakedAmountResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllRegistryStakedAmountResponse) ProtoMessage()    {}
+func (*QueryAllRegistryStakedAmountResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_33b7babacada5cb6, []int{17}
 }
-func (m *QueryAllPriceConsensusResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllRegistryStakedAmountResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllPriceConsensusResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllRegistryStakedAmountResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllPriceConsensusResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllRegistryStakedAmountResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -823,26 +823,410 @@ func (m *QueryAllPriceConsensusResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *QueryAllPriceConsensusResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllPriceConsensusResponse.Merge(m, src)
+func (m *QueryAllRegistryStakedAmountResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllRegistryStakedAmountResponse.Merge(m, src)
 }
-func (m *QueryAllPriceConsensusResponse) XXX_Size() int {
+func (m *QueryAllRegistryStakedAmountResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllPriceConsensusResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllPriceConsensusResponse.DiscardUnknown(m)
+func (m *QueryAllRegistryStakedAmountResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllRegistryStakedAmountResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllPriceConsensusResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllRegistryStakedAmountResponse proto.InternalMessageInfo
 
-func (m *QueryAllPriceConsensusResponse) GetPriceConsensus() []PriceConsensus {
+func (m *QueryAllRegistryStakedAmountResponse) GetRegistryStakedAmount() []RegistryStakedAmount {
 	if m != nil {
-		return m.PriceConsensus
+		return m.RegistryStakedAmount
 	}
 	return nil
 }
 
-func (m *QueryAllPriceConsensusResponse) GetPagination() *query.PageResponse {
+func (m *QueryAllRegistryStakedAmountResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryGetRegistryStakedAmountPerWalletRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Reset() {
+	*m = QueryGetRegistryStakedAmountPerWalletRequest{}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryGetRegistryStakedAmountPerWalletRequest) ProtoMessage() {}
+func (*QueryGetRegistryStakedAmountPerWalletRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{18}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest.Merge(m, src)
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletRequest proto.InternalMessageInfo
+
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetRegistryStakedAmountPerWalletResponse struct {
+	RegistryStakedAmountPerWallet RegistryStakedAmountPerWallet `protobuf:"bytes,1,opt,name=registryStakedAmountPerWallet,proto3" json:"registryStakedAmountPerWallet"`
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Reset() {
+	*m = QueryGetRegistryStakedAmountPerWalletResponse{}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryGetRegistryStakedAmountPerWalletResponse) ProtoMessage() {}
+func (*QueryGetRegistryStakedAmountPerWalletResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{19}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse.Merge(m, src)
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetRegistryStakedAmountPerWalletResponse proto.InternalMessageInfo
+
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) GetRegistryStakedAmountPerWallet() RegistryStakedAmountPerWallet {
+	if m != nil {
+		return m.RegistryStakedAmountPerWallet
+	}
+	return RegistryStakedAmountPerWallet{}
+}
+
+type QueryAllRegistryStakedAmountPerWalletRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Reset() {
+	*m = QueryAllRegistryStakedAmountPerWalletRequest{}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllRegistryStakedAmountPerWalletRequest) ProtoMessage() {}
+func (*QueryAllRegistryStakedAmountPerWalletRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{20}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest.Merge(m, src)
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletRequest proto.InternalMessageInfo
+
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllRegistryStakedAmountPerWalletResponse struct {
+	RegistryStakedAmountPerWallet []RegistryStakedAmountPerWallet `protobuf:"bytes,1,rep,name=registryStakedAmountPerWallet,proto3" json:"registryStakedAmountPerWallet"`
+	Pagination                    *query.PageResponse             `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Reset() {
+	*m = QueryAllRegistryStakedAmountPerWalletResponse{}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllRegistryStakedAmountPerWalletResponse) ProtoMessage() {}
+func (*QueryAllRegistryStakedAmountPerWalletResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{21}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse.Merge(m, src)
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllRegistryStakedAmountPerWalletResponse proto.InternalMessageInfo
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) GetRegistryStakedAmountPerWallet() []RegistryStakedAmountPerWallet {
+	if m != nil {
+		return m.RegistryStakedAmountPerWallet
+	}
+	return nil
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryGetPriceDataRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetPriceDataRequest) Reset()         { *m = QueryGetPriceDataRequest{} }
+func (m *QueryGetPriceDataRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetPriceDataRequest) ProtoMessage()    {}
+func (*QueryGetPriceDataRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{22}
+}
+func (m *QueryGetPriceDataRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetPriceDataRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetPriceDataRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetPriceDataRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetPriceDataRequest.Merge(m, src)
+}
+func (m *QueryGetPriceDataRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetPriceDataRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetPriceDataRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetPriceDataRequest proto.InternalMessageInfo
+
+func (m *QueryGetPriceDataRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetPriceDataResponse struct {
+	PriceData PriceData `protobuf:"bytes,1,opt,name=priceData,proto3" json:"priceData"`
+}
+
+func (m *QueryGetPriceDataResponse) Reset()         { *m = QueryGetPriceDataResponse{} }
+func (m *QueryGetPriceDataResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetPriceDataResponse) ProtoMessage()    {}
+func (*QueryGetPriceDataResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{23}
+}
+func (m *QueryGetPriceDataResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetPriceDataResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetPriceDataResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetPriceDataResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetPriceDataResponse.Merge(m, src)
+}
+func (m *QueryGetPriceDataResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetPriceDataResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetPriceDataResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetPriceDataResponse proto.InternalMessageInfo
+
+func (m *QueryGetPriceDataResponse) GetPriceData() PriceData {
+	if m != nil {
+		return m.PriceData
+	}
+	return PriceData{}
+}
+
+type QueryAllPriceDataRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllPriceDataRequest) Reset()         { *m = QueryAllPriceDataRequest{} }
+func (m *QueryAllPriceDataRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllPriceDataRequest) ProtoMessage()    {}
+func (*QueryAllPriceDataRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{24}
+}
+func (m *QueryAllPriceDataRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllPriceDataRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllPriceDataRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllPriceDataRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllPriceDataRequest.Merge(m, src)
+}
+func (m *QueryAllPriceDataRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllPriceDataRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllPriceDataRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllPriceDataRequest proto.InternalMessageInfo
+
+func (m *QueryAllPriceDataRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllPriceDataResponse struct {
+	PriceData  []PriceData         `protobuf:"bytes,1,rep,name=priceData,proto3" json:"priceData"`
+	Pagination *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllPriceDataResponse) Reset()         { *m = QueryAllPriceDataResponse{} }
+func (m *QueryAllPriceDataResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllPriceDataResponse) ProtoMessage()    {}
+func (*QueryAllPriceDataResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_33b7babacada5cb6, []int{25}
+}
+func (m *QueryAllPriceDataResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllPriceDataResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllPriceDataResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllPriceDataResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllPriceDataResponse.Merge(m, src)
+}
+func (m *QueryAllPriceDataResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllPriceDataResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllPriceDataResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllPriceDataResponse proto.InternalMessageInfo
+
+func (m *QueryAllPriceDataResponse) GetPriceData() []PriceData {
+	if m != nil {
+		return m.PriceData
+	}
+	return nil
+}
+
+func (m *QueryAllPriceDataResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -864,68 +1248,98 @@ func init() {
 	proto.RegisterType((*QueryGetRegistryMemberResponse)(nil), "pricechain.cprc.registry.QueryGetRegistryMemberResponse")
 	proto.RegisterType((*QueryAllRegistryMemberRequest)(nil), "pricechain.cprc.registry.QueryAllRegistryMemberRequest")
 	proto.RegisterType((*QueryAllRegistryMemberResponse)(nil), "pricechain.cprc.registry.QueryAllRegistryMemberResponse")
-	proto.RegisterType((*QueryGetPriceConsensusRequest)(nil), "pricechain.cprc.registry.QueryGetPriceConsensusRequest")
-	proto.RegisterType((*QueryGetPriceConsensusResponse)(nil), "pricechain.cprc.registry.QueryGetPriceConsensusResponse")
-	proto.RegisterType((*QueryAllPriceConsensusRequest)(nil), "pricechain.cprc.registry.QueryAllPriceConsensusRequest")
-	proto.RegisterType((*QueryAllPriceConsensusResponse)(nil), "pricechain.cprc.registry.QueryAllPriceConsensusResponse")
+	proto.RegisterType((*QueryGetRegistryStakedAmountRequest)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountRequest")
+	proto.RegisterType((*QueryGetRegistryStakedAmountResponse)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountResponse")
+	proto.RegisterType((*QueryAllRegistryStakedAmountRequest)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountRequest")
+	proto.RegisterType((*QueryAllRegistryStakedAmountResponse)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountResponse")
+	proto.RegisterType((*QueryGetRegistryStakedAmountPerWalletRequest)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountPerWalletRequest")
+	proto.RegisterType((*QueryGetRegistryStakedAmountPerWalletResponse)(nil), "pricechain.cprc.registry.QueryGetRegistryStakedAmountPerWalletResponse")
+	proto.RegisterType((*QueryAllRegistryStakedAmountPerWalletRequest)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountPerWalletRequest")
+	proto.RegisterType((*QueryAllRegistryStakedAmountPerWalletResponse)(nil), "pricechain.cprc.registry.QueryAllRegistryStakedAmountPerWalletResponse")
+	proto.RegisterType((*QueryGetPriceDataRequest)(nil), "pricechain.cprc.registry.QueryGetPriceDataRequest")
+	proto.RegisterType((*QueryGetPriceDataResponse)(nil), "pricechain.cprc.registry.QueryGetPriceDataResponse")
+	proto.RegisterType((*QueryAllPriceDataRequest)(nil), "pricechain.cprc.registry.QueryAllPriceDataRequest")
+	proto.RegisterType((*QueryAllPriceDataResponse)(nil), "pricechain.cprc.registry.QueryAllPriceDataResponse")
 }
 
 func init() { proto.RegisterFile("registry/query.proto", fileDescriptor_33b7babacada5cb6) }
 
 var fileDescriptor_33b7babacada5cb6 = []byte{
-	// 832 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x97, 0x4d, 0x4f, 0xd4, 0x40,
-	0x18, 0xc7, 0x77, 0x76, 0x91, 0x98, 0x41, 0x89, 0x8e, 0x18, 0xc8, 0x06, 0x2a, 0x69, 0x08, 0xef,
-	0xb4, 0xee, 0x92, 0x00, 0x27, 0x13, 0xf0, 0x85, 0x93, 0x11, 0xd7, 0xe8, 0xc1, 0x0b, 0x76, 0x77,
-	0xc7, 0xd2, 0x64, 0xb7, 0x2d, 0x6d, 0x57, 0x21, 0xc6, 0x8b, 0x9f, 0x40, 0xe3, 0x37, 0x30, 0x5e,
-	0xfc, 0x04, 0xc6, 0x18, 0x0e, 0xde, 0x38, 0x92, 0x78, 0xd1, 0x8b, 0x31, 0xe0, 0x07, 0x31, 0x9d,
-	0x79, 0xba, 0xbb, 0xd3, 0x6e, 0x69, 0x0b, 0xcb, 0xad, 0xe9, 0x3c, 0x2f, 0xbf, 0xff, 0xff, 0xd9,
-	0xcc, 0xd3, 0xc5, 0x23, 0x0e, 0xd5, 0x0d, 0xd7, 0x73, 0xf6, 0xd5, 0xdd, 0x16, 0x75, 0xf6, 0x15,
-	0xdb, 0xb1, 0x3c, 0x8b, 0x8c, 0xd9, 0x8e, 0x51, 0xa3, 0xb5, 0x1d, 0xcd, 0x30, 0x95, 0x9a, 0xed,
-	0xd4, 0x94, 0x20, 0xaa, 0x38, 0xa2, 0x5b, 0xba, 0xc5, 0x82, 0x54, 0xff, 0x89, 0xc7, 0x17, 0xc7,
-	0x75, 0xcb, 0xd2, 0x1b, 0x54, 0xd5, 0x6c, 0x43, 0xd5, 0x4c, 0xd3, 0xf2, 0x34, 0xcf, 0xb0, 0x4c,
-	0x17, 0x4e, 0xe7, 0x6b, 0x96, 0xdb, 0xb4, 0x5c, 0xb5, 0xaa, 0xb9, 0x94, 0xb7, 0x51, 0x5f, 0x95,
-	0xaa, 0xd4, 0xd3, 0x4a, 0xaa, 0xad, 0xe9, 0x86, 0xc9, 0x82, 0x21, 0xf6, 0x66, 0x9b, 0xc7, 0xd6,
-	0x1c, 0xad, 0x19, 0x94, 0x18, 0x6d, 0xbf, 0x0e, 0x1e, 0xe0, 0x60, 0x22, 0x72, 0xb0, 0x6d, 0xbd,
-	0x36, 0xa9, 0x03, 0xc7, 0x52, 0xf4, 0xb8, 0x49, 0x9b, 0xd5, 0x1e, 0xe7, 0x4c, 0xf1, 0x76, 0xcd,
-	0x32, 0x5d, 0x6a, 0xba, 0x2d, 0xe8, 0x2b, 0x8f, 0x60, 0xf2, 0xd8, 0x07, 0xde, 0x62, 0x30, 0x15,
-	0xba, 0xdb, 0xa2, 0xae, 0x27, 0x3f, 0xc5, 0x37, 0x84, 0xb7, 0xae, 0xed, 0xa7, 0x91, 0x3b, 0x78,
-	0x90, 0x43, 0x8f, 0xa1, 0x49, 0x34, 0x3b, 0x54, 0x9e, 0x54, 0xe2, 0x6c, 0x54, 0x78, 0xe6, 0xc6,
-	0xc0, 0xe1, 0x9f, 0x5b, 0xb9, 0x0a, 0x64, 0xc9, 0x73, 0x78, 0x94, 0x95, 0xdd, 0xa4, 0x5e, 0x05,
-	0x02, 0xa1, 0x23, 0x19, 0xc6, 0x79, 0xa3, 0xce, 0xca, 0x0e, 0x54, 0xf2, 0x46, 0x5d, 0x7e, 0x81,
-	0xc7, 0xa2, 0xa1, 0x80, 0x71, 0x0f, 0x5f, 0x0e, 0xde, 0x01, 0x88, 0x1c, 0x0f, 0x12, 0x44, 0x02,
-	0x4a, 0x3b, 0x53, 0xd6, 0x00, 0x66, 0xbd, 0xd1, 0x08, 0xc3, 0x3c, 0xc0, 0xb8, 0x33, 0x37, 0x68,
-	0x31, 0xad, 0xf0, 0x21, 0x2b, 0xfe, 0x90, 0x15, 0xfe, 0x5b, 0x82, 0x21, 0x2b, 0x5b, 0x9a, 0x4e,
-	0x21, 0xb7, 0xd2, 0x95, 0x29, 0x7f, 0x41, 0xa0, 0x42, 0xe8, 0xd1, 0x53, 0x45, 0xe1, 0x6c, 0x2a,
-	0xc8, 0xa6, 0x80, 0x9a, 0x67, 0xa8, 0x33, 0x89, 0xa8, 0x1c, 0x41, 0x60, 0x55, 0xf0, 0x78, 0xd8,
-	0xf0, 0x47, 0xfe, 0xef, 0x2c, 0x6e, 0x40, 0x1e, 0x9e, 0x88, 0x89, 0x07, 0x7d, 0x4f, 0xf0, 0x55,
-	0xe1, 0x00, 0x7c, 0x9c, 0x49, 0x16, 0xc9, 0xc2, 0x41, 0xa9, 0x58, 0x43, 0x7e, 0x09, 0x94, 0x5d,
-	0x86, 0x0a, 0x94, 0xfd, 0x9a, 0xdc, 0x01, 0x02, 0x79, 0xd1, 0x46, 0xf1, 0xf2, 0x0a, 0xe7, 0x95,
-	0xd7, 0xbf, 0x69, 0xaa, 0xd1, 0xe9, 0x3c, 0x64, 0xd7, 0x42, 0xdc, 0x38, 0xf7, 0xb0, 0x14, 0x97,
-	0x00, 0x82, 0x9f, 0xe1, 0x61, 0xf1, 0x04, 0xec, 0x9d, 0x4d, 0x56, 0xcc, 0xe3, 0x41, 0x72, 0xa8,
-	0x8a, 0xac, 0x47, 0x9d, 0x16, 0x51, 0xfb, 0x35, 0xd3, 0x1f, 0x08, 0x34, 0xf6, 0xe8, 0x74, 0x8a,
-	0xc6, 0xc2, 0xf9, 0x35, 0x5e, 0xc8, 0x5c, 0xb7, 0x7c, 0xa2, 0xbb, 0xc1, 0x75, 0x9e, 0x62, 0xae,
-	0xe1, 0x84, 0x8e, 0x66, 0xf1, 0x24, 0x79, 0xae, 0x62, 0x7c, 0xa0, 0x59, 0x7c, 0xdb, 0x3d, 0xd7,
-	0xde, 0xa8, 0x17, 0x31, 0xd7, 0x0c, 0x1a, 0x0b, 0xe7, 0xd7, 0xd8, 0xb7, 0xb9, 0x96, 0x7f, 0x5f,
-	0xc1, 0x97, 0x98, 0x06, 0xf2, 0x01, 0xe1, 0x41, 0xbe, 0x3c, 0xc9, 0x62, 0x3c, 0x5d, 0x74, 0x67,
-	0x17, 0x97, 0x52, 0x46, 0xf3, 0xee, 0xf2, 0xfc, 0xbb, 0x9f, 0xff, 0x3e, 0xe6, 0xa7, 0x88, 0xac,
-	0x72, 0x4d, 0x7e, 0x9a, 0xea, 0xd4, 0xb7, 0x4d, 0xea, 0xa9, 0xa1, 0x4f, 0x14, 0xf2, 0x19, 0x75,
-	0x76, 0x15, 0x29, 0x25, 0xf4, 0x89, 0x2e, 0xf7, 0x62, 0x39, 0x4b, 0x0a, 0xf0, 0x95, 0x18, 0xdf,
-	0x02, 0x99, 0x3b, 0x8d, 0xaf, 0xfd, 0xf0, 0xc6, 0xa8, 0xbf, 0x25, 0x9f, 0x10, 0x1e, 0x0a, 0xea,
-	0xac, 0x37, 0x1a, 0x89, 0xa4, 0xd1, 0xcd, 0x9f, 0x48, 0xda, 0x63, 0x91, 0xcb, 0x8b, 0x8c, 0x74,
-	0x9a, 0x4c, 0xa5, 0x21, 0x25, 0xdf, 0x50, 0x68, 0x71, 0x90, 0x95, 0xf4, 0xee, 0x74, 0xef, 0xba,
-	0xe2, 0x6a, 0xe6, 0x3c, 0x00, 0x5e, 0x65, 0xc0, 0x25, 0xa2, 0xa6, 0x01, 0xe6, 0x5f, 0x9b, 0xdc,
-	0xe0, 0xaf, 0x08, 0x5f, 0x13, 0x4a, 0xfa, 0x2e, 0xaf, 0xa4, 0xb7, 0x2c, 0x13, 0x7e, 0xdc, 0xe6,
-	0x95, 0xcb, 0x0c, 0x7f, 0x91, 0xcc, 0xa7, 0xc7, 0x27, 0x07, 0x28, 0x7c, 0xb3, 0x93, 0x0c, 0xf6,
-	0x09, 0xfb, 0xa8, 0xb8, 0x96, 0x3d, 0x11, 0xc8, 0xd7, 0x18, 0x79, 0x99, 0xdc, 0x4e, 0x45, 0xce,
-	0xbf, 0xe3, 0xb9, 0xf3, 0xdf, 0x11, 0xbe, 0x2e, 0x16, 0xf5, 0xad, 0xcf, 0x60, 0x61, 0x36, 0x09,
-	0xb1, 0x1b, 0x52, 0x5e, 0x66, 0x12, 0x96, 0xc8, 0x42, 0x06, 0x09, 0xcc, 0xfd, 0xd0, 0xcd, 0x99,
-	0xc2, 0xfd, 0x9e, 0x5b, 0x23, 0x8d, 0xfb, 0xbd, 0x97, 0x40, 0x3a, 0xf7, 0x43, 0xff, 0x92, 0x3a,
-	0xee, 0x8b, 0x45, 0x53, 0xba, 0x7f, 0x36, 0x09, 0xb1, 0x7b, 0x2c, 0x9d, 0xfb, 0x21, 0x09, 0x1b,
-	0xf7, 0x0f, 0x8f, 0x25, 0x74, 0x74, 0x2c, 0xa1, 0xbf, 0xc7, 0x12, 0x7a, 0x7f, 0x22, 0xe5, 0x8e,
-	0x4e, 0xa4, 0xdc, 0xaf, 0x13, 0x29, 0xf7, 0x7c, 0x41, 0x37, 0xbc, 0x9d, 0x56, 0x55, 0xa9, 0x59,
-	0xcd, 0xee, 0x82, 0x3e, 0x92, 0xba, 0xd7, 0x29, 0xe8, 0xed, 0xdb, 0xd4, 0xad, 0x0e, 0xb2, 0x3f,
-	0x8c, 0xcb, 0xff, 0x03, 0x00, 0x00, 0xff, 0xff, 0x8c, 0x21, 0x8c, 0x97, 0x51, 0x0f, 0x00, 0x00,
+	// 1174 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x58, 0xcb, 0x6f, 0xdc, 0x44,
+	0x18, 0xcf, 0x64, 0xdb, 0x88, 0x4c, 0xa1, 0x82, 0x69, 0x50, 0xd2, 0x55, 0xb3, 0x44, 0xd3, 0xd0,
+	0x3c, 0x9a, 0xd8, 0x9b, 0x14, 0xd2, 0x88, 0x2a, 0x15, 0x69, 0xd2, 0xe4, 0x80, 0x10, 0x61, 0x2b,
+	0x40, 0xe2, 0xb2, 0xcc, 0xee, 0x0e, 0x8e, 0xc5, 0xae, 0xed, 0xda, 0x4e, 0x9b, 0xa8, 0xea, 0x05,
+	0xfe, 0x00, 0x2a, 0xf1, 0x0f, 0x20, 0x24, 0x0e, 0x20, 0x71, 0xac, 0x10, 0x42, 0x1c, 0xb8, 0xf5,
+	0xc0, 0xa1, 0x82, 0x03, 0x70, 0x41, 0x28, 0xe1, 0x8f, 0xe0, 0x02, 0x42, 0x1e, 0x7f, 0xf6, 0xae,
+	0xdf, 0xf6, 0xc6, 0xdc, 0x76, 0x3d, 0xdf, 0xe3, 0xf7, 0xf8, 0x64, 0x7f, 0x36, 0x9e, 0x30, 0xb9,
+	0xa2, 0x5a, 0xb6, 0x79, 0x24, 0xdf, 0x3d, 0xe0, 0xe6, 0x91, 0x64, 0x98, 0xba, 0xad, 0x93, 0x29,
+	0xc3, 0x54, 0xdb, 0xbc, 0xbd, 0xcf, 0x54, 0x4d, 0x6a, 0x1b, 0x66, 0x5b, 0xf2, 0xa2, 0xaa, 0x13,
+	0x8a, 0xae, 0xe8, 0x22, 0x48, 0x76, 0x7e, 0xb9, 0xf1, 0xd5, 0x4b, 0x8a, 0xae, 0x2b, 0x5d, 0x2e,
+	0x33, 0x43, 0x95, 0x99, 0xa6, 0xe9, 0x36, 0xb3, 0x55, 0x5d, 0xb3, 0xe0, 0x74, 0xb1, 0xad, 0x5b,
+	0x3d, 0xdd, 0x92, 0x5b, 0xcc, 0xe2, 0x6e, 0x1b, 0xf9, 0xde, 0x4a, 0x8b, 0xdb, 0x6c, 0x45, 0x36,
+	0x98, 0xa2, 0x6a, 0x22, 0x18, 0x62, 0x5f, 0xf4, 0xf1, 0x18, 0xcc, 0x64, 0x3d, 0xaf, 0xc4, 0xa4,
+	0x7f, 0xd9, 0xfb, 0x01, 0x07, 0xd3, 0x91, 0x83, 0xa6, 0x7e, 0x5f, 0xe3, 0x26, 0x1c, 0xd7, 0xa2,
+	0xc7, 0x3d, 0xde, 0x6b, 0xf9, 0xe7, 0x2f, 0x47, 0xcf, 0x2d, 0x9b, 0x7d, 0xc4, 0x3b, 0x4d, 0xd6,
+	0xd3, 0x0f, 0x34, 0x1b, 0xc2, 0xea, 0x19, 0x61, 0x4d, 0x83, 0x9b, 0xcd, 0xfb, 0xac, 0xdb, 0xe5,
+	0x5e, 0xc6, 0xc5, 0x3e, 0x0f, 0x47, 0xca, 0x66, 0x87, 0xd9, 0xcc, 0x3d, 0xa2, 0x13, 0x98, 0xbc,
+	0xed, 0x88, 0xb0, 0x27, 0x08, 0x36, 0xf8, 0xdd, 0x03, 0x6e, 0xd9, 0xf4, 0x1d, 0x7c, 0x21, 0x70,
+	0xd5, 0x32, 0x74, 0xcd, 0xe2, 0xe4, 0x26, 0x1e, 0x73, 0x85, 0x98, 0x42, 0x33, 0x68, 0xfe, 0xdc,
+	0xea, 0x8c, 0x94, 0x64, 0x8d, 0xe4, 0x66, 0xde, 0x3a, 0xf3, 0xe4, 0x8f, 0x97, 0x46, 0x1a, 0x90,
+	0x45, 0x17, 0xf0, 0xa4, 0x28, 0xbb, 0xcb, 0xed, 0x06, 0x04, 0x42, 0x47, 0x72, 0x1e, 0x8f, 0xaa,
+	0x1d, 0x51, 0xf6, 0x4c, 0x63, 0x54, 0xed, 0xd0, 0x0f, 0xf0, 0x54, 0x34, 0x14, 0x60, 0x6c, 0xe3,
+	0x67, 0xbc, 0x6b, 0x00, 0x84, 0x26, 0x03, 0xf1, 0x22, 0x01, 0x8a, 0x9f, 0x49, 0x19, 0x80, 0xd9,
+	0xec, 0x76, 0xc3, 0x60, 0x76, 0x30, 0xee, 0xcf, 0x02, 0xb4, 0xb8, 0x22, 0xb9, 0x83, 0x23, 0x39,
+	0x83, 0x23, 0xb9, 0xf3, 0x09, 0x83, 0x23, 0xed, 0x31, 0x85, 0x43, 0x6e, 0x63, 0x20, 0x93, 0x7e,
+	0x85, 0x80, 0x45, 0xa0, 0x47, 0x2c, 0x8b, 0xca, 0x70, 0x2c, 0xc8, 0x6e, 0x00, 0xea, 0xa8, 0x80,
+	0x3a, 0x97, 0x09, 0xd5, 0x85, 0x10, 0xc0, 0x2a, 0xe1, 0x4b, 0x61, 0xc1, 0xdf, 0x72, 0x66, 0x37,
+	0xc9, 0x20, 0x1b, 0x4f, 0x27, 0xc4, 0x03, 0xbf, 0x3b, 0xf8, 0xb9, 0xc0, 0x01, 0xe8, 0x38, 0x97,
+	0x4d, 0x52, 0x84, 0x03, 0xd3, 0x60, 0x0d, 0xfa, 0x21, 0xa0, 0x1c, 0x10, 0x34, 0x80, 0xb2, 0x2c,
+	0xe7, 0x7e, 0x40, 0x40, 0x2f, 0xda, 0x28, 0x99, 0x5e, 0xe5, 0xb4, 0xf4, 0xca, 0x73, 0x53, 0x8e,
+	0xba, 0xf3, 0xa6, 0xb8, 0xd5, 0x24, 0xd9, 0x79, 0x88, 0x6b, 0x49, 0x09, 0x40, 0xf8, 0x5d, 0x7c,
+	0x3e, 0x78, 0x02, 0xf2, 0xce, 0x67, 0x33, 0x76, 0xe3, 0x81, 0x72, 0xa8, 0x0a, 0x55, 0xa2, 0x4a,
+	0x07, 0xa1, 0x96, 0xe5, 0xe9, 0x8f, 0x08, 0x38, 0xc6, 0x74, 0x4a, 0xe1, 0x58, 0x39, 0x3d, 0xc7,
+	0xf2, 0x7c, 0xbd, 0x81, 0x2f, 0x87, 0x6d, 0xba, 0x23, 0xee, 0xfd, 0x9b, 0xe2, 0xd6, 0xef, 0x49,
+	0x36, 0x81, 0xcf, 0xaa, 0x5a, 0x87, 0x1f, 0x0a, 0xb5, 0xc6, 0x1b, 0xee, 0x1f, 0xfa, 0x08, 0xe1,
+	0xd9, 0xf4, 0x6c, 0x90, 0x61, 0xbf, 0xff, 0x24, 0x1e, 0x3c, 0x07, 0xed, 0xa5, 0x6c, 0x31, 0x06,
+	0xb3, 0x40, 0x92, 0xd8, 0x8a, 0xb4, 0x07, 0x7c, 0x06, 0x2c, 0x89, 0xe3, 0x53, 0xd6, 0x08, 0xfc,
+	0xee, 0x29, 0x90, 0xd8, 0x2f, 0x53, 0x81, 0x4a, 0xb9, 0x0a, 0x94, 0x37, 0x1a, 0xdb, 0x78, 0x29,
+	0xcd, 0xdc, 0x3d, 0x6e, 0xbe, 0x27, 0x76, 0x82, 0xf4, 0x19, 0x79, 0x8c, 0xf0, 0x72, 0xce, 0x32,
+	0x20, 0xd5, 0x27, 0x08, 0x4f, 0x9b, 0x69, 0x91, 0xe0, 0xd7, 0xf5, 0x62, 0xa2, 0xf9, 0xe9, 0xa0,
+	0x5e, 0x7a, 0x0f, 0x7a, 0x0f, 0xd8, 0x27, 0x18, 0x1b, 0x61, 0x5f, 0xd6, 0x44, 0xfd, 0xeb, 0xe9,
+	0x95, 0xdd, 0xb8, 0x80, 0x5e, 0x95, 0xff, 0x5b, 0xaf, 0xf2, 0xc6, 0xae, 0xde, 0x5f, 0xd4, 0xf6,
+	0x1c, 0xbc, 0xdb, 0xcc, 0x66, 0xe9, 0x23, 0xd6, 0xc1, 0x17, 0x63, 0x32, 0x40, 0x9d, 0x5d, 0x3c,
+	0x6e, 0x78, 0x17, 0xc1, 0x96, 0xcb, 0x29, 0x5b, 0xa6, 0x17, 0x0a, 0xa4, 0xfb, 0xb9, 0xb4, 0xd5,
+	0x5f, 0xbd, 0x22, 0xb8, 0xca, 0x32, 0xff, 0x1b, 0x04, 0x54, 0x82, 0x4d, 0xe2, 0xa9, 0x54, 0x86,
+	0xa5, 0x52, 0x9a, 0x57, 0xab, 0x3f, 0x5d, 0xc0, 0x67, 0x05, 0x5e, 0xf2, 0x29, 0xc2, 0x63, 0xee,
+	0x8a, 0x4e, 0x96, 0x92, 0x31, 0x45, 0xdf, 0x0c, 0xaa, 0xcb, 0x39, 0xa3, 0xdd, 0xee, 0x74, 0xfe,
+	0xe3, 0x5f, 0xfe, 0xfa, 0x6c, 0x94, 0x92, 0x19, 0x59, 0xf0, 0xdb, 0x72, 0xd2, 0x64, 0x27, 0x4d,
+	0x0e, 0xbd, 0x5a, 0x91, 0x2f, 0x50, 0x7f, 0x1f, 0x26, 0x2b, 0x19, 0x5d, 0xa2, 0x2f, 0x10, 0xd5,
+	0xd5, 0x22, 0x29, 0x80, 0x4e, 0x16, 0xe8, 0x16, 0xc8, 0x5c, 0x32, 0x3a, 0xff, 0xc7, 0x03, 0xb5,
+	0xf3, 0x90, 0x7c, 0x8e, 0xf0, 0x39, 0xaf, 0xca, 0x66, 0xb7, 0x9b, 0x89, 0x33, 0xfa, 0x6e, 0x91,
+	0x89, 0x33, 0xe6, 0x55, 0x81, 0x2e, 0x0a, 0x9c, 0xb3, 0x84, 0x66, 0xe3, 0x24, 0xdf, 0xa2, 0xd0,
+	0x62, 0x4a, 0xd6, 0xf2, 0x2b, 0x33, 0xb8, 0x4b, 0x57, 0xaf, 0x17, 0xce, 0x03, 0xb8, 0xaf, 0x0a,
+	0xb8, 0x32, 0x59, 0xce, 0x86, 0xeb, 0xbe, 0x1f, 0xbb, 0xe2, 0x3e, 0x46, 0xf8, 0xf9, 0x40, 0x41,
+	0x47, 0xe1, 0xb5, 0xfc, 0x72, 0x15, 0x02, 0x9f, 0xb4, 0xd7, 0xd3, 0xba, 0x00, 0xbf, 0x48, 0xe6,
+	0xf3, 0x82, 0x27, 0xdf, 0xa3, 0xf0, 0xd6, 0x48, 0x0a, 0x48, 0x17, 0xd8, 0x75, 0xab, 0xeb, 0xc5,
+	0x13, 0x01, 0xf7, 0x9a, 0xc0, 0x5d, 0x27, 0x52, 0x0e, 0xdc, 0xee, 0x57, 0x07, 0x57, 0xf5, 0xef,
+	0x10, 0x7e, 0x21, 0x58, 0xd2, 0x91, 0xbd, 0x80, 0x7c, 0xc5, 0x08, 0x24, 0xee, 0xde, 0x74, 0x45,
+	0x10, 0xb8, 0x4a, 0x16, 0x72, 0x13, 0x20, 0xbf, 0x22, 0x3c, 0x11, 0xf7, 0x2c, 0x24, 0x1b, 0xf9,
+	0x65, 0x8c, 0x59, 0x37, 0xab, 0x37, 0x87, 0x4d, 0x07, 0x2a, 0xaf, 0x0b, 0x2a, 0xaf, 0x91, 0xf5,
+	0x1c, 0x54, 0x02, 0x9f, 0x6e, 0xe4, 0x07, 0xe2, 0x11, 0xf9, 0x90, 0xfc, 0x8c, 0xf0, 0x64, 0x5c,
+	0x0b, 0xc7, 0x9b, 0x8d, 0xfc, 0x12, 0x0f, 0x43, 0x2e, 0x63, 0x35, 0xa6, 0xeb, 0x82, 0xdc, 0x2a,
+	0xa9, 0x17, 0x25, 0x47, 0xfe, 0x41, 0x78, 0x3a, 0x75, 0x75, 0x21, 0x3b, 0xc3, 0x09, 0x1f, 0xde,
+	0xee, 0xaa, 0xbb, 0xa7, 0xae, 0x03, 0x64, 0xdf, 0x10, 0x64, 0x6f, 0x93, 0xad, 0xa2, 0x64, 0x07,
+	0x3e, 0xc2, 0xf9, 0xa6, 0xfe, 0x8d, 0xf0, 0x4c, 0x6a, 0x5b, 0xc7, 0xdd, 0x9d, 0xe1, 0xec, 0x29,
+	0x2c, 0x41, 0xde, 0x7d, 0x95, 0x6e, 0x09, 0x09, 0x36, 0xc8, 0x8d, 0x53, 0x48, 0x40, 0xbe, 0x46,
+	0x78, 0xdc, 0xdf, 0x70, 0x48, 0x8e, 0x67, 0x75, 0x78, 0x67, 0xab, 0x5e, 0x2b, 0x94, 0x03, 0xd8,
+	0x5f, 0x11, 0xd8, 0x25, 0xb2, 0x94, 0xb2, 0x7e, 0xf8, 0x5f, 0x44, 0x7d, 0x9f, 0xbe, 0x44, 0xf8,
+	0x59, 0xbf, 0x96, 0xe3, 0x49, 0x8e, 0x67, 0x76, 0x61, 0xbc, 0x71, 0x2b, 0x23, 0x5d, 0x12, 0x78,
+	0xaf, 0x90, 0xd9, 0x3c, 0x78, 0x6f, 0xdd, 0x7e, 0x72, 0x5c, 0x43, 0x4f, 0x8f, 0x6b, 0xe8, 0xcf,
+	0xe3, 0x1a, 0x7a, 0x74, 0x52, 0x1b, 0x79, 0x7a, 0x52, 0x1b, 0xf9, 0xed, 0xa4, 0x36, 0xf2, 0xfe,
+	0x55, 0x45, 0xb5, 0xf7, 0x0f, 0x5a, 0x52, 0x5b, 0xef, 0x45, 0x2a, 0x1d, 0xf6, 0x6b, 0xd9, 0x47,
+	0x06, 0xb7, 0x5a, 0x63, 0xe2, 0x4b, 0xf0, 0xb5, 0xff, 0x02, 0x00, 0x00, 0xff, 0xff, 0x29, 0x40,
+	0xe6, 0xbf, 0x7e, 0x17, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -954,10 +1368,18 @@ type QueryClient interface {
 	RegistryMember(ctx context.Context, in *QueryGetRegistryMemberRequest, opts ...grpc.CallOption) (*QueryGetRegistryMemberResponse, error)
 	// Queries a list of RegistryMember items.
 	RegistryMemberAll(ctx context.Context, in *QueryAllRegistryMemberRequest, opts ...grpc.CallOption) (*QueryAllRegistryMemberResponse, error)
-	// Queries a PriceConsensus by id.
-	PriceConsensus(ctx context.Context, in *QueryGetPriceConsensusRequest, opts ...grpc.CallOption) (*QueryGetPriceConsensusResponse, error)
-	// Queries a list of PriceConsensus items.
-	PriceConsensusAll(ctx context.Context, in *QueryAllPriceConsensusRequest, opts ...grpc.CallOption) (*QueryAllPriceConsensusResponse, error)
+	// Queries a RegistryStakedAmount by index.
+	RegistryStakedAmount(ctx context.Context, in *QueryGetRegistryStakedAmountRequest, opts ...grpc.CallOption) (*QueryGetRegistryStakedAmountResponse, error)
+	// Queries a list of RegistryStakedAmount items.
+	RegistryStakedAmountAll(ctx context.Context, in *QueryAllRegistryStakedAmountRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountResponse, error)
+	// Queries a StakedAmountPerWallet by index.
+	RegistryStakedAmountPerWallet(ctx context.Context, in *QueryGetRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryGetRegistryStakedAmountPerWalletResponse, error)
+	// Queries a list of StakedAmountPerWallet items.
+	RegistryStakedAmountPerWalletAll(ctx context.Context, in *QueryAllRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountPerWalletResponse, error)
+	// Queries a PriceData by index.
+	PriceData(ctx context.Context, in *QueryGetPriceDataRequest, opts ...grpc.CallOption) (*QueryGetPriceDataResponse, error)
+	// Queries a list of PriceData items.
+	PriceDataAll(ctx context.Context, in *QueryAllPriceDataRequest, opts ...grpc.CallOption) (*QueryAllPriceDataResponse, error)
 }
 
 type queryClient struct {
@@ -1031,18 +1453,54 @@ func (c *queryClient) RegistryMemberAll(ctx context.Context, in *QueryAllRegistr
 	return out, nil
 }
 
-func (c *queryClient) PriceConsensus(ctx context.Context, in *QueryGetPriceConsensusRequest, opts ...grpc.CallOption) (*QueryGetPriceConsensusResponse, error) {
-	out := new(QueryGetPriceConsensusResponse)
-	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/PriceConsensus", in, out, opts...)
+func (c *queryClient) RegistryStakedAmount(ctx context.Context, in *QueryGetRegistryStakedAmountRequest, opts ...grpc.CallOption) (*QueryGetRegistryStakedAmountResponse, error) {
+	out := new(QueryGetRegistryStakedAmountResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/RegistryStakedAmount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) PriceConsensusAll(ctx context.Context, in *QueryAllPriceConsensusRequest, opts ...grpc.CallOption) (*QueryAllPriceConsensusResponse, error) {
-	out := new(QueryAllPriceConsensusResponse)
-	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/PriceConsensusAll", in, out, opts...)
+func (c *queryClient) RegistryStakedAmountAll(ctx context.Context, in *QueryAllRegistryStakedAmountRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountResponse, error) {
+	out := new(QueryAllRegistryStakedAmountResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/RegistryStakedAmountAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) RegistryStakedAmountPerWallet(ctx context.Context, in *QueryGetRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryGetRegistryStakedAmountPerWalletResponse, error) {
+	out := new(QueryGetRegistryStakedAmountPerWalletResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWallet", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) RegistryStakedAmountPerWalletAll(ctx context.Context, in *QueryAllRegistryStakedAmountPerWalletRequest, opts ...grpc.CallOption) (*QueryAllRegistryStakedAmountPerWalletResponse, error) {
+	out := new(QueryAllRegistryStakedAmountPerWalletResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWalletAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) PriceData(ctx context.Context, in *QueryGetPriceDataRequest, opts ...grpc.CallOption) (*QueryGetPriceDataResponse, error) {
+	out := new(QueryGetPriceDataResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/PriceData", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) PriceDataAll(ctx context.Context, in *QueryAllPriceDataRequest, opts ...grpc.CallOption) (*QueryAllPriceDataResponse, error) {
+	out := new(QueryAllPriceDataResponse)
+	err := c.cc.Invoke(ctx, "/pricechain.cprc.registry.Query/PriceDataAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1065,10 +1523,18 @@ type QueryServer interface {
 	RegistryMember(context.Context, *QueryGetRegistryMemberRequest) (*QueryGetRegistryMemberResponse, error)
 	// Queries a list of RegistryMember items.
 	RegistryMemberAll(context.Context, *QueryAllRegistryMemberRequest) (*QueryAllRegistryMemberResponse, error)
-	// Queries a PriceConsensus by id.
-	PriceConsensus(context.Context, *QueryGetPriceConsensusRequest) (*QueryGetPriceConsensusResponse, error)
-	// Queries a list of PriceConsensus items.
-	PriceConsensusAll(context.Context, *QueryAllPriceConsensusRequest) (*QueryAllPriceConsensusResponse, error)
+	// Queries a RegistryStakedAmount by index.
+	RegistryStakedAmount(context.Context, *QueryGetRegistryStakedAmountRequest) (*QueryGetRegistryStakedAmountResponse, error)
+	// Queries a list of RegistryStakedAmount items.
+	RegistryStakedAmountAll(context.Context, *QueryAllRegistryStakedAmountRequest) (*QueryAllRegistryStakedAmountResponse, error)
+	// Queries a StakedAmountPerWallet by index.
+	RegistryStakedAmountPerWallet(context.Context, *QueryGetRegistryStakedAmountPerWalletRequest) (*QueryGetRegistryStakedAmountPerWalletResponse, error)
+	// Queries a list of StakedAmountPerWallet items.
+	RegistryStakedAmountPerWalletAll(context.Context, *QueryAllRegistryStakedAmountPerWalletRequest) (*QueryAllRegistryStakedAmountPerWalletResponse, error)
+	// Queries a PriceData by index.
+	PriceData(context.Context, *QueryGetPriceDataRequest) (*QueryGetPriceDataResponse, error)
+	// Queries a list of PriceData items.
+	PriceDataAll(context.Context, *QueryAllPriceDataRequest) (*QueryAllPriceDataResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -1096,11 +1562,23 @@ func (*UnimplementedQueryServer) RegistryMember(ctx context.Context, req *QueryG
 func (*UnimplementedQueryServer) RegistryMemberAll(ctx context.Context, req *QueryAllRegistryMemberRequest) (*QueryAllRegistryMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegistryMemberAll not implemented")
 }
-func (*UnimplementedQueryServer) PriceConsensus(ctx context.Context, req *QueryGetPriceConsensusRequest) (*QueryGetPriceConsensusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PriceConsensus not implemented")
+func (*UnimplementedQueryServer) RegistryStakedAmount(ctx context.Context, req *QueryGetRegistryStakedAmountRequest) (*QueryGetRegistryStakedAmountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmount not implemented")
 }
-func (*UnimplementedQueryServer) PriceConsensusAll(ctx context.Context, req *QueryAllPriceConsensusRequest) (*QueryAllPriceConsensusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PriceConsensusAll not implemented")
+func (*UnimplementedQueryServer) RegistryStakedAmountAll(ctx context.Context, req *QueryAllRegistryStakedAmountRequest) (*QueryAllRegistryStakedAmountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmountAll not implemented")
+}
+func (*UnimplementedQueryServer) RegistryStakedAmountPerWallet(ctx context.Context, req *QueryGetRegistryStakedAmountPerWalletRequest) (*QueryGetRegistryStakedAmountPerWalletResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmountPerWallet not implemented")
+}
+func (*UnimplementedQueryServer) RegistryStakedAmountPerWalletAll(ctx context.Context, req *QueryAllRegistryStakedAmountPerWalletRequest) (*QueryAllRegistryStakedAmountPerWalletResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegistryStakedAmountPerWalletAll not implemented")
+}
+func (*UnimplementedQueryServer) PriceData(ctx context.Context, req *QueryGetPriceDataRequest) (*QueryGetPriceDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PriceData not implemented")
+}
+func (*UnimplementedQueryServer) PriceDataAll(ctx context.Context, req *QueryAllPriceDataRequest) (*QueryAllPriceDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PriceDataAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -1233,38 +1711,110 @@ func _Query_RegistryMemberAll_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_PriceConsensus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetPriceConsensusRequest)
+func _Query_RegistryStakedAmount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetRegistryStakedAmountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).PriceConsensus(ctx, in)
+		return srv.(QueryServer).RegistryStakedAmount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pricechain.cprc.registry.Query/PriceConsensus",
+		FullMethod: "/pricechain.cprc.registry.Query/RegistryStakedAmount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PriceConsensus(ctx, req.(*QueryGetPriceConsensusRequest))
+		return srv.(QueryServer).RegistryStakedAmount(ctx, req.(*QueryGetRegistryStakedAmountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_PriceConsensusAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllPriceConsensusRequest)
+func _Query_RegistryStakedAmountAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllRegistryStakedAmountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).PriceConsensusAll(ctx, in)
+		return srv.(QueryServer).RegistryStakedAmountAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/pricechain.cprc.registry.Query/PriceConsensusAll",
+		FullMethod: "/pricechain.cprc.registry.Query/RegistryStakedAmountAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PriceConsensusAll(ctx, req.(*QueryAllPriceConsensusRequest))
+		return srv.(QueryServer).RegistryStakedAmountAll(ctx, req.(*QueryAllRegistryStakedAmountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_RegistryStakedAmountPerWallet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetRegistryStakedAmountPerWalletRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).RegistryStakedAmountPerWallet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWallet",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).RegistryStakedAmountPerWallet(ctx, req.(*QueryGetRegistryStakedAmountPerWalletRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_RegistryStakedAmountPerWalletAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllRegistryStakedAmountPerWalletRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).RegistryStakedAmountPerWalletAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pricechain.cprc.registry.Query/RegistryStakedAmountPerWalletAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).RegistryStakedAmountPerWalletAll(ctx, req.(*QueryAllRegistryStakedAmountPerWalletRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_PriceData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetPriceDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).PriceData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pricechain.cprc.registry.Query/PriceData",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).PriceData(ctx, req.(*QueryGetPriceDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_PriceDataAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllPriceDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).PriceDataAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pricechain.cprc.registry.Query/PriceDataAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).PriceDataAll(ctx, req.(*QueryAllPriceDataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1302,12 +1852,28 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_RegistryMemberAll_Handler,
 		},
 		{
-			MethodName: "PriceConsensus",
-			Handler:    _Query_PriceConsensus_Handler,
+			MethodName: "RegistryStakedAmount",
+			Handler:    _Query_RegistryStakedAmount_Handler,
 		},
 		{
-			MethodName: "PriceConsensusAll",
-			Handler:    _Query_PriceConsensusAll_Handler,
+			MethodName: "RegistryStakedAmountAll",
+			Handler:    _Query_RegistryStakedAmountAll_Handler,
+		},
+		{
+			MethodName: "RegistryStakedAmountPerWallet",
+			Handler:    _Query_RegistryStakedAmountPerWallet_Handler,
+		},
+		{
+			MethodName: "RegistryStakedAmountPerWalletAll",
+			Handler:    _Query_RegistryStakedAmountPerWalletAll_Handler,
+		},
+		{
+			MethodName: "PriceData",
+			Handler:    _Query_PriceData_Handler,
+		},
+		{
+			MethodName: "PriceDataAll",
+			Handler:    _Query_PriceDataAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1805,7 +2371,7 @@ func (m *QueryAllRegistryMemberResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetPriceConsensusRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetRegistryStakedAmountRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1815,25 +2381,27 @@ func (m *QueryGetPriceConsensusRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetPriceConsensusRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetPriceConsensusRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if m.Id != 0 {
-		i = encodeVarintQuery(dAtA, i, uint64(m.Id))
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
 		i--
-		dAtA[i] = 0x8
+		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetPriceConsensusResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetRegistryStakedAmountResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1843,18 +2411,18 @@ func (m *QueryGetPriceConsensusResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetPriceConsensusResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetPriceConsensusResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetRegistryStakedAmountResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.PriceConsensus.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.RegistryStakedAmount.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -1866,7 +2434,7 @@ func (m *QueryGetPriceConsensusResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllPriceConsensusRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllRegistryStakedAmountRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1876,12 +2444,12 @@ func (m *QueryAllPriceConsensusRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllPriceConsensusRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllPriceConsensusRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1901,7 +2469,7 @@ func (m *QueryAllPriceConsensusRequest) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllPriceConsensusResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllRegistryStakedAmountResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1911,12 +2479,12 @@ func (m *QueryAllPriceConsensusResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllPriceConsensusResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllPriceConsensusResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllRegistryStakedAmountResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1933,10 +2501,304 @@ func (m *QueryAllPriceConsensusResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.PriceConsensus) > 0 {
-		for iNdEx := len(m.PriceConsensus) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.RegistryStakedAmount) > 0 {
+		for iNdEx := len(m.RegistryStakedAmount) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.PriceConsensus[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.RegistryStakedAmount[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.RegistryStakedAmountPerWallet.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.RegistryStakedAmountPerWallet) > 0 {
+		for iNdEx := len(m.RegistryStakedAmountPerWallet) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.RegistryStakedAmountPerWallet[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetPriceDataRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetPriceDataRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetPriceDataRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetPriceDataResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetPriceDataResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetPriceDataResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.PriceData.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllPriceDataRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllPriceDataRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllPriceDataRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllPriceDataResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllPriceDataResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllPriceDataResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.PriceData) > 0 {
+		for iNdEx := len(m.PriceData) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.PriceData[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -2146,30 +3008,31 @@ func (m *QueryAllRegistryMemberResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetPriceConsensusRequest) Size() (n int) {
+func (m *QueryGetRegistryStakedAmountRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if m.Id != 0 {
-		n += 1 + sovQuery(uint64(m.Id))
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
 }
 
-func (m *QueryGetPriceConsensusResponse) Size() (n int) {
+func (m *QueryGetRegistryStakedAmountResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = m.PriceConsensus.Size()
+	l = m.RegistryStakedAmount.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
 
-func (m *QueryAllPriceConsensusRequest) Size() (n int) {
+func (m *QueryAllRegistryStakedAmountRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2182,14 +3045,126 @@ func (m *QueryAllPriceConsensusRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryAllPriceConsensusResponse) Size() (n int) {
+func (m *QueryAllRegistryStakedAmountResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.PriceConsensus) > 0 {
-		for _, e := range m.PriceConsensus {
+	if len(m.RegistryStakedAmount) > 0 {
+		for _, e := range m.RegistryStakedAmount {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.RegistryStakedAmountPerWallet.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.RegistryStakedAmountPerWallet) > 0 {
+		for _, e := range m.RegistryStakedAmountPerWallet {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetPriceDataRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetPriceDataResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.PriceData.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllPriceDataRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllPriceDataResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.PriceData) > 0 {
+		for _, e := range m.PriceData {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -3414,7 +4389,7 @@ func (m *QueryAllRegistryMemberResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetPriceConsensusRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryGetRegistryStakedAmountRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3437,17 +4412,17 @@ func (m *QueryGetPriceConsensusRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
 			}
-			m.Id = 0
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowQuery
@@ -3457,11 +4432,24 @@ func (m *QueryGetPriceConsensusRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipQuery(dAtA[iNdEx:])
@@ -3483,7 +4471,7 @@ func (m *QueryGetPriceConsensusRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetPriceConsensusResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryGetRegistryStakedAmountResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3506,15 +4494,15 @@ func (m *QueryGetPriceConsensusResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetPriceConsensusResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PriceConsensus", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryStakedAmount", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3541,7 +4529,7 @@ func (m *QueryGetPriceConsensusResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.PriceConsensus.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.RegistryStakedAmount.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -3566,7 +4554,7 @@ func (m *QueryGetPriceConsensusResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllPriceConsensusRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryAllRegistryStakedAmountRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3589,10 +4577,10 @@ func (m *QueryAllPriceConsensusRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3652,7 +4640,7 @@ func (m *QueryAllPriceConsensusRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllPriceConsensusResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryAllRegistryStakedAmountResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3675,15 +4663,15 @@ func (m *QueryAllPriceConsensusResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllPriceConsensusResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PriceConsensus", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryStakedAmount", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -3710,8 +4698,750 @@ func (m *QueryAllPriceConsensusResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.PriceConsensus = append(m.PriceConsensus, PriceConsensus{})
-			if err := m.PriceConsensus[len(m.PriceConsensus)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.RegistryStakedAmount = append(m.RegistryStakedAmount, RegistryStakedAmount{})
+			if err := m.RegistryStakedAmount[len(m.RegistryStakedAmount)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetRegistryStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetRegistryStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetRegistryStakedAmountPerWalletResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryStakedAmountPerWallet", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.RegistryStakedAmountPerWallet.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllRegistryStakedAmountPerWalletRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllRegistryStakedAmountPerWalletResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllRegistryStakedAmountPerWalletResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistryStakedAmountPerWallet", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RegistryStakedAmountPerWallet = append(m.RegistryStakedAmountPerWallet, RegistryStakedAmountPerWallet{})
+			if err := m.RegistryStakedAmountPerWallet[len(m.RegistryStakedAmountPerWallet)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetPriceDataRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetPriceDataRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetPriceDataRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetPriceDataResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetPriceDataResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetPriceDataResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PriceData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.PriceData.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllPriceDataRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllPriceDataRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllPriceDataRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllPriceDataResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllPriceDataResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllPriceDataResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PriceData", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PriceData = append(m.PriceData, PriceData{})
+			if err := m.PriceData[len(m.PriceData)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

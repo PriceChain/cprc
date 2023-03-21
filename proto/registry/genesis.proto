@@ -6,7 +6,9 @@ import "registry/params.proto";
 import "registry/registry.proto";
 import "registry/registry_owner.proto";
 import "registry/registry_member.proto";
-import "registry/price_consensus.proto";
+import "registry/registry_staked_amount.proto";
+import "registry/registry_staked_amount_per_wallet.proto";
+import "registry/price_data.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/PriceChain/cprc/x/registry/types";
@@ -20,7 +22,8 @@ message GenesisState {
   uint64 registryOwnerCount = 5;
   repeated RegistryMember registryMemberList = 6 [(gogoproto.nullable) = false];
   uint64 registryMemberCount = 7;
-  repeated PriceConsensus priceConsensusList = 8 [(gogoproto.nullable) = false];
-  uint64 priceConsensusCount = 9;
+  repeated RegistryStakedAmount registryStakedAmountList = 8 [(gogoproto.nullable) = false];
+  repeated RegistryStakedAmountPerWallet registryStakedAmountPerWalletList = 9 [(gogoproto.nullable) = false];
+  repeated PriceData priceDataList = 10 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

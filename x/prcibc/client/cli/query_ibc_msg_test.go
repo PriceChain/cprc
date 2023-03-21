@@ -14,25 +14,25 @@ import (
 	"github.com/PriceChain/cprc/testutil/network"
 	"github.com/PriceChain/cprc/testutil/nullify"
 	"github.com/PriceChain/cprc/x/prcibc/client/cli"
-    "github.com/PriceChain/cprc/x/prcibc/types"
+	"github.com/PriceChain/cprc/x/prcibc/types"
 )
 
 func networkWithIbcMsgObjects(t *testing.T, n int) (*network.Network, []types.IbcMsg) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
-    require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
+	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
 		ibcMsg := types.IbcMsg{
-    		Id: uint64(i),
-    	}
+			Id: uint64(i),
+		}
 		nullify.Fill(&ibcMsg)
 		state.IbcMsgList = append(state.IbcMsgList, ibcMsg)
 	}
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
-    cfg.GenesisState[types.ModuleName] = buf
+	cfg.GenesisState[types.ModuleName] = buf
 	return network.New(t, cfg), state.IbcMsgList
 }
 
@@ -78,9 +78,9 @@ func TestShowIbcMsg(t *testing.T) {
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 				require.NotNil(t, resp.IbcMsg)
 				require.Equal(t,
-                	nullify.Fill(&tc.obj),
-                	nullify.Fill(&resp.IbcMsg),
-                )
+					nullify.Fill(&tc.obj),
+					nullify.Fill(&resp.IbcMsg),
+				)
 			}
 		})
 	}
@@ -115,9 +115,9 @@ func TestListIbcMsg(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.IbcMsg), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.IbcMsg),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.IbcMsg),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -132,8 +132,8 @@ func TestListIbcMsg(t *testing.T) {
 			require.LessOrEqual(t, len(resp.IbcMsg), step)
 			require.Subset(t,
 				nullify.Fill(objs),
-            	nullify.Fill(resp.IbcMsg),
-            )
+				nullify.Fill(resp.IbcMsg),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

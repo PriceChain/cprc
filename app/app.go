@@ -97,12 +97,13 @@ import (
 
 	"github.com/PriceChain/cprc/docs"
 
-	"github.com/PriceChain/cprc/x/mint"
-	mintkeeper "github.com/PriceChain/cprc/x/mint/keeper"
-	minttypes "github.com/PriceChain/cprc/x/mint/types"
 	prcibcmodule "github.com/PriceChain/cprc/x/prcibc"
 	prcibcmodulekeeper "github.com/PriceChain/cprc/x/prcibc/keeper"
 	prcibcmoduletypes "github.com/PriceChain/cprc/x/prcibc/types"
+
+	"github.com/PriceChain/cprc/x/prcmint"
+	mintkeeper "github.com/PriceChain/cprc/x/prcmint/keeper"
+	minttypes "github.com/PriceChain/cprc/x/prcmint/types"
 	registrymodule "github.com/PriceChain/cprc/x/registry"
 	registrymodulekeeper "github.com/PriceChain/cprc/x/registry/keeper"
 	registrymoduletypes "github.com/PriceChain/cprc/x/registry/types"
@@ -110,7 +111,7 @@ import (
 )
 
 const (
-	AccountAddressPrefix = "price"
+	AccountAddressPrefix = "naprc"
 	Name                 = "cprc"
 )
 
@@ -147,7 +148,7 @@ var (
 		bank.AppModuleBasic{},
 		capability.AppModuleBasic{},
 		staking.AppModuleBasic{},
-		mint.AppModuleBasic{},
+		prcmint.AppModuleBasic{},
 		distr.AppModuleBasic{},
 		gov.NewAppModuleBasic(getGovProposalHandlers()...),
 		params.AppModuleBasic{},
@@ -167,14 +168,15 @@ var (
 
 	// module account permissions
 	maccPerms = map[string][]string{
-		authtypes.FeeCollectorName:     nil,
-		distrtypes.ModuleName:          nil,
-		minttypes.ModuleName:           {authtypes.Minter},
-		stakingtypes.BondedPoolName:    {authtypes.Burner, authtypes.Staking},
-		stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
-		govtypes.ModuleName:            {authtypes.Burner},
-		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
-		registrymoduletypes.ModuleName: {authtypes.Minter, authtypes.Burner, authtypes.Staking},
+		authtypes.FeeCollectorName:                     nil,
+		distrtypes.ModuleName:                          nil,
+		registrymoduletypes.RegistryStakeCollectorName: {authtypes.Minter},
+		minttypes.ModuleName:                           {authtypes.Minter},
+		stakingtypes.BondedPoolName:                    {authtypes.Burner, authtypes.Staking},
+		stakingtypes.NotBondedPoolName:                 {authtypes.Burner, authtypes.Staking},
+		govtypes.ModuleName:                            {authtypes.Burner},
+		ibctransfertypes.ModuleName:                    {authtypes.Minter, authtypes.Burner},
+		registrymoduletypes.ModuleName:                 {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -239,6 +241,7 @@ type App struct {
 	RegistryKeeper     registrymodulekeeper.Keeper
 	ScopedPrcibcKeeper capabilitykeeper.ScopedKeeper
 	PrcibcKeeper       prcibcmodulekeeper.Keeper
+
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -321,10 +324,7 @@ func New(
 	stakingKeeper := stakingkeeper.NewKeeper(
 		appCodec, keys[stakingtypes.StoreKey], app.AccountKeeper, app.BankKeeper, app.GetSubspace(stakingtypes.ModuleName),
 	)
-	app.MintKeeper = mintkeeper.NewKeeper(
-		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
-		app.AccountKeeper, app.BankKeeper, authtypes.FeeCollectorName,
-	)
+
 	app.DistrKeeper = distrkeeper.NewKeeper(
 		appCodec, keys[distrtypes.StoreKey], app.GetSubspace(distrtypes.ModuleName), app.AccountKeeper, app.BankKeeper,
 		&stakingKeeper, authtypes.FeeCollectorName, app.ModuleAccountAddrs(),
@@ -403,10 +403,15 @@ func New(
 		keys[registrymoduletypes.StoreKey],
 		keys[registrymoduletypes.MemStoreKey],
 		app.GetSubspace(registrymoduletypes.ModuleName),
-
+		app.AccountKeeper,
 		app.BankKeeper,
 	)
 	registryModule := registrymodule.NewAppModule(appCodec, app.RegistryKeeper, app.AccountKeeper, app.BankKeeper)
+
+	app.MintKeeper = mintkeeper.NewKeeper(
+		appCodec, keys[minttypes.StoreKey], app.GetSubspace(minttypes.ModuleName), &stakingKeeper,
+		app.AccountKeeper, app.BankKeeper, app.RegistryKeeper, authtypes.FeeCollectorName, registrymoduletypes.RegistryStakeCollectorName,
+	)
 
 	scopedPrcibcKeeper := app.CapabilityKeeper.ScopeToModule(prcibcmoduletypes.ModuleName)
 	app.ScopedPrcibcKeeper = scopedPrcibcKeeper
@@ -453,7 +458,7 @@ func New(
 		feegrantmodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper, app.FeeGrantKeeper, app.interfaceRegistry),
 		crisis.NewAppModule(&app.CrisisKeeper, skipGenesisInvariants),
 		gov.NewAppModule(appCodec, app.GovKeeper, app.AccountKeeper, app.BankKeeper),
-		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
+		prcmint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper, nil),
 		slashing.NewAppModule(appCodec, app.SlashingKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		distr.NewAppModule(appCodec, app.DistrKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		staking.NewAppModule(appCodec, app.StakingKeeper, app.AccountKeeper, app.BankKeeper),
@@ -564,7 +569,7 @@ func New(
 		capability.NewAppModule(appCodec, *app.CapabilityKeeper),
 		feegrantmodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper, app.FeeGrantKeeper, app.interfaceRegistry),
 		gov.NewAppModule(appCodec, app.GovKeeper, app.AccountKeeper, app.BankKeeper),
-		mint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper),
+		prcmint.NewAppModule(appCodec, app.MintKeeper, app.AccountKeeper, nil),
 		staking.NewAppModule(appCodec, app.StakingKeeper, app.AccountKeeper, app.BankKeeper),
 		distr.NewAppModule(appCodec, app.DistrKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
 		slashing.NewAppModule(appCodec, app.SlashingKeeper, app.AccountKeeper, app.BankKeeper, app.StakingKeeper),
@@ -784,6 +789,6 @@ func (app *App) SimulationManager() *module.SimulationManager {
 }
 
 func RegisterCoinDenominations() {
-	_ = sdk.RegisterDenom("prc", sdk.OneDec())
-	_ = sdk.RegisterDenom("uprc", sdk.NewDecWithPrec(1, 6))
+	_ = sdk.RegisterDenom("prcna", sdk.OneDec())
+	_ = sdk.RegisterDenom("uprcna", sdk.NewDecWithPrec(1, 6))
 }

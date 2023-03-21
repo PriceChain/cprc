@@ -1,13 +1,13 @@
 package cli
 
 import (
-    "context"
-    "strconv"
+	"context"
+	"strconv"
 
+	"github.com/PriceChain/cprc/x/prcibc/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
-    "github.com/PriceChain/cprc/x/prcibc/types"
 )
 
 func CmdListIbcMsg() *cobra.Command {
@@ -15,32 +15,32 @@ func CmdListIbcMsg() *cobra.Command {
 		Use:   "list-ibc-msg",
 		Short: "list all ibcMsg",
 		RunE: func(cmd *cobra.Command, args []string) error {
-            clientCtx := client.GetClientContextFromCmd(cmd)
+			clientCtx := client.GetClientContextFromCmd(cmd)
 
-            pageReq, err := client.ReadPageRequest(cmd.Flags())
-            if err != nil {
-                return err
-            }
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
+			if err != nil {
+				return err
+			}
 
-            queryClient := types.NewQueryClient(clientCtx)
+			queryClient := types.NewQueryClient(clientCtx)
 
-            params := &types.QueryAllIbcMsgRequest{
-                Pagination: pageReq,
-            }
+			params := &types.QueryAllIbcMsgRequest{
+				Pagination: pageReq,
+			}
 
-            res, err := queryClient.IbcMsgAll(context.Background(), params)
-            if err != nil {
-                return err
-            }
+			res, err := queryClient.IbcMsgAll(context.Background(), params)
+			if err != nil {
+				return err
+			}
 
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddPaginationFlagsToCmd(cmd, cmd.Use)
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }
 
 func CmdShowIbcMsg() *cobra.Command {
@@ -49,29 +49,29 @@ func CmdShowIbcMsg() *cobra.Command {
 		Short: "shows a ibcMsg",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-            clientCtx := client.GetClientContextFromCmd(cmd)
+			clientCtx := client.GetClientContextFromCmd(cmd)
 
-            queryClient := types.NewQueryClient(clientCtx)
+			queryClient := types.NewQueryClient(clientCtx)
 
-            id, err := strconv.ParseUint(args[0], 10, 64)
-            if err != nil {
-                return err
-            }
+			id, err := strconv.ParseUint(args[0], 10, 64)
+			if err != nil {
+				return err
+			}
 
-            params := &types.QueryGetIbcMsgRequest{
-                Id: id,
-            }
+			params := &types.QueryGetIbcMsgRequest{
+				Id: id,
+			}
 
-            res, err := queryClient.IbcMsg(context.Background(), params)
-            if err != nil {
-                return err
-            }
+			res, err := queryClient.IbcMsg(context.Background(), params)
+			if err != nil {
+				return err
+			}
 
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }

@@ -49,15 +49,30 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 				},
 				RegistryMemberCount: 2,
-				PriceConsensusList: []types.PriceConsensus{
+				RegistryStakedAmountList: []types.RegistryStakedAmount{
 					{
-						Id: 0,
+						Index: "0",
 					},
 					{
-						Id: 1,
+						Index: "1",
 					},
 				},
-				PriceConsensusCount: 2,
+				RegistryStakedAmountPerWalletList: []types.RegistryStakedAmountPerWallet{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
+				PriceDataList: []types.PriceData{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -141,28 +156,44 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: false,
 		},
 		{
-			desc: "duplicated priceConsensus",
+			desc: "duplicated registryStakedAmount",
 			genState: &types.GenesisState{
-				PriceConsensusList: []types.PriceConsensus{
+				RegistryStakedAmountList: []types.RegistryStakedAmount{
 					{
-						Id: 0,
+						Index: "0",
 					},
 					{
-						Id: 0,
+						Index: "0",
 					},
 				},
 			},
 			valid: false,
 		},
 		{
-			desc: "invalid priceConsensus count",
+			desc: "duplicated stakedAmountPerWallet",
 			genState: &types.GenesisState{
-				PriceConsensusList: []types.PriceConsensus{
+				RegistryStakedAmountPerWalletList: []types.RegistryStakedAmountPerWallet{
 					{
-						Id: 1,
+						Index: "0",
+					},
+					{
+						Index: "0",
 					},
 				},
-				PriceConsensusCount: 0,
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated priceData",
+			genState: &types.GenesisState{
+				PriceDataList: []types.PriceData{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
 			},
 			valid: false,
 		},

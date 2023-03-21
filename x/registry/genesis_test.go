@@ -41,15 +41,30 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		RegistryMemberCount: 2,
-		PriceConsensusList: []types.PriceConsensus{
+		RegistryStakedAmountList: []types.RegistryStakedAmount{
 			{
-				Id: 0,
+				Index: "0",
 			},
 			{
-				Id: 1,
+				Index: "1",
 			},
 		},
-		PriceConsensusCount: 2,
+		RegistryStakedAmountPerWalletList: []types.RegistryStakedAmountPerWallet{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
+		PriceDataList: []types.PriceData{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -67,7 +82,8 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.RegistryOwnerCount, got.RegistryOwnerCount)
 	require.ElementsMatch(t, genesisState.RegistryMemberList, got.RegistryMemberList)
 	require.Equal(t, genesisState.RegistryMemberCount, got.RegistryMemberCount)
-	require.ElementsMatch(t, genesisState.PriceConsensusList, got.PriceConsensusList)
-	require.Equal(t, genesisState.PriceConsensusCount, got.PriceConsensusCount)
+	require.ElementsMatch(t, genesisState.RegistryStakedAmountList, got.RegistryStakedAmountList)
+	require.ElementsMatch(t, genesisState.RegistryStakedAmountPerWalletList, got.RegistryStakedAmountPerWalletList)
+	require.ElementsMatch(t, genesisState.PriceDataList, got.PriceDataList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

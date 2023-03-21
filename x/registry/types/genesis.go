@@ -10,10 +10,12 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		RegistryList:       []Registry{},
-		RegistryOwnerList:  []RegistryOwner{},
-		RegistryMemberList: []RegistryMember{},
-		PriceConsensusList: []PriceConsensus{},
+		RegistryList:                      []Registry{},
+		RegistryOwnerList:                 []RegistryOwner{},
+		RegistryMemberList:                []RegistryMember{},
+		RegistryStakedAmountList:          []RegistryStakedAmount{},
+		RegistryStakedAmountPerWalletList: []RegistryStakedAmountPerWallet{},
+		PriceDataList:                     []PriceData{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -58,17 +60,35 @@ func (gs GenesisState) Validate() error {
 		}
 		registryMemberIdMap[elem.Id] = true
 	}
-	// Check for duplicated ID in priceConsensus
-	priceConsensusIdMap := make(map[uint64]bool)
-	priceConsensusCount := gs.GetPriceConsensusCount()
-	for _, elem := range gs.PriceConsensusList {
-		if _, ok := priceConsensusIdMap[elem.Id]; ok {
-			return fmt.Errorf("duplicated id for priceConsensus")
+	// Check for duplicated index in registryStakedAmount
+	registryStakedAmountIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.RegistryStakedAmountList {
+		index := string(RegistryStakedAmountKey(elem.Index))
+		if _, ok := registryStakedAmountIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for registryStakedAmount")
 		}
-		if elem.Id >= priceConsensusCount {
-			return fmt.Errorf("priceConsensus id should be lower or equal than the last id")
+		registryStakedAmountIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in stakedAmountPerWallet
+	stakedAmountPerWalletIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.RegistryStakedAmountPerWalletList {
+		index := string(StakedAmountPerWalletKey(elem.Index))
+		if _, ok := stakedAmountPerWalletIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for stakedAmountPerWallet")
 		}
-		priceConsensusIdMap[elem.Id] = true
+		stakedAmountPerWalletIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in priceData
+	priceDataIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.PriceDataList {
+		index := string(PriceDataKey(elem.Index))
+		if _, ok := priceDataIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for priceData")
+		}
+		priceDataIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

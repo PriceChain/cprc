@@ -9,15 +9,15 @@ const TypeMsgModifyRegistry = "modify_registry"
 
 var _ sdk.Msg = &MsgModifyRegistry{}
 
-func NewMsgModifyRegistry(creator string, registryId string, stakeAmount string, name string, quorum string, consensusExpringTime string, reason string) *MsgModifyRegistry {
+func NewMsgModifyRegistry(creator string, registryId string, stakeAmount string, name string, description string, imageUrl string, reason string) *MsgModifyRegistry {
 	return &MsgModifyRegistry{
-		Creator:              creator,
-		RegistryId:           registryId,
-		StakeAmount:          stakeAmount,
-		Name:                 name,
-		Quorum:               quorum,
-		ConsensusExpringTime: consensusExpringTime,
-		Reason:               reason,
+		Creator:     creator,
+		RegistryId:  registryId,
+		StakeAmount: stakeAmount,
+		Name:        name,
+		Description: description,
+		ImageUrl:    imageUrl,
+		Reason:      reason,
 	}
 }
 

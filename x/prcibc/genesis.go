@@ -10,13 +10,13 @@ import (
 // state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// Set all the ibcMsg
-for _, elem := range genState.IbcMsgList {
-	k.SetIbcMsg(ctx, elem)
-}
+	for _, elem := range genState.IbcMsgList {
+		k.SetIbcMsg(ctx, elem)
+	}
 
-// Set ibcMsg count
-k.SetIbcMsgCount(ctx, genState.IbcMsgCount)
-// this line is used by starport scaffolding # genesis/module/init
+	// Set ibcMsg count
+	k.SetIbcMsgCount(ctx, genState.IbcMsgCount)
+	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
 	// port capability from capability InitGenesis
@@ -38,8 +38,8 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 
 	genesis.PortId = k.GetPort(ctx)
 	genesis.IbcMsgList = k.GetAllIbcMsg(ctx)
-genesis.IbcMsgCount = k.GetIbcMsgCount(ctx)
-// this line is used by starport scaffolding # genesis/module/export
+	genesis.IbcMsgCount = k.GetIbcMsgCount(ctx)
+	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis
 }

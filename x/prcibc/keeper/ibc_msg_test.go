@@ -3,11 +3,11 @@ package keeper_test
 import (
 	"testing"
 
-    "github.com/PriceChain/cprc/x/prcibc/keeper"
-    "github.com/PriceChain/cprc/x/prcibc/types"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	keepertest "github.com/PriceChain/cprc/testutil/keeper"
 	"github.com/PriceChain/cprc/testutil/nullify"
+	"github.com/PriceChain/cprc/x/prcibc/keeper"
+	"github.com/PriceChain/cprc/x/prcibc/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -35,8 +35,8 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case *types.MsgProposePrice:
 			res, err := msgServer.ProposePrice(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
-		case *types.MsgVotePrice:
-			res, err := msgServer.VotePrice(sdk.WrapSDKContext(ctx), msg)
+		case *types.MsgWithdrawRewards:
+			res, err := msgServer.WithdrawRewards(sdk.WrapSDKContext(ctx), msg)
 			return sdk.WrapServiceResult(ctx, res, err)
 			// this line is used by starport scaffolding # 1
 		default:

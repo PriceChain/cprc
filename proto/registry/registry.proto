@@ -8,12 +8,12 @@ message Registry {
   string name = 2; 
   string stakedAmount = 3; 
   string status = 4; 
-  string price = 5; 
-  string quorum = 6; 
-  string consensusExpiringTime = 7; 
-  string activeMembers = 8; 
-  string prodInfo = 9; 
-  string memo = 10; 
-  string reserved = 11; 
-  string creator = 12;
+  string description = 5; 
+  string imageUrl = 6; 
+  string priceCount = 7; 
+  string reviewCount = 8; 
+  string timestamp = 9; 
+  string reserved = 10; 
+  repeated string owners = 11;
+  repeated string validators = 12;
 }
