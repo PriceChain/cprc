@@ -22,7 +22,7 @@ Command should return go version go1.18 linux/amd64
 
 ## Clone Master Repository
 ```
-git clone https://github.com/PriceChain/Cprc_chain.git
+git clone https://github.com/PriceChain/cprc.git
 ```
 ## Install the executables
 ```
@@ -68,13 +68,13 @@ cprcd add-genesis-account $(cprcd keys show "Validator1" -a --keyring-backend os
 
 ## Generate CreateValidator signed transaction
 ```
-cprcd gentx "Validator" 1204770000uprcna --keyring-backend os --chain-id "chainname"
+cprcd gentx "Validator" 1571340000000uprcna --keyring-backend os --chain-id "chainname"
 ```
 ## Collect genesis transactions
 ```
 cprcd collect-gentxs
 ```
-## Replace stake to PRC
+## Replace stake to PRCNA
 ```
 sed -i 's/stake/uprcna/g' ~/.cprc/config/genesis.json
 ```
@@ -110,7 +110,6 @@ WantedBy=multi-user.target
 
 ## Create log files for cprcd
 ```
-
 sudo systemctl enable cprcd
 sudo systemctl start cprcd
 ```
@@ -149,11 +148,10 @@ sudo cp $(which cprcd-manager) /usr/bin
 ```
 cprcd init "validator1" --chain-id chainname
 ```
-## Add new wallet & buy PRC Coin to stake, but here is just using a genesis account
+## Add new wallet & buy PRCNA Coin to stake, but here is just using a genesis account
 ```
 cprcd keys add "validator1" --keyring-backend os --recover
 ```
-
 ## Fetch genesis configuration from the first node deployed
 ```
 curl http://<first_node_IP>:26657/genesis? | jq ".result.genesis" > ~/.cprc/config/genesis.json
@@ -204,7 +202,7 @@ sudo systemctl enable cprcd
 sudo systemctl start cprcd
 ```
 
-## Become a validator by staking PRC coin
+## Become a validator by staking PRCNA coin
 ```
 cprcd tx staking create-validator --from "validator1" --moniker "validator1" --pubkey $(cprcd tendermint show-validator) --chain-id "chainname" --keyring-backend os --amount 1571340000000uprcna --commission-max-change-rate 0.01 --commission-max-rate 0.2 --commission-rate 0 --commission-rate 0.1 --min-self-delegation 1 -y
 ```
