@@ -197,7 +197,6 @@ WantedBy=multi-user.target
 
 ## Create log files for cprcd
 ```
-
 sudo systemctl enable cprcd
 sudo systemctl start cprcd
 ```
