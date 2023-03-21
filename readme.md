@@ -62,8 +62,8 @@ cprcd keys add "Validator1" --keyring-backend os
 
 ## Add genesis accounts
 ```
-cprcd add-genesis-account $(cprcd keys show "Validator" -a --keyring-backend os)  1204700000000uprcna
-cprcd add-genesis-account $(cprcd keys show "Validator1" -a --keyring-backend os) 1204700000000uprcna
+cprcd add-genesis-account $(cprcd keys show "Validator" -a --keyring-backend os) 1571340000000uprcna
+cprcd add-genesis-account $(cprcd keys show "Validator1" -a --keyring-backend os) 1571340000000uprcna
 ```
 
 ## Generate CreateValidator signed transaction
