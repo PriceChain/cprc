@@ -111,7 +111,7 @@ import (
 )
 
 const (
-	AccountAddressPrefix = "naprc"
+	AccountAddressPrefix = "pricena"
 	Name                 = "cprc"
 )
 
