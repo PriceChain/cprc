@@ -211,7 +211,7 @@ cprcd tx staking create-validator --from "validator1" --moniker "validator1" --p
 | #  | Chain Name              | Token Symbol | Account Prefix |
 |----|-------------------------|--------------|----------------|
 | 0  | pricechain-trs-1        | prc          | price          |
-| 1  | pricechain-na-1         | prcna        | priceena       |
+| 1  | pricechain-na-1         | prcna        | pricena        |
 | 2  | pricechain-sa-1         | prcsa        | pricesa        |
 | 3  | pricechain-eu-1         | prceu        | priceeu        |
 | 4  | pricechain-af-1         | prcaf        | priceaf        |
