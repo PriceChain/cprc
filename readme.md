@@ -207,7 +207,7 @@ sudo systemctl start cprcd
 cprcd tx staking create-validator --from "validator1" --moniker "validator1" --pubkey $(cprcd tendermint show-validator) --chain-id "chainname" --keyring-backend os --amount 1571340000000uprcna --commission-max-change-rate 0.01 --commission-max-rate 0.2 --commission-rate 0 --commission-rate 0.1 --min-self-delegation 1 -y
 ```
 
-## CPRC Naming Conventions
+## Naming Conventions
 
 ---------------------------------------------------------------------------
 | #  | Chain Name                         | Token Symbol | Account Prefix |
