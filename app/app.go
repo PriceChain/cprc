@@ -787,7 +787,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 func (app *App) SimulationManager() *module.SimulationManager {
 	return app.sm
 }
-
+//config will add
 func RegisterCoinDenominations() {
 	_ = sdk.RegisterDenom("prcna", sdk.OneDec())
 	_ = sdk.RegisterDenom("uprcna", sdk.NewDecWithPrec(1, 6))
