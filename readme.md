@@ -206,9 +206,17 @@ sudo systemctl start cprcd
 ```
 cprcd tx staking create-validator --from "validator1" --moniker "validator1" --pubkey $(cprcd tendermint show-validator) --chain-id "chainname" --keyring-backend os --amount 1571340000000uprcna --commission-max-change-rate 0.01 --commission-max-rate 0.2 --commission-rate 0 --commission-rate 0.1 --min-self-delegation 1 -y
 ```
-
 ## Naming Conventions
-
-
+----------------------------------------------------------------
+| #  | Chain Name              | Token Symbol | Account Prefix |
+|----|-------------------------|--------------|----------------|
+| 0  | pricechain-trs-1        | prc          | pricee         |
+| 1  | pricechain-na-1         | prcna        | priceena       |
+| 2  | pricechain-sa-1         | prcsa        | pricesa        |
+| 3  | pricechain-eu-1         | prceu        | priceeu        |
+| 4  | pricechain-af-1         | prcaf        | priceaf        |
+| 5  | pricechain-as-1         | prcas        | priceas        |
+| 6  | pricechain-oc-1         | prcoc        | priceoc        |
+----------------------------------------------------------------
 ```
 
