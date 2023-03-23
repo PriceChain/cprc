@@ -6,9 +6,26 @@ ifeq ($(CONTINENT_CODE), NA)
 	TOKEN_SYMBOL := prcna
 	UTOKEN_SYMBOL := uprcna
 	PREFIX := pricena
-else ifeq ($(CONTINENT_CODE), ...)
-	# Add other continents with their respective values following the same pattern
-	# ...
+else ifeq ($(CONTINENT_CODE), SA)
+	TOKEN_SYMBOL := prcsa
+	UTOKEN_SYMBOL := uprcsa
+	PREFIX := pricesa
+else ifeq ($(CONTINENT_CODE), EU)
+	TOKEN_SYMBOL := prceu
+	UTOKEN_SYMBOL := uprceu
+	PREFIX := priceeu
+else ifeq ($(CONTINENT_CODE), AF)
+	TOKEN_SYMBOL := prcaf
+	UTOKEN_SYMBOL := uprcaf
+	PREFIX := priceaf
+else ifeq ($(CONTINENT_CODE), AS)
+	TOKEN_SYMBOL := prcas
+	UTOKEN_SYMBOL := uprcas
+	PREFIX := priceas
+else ifeq ($(CONTINENT_CODE), OC)
+	TOKEN_SYMBOL := prcoc
+	UTOKEN_SYMBOL := uprcoc
+	PREFIX := priceoc
 endif
 ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=cprc \
 	-X github.com/cosmos/cosmos-sdk/version.ServerName=cprcd \
@@ -26,7 +43,6 @@ PROJECT_NAME = $(shell git remote get-url origin | xargs basename -s .git)
 all: install
 
 install: go.sum
-	@echo $(TOKEN_SYMBOL)
 	go install -mod=readonly $(BUILD_FLAGS) ./cmd/cprcd-manager
 	go install -mod=readonly $(BUILD_FLAGS) ./cmd/cprcd
 
