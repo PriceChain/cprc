@@ -1,10 +1,22 @@
 VERSION := 0.0.1
 COMMIT := $(shell git log -1 --format='%H')
-
+COMMIT := $(shell git log -1 --format='%H')
+CONTINENT_CODE ?= NA
+ifeq ($(CONTINENT_CODE), NA)
+	TOKEN_SYMBOL := prcna
+	UTOKEN_SYMBOL := uprcna
+	PREFIX := pricena
+else ifeq ($(CONTINENT_CODE), ...)
+	# Add other continents with their respective values following the same pattern
+	# ...
+endif
 ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=cprc \
 	-X github.com/cosmos/cosmos-sdk/version.ServerName=cprcd \
 	-X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
-	-X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT)
+	-X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
+	-X github.com/PriceChain/cprc/app.AccountAddressPrefix=$(PREFIX) \
+	-X github.com/PriceChain/cprc/app.CoinOneDenom=$(TOKEN_SYMBOL) \
+	-X github.com/PriceChain/cprc/app.CoinPrevDenom=$(UTOKEN_SYMBOL)
 
 BUILD_FLAGS := -ldflags '$(ldflags)'
 DOCKER := $(shell which docker)
@@ -14,6 +26,7 @@ PROJECT_NAME = $(shell git remote get-url origin | xargs basename -s .git)
 all: install
 
 install: go.sum
+	@echo $(TOKEN_SYMBOL)
 	go install -mod=readonly $(BUILD_FLAGS) ./cmd/cprcd-manager
 	go install -mod=readonly $(BUILD_FLAGS) ./cmd/cprcd
 

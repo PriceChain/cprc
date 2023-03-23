@@ -110,9 +110,12 @@ import (
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
-const (
-	AccountAddressPrefix = "pricena"
+var (
+	AccountAddressPrefix = "price"
 	Name                 = "cprc"
+	CoinOneDenom		 = "prc"
+	CoinPrevDenom		 = "uprc"
+	
 )
 
 // this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
@@ -185,6 +188,7 @@ var (
 	_ cosmoscmd.App           = (*App)(nil)
 	_ servertypes.Application = (*App)(nil)
 	_ simapp.App              = (*App)(nil)
+	
 )
 
 func init() {
@@ -789,6 +793,6 @@ func (app *App) SimulationManager() *module.SimulationManager {
 }
 //config will add
 func RegisterCoinDenominations() {
-	_ = sdk.RegisterDenom("prcna", sdk.OneDec())
-	_ = sdk.RegisterDenom("uprcna", sdk.NewDecWithPrec(1, 6))
+	_ = sdk.RegisterDenom(CoinOneDenom, sdk.OneDec())
+	_ = sdk.RegisterDenom(CoinPrevDenom, sdk.NewDecWithPrec(1, 6))
 }
