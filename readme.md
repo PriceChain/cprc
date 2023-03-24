@@ -100,7 +100,7 @@ Environment=DAEMON_HOME=/home/ubuntu/.cprc
 Environment=DAEMON_ALLOW_DOWNLOAD_BINARIES=on
 Environment=DAEMON_RESTART_AFTER_UPGRADE=on
 PermissionsStartOnly=true
-ExecStart=/usr/bin/cprcd-manager start --pruning="nothing" --rpc.laddr "tcp://0.0.0.0:26657"
+ExecStart=/usr/bin/cprcd-manager start --pruning="nothing" --rpc.laddr "tcp://0.0.0.0:26557"
 ExecReload=/bin/kill -HUP $MAINPID
 KillSignal=SIGTERM
 LimitNOFILE=4096
