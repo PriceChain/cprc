@@ -1,28 +1,28 @@
 VERSION := 0.0.1
 COMMIT := $(shell git log -1 --format='%H')
 COMMIT := $(shell git log -1 --format='%H')
-CONTINENT_CODE ?= NA
-ifeq ($(CONTINENT_CODE), NA)
+CONTINENT ?= NA
+ifeq ($(CONTINENT), NA)
 	TOKEN_SYMBOL := prcna
 	UTOKEN_SYMBOL := uprcna
 	PREFIX := pricena
-else ifeq ($(CONTINENT_CODE), SA)
+else ifeq ($(CONTINENT), SA)
 	TOKEN_SYMBOL := prcsa
 	UTOKEN_SYMBOL := uprcsa
 	PREFIX := pricesa
-else ifeq ($(CONTINENT_CODE), EU)
+else ifeq ($(CONTINENT), EU)
 	TOKEN_SYMBOL := prceu
 	UTOKEN_SYMBOL := uprceu
 	PREFIX := priceeu
-else ifeq ($(CONTINENT_CODE), AF)
+else ifeq ($(CONTINENT), AF)
 	TOKEN_SYMBOL := prcaf
 	UTOKEN_SYMBOL := uprcaf
 	PREFIX := priceaf
-else ifeq ($(CONTINENT_CODE), AS)
+else ifeq ($(CONTINENT), AS)
 	TOKEN_SYMBOL := prcas
 	UTOKEN_SYMBOL := uprcas
 	PREFIX := priceas
-else ifeq ($(CONTINENT_CODE), OC)
+else ifeq ($(CONTINENT), OC)
 	TOKEN_SYMBOL := prcoc
 	UTOKEN_SYMBOL := uprcoc
 	PREFIX := priceoc
